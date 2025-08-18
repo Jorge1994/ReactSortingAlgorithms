@@ -1,0 +1,16 @@
+# Diretórios comuns
+node_modules/
+dist/
+build/
+venv/
+__pycache__/
+
+# Ficheiros temporários
+*.log
+*.tmp
+*.swp
+
+# Configurações locais
+.env
+.DS_Store
+Thumbs.db
