@@ -174,10 +174,9 @@ npm install
 
 # 4. Instalar dependências adicionais
 npm install react-router-dom framer-motion
-npm install -D tailwindcss postcss autoprefixer @types/react-router-dom
+npm install -D @types/react-router-dom
 
-# 5. Configurar Tailwind CSS
-npx tailwindcss init -p
+# 5. Tailwind CSS 4 já configurado via plugin @tailwindcss/vite
 
 # 6. Configurar ESLint e Prettier (opcional)
 npm install -D eslint prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
@@ -192,39 +191,30 @@ npm run build
 npm run preview
 ```
 
-### Configuração do Tailwind CSS
+### Configuração do Tailwind CSS 4
 
-**tailwind.config.js**
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        comparing: '#3B82F6',    // Azul
-        swapping: '#EF4444',     // Vermelho
-        sorted: '#10B981',       // Verde
-        unsorted: '#6B7280',     // Cinza
-      },
-      animation: {
-        'bar-height': 'barHeight 0.3s ease-in-out',
-        'bar-color': 'barColor 0.2s ease-in-out',
-      }
-    },
-  },
-  plugins: [],
-}
+**vite.config.ts** (já configurado)
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
 ```
 
-**src/styles/globals.css**
+**src/index.css**
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Custom colors and animations */
+:root {
+  --color-comparing: #3b82f6;
+  --color-swapping: #ef4444;
+  --color-sorted: #10b981;
+  --color-unsorted: #6b7280;
+}
 
 @keyframes barHeight {
   from { transform: scaleY(0.8); }
@@ -235,6 +225,10 @@ export default {
   0% { opacity: 0.8; }
   50% { opacity: 1; }
   100% { opacity: 0.9; }
+}
+
+.bar-animation {
+  animation: barHeight 0.3s ease-in-out, barColor 0.2s ease-in-out;
 }
 ```
 
@@ -525,11 +519,9 @@ sorting-visualizer/
 │   │   ├── algorithm.ts
 │   │   ├── ui.ts
 │   │   └── index.ts
-│   ├── styles/
-│   │   └── globals.css
+│   ├── index.css
 │   ├── App.tsx
 │   └── main.tsx
-├── tailwind.config.js
 ├── postcss.config.js
 ├── package.json
 └── vite.config.ts
@@ -677,7 +669,7 @@ export const selectionSortAlgorithm = createSortingAlgorithm(
 ## Próximos Passos
 
 1. Executar os comandos de setup
-2. Configurar Tailwind CSS e React Router
+2. Configurar React Router (Tailwind CSS 4 já configurado)
 3. **Criar estrutura modular dos algoritmos**
    - Definir interfaces e tipos compartilhados
    - Implementar algoritmos como módulos independentes

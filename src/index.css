@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/* Custom colors and animations for the sorting visualizer */
+:root {
+  --color-comparing: #3b82f6; /* Blue */
+  --color-swapping: #ef4444; /* Red */
+  --color-sorted: #10b981; /* Green */
+  --color-unsorted: #6b7280; /* Gray */
+}
+
+@keyframes barHeight {
+  from {
+    transform: scaleY(0.8);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes barColor {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+.bar-animation {
+  animation: barHeight 0.3s ease-in-out, barColor 0.2s ease-in-out;
+}
+
+/* Default styles */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
