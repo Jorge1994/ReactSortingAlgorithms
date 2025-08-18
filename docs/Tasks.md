@@ -1,7 +1,7 @@
 # Task List - Sorting Algorithm Visualizer
 
 ## 📋 Project Status
-- **Start Date**: [Start date]
+- **Start Date**: [18/08/2025]
 - **Estimated Completion**: 9-14 days
 - **Current Status**: 🟡 Planning Complete
 
@@ -230,5 +230,5 @@
 
 ---
 
-**Last Updated**: [Date]  
-**Responsible**: [Name]
+**Last Updated**: [18/08/2025]  
+**Responsible**: [Paulo J.S. Ferreira]
