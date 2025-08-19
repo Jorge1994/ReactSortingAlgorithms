@@ -11,6 +11,8 @@ interface ControlPanelProps {
   canPlayPrev: boolean;
   animationSpeed: number;
   onSpeedChange: (speed: number) => void;
+  arraySize: number;
+  onArraySizeChange: (size: number) => void;
 }
 
 export function ControlPanel({
@@ -25,7 +27,9 @@ export function ControlPanel({
   canPlayNext,
   canPlayPrev,
   animationSpeed,
-  onSpeedChange
+  onSpeedChange,
+  arraySize,
+  onArraySizeChange
 }: ControlPanelProps) {
   return (
     <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-8 border border-slate-200">
@@ -71,6 +75,47 @@ export function ControlPanel({
               <span className="text-xs opacity-80">Descending order</span>
             </div>
           </button>
+        </div>
+      </div>
+
+      {/* Array Size Control Section */}
+      <div className="mb-8">
+        <h3 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+          <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+          Array Size
+        </h3>
+        <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-6">
+            <label htmlFor="array-size" className="text-sm font-medium text-slate-600 min-w-fit">
+              Elements: {arraySize}
+            </label>
+            <div className="flex-1">
+              <input
+                id="array-size"
+                type="range"
+                min="5"
+                max="100"
+                value={arraySize}
+                onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
+                className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+              />
+              <div className="flex justify-between text-xs text-slate-400 mt-1">
+                <span>5</span>
+                <span>50</span>
+                <span>100</span>
+              </div>
+            </div>
+            <div className="min-w-fit">
+              <input
+                type="number"
+                min="5"
+                max="100"
+                value={arraySize}
+                onChange={(e) => onArraySizeChange(Math.min(100, Math.max(5, parseInt(e.target.value) || 5)))}
+                className="w-16 px-2 py-1 border border-slate-300 rounded-lg text-sm text-center focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              />
+            </div>
+          </div>
         </div>
       </div>
 

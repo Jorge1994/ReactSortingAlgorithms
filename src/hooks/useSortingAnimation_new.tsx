@@ -3,8 +3,38 @@ import { getAlgorithm, type AlgorithmKey } from '../algorithms/registry';
 import { generateRandomArray, generateNearlySortedArray, generateReverseSortedArray } from '../utils/arrayGenerator';
 import type { SortStep } from '../types';
 
-export function useSortingAnimation(currentAlgorithm: AlgorithmKey) {
-  const [array, setArray] = useState<number[]>([64, 34, 25, 12, 22, 11, 90]);
+interface UseSortingAnimationReturn {
+  // State
+  array: number[];
+  steps: SortStep[];
+  currentStep: number;
+  isAnimating: boolean;
+  isPlaying: boolean;
+  animationSpeed: number;
+  currentStepData: SortStep;
+  displayArray: number[];
+  arraySize: number;
+  
+  // Actions
+  generateNewArray: (type?: 'random' | 'nearly-sorted' | 'reverse') => void;
+  runSortingAlgorithm: () => void;
+  playAnimation: () => void;
+  pauseAnimation: () => void;
+  nextStep: () => void;
+  prevStep: () => void;
+  reset: () => void;
+  setAnimationSpeed: (speed: number) => void;
+  changeArraySize: (size: number) => void;
+  
+  // Computed values
+  canPlayNext: boolean;
+  canPlayPrev: boolean;
+  isCompleted: boolean;
+}
+
+export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingAnimationReturn {
+  const [arraySize, setArraySize] = useState(15);
+  const [array, setArray] = useState<number[]>(() => generateRandomArray(15, 1, 100));
   const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -29,13 +59,13 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey) {
     
     switch (type) {
       case 'nearly-sorted':
-        newArray = generateNearlySortedArray(10);
+        newArray = generateNearlySortedArray(arraySize);
         break;
       case 'reverse':
-        newArray = generateReverseSortedArray(10);
+        newArray = generateReverseSortedArray(arraySize);
         break;
       default:
-        newArray = generateRandomArray(10, 1, 100);
+        newArray = generateRandomArray(arraySize, 1, 100);
     }
     
     setArray(newArray);
@@ -77,6 +107,17 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey) {
     setIsPlaying(false);
   };
 
+  const changeArraySize = (newSize: number) => {
+    setArraySize(newSize);
+    // Generate new array with the new size
+    const newArray = generateRandomArray(newSize, 1, 100);
+    setArray(newArray);
+    setSteps([]);
+    setCurrentStep(0);
+    setIsAnimating(false);
+    setIsPlaying(false);
+  };
+
   const currentStepData = steps[currentStep];
   const displayArray = currentStepData ? currentStepData.array : array;
 
@@ -90,6 +131,7 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey) {
     animationSpeed,
     currentStepData,
     displayArray,
+    arraySize,
     
     // Actions
     generateNewArray,
@@ -100,6 +142,7 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey) {
     prevStep,
     reset,
     setAnimationSpeed,
+    changeArraySize,
     
     // Computed values
     canPlayNext: currentStep < steps.length - 1,

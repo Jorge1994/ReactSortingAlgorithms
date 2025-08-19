@@ -15,6 +15,8 @@ function App() {
   const [currentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
   // setCurrentAlgorithm will be used when multiple algorithms are available
 
+  const hookResult = useSortingAnimation(currentAlgorithm);
+  
   const {
     displayArray,
     steps,
@@ -33,7 +35,13 @@ function App() {
     canPlayNext,
     canPlayPrev,
     isCompleted
-  } = useSortingAnimation(currentAlgorithm);
+  } = hookResult;
+  
+  // Access new properties
+  const arraySize = (hookResult as any).arraySize ?? 15;
+  const changeArraySize = (hookResult as any).changeArraySize ?? (() => {
+    console.log('Fallback changeArraySize called - function not found in hook');
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -84,6 +92,8 @@ function App() {
               canPlayPrev={canPlayPrev}
               animationSpeed={animationSpeed}
               onSpeedChange={setAnimationSpeed}
+              arraySize={arraySize}
+              onArraySizeChange={changeArraySize}
             />
           </div>
         </section>
