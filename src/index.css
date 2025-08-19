@@ -28,6 +28,66 @@
   transition: all 0.2s ease;
 }
 
+/* Enhanced Code Block Styles */
+pre[class*="language-"] {
+  position: relative;
+  border-radius: 0 0 12px 12px !important;
+  margin: 0 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+code[class*="language-"] {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Improve syntax highlighting colors for better contrast */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6b7280 !important;
+}
+
+.token.string,
+.token.attr-value {
+  color: #10b981 !important;
+}
+
+.token.keyword,
+.token.function {
+  color: #3b82f6 !important;
+}
+
+.token.number {
+  color: #f59e0b !important;
+}
+
+.token.operator,
+.token.punctuation {
+  color: #e5e7eb !important;
+}
+
+/* Custom scrollbar for code blocks */
+pre[class*="language-"]::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 .slider::-moz-range-thumb:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
