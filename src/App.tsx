@@ -14,7 +14,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [animationSpeed, setAnimationSpeed] = useState(500); // milliseconds
+  const [animationSpeed, setAnimationSpeed] = useState(500);
   const [isAlgorithmDetailsExpanded, setIsAlgorithmDetailsExpanded] = useState(false);
 
   // Auto-play functionality
@@ -60,14 +60,9 @@ function App() {
     setIsPlaying(false);
   };
 
-  const playAnimation = () => {
-    setIsPlaying(true);
-  };
-
-  const pauseAnimation = () => {
-    setIsPlaying(false);
-  };
-
+  const playAnimation = () => setIsPlaying(true);
+  const pauseAnimation = () => setIsPlaying(false);
+  
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -92,257 +87,320 @@ function App() {
   const displayArray = currentStepData ? currentStepData.array : array;
 
   return (
-    <div className="fixed inset-0 w-screen h-screen bg-gray-100 flex flex-col overflow-hidden">
-      {/* Fixed Header */}
-      <div className="flex-shrink-0 w-full p-4 bg-white shadow-sm">
-        <h1 className="text-4xl font-bold text-center text-gray-800">
-          Bubble Sort Visualizer
-        </h1>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Header */}
+      <header className="sticky top-0 z-10 w-full p-6 bg-white/90 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+            Bubble Sort Visualizer
+          </h1>
+        </div>
+      </header>
       
-      {/* Scrollable Content */}
-      <div className="flex-1 w-full overflow-y-auto p-4">
+      {/* Content */}
+      <main className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Array Visualization */}
-        <div className="w-full bg-white rounded-lg shadow-lg p-6 mb-4">
-          <div className="w-full flex items-end justify-center space-x-2 h-64 mb-6">
-            {displayArray.map((value, index) => {
-              let barColor = 'bg-gray-400'; // default
-              
-              if (currentStepData) {
-                if (currentStepData.type === 'compare' && currentStepData.indices.includes(index)) {
-                  barColor = 'bg-blue-500'; // comparing
-                } else if (currentStepData.type === 'swap' && currentStepData.indices.includes(index)) {
-                  barColor = 'bg-red-500'; // swapping
-                } else if (currentStepData.type === 'set-sorted' && currentStepData.indices.includes(index)) {
-                  barColor = 'bg-green-500'; // sorted
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+          <div className="p-8">
+            {/* Bars */}
+            <div className="w-full flex items-end justify-center space-x-3 h-72 mb-8">
+              {displayArray.map((value, index) => {
+                let barColor = 'bg-slate-400';
+                
+                if (currentStepData) {
+                  if (currentStepData.type === 'compare' && currentStepData.indices.includes(index)) {
+                    barColor = 'bg-blue-500 shadow-lg shadow-blue-500/30';
+                  } else if (currentStepData.type === 'swap' && currentStepData.indices.includes(index)) {
+                    barColor = 'bg-red-500 shadow-lg shadow-red-500/30';
+                  } else if (currentStepData.type === 'set-sorted' && currentStepData.indices.includes(index)) {
+                    barColor = 'bg-green-500 shadow-lg shadow-green-500/30';
+                  }
+                  
+                  // Keep previously sorted elements green
+                  if (steps.slice(0, currentStep + 1).some(step => 
+                    step.type === 'set-sorted' && step.indices.includes(index)
+                  )) {
+                    barColor = 'bg-green-500 shadow-lg shadow-green-500/30';
+                  }
                 }
                 
-                // Keep previously sorted elements green
-                if (steps.slice(0, currentStep + 1).some(step => 
-                  step.type === 'set-sorted' && step.indices.includes(index)
-                )) {
-                  barColor = 'bg-green-500';
-                }
-              }
-              
-              return (
-                <div
-                  key={`${index}-${value}`}
-                  className={`${barColor} transition-colors duration-300 rounded-t flex items-end justify-center text-white text-sm font-bold`}
-                  style={{
-                    height: `${(value / Math.max(...displayArray)) * 200}px`,
-                    width: '40px',
-                    minHeight: '20px'
-                  }}
-                >
-                  {value}
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* Step Information */}
-          {currentStepData && (
-            <div className="text-center text-gray-600 mb-6">
-              <p className="font-semibold text-lg">{currentStepData.metadata?.currentPhase}</p>
-              <p className="text-base mt-2">
-                Comparisons: {currentStepData.metadata?.comparisons} | 
-                Swaps: {currentStepData.metadata?.swaps}
-              </p>
-            </div>
-          )}
-
-          {/* Final Statistics - Right after bars when sorting is complete */}
-          {steps.length > 0 && currentStep === steps.length - 1 && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-              <h3 className="font-semibold text-green-800 mb-3 text-base">🎉 Sorting Complete!</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.comparisons}</div>
-                  <div className="text-xs text-green-600">Total Comparisons</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.swaps}</div>
-                  <div className="text-xs text-green-600">Total Swaps</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{array.length}</div>
-                  <div className="text-xs text-green-600">Array Size</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{steps.length}</div>
-                  <div className="text-xs text-green-600">Total Steps</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">
-                    {currentStepData?.metadata?.executionTime ? 
-                      `${currentStepData.metadata.executionTime.toFixed(2)}ms` : 
-                      'N/A'
-                    }
+                return (
+                  <div
+                    key={`${index}-${value}`}
+                    className={`${barColor} transition-all duration-300 rounded-t-lg flex items-end justify-center text-white text-sm font-bold hover:scale-105 transform-gpu`}
+                    style={{
+                      height: `${(value / Math.max(...displayArray)) * 240}px`,
+                      width: '45px',
+                      minHeight: '30px'
+                    }}
+                  >
+                    {value}
                   </div>
-                  <div className="text-xs text-green-600">Execution Time</div>
+                );
+              })}
+            </div>
+            
+            {/* Step Information */}
+            {currentStepData && (
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center px-6 py-3 text-base border border-slate-200 rounded-lg bg-white mb-4 text-slate-800 shadow-sm">
+                  {currentStepData.metadata?.currentPhase}
+                </div>
+                <div className="flex justify-center gap-6 text-sm">
+                  <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-lg border border-blue-100">
+                    <span className="text-blue-600">⚖️</span>
+                    <span className="text-slate-700">Comparisons:</span>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-semibold">
+                      {currentStepData.metadata?.comparisons}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-lg border border-red-100">
+                    <span className="text-red-600">🔄</span>
+                    <span className="text-slate-700">Swaps:</span>
+                    <span className="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-semibold">
+                      {currentStepData.metadata?.swaps}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Color Legend */}
-          <div className="flex justify-center items-center gap-8 text-base bg-gray-50 p-4 rounded-lg">
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 bg-blue-500 rounded"></div>
-              <span className="font-medium text-gray-700">Comparing</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 bg-red-500 rounded"></div>
-              <span className="font-medium text-gray-700">Swapping</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 bg-green-500 rounded"></div>
-              <span className="font-medium text-gray-700">Sorted</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 bg-gray-400 rounded"></div>
-              <span className="font-medium text-gray-700">Unsorted</span>
+            {/* Final Statistics */}
+            {steps.length > 0 && currentStep === steps.length - 1 && (
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-8 mb-8">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <span className="text-3xl">🎉</span>
+                  <h3 className="font-bold text-green-800 text-xl">Sorting Complete!</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                  <div className="text-center p-4 bg-white/50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700">{currentStepData?.metadata?.comparisons}</div>
+                    <div className="text-sm text-green-600 uppercase tracking-wide font-medium">Comparisons</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700">{currentStepData?.metadata?.swaps}</div>
+                    <div className="text-sm text-green-600 uppercase tracking-wide font-medium">Swaps</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700">{array.length}</div>
+                    <div className="text-sm text-green-600 uppercase tracking-wide font-medium">Array Size</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700">{steps.length}</div>
+                    <div className="text-sm text-green-600 uppercase tracking-wide font-medium">Total Steps</div>
+                  </div>
+                  <div className="text-center p-4 bg-white/50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-700">
+                      {currentStepData?.metadata?.executionTime ? 
+                        `${currentStepData.metadata.executionTime.toFixed(2)}` : 
+                        'N/A'
+                      }
+                    </div>
+                    <div className="text-sm text-green-600 uppercase tracking-wide font-medium">
+                      {currentStepData?.metadata?.executionTime ? 'Milliseconds' : 'Execution Time'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Color Legend */}
+            <div className="flex justify-center items-center gap-8 text-sm bg-slate-50 p-6 rounded-xl border">
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 bg-blue-500 rounded-lg shadow-sm"></div>
+                <span className="font-medium text-slate-700">Comparing</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 bg-red-500 rounded-lg shadow-sm"></div>
+                <span className="font-medium text-slate-700">Swapping</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 bg-green-500 rounded-lg shadow-sm"></div>
+                <span className="font-medium text-slate-700">Sorted</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 bg-slate-400 rounded-lg shadow-sm"></div>
+                <span className="font-medium text-slate-700">Unsorted</span>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Controls */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-          <div className="w-full bg-white rounded-lg shadow-lg p-6">
-            {/* Array Generation Controls */}
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-700 mb-3">Generate Array</h3>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => generateNewArray('random')}
-                  className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
-                >
-                  Random
-                </button>
-                <button
-                  onClick={() => generateNewArray('nearly-sorted')}
-                  className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
-                >
-                  Nearly Sorted
-                </button>
-                <button
-                  onClick={() => generateNewArray('reverse')}
-                  className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
-                >
-                  Reverse Order
-                </button>
-              </div>
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Array Generation */}
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+            <div className="p-6 pb-0">
+              <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2 mb-4">
+                <span className="text-blue-600">🎲</span>
+                Generate Array
+              </h3>
             </div>
+            <div className="p-6 pt-0 space-y-3">
+              <button
+                onClick={() => generateNewArray('random')}
+                className="w-full flex items-center justify-start gap-3 px-4 py-3 border border-slate-200 bg-white hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 rounded-lg transition-colors"
+              >
+                <span>🔀</span>
+                Random Array
+              </button>
+              <button
+                onClick={() => generateNewArray('nearly-sorted')}
+                className="w-full flex items-center justify-start gap-3 px-4 py-3 border border-slate-200 bg-white hover:bg-green-50 hover:border-green-300 hover:text-green-700 rounded-lg transition-colors"
+              >
+                <span>📈</span>
+                Nearly Sorted
+              </button>
+              <button
+                onClick={() => generateNewArray('reverse')}
+                className="w-full flex items-center justify-start gap-3 px-4 py-3 border border-slate-200 bg-white hover:bg-red-50 hover:border-red-300 hover:text-red-700 rounded-lg transition-colors"
+              >
+                <span>📉</span>
+                Reverse Order
+              </button>
+            </div>
+          </div>
 
-            {/* Algorithm Controls */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-3">Algorithm Control</h3>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={runBubbleSort}
-                  disabled={isAnimating}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-gray-400 transition-colors font-semibold text-sm"
-                >
-                  Run Bubble Sort
-                </button>
-                
-                {steps.length > 0 && (
-                  <>
+          {/* Algorithm Control */}
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+            <div className="p-6 pb-0">
+              <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2 mb-4">
+                <span className="text-green-600">⚡</span>
+                Algorithm Control
+              </h3>
+            </div>
+            <div className="p-6 pt-0 space-y-4">
+              <button
+                onClick={runBubbleSort}
+                disabled={isAnimating}
+                className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg shadow-lg transition-all flex items-center justify-center gap-3 font-semibold"
+              >
+                <span>🚀</span>
+                Run Bubble Sort
+              </button>
+              
+              {steps.length > 0 && (
+                <>
+                  <div className="h-px bg-slate-200"></div>
+                  <div className="grid grid-cols-4 gap-2">
                     <button
                       onClick={isPlaying ? pauseAnimation : playAnimation}
-                      className="px-3 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors text-sm"
+                      className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg transition-colors text-xl"
                     >
-                      {isPlaying ? '⏸️ Pause' : '▶️ Play'}
+                      {isPlaying ? '⏸️' : '▶️'}
                     </button>
                     
                     <button
                       onClick={prevStep}
                       disabled={currentStep === 0}
-                      className="px-3 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 disabled:bg-gray-300 transition-colors text-sm"
+                      className="px-3 py-2 border border-slate-200 bg-white hover:bg-slate-50 disabled:bg-slate-100 disabled:text-slate-400 text-slate-800 rounded-lg transition-colors text-xl"
                     >
-                      ← Previous
+                      ⏮️
                     </button>
                     
                     <button
                       onClick={nextStep}
                       disabled={currentStep === steps.length - 1}
-                      className="px-3 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 disabled:bg-gray-300 transition-colors text-sm"
+                      className="px-3 py-2 border border-slate-200 bg-white hover:bg-slate-50 disabled:bg-slate-100 disabled:text-slate-400 text-slate-800 rounded-lg transition-colors text-xl"
                     >
-                      Next →
+                      ⏭️
                     </button>
                     
                     <button
                       onClick={reset}
-                      className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
+                      className="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors text-xl"
                     >
-                      Reset
+                      🔄
                     </button>
-                  </>
-                )}
-              </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
-          <div className="w-full bg-white rounded-lg shadow-lg p-6">
-            {/* Speed Control */}
-            {steps.length > 0 && (
-              <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-700 mb-3">Animation Speed</h3>
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-gray-600">Slow</span>
-                  <input
-                    type="range"
-                    min="100"
-                    max="2000"
-                    step="100"
-                    value={animationSpeed}
-                    onChange={(e) => setAnimationSpeed(Number(e.target.value))}
-                    className="flex-1"
-                  />
-                  <span className="text-sm text-gray-600">Fast</span>
-                  <span className="text-sm text-gray-500 min-w-[60px]">
-                    {animationSpeed}ms
-                  </span>
+          {/* Animation & Progress */}
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+            <div className="p-6 pb-0">
+              <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2 mb-4">
+                <span className="text-purple-600">🎬</span>
+                Animation & Progress
+              </h3>
+            </div>
+            <div className="p-6 pt-0 space-y-6">
+              {steps.length > 0 ? (
+                <>
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-sm font-medium text-slate-700">Speed</span>
+                      <span className="px-2 py-1 bg-slate-200 text-slate-800 rounded text-xs font-mono">
+                        {animationSpeed}ms
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="100"
+                      max="2000"
+                      step="100"
+                      value={animationSpeed}
+                      onChange={(e) => setAnimationSpeed(Number(e.target.value))}
+                      className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                    />
+                    <div className="flex justify-between text-xs text-slate-500 mt-2">
+                      <span>⚡ Fast</span>
+                      <span>🐌 Slow</span>
+                    </div>
+                  </div>
+                  
+                  <div className="h-px bg-slate-200"></div>
+                  
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-sm font-medium text-slate-700">Progress</span>
+                      <span className="px-2 py-1 border border-slate-200 text-slate-800 rounded text-xs font-mono">
+                        {currentStep + 1} / {steps.length}
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-300 shadow-sm"
+                        style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="text-center text-slate-500 py-8">
+                  <span className="text-4xl block mb-4">💤</span>
+                  <p className="text-sm">Run algorithm to see controls</p>
                 </div>
-              </div>
-            )}
-            
-            {steps.length > 0 && (
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-700 mb-3">Progress</h3>
-                <p className="text-gray-600 mb-2 text-sm">
-                  Step {currentStep + 1} of {steps.length}
-                </p>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Algorithm Theoretical Information */}
-        <div className="w-full">
-          <AlgorithmDetails 
-            algorithmInfo={getAlgorithmInfo('bubble-sort')} 
-            isExpanded={isAlgorithmDetailsExpanded}
-            onToggle={() => setIsAlgorithmDetailsExpanded(!isAlgorithmDetailsExpanded)} 
-          />
-        </div>
+        {/* Algorithm Details */}
+        <AlgorithmDetails 
+          algorithmInfo={getAlgorithmInfo('bubble-sort')} 
+          isExpanded={isAlgorithmDetailsExpanded}
+          onToggle={() => setIsAlgorithmDetailsExpanded(!isAlgorithmDetailsExpanded)} 
+        />
 
-        {/* Code Implementations Section */}
-        <div className="w-full bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800">Implementation Examples</h2>
-          <p className="text-gray-600 mb-4 text-sm">
-            Here are complete implementations of the Bubble Sort algorithm in different programming languages:
-          </p>
-          <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
-        </div>
-      </div>
+        {/* Code Examples */}
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+          <div className="p-6 pb-0">
+            <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2 mb-4">
+              <span className="text-slate-600">💻</span>
+              Implementation Examples
+            </h3>
+          </div>
+          <div className="p-6 pt-0">
+            <p className="text-slate-600 mb-6">
+              Here are complete implementations of the Bubble Sort algorithm in different programming languages:
+            </p>
+            <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
