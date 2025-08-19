@@ -77,6 +77,32 @@ const bubbleSortFunction = (arr: number[]): SortStep[] => {
     }
   }
 
+  // Ensure the first element is marked as sorted when algorithm completes naturally
+  // (not through early termination)
+  let firstElementSorted = false;
+  
+  // Check if first element was already marked in early termination
+  for (const step of steps) {
+    if (step.type === 'set-sorted' && step.indices.includes(0)) {
+      firstElementSorted = true;
+      break;
+    }
+  }
+  
+  // If first element wasn't marked, mark it now
+  if (!firstElementSorted) {
+    steps.push({
+      type: 'set-sorted',
+      indices: [0],
+      array: [...array],
+      metadata: { 
+        comparisons, 
+        swaps,
+        currentPhase: 'First element in final position'
+      }
+    });
+  }
+
   return steps;
 };
 
