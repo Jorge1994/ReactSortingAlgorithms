@@ -3,147 +3,181 @@ import type { AlgorithmInfo } from '../types/algorithmInfo';
 interface AlgorithmDetailsProps {
   algorithmInfo: AlgorithmInfo;
   isExpanded?: boolean;
-  onToggle?: () => void;
 }
 
 /**
  * Component to display detailed algorithm information
  * Uses theoretical data separated from implementation
  */
-export function AlgorithmDetails({ algorithmInfo, isExpanded = false, onToggle }: AlgorithmDetailsProps) {
+export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: AlgorithmDetailsProps) {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Header */}
-      <div 
-        className={`p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white cursor-pointer ${onToggle ? 'hover:from-blue-600 hover:to-blue-700' : ''}`}
-        onClick={onToggle}
-      >
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">{algorithmInfo.name}</h2>
-          {onToggle && (
-            <span className="text-2xl transform transition-transform duration-200" style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-              ▼
-            </span>
-          )}
-        </div>
-        <p className="text-blue-100 mt-1">{algorithmInfo.description}</p>
-      </div>
-
-      {/* Content */}
-      {(isExpanded || !onToggle) && (
-        <div className="p-6 space-y-6">
+    <div className="bg-white overflow-hidden">
+      {/* Content - only show if expanded */}
+      {isExpanded && (
+        <div className="p-8 space-y-8 bg-gradient-to-br from-slate-50 to-white">
           {/* Complexity Analysis */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Complexity Analysis</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="font-medium text-gray-700 mb-2">Time Complexity</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li><span className="font-medium">Best:</span> {algorithmInfo.complexity.time.best}</li>
-                  <li><span className="font-medium">Average:</span> {algorithmInfo.complexity.time.average}</li>
-                  <li><span className="font-medium">Worst:</span> {algorithmInfo.complexity.time.worst}</li>
-                </ul>
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Complexity Analysis
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                <h4 className="font-semibold text-blue-800 mb-4 flex items-center gap-2">
+                  <span className="text-xl">⏱️</span>
+                  Time Complexity
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-blue-700">Best Case:</span>
+                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.best}</code>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-blue-700">Average Case:</span>
+                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.average}</code>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-blue-700">Worst Case:</span>
+                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.worst}</code>
+                  </div>
+                </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h4 className="font-medium text-gray-700 mb-2">Space Complexity</h4>
-                <p className="text-sm text-gray-600">{algorithmInfo.complexity.space}</p>
+              <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+                <h4 className="font-semibold text-purple-800 mb-4 flex items-center gap-2">
+                  <span className="text-xl">💾</span>
+                  Space Complexity
+                </h4>
+                <div className="flex items-center justify-center h-16">
+                  <code className="bg-purple-200 text-purple-800 px-4 py-2 rounded-lg font-mono text-lg font-bold">{algorithmInfo.complexity.space}</code>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Key Characteristics */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Key Characteristics</h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+              Key Characteristics
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {algorithmInfo.keyCharacteristics.map((characteristic, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="text-blue-500 mt-1">•</span>
-                  {characteristic}
-                </li>
+                <div key={index} className="flex items-start gap-3 p-4 bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </div>
+                  <span className="text-slate-700 leading-relaxed">{characteristic}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Visualization Notes */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Visualization Guide</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+              Visualization Guide
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Colors */}
-              <div>
-                <h4 className="font-medium text-gray-700 mb-2">Color Coding</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-blue-500 rounded"></div>
-                    <span className="text-gray-600">{algorithmInfo.visualizationNotes.colors.comparing}</span>
+              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+                <h4 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                  <span className="text-xl">🎨</span>
+                  Color Coding
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="w-5 h-5 bg-blue-500 rounded-lg shadow-sm"></div>
+                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.comparing}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-red-500 rounded"></div>
-                    <span className="text-gray-600">{algorithmInfo.visualizationNotes.colors.swapping}</span>
+                  <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                    <div className="w-5 h-5 bg-red-500 rounded-lg shadow-sm"></div>
+                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.swapping}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-green-500 rounded"></div>
-                    <span className="text-gray-600">{algorithmInfo.visualizationNotes.colors.sorted}</span>
+                  <div className="flex items-center gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                    <div className="w-5 h-5 bg-emerald-500 rounded-lg shadow-sm"></div>
+                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.sorted}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                    <span className="text-gray-600">{algorithmInfo.visualizationNotes.colors.unsorted}</span>
+                  <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                    <div className="w-5 h-5 bg-slate-400 rounded-lg shadow-sm"></div>
+                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.unsorted}</span>
                   </div>
                 </div>
               </div>
 
               {/* Phases */}
-              <div>
-                <h4 className="font-medium text-gray-700 mb-2">Algorithm Phases</h4>
-                <ul className="space-y-1">
+              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+                <h4 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                  <span className="text-xl">🔄</span>
+                  Algorithm Phases
+                </h4>
+                <div className="space-y-3">
                   {algorithmInfo.visualizationNotes.phases.map((phase, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                      <span className="text-green-500 font-bold">{index + 1}.</span>
-                      {phase}
-                    </li>
+                    <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                      <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
+                        {index + 1}
+                      </div>
+                      <span className="text-slate-700 leading-relaxed">{phase}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Advantages and Disadvantages */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-semibold text-green-700 mb-3">✅ Advantages</h3>
-              <ul className="space-y-2">
+            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border border-emerald-200">
+              <h3 className="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                <span className="text-2xl">✅</span>
+                Advantages
+              </h3>
+              <div className="space-y-3">
                 {algorithmInfo.advantages.map((advantage, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-green-500 mt-1">•</span>
-                    {advantage}
-                  </li>
+                  <div key={index} className="flex items-start gap-3 p-3 bg-white/80 rounded-lg border border-emerald-100">
+                    <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs">+</span>
+                    </div>
+                    <span className="text-emerald-800 leading-relaxed">{advantage}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-red-700 mb-3">❌ Disadvantages</h3>
-              <ul className="space-y-2">
+            <div className="bg-gradient-to-br from-rose-50 to-red-50 rounded-xl p-6 border border-rose-200">
+              <h3 className="text-xl font-bold text-rose-800 mb-4 flex items-center gap-2">
+                <span className="text-2xl">❌</span>
+                Disadvantages
+              </h3>
+              <div className="space-y-3">
                 {algorithmInfo.disadvantages.map((disadvantage, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-red-500 mt-1">•</span>
-                    {disadvantage}
-                  </li>
+                  <div key={index} className="flex items-start gap-3 p-3 bg-white/80 rounded-lg border border-rose-100">
+                    <div className="w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs">-</span>
+                    </div>
+                    <span className="text-rose-800 leading-relaxed">{disadvantage}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
 
           {/* Use Cases */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">Recommended Use Cases</h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+              Recommended Use Cases
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {algorithmInfo.useCases.map((useCase, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="text-purple-500 mt-1">•</span>
-                  {useCase}
-                </li>
+                <div key={index} className="flex items-start gap-3 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200 hover:shadow-md transition-shadow duration-200">
+                  <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-xs font-bold">💡</span>
+                  </div>
+                  <span className="text-indigo-800 leading-relaxed font-medium">{useCase}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       )}
