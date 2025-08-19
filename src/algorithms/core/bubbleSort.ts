@@ -7,6 +7,7 @@ import { bubbleSortInfo } from '../info/bubbleSortInfo';
  * Pure algorithm logic separated from theoretical information
  */
 const bubbleSortFunction = (arr: number[]): SortStep[] => {
+  const startTime = performance.now();
   const steps: SortStep[] = [];
   const array = [...arr]; // Copy to avoid mutation
   let comparisons = 0;
@@ -91,6 +92,9 @@ const bubbleSortFunction = (arr: number[]): SortStep[] => {
   
   // If first element wasn't marked, mark it now
   if (!firstElementSorted) {
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    
     steps.push({
       type: 'set-sorted',
       indices: [0],
@@ -98,9 +102,17 @@ const bubbleSortFunction = (arr: number[]): SortStep[] => {
       metadata: { 
         comparisons, 
         swaps,
-        currentPhase: 'First element in final position'
+        currentPhase: 'First element in final position',
+        executionTime
       }
     });
+  } else {
+    // Add execution time to the last step if first element was already marked
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    if (steps.length > 0 && steps[steps.length - 1].metadata) {
+      steps[steps.length - 1].metadata!.executionTime = executionTime;
+    }
   }
 
   return steps;

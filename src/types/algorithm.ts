@@ -8,6 +8,7 @@ export interface SortStep {
     comparisons: number;
     swaps: number;
     currentPhase?: string;
+    executionTime?: number; // in milliseconds
   };
 }
 

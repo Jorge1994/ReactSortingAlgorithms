@@ -152,6 +152,40 @@ function App() {
             </div>
           )}
 
+          {/* Final Statistics - Right after bars when sorting is complete */}
+          {steps.length > 0 && currentStep === steps.length - 1 && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <h3 className="font-semibold text-green-800 mb-3 text-base">🎉 Sorting Complete!</h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.comparisons}</div>
+                  <div className="text-xs text-green-600">Total Comparisons</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.swaps}</div>
+                  <div className="text-xs text-green-600">Total Swaps</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-700">{array.length}</div>
+                  <div className="text-xs text-green-600">Array Size</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-700">{steps.length}</div>
+                  <div className="text-xs text-green-600">Total Steps</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-700">
+                    {currentStepData?.metadata?.executionTime ? 
+                      `${currentStepData.metadata.executionTime.toFixed(2)}ms` : 
+                      'N/A'
+                    }
+                  </div>
+                  <div className="text-xs text-green-600">Execution Time</div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Color Legend */}
           <div className="flex justify-center items-center gap-8 text-base bg-gray-50 p-4 rounded-lg">
             <div className="flex items-center gap-2">
@@ -307,31 +341,6 @@ function App() {
             Here are complete implementations of the Bubble Sort algorithm in different programming languages:
           </p>
           <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
-
-          {/* Final Statistics */}
-          {steps.length > 0 && currentStep === steps.length - 1 && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-6">
-              <h3 className="font-semibold text-green-800 mb-3 text-base">🎉 Sorting Complete!</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.comparisons}</div>
-                  <div className="text-xs text-green-600">Total Comparisons</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{currentStepData?.metadata?.swaps}</div>
-                  <div className="text-xs text-green-600">Total Swaps</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{array.length}</div>
-                  <div className="text-xs text-green-600">Array Size</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-700">{steps.length}</div>
-                  <div className="text-xs text-green-600">Total Steps</div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
