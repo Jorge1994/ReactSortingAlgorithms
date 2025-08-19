@@ -80,5 +80,6 @@ User Input → Algorithm Registry → Algorithm.execute() → SortStep[] → use
 Never mix algorithm logic with UI concerns. Algorithm files should have zero React dependencies. Use the registry pattern to keep algorithms discoverable and the factory pattern to ensure consistent interfaces.
 
 ## Answering User Queries
-All the code, functions, variables, and the documentation must be written in English.
+All the code, functions, variables, strings, comments, and the documentation must be written in English.
 The answers to the user in the chat must be in Portuguese from Portugal.
+All the text in UI must be in English.

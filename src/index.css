@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+/* Garantir que a aplicação ocupe toda a área disponível */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 /* Custom colors and animations for the sorting visualizer */
 :root {
   --color-comparing: #3b82f6; /* Blue */
