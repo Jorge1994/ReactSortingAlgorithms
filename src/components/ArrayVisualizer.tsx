@@ -68,19 +68,19 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
   };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
       
-      {/* Array container */}
-      <div className="relative w-full flex items-end justify-center gap-2 h-80 p-8 mb-8">
+      {/* Array container with proper spacing for labels */}
+      <div className="relative w-full flex items-end justify-center gap-2 p-8 pt-16 pb-20" style={{ height: '400px' }}>
         {displayArray.map((value, index) => (
           <div
             key={`${index}-${value}`}
             className="group relative flex flex-col items-center"
           >
             {/* Value label on top */}
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
               <div className="bg-slate-800 text-white px-2 py-1 rounded-lg text-xs font-semibold shadow-lg">
                 {value}
               </div>
@@ -90,7 +90,7 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
             <div
               className={`relative w-8 md:w-12 rounded-t-xl transition-all duration-500 ease-out transform group-hover:scale-110 ${getBarGlow(index)}`}
               style={{
-                height: `${(value / Math.max(...displayArray)) * 280}px`,
+                height: `${(value / Math.max(...displayArray)) * 250}px`,
                 backgroundColor: getBarColor(index),
                 minHeight: '20px'
               }}

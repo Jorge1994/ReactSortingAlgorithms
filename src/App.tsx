@@ -41,7 +41,7 @@ function App() {
       
       <main className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Array Visualization */}
-        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
           <div className="p-8">
             <ArrayVisualizer 
               displayArray={displayArray} 
