@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getAlgorithm } from './algorithms/registry';
+import { getAlgorithm, type AlgorithmKey } from './algorithms/registry';
 import { getAlgorithmInfo } from './algorithms/infoRegistry';
 import { generateRandomArray, generateNearlySortedArray, generateReverseSortedArray } from './utils/arrayGenerator';
 import { CodeTabs } from './components/CodeTabs';
 import { AlgorithmDetails } from './components/AlgorithmDetails';
-import { bubbleSortImplementations } from './data/bubbleSortImplementations';
+import { getImplementations } from './data/implementationsRegistry';
 import { getActiveImplementations } from './types/implementations';
 import type { SortStep } from './types';
 
@@ -16,6 +16,9 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationSpeed, setAnimationSpeed] = useState(500);
   const [isAlgorithmDetailsExpanded, setIsAlgorithmDetailsExpanded] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
+  // setCurrentAlgorithm will be used when multiple algorithms are available
 
   // Auto-play functionality
   useEffect(() => {
@@ -51,8 +54,8 @@ function App() {
     setIsPlaying(false);
   };
 
-  const runBubbleSort = () => {
-    const algorithm = getAlgorithm('bubble-sort');
+  const runSortingAlgorithm = () => {
+    const algorithm = getAlgorithm(currentAlgorithm);
     const sortSteps = algorithm.execute(array);
     setSteps(sortSteps);
     setCurrentStep(0);
@@ -92,7 +95,7 @@ function App() {
       <header className="sticky top-0 z-10 w-full p-6 bg-white/90 backdrop-blur-sm border-b border-slate-200 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-            Bubble Sort Visualizer
+            {getAlgorithm(currentAlgorithm).name} Visualizer
           </h1>
         </div>
       </header>
@@ -271,12 +274,12 @@ function App() {
             </div>
             <div className="p-6 pt-0 space-y-4">
               <button
-                onClick={runBubbleSort}
+                onClick={runSortingAlgorithm}
                 disabled={isAnimating}
                 className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg shadow-lg transition-all flex items-center justify-center gap-3 font-semibold"
               >
                 <span>🚀</span>
-                Run Bubble Sort
+                Run {getAlgorithm(currentAlgorithm).name}
               </button>
               
               {steps.length > 0 && (
@@ -380,7 +383,7 @@ function App() {
 
         {/* Algorithm Details */}
         <AlgorithmDetails 
-          algorithmInfo={getAlgorithmInfo('bubble-sort')} 
+          algorithmInfo={getAlgorithmInfo(currentAlgorithm)} 
           isExpanded={isAlgorithmDetailsExpanded}
           onToggle={() => setIsAlgorithmDetailsExpanded(!isAlgorithmDetailsExpanded)} 
         />
@@ -395,9 +398,9 @@ function App() {
           </div>
           <div className="p-6 pt-0">
             <p className="text-slate-600 mb-6">
-              Here are complete implementations of the Bubble Sort algorithm in different programming languages:
+              Here are complete implementations of the {getAlgorithm(currentAlgorithm).name} algorithm in different programming languages:
             </p>
-            <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
+            <CodeTabs examples={getActiveImplementations(getImplementations(currentAlgorithm))} />
           </div>
         </section>
       </main>
