@@ -430,6 +430,47 @@ function App() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="mt-16 border-t border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">P</span>
+              </div>
+              <div>
+                <p className="text-slate-800 font-semibold">Paulo J.S. Ferreira</p>
+                <p className="text-slate-600 text-sm">Sorting Algorithm Visualizer</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-6 text-sm text-slate-600">
+              <div className="flex items-center gap-2">
+                <span>📅</span>
+                <span>&copy; 2025</span>
+              </div>
+              <div className="hidden md:block w-px h-6 bg-slate-300"></div>
+              <div className="flex items-center gap-2">
+                <span>⚛️</span>
+                <span>Built with React & TypeScript</span>
+              </div>
+              <div className="hidden md:block w-px h-6 bg-slate-300"></div>
+              <div className="flex items-center gap-2">
+                <span>🎨</span>
+                <span>Designed with Tailwind CSS</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Additional footer info */}
+          <div className="mt-6 pt-6 border-t border-slate-200 text-center">
+            <p className="text-slate-500 text-xs">
+              Educational project for visualizing and understanding sorting algorithms through interactive demonstrations
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
