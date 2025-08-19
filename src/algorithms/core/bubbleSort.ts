@@ -1,8 +1,10 @@
-import type { SortStep, AlgorithmComplexity } from '../../types';
+import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { bubbleSortInfo } from '../info/bubbleSortInfo';
 
 /**
  * Bubble Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
  */
 const bubbleSortFunction = (arr: number[]): SortStep[] => {
   const steps: SortStep[] = [];
@@ -78,18 +80,14 @@ const bubbleSortFunction = (arr: number[]): SortStep[] => {
   return steps;
 };
 
-const complexity: AlgorithmComplexity = {
-  time: {
-    best: "O(n)",      // When array is already sorted
-    average: "O(n²)",  // Average case
-    worst: "O(n²)"     // When array is reverse sorted
-  },
-  space: "O(1)"        // In-place sorting (constant extra space)
-};
-
+/**
+ * Export the complete Bubble Sort algorithm with separated concerns:
+ * - Algorithm logic (this file)
+ * - Theoretical information (bubbleSortInfo.ts)
+ */
 export const bubbleSortAlgorithm = createSortingAlgorithm(
-  "Bubble Sort",
-  "Compares adjacent elements and swaps them if they are in the wrong order. Repeats until no swaps are needed.",
-  complexity,
+  bubbleSortInfo.name,
+  bubbleSortInfo.description,
+  bubbleSortInfo.complexity,
   bubbleSortFunction
 );

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getAlgorithm } from './algorithms/registry';
+import { getAlgorithmInfo } from './algorithms/infoRegistry';
 import { generateRandomArray, generateNearlySortedArray, generateReverseSortedArray } from './utils/arrayGenerator';
 import { CodeTabs } from './components/CodeTabs';
+import { AlgorithmDetails } from './components/AlgorithmDetails';
 import { bubbleSortImplementations } from './data/bubbleSortImplementations';
 import { getActiveImplementations } from './types/implementations';
 import type { SortStep } from './types';
@@ -13,6 +15,7 @@ function App() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationSpeed, setAnimationSpeed] = useState(500); // milliseconds
+  const [isAlgorithmDetailsExpanded, setIsAlgorithmDetailsExpanded] = useState(false);
 
   // Auto-play functionality
   useEffect(() => {
@@ -288,40 +291,26 @@ function App() {
           </div>
         </div>
 
-        {/* Algorithm Info & Statistics */}
-        <div className="w-full bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-xl font-bold mb-3 text-gray-800">About Bubble Sort</h2>
-          <p className="text-gray-600 mb-4 text-sm">
-            {getAlgorithm('bubble-sort').description}
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div>
-              <h3 className="font-semibold text-gray-700 mb-2 text-sm">Time Complexity</h3>
-              <ul className="text-gray-600 space-y-1 text-xs">
-                <li><span className="font-medium">Best case:</span> {getAlgorithm('bubble-sort').complexity.time.best}</li>
-                <li><span className="font-medium">Average case:</span> {getAlgorithm('bubble-sort').complexity.time.average}</li>
-                <li><span className="font-medium">Worst case:</span> {getAlgorithm('bubble-sort').complexity.time.worst}</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-gray-700 mb-2 text-sm">Space Complexity</h3>
-              <p className="text-gray-600 text-xs">
-                <span className="font-medium">Space:</span> {getAlgorithm('bubble-sort').complexity.space}
-              </p>
-            </div>
-          </div>
+        {/* Algorithm Theoretical Information */}
+        <div className="w-full">
+          <AlgorithmDetails 
+            algorithmInfo={getAlgorithmInfo('bubble-sort')} 
+            isExpanded={isAlgorithmDetailsExpanded}
+            onToggle={() => setIsAlgorithmDetailsExpanded(!isAlgorithmDetailsExpanded)} 
+          />
+        </div>
 
-          {/* Code Implementations Section */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">Implementation Examples</h3>
-            <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
-          </div>
+        {/* Code Implementations Section */}
+        <div className="w-full bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-xl font-bold mb-3 text-gray-800">Implementation Examples</h2>
+          <p className="text-gray-600 mb-4 text-sm">
+            Here are complete implementations of the Bubble Sort algorithm in different programming languages:
+          </p>
+          <CodeTabs examples={getActiveImplementations(bubbleSortImplementations)} />
 
           {/* Final Statistics */}
           {steps.length > 0 && currentStep === steps.length - 1 && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-6">
               <h3 className="font-semibold text-green-800 mb-3 text-base">🎉 Sorting Complete!</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="text-center">
