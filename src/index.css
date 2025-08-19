@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Garantir que a aplicação ocupe toda a área disponível */
+/* Ensure the application occupies the entire available area */
 * {
   box-sizing: border-box;
 }

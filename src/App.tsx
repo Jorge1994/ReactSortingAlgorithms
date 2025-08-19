@@ -90,14 +90,14 @@ function App() {
 
   return (
     <div className="fixed inset-0 w-screen h-screen bg-gray-100 flex flex-col overflow-hidden">
-      {/* Header fixo */}
+      {/* Fixed Header */}
       <div className="flex-shrink-0 w-full p-4 bg-white shadow-sm">
         <h1 className="text-4xl font-bold text-center text-gray-800">
           Bubble Sort Visualizer
         </h1>
       </div>
       
-      {/* Conteúdo scrollável */}
+      {/* Scrollable Content */}
       <div className="flex-1 w-full overflow-y-auto p-4">
         {/* Array Visualization */}
         <div className="w-full bg-white rounded-lg shadow-lg p-6 mb-4">

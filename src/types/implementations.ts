@@ -1,11 +1,11 @@
-// Interface para definir implementações de algoritmos
+// Interface to define algorithm implementations
 export interface AlgorithmImplementation {
   language: string;
   code: string;
   fileExtension: string;
 }
 
-// Função helper para criar implementações de algoritmos
+// Helper function to create algorithm implementations
 export function createAlgorithmImplementation(
   language: string, 
   code: string, 
@@ -18,15 +18,15 @@ export function createAlgorithmImplementation(
   };
 }
 
-// Tipo para coleção de implementações de um algoritmo
+// Type for collection of algorithm implementations
 export type AlgorithmImplementations = {
   [key: string]: AlgorithmImplementation;
 };
 
-// Função para obter as implementações ativas (facilita adição/remoção)
+// Function to get active implementations (facilitates addition/removal)
 export function getActiveImplementations(implementations: AlgorithmImplementations): AlgorithmImplementation[] {
-  // Por agora, retorna apenas Python e Java
-  // Para adicionar mais linguagens, basta incluir a chave aqui
+  // For now, returns only Python and Java
+  // To add more languages, just include the key here
   const activeLanguages = ['python', 'java'];
   
   return activeLanguages
