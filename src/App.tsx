@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type AlgorithmKey } from './algorithms/registry';
 import { useSortingAnimation } from './hooks/useSortingAnimation';
+import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
 import { Header } from './components/Header';
 import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { ControlPanel } from './components/ControlPanel';
@@ -11,11 +12,10 @@ import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
   // setCurrentAlgorithm will be used when multiple algorithms are available
 
-  const hookResult = useSortingAnimation(currentAlgorithm);
+  const hookResult: UseSortingAnimationReturn = useSortingAnimation(currentAlgorithm);
   
   const {
     displayArray,
@@ -34,14 +34,10 @@ function App() {
     setAnimationSpeed,
     canPlayNext,
     canPlayPrev,
-    isCompleted
+    isCompleted,
+    arraySize,
+    changeArraySize
   } = hookResult;
-  
-  // Access new properties
-  const arraySize = (hookResult as any).arraySize ?? 15;
-  const changeArraySize = (hookResult as any).changeArraySize ?? (() => {
-    console.log('Fallback changeArraySize called - function not found in hook');
-  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">

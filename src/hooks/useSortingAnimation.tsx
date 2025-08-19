@@ -3,7 +3,7 @@ import { getAlgorithm, type AlgorithmKey } from '../algorithms/registry';
 import { generateRandomArray, generateNearlySortedArray, generateReverseSortedArray } from '../utils/arrayGenerator';
 import type { SortStep } from '../types';
 
-interface UseSortingAnimationReturn {
+export interface UseSortingAnimationReturn {
   // State
   array: number[];
   steps: SortStep[];
