@@ -31,6 +31,9 @@ export function ControlPanel({
   arraySize,
   onArraySizeChange
 }: ControlPanelProps) {
+  // Calculate progress percentages for slider fill
+  const arraySizeProgress = ((arraySize - 5) / (100 - 5)) * 100;
+  const speedProgress = ((animationSpeed - 50) / (2000 - 50)) * 100;
   return (
     <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-8 border border-slate-200">
       {/* Array Generation Section */}
@@ -98,6 +101,9 @@ export function ControlPanel({
                 value={arraySize}
                 onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
                 className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                style={{
+                  background: `linear-gradient(to right, #f59e0b 0%, #f59e0b ${arraySizeProgress}%, #e5e7eb ${arraySizeProgress}%, #e5e7eb 100%)`
+                }}
               />
               <div className="flex justify-between text-xs text-slate-400 mt-1">
                 <span>5</span>
@@ -205,6 +211,9 @@ export function ControlPanel({
                 value={animationSpeed}
                 onChange={(e) => onSpeedChange(Number(e.target.value))}
                 className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                style={{
+                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${speedProgress}%, #e2e8f0 ${speedProgress}%, #e2e8f0 100%)`
+                }}
               />
               <div className="flex justify-between text-xs text-slate-500 mt-1">
                 <span>Fast</span>
