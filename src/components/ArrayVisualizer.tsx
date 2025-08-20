@@ -129,11 +129,6 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
           );
         })}
       </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute top-4 left-4 w-3 h-3 bg-blue-400 rounded-full opacity-30"></div>
-      <div className="absolute top-8 right-6 w-2 h-2 bg-purple-400 rounded-full opacity-40"></div>
-      <div className="absolute bottom-4 left-8 w-4 h-4 bg-emerald-400 rounded-full opacity-20"></div>
     </div>
   );
 }
