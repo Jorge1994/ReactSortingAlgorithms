@@ -40,14 +40,6 @@ export function CompletionStats({ currentStepData, arrayLength }: CompletionStat
       color: 'from-purple-500 to-purple-600',
       bgColor: 'from-purple-50 to-purple-100',
       textColor: 'text-purple-800'
-    },
-    {
-      value: 'O(n²)',
-      label: 'Time Complexity',
-      icon: '🧮',
-      color: 'from-amber-500 to-amber-600',
-      bgColor: 'from-amber-50 to-amber-100',
-      textColor: 'text-amber-800'
     }
   ];
 
@@ -68,7 +60,7 @@ export function CompletionStats({ currentStepData, arrayLength }: CompletionStat
         </div>
 
         {/* Statistics grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <div 
               key={stat.label}

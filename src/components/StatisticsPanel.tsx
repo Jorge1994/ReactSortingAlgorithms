@@ -50,20 +50,6 @@ export function StatisticsPanel({ currentStepData, currentStep, totalSteps }: St
             </div>
           </div>
         </div>
-        
-        {currentStepData.metadata?.currentPhase && (
-          <div className="bg-gradient-to-r from-amber-50 to-amber-100 border border-amber-200 rounded-xl p-4 min-w-[180px]">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center shadow-sm">
-                <span className="text-white text-lg">📍</span>
-              </div>
-              <div>
-                <div className="text-xs font-medium text-amber-600 uppercase tracking-wide">Current Phase</div>
-                <div className="text-sm font-semibold text-amber-800">{currentStepData.metadata.currentPhase}</div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
