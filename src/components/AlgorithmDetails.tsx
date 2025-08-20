@@ -72,55 +72,22 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
             </div>
           </div>
 
-          {/* Visualization Notes */}
+          {/* Algorithm Phases */}
           <div>
             <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-              Visualization Guide
+              Algorithm Phases
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Colors */}
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h4 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                  <span className="text-xl">🎨</span>
-                  Color Coding
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                    <div className="w-5 h-5 bg-blue-500 rounded-lg shadow-sm"></div>
-                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.comparing}</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
-                    <div className="w-5 h-5 bg-red-500 rounded-lg shadow-sm"></div>
-                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.swapping}</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                    <div className="w-5 h-5 bg-emerald-500 rounded-lg shadow-sm"></div>
-                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.sorted}</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
-                    <div className="w-5 h-5 bg-slate-400 rounded-lg shadow-sm"></div>
-                    <span className="text-slate-700 font-medium">{algorithmInfo.visualizationNotes.colors.unsorted}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Phases */}
-              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h4 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                  <span className="text-xl">🔄</span>
-                  Algorithm Phases
-                </h4>
-                <div className="space-y-3">
-                  {algorithmInfo.visualizationNotes.phases.map((phase, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
-                      <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
-                        {index + 1}
-                      </div>
-                      <span className="text-slate-700 leading-relaxed">{phase}</span>
+            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+              <div className="space-y-3">
+                {algorithmInfo.visualizationNotes.phases.map((phase, index) => (
+                  <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                    <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
+                      {index + 1}
                     </div>
-                  ))}
-                </div>
+                    <span className="text-slate-700 leading-relaxed">{phase}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
