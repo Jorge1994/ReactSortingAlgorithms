@@ -17,7 +17,6 @@ export interface UseSortingAnimationReturn {
   
   // Actions
   generateNewArray: (type?: 'random' | 'nearly-sorted' | 'reverse') => void;
-  runSortingAlgorithm: () => void;
   playAnimation: () => void;
   pauseAnimation: () => void;
   nextStep: () => void;
@@ -75,16 +74,17 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
     setIsPlaying(false);
   };
 
-  const runSortingAlgorithm = () => {
-    const algorithm = getAlgorithm(currentAlgorithm);
-    const sortSteps = algorithm.execute(array);
-    setSteps(sortSteps);
-    setCurrentStep(0);
-    setIsAnimating(true);
-    setIsPlaying(false);
+  const playAnimation = () => {
+    // If no steps exist, run the algorithm first
+    if (steps.length === 0) {
+      const algorithm = getAlgorithm(currentAlgorithm);
+      const sortSteps = algorithm.execute(array);
+      setSteps(sortSteps);
+      setCurrentStep(0);
+      setIsAnimating(true);
+    }
+    setIsPlaying(true);
   };
-
-  const playAnimation = () => setIsPlaying(true);
   const pauseAnimation = () => setIsPlaying(false);
   
   const nextStep = () => {
@@ -135,7 +135,6 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
     
     // Actions
     generateNewArray,
-    runSortingAlgorithm,
     playAnimation,
     pauseAnimation,
     nextStep,

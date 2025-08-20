@@ -1,6 +1,5 @@
 interface ControlPanelProps {
   onGenerateArray: (type: 'random' | 'nearly-sorted' | 'reverse') => void;
-  onRunAlgorithm: () => void;
   onPlay: () => void;
   onPause: () => void;
   onNext: () => void;
@@ -17,7 +16,6 @@ interface ControlPanelProps {
 
 export function ControlPanel({
   onGenerateArray,
-  onRunAlgorithm,
   onPlay,
   onPause,
   onNext,
@@ -125,34 +123,11 @@ export function ControlPanel({
         </div>
       </div>
 
-      {/* Start Sorting Section */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-          <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-          Algorithm Execution
-        </h3>
-        <div className="flex justify-center">
-          <button
-            onClick={onRunAlgorithm}
-            className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-700 text-white rounded-2xl px-12 py-6 hover:from-purple-700 hover:via-purple-800 hover:to-indigo-800 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-purple-500/30"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative flex items-center gap-3">
-              <span className="text-3xl">🚀</span>
-              <div className="text-left">
-                <div className="text-xl font-bold">Start Sorting</div>
-                <div className="text-sm opacity-90">Execute algorithm</div>
-              </div>
-            </div>
-          </button>
-        </div>
-      </div>
-
       {/* Animation Controls Section */}
       <div>
         <h3 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
-          <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-          Playback Controls
+          <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+          Sort & Playback Controls
         </h3>
         
         <div className="bg-white rounded-xl p-6 shadow-inner border border-slate-200">
@@ -168,9 +143,10 @@ export function ControlPanel({
             
             <button
               onClick={isPlaying ? onPause : onPlay}
-              className="group relative flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 mx-2"
+              className="group relative flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-110 mx-3"
             >
-              <span className="text-2xl">{isPlaying ? '⏸️' : '▶️'}</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+              <span className="relative text-3xl">{isPlaying ? '⏸️' : '▶️'}</span>
             </button>
             
             <button

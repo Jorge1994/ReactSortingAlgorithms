@@ -24,7 +24,6 @@ function App() {
     animationSpeed,
     currentStepData,
     generateNewArray,
-    runSortingAlgorithm,
     playAnimation,
     pauseAnimation,
     nextStep,
@@ -85,7 +84,6 @@ function App() {
           <div className="p-8">
             <ControlPanel 
               onGenerateArray={generateNewArray}
-              onRunAlgorithm={runSortingAlgorithm}
               onPlay={playAnimation}
               onPause={pauseAnimation}
               onNext={nextStep}
