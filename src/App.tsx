@@ -4,7 +4,8 @@ import { useSortingAnimation } from './hooks/useSortingAnimation';
 import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
 import { Header } from './components/Header';
 import { ArrayVisualizer } from './components/ArrayVisualizer';
-import { ControlPanel } from './components/ControlPanel';
+import { ArrayControls } from './components/ArrayControls';
+import { AnimationControls } from './components/AnimationControls';
 import { StatisticsPanel } from './components/StatisticsPanel';
 import { CompletionStats } from './components/CompletionStats';
 import { ColorLegend } from './components/ColorLegend';
@@ -81,9 +82,14 @@ function App() {
 
         {/* Controls */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-          <div className="p-8">
-            <ControlPanel 
+          <div className="p-8 space-y-6">
+            <ArrayControls
               onGenerateArray={generateNewArray}
+              arraySize={arraySize}
+              onArraySizeChange={changeArraySize}
+            />
+            
+            <AnimationControls
               onPlay={playAnimation}
               onPause={pauseAnimation}
               onNext={nextStep}
@@ -94,8 +100,6 @@ function App() {
               canPlayPrev={canPlayPrev}
               animationSpeed={animationSpeed}
               onSpeedChange={setAnimationSpeed}
-              arraySize={arraySize}
-              onArraySizeChange={changeArraySize}
             />
           </div>
         </section>
