@@ -78,7 +78,7 @@ export function AnimationControls({
               Animation Speed
             </label>
             <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-lg border border-slate-300">
-              <span className="text-sm font-mono text-slate-600">{animationSpeed}ms</span>
+              <span className="text-sm font-mono text-slate-600">{animationSpeed} ms</span>
             </div>
           </div>
           <div className="relative">
