@@ -109,16 +109,6 @@ export function ControlPanel({
                 <span>100</span>
               </div>
             </div>
-            <div className="min-w-fit">
-              <input
-                type="number"
-                min="5"
-                max="100"
-                value={arraySize}
-                onChange={(e) => onArraySizeChange(Math.min(100, Math.max(5, parseInt(e.target.value) || 5)))}
-                className="w-16 px-2 py-1 border border-slate-300 rounded-lg text-sm text-center focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              />
-            </div>
           </div>
         </div>
       </div>
