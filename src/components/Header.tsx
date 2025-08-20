@@ -8,6 +8,14 @@ interface HeaderProps {
 }
 
 export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
+  const getAlgorithmIcon = (algorithmKey: AlgorithmKey): string => {
+    const icons: Record<AlgorithmKey, string> = {
+      'bubble-sort': '🫧',
+      'selection-sort': '🎯',
+    };
+    return icons[algorithmKey] || '⚡';
+  };
+
   return (
     <header className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white">
       {/* Animated background pattern */}
@@ -20,7 +28,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
         <div className="text-center">
           {/* Algorithm icon */}
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
-            <span className="text-4xl">⚡</span>
+            <span className="text-4xl">{getAlgorithmIcon(currentAlgorithm)}</span>
           </div>
           
           {/* Main title */}
