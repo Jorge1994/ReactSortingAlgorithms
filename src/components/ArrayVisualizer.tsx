@@ -97,7 +97,7 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
             >
               {/* Bar */}
               <div
-                className={`relative rounded-t-xl transition-all duration-500 ease-out ${displayArray.length <= 50 ? 'group-hover:scale-110' : ''} ${getBarGlow(index)}`}
+                className={`relative rounded-t-xl transition-all duration-500 ease-out ${getBarGlow(index)}`}
                 style={{
                   width: `${barWidth}px`,
                   height: `${(value / Math.max(...displayArray)) * (displayArray.length > 50 ? 200 : 250)}px`,
