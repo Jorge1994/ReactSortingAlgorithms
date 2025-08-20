@@ -12,8 +12,7 @@ import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
 
 function App() {
-  const [currentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
-  // setCurrentAlgorithm will be used when multiple algorithms are available
+  const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
 
   const hookResult: UseSortingAnimationReturn = useSortingAnimation(currentAlgorithm);
   
@@ -39,9 +38,18 @@ function App() {
     changeArraySize
   } = hookResult;
 
+  const handleAlgorithmChange = (algorithmKey: AlgorithmKey) => {
+    setCurrentAlgorithm(algorithmKey);
+    // Reset the visualization when switching algorithms
+    reset();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <Header currentAlgorithm={currentAlgorithm} />
+      <Header 
+        currentAlgorithm={currentAlgorithm} 
+        onAlgorithmChange={handleAlgorithmChange}
+      />
       
       <main className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Array Visualization */}

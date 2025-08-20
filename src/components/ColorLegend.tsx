@@ -2,6 +2,7 @@ export function ColorLegend() {
   const legendItems = [
     { color: 'bg-blue-500', label: 'Comparing', icon: '👀', description: 'Elements being compared' },
     { color: 'bg-red-500', label: 'Swapping', icon: '🔄', description: 'Elements being swapped' },
+    { color: 'bg-amber-500', label: 'Highlighting', icon: '🔦', description: 'Current minimum or special element' },
     { color: 'bg-emerald-500', label: 'Sorted', icon: '✅', description: 'Elements in final position' },
     { color: 'bg-slate-400', label: 'Unsorted', icon: '⏳', description: 'Elements waiting to be processed' }
   ];
@@ -16,7 +17,7 @@ export function ColorLegend() {
         <p className="text-sm text-slate-600 mt-1">Understanding the visualization colors</p>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         {legendItems.map((item) => (
           <div 
             key={item.label}

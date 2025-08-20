@@ -1,15 +1,17 @@
 import type { AlgorithmKey } from '../algorithms/registry';
 import { getAlgorithm } from '../algorithms/registry';
+import { AlgorithmSelector } from './AlgorithmSelector';
 
 interface HeaderProps {
   currentAlgorithm: AlgorithmKey;
+  onAlgorithmChange: (algorithmKey: AlgorithmKey) => void;
 }
 
-export function Header({ currentAlgorithm }: HeaderProps) {
+export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
   return (
-    <header className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white">
+    <header className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white">
       {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
         <div className="absolute top-0 right-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
       </div>
@@ -27,10 +29,18 @@ export function Header({ currentAlgorithm }: HeaderProps) {
           </h1>
           
           {/* Subtitle */}
-          <div className="flex items-center justify-center gap-3 text-xl text-purple-200 mb-2">
+          <div className="flex items-center justify-center gap-3 text-xl text-purple-200 mb-6">
             <span className="w-8 h-px bg-gradient-to-r from-transparent to-purple-400"></span>
             <span className="font-light">Interactive Visualizer</span>
             <span className="w-8 h-px bg-gradient-to-l from-transparent to-purple-400"></span>
+          </div>
+          
+          {/* Algorithm Selector */}
+          <div className="flex justify-center mb-6">
+            <AlgorithmSelector 
+              currentAlgorithm={currentAlgorithm}
+              onAlgorithmChange={onAlgorithmChange}
+            />
           </div>
           
           {/* Description */}

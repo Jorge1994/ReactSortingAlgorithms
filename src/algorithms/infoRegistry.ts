@@ -1,4 +1,5 @@
 import { bubbleSortInfo } from './info/bubbleSortInfo';
+import { selectionSortInfo } from './info/selectionSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -7,6 +8,7 @@ import type { AlgorithmInfo } from '../types/algorithmInfo';
  */
 export const algorithmInfoRegistry = {
   'bubble-sort': bubbleSortInfo,
+  'selection-sort': selectionSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;
