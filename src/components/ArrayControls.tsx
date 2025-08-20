@@ -80,7 +80,7 @@ export function ArrayControls({
                 onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
                 className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
                 style={{
-                  background: `linear-gradient(to right, #f59e0b 0%, #f59e0b ${arraySizeProgress}%, #e5e7eb ${arraySizeProgress}%, #e5e7eb 100%)`
+                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
                 }}
               />
               <div className="flex justify-between text-xs text-slate-400 mt-1">
