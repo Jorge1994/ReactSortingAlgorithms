@@ -96,6 +96,7 @@ export function AnimationControls({
             />
             <div className="flex justify-between text-xs text-slate-500 mt-1">
               <span>Fast</span>
+              <span>Medium</span>
               <span>Slow</span>
             </div>
           </div>

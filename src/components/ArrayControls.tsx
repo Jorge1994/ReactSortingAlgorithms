@@ -66,28 +66,32 @@ export function ArrayControls({
           Array Size
         </h3>
         <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-          <div className="flex items-center gap-6">
-            <label htmlFor="array-size" className="text-sm font-medium text-slate-600 min-w-fit">
-              Elements: {arraySize}
+          <div className="flex items-center justify-between mb-3">
+            <label htmlFor="array-size" className="text-sm font-medium text-slate-700 flex items-center gap-2">
+              <span className="text-base">📏</span>
+              Array Size
             </label>
-            <div className="flex-1">
-              <input
-                id="array-size"
-                type="range"
-                min="5"
-                max="100"
-                value={arraySize}
-                onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
-                className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
-                style={{
-                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
-                }}
-              />
-              <div className="flex justify-between text-xs text-slate-400 mt-1">
-                <span>5</span>
-                <span>50</span>
-                <span>100</span>
-              </div>
+            <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-lg border border-slate-300">
+              <span className="text-sm font-mono text-slate-600">{arraySize} elements</span>
+            </div>
+          </div>
+          <div className="relative">
+            <input
+              id="array-size"
+              type="range"
+              min="5"
+              max="100"
+              value={arraySize}
+              onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
+              className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+              style={{
+                background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
+              }}
+            />
+            <div className="flex justify-between text-xs text-slate-500 mt-1">
+              <span>5</span>
+              <span>50</span>
+              <span>100</span>
             </div>
           </div>
         </div>
