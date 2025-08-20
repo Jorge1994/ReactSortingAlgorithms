@@ -30,7 +30,7 @@ export function AnimationControls({
     <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-8 border border-slate-200">
       <h3 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
         <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-        Sort & Playback Controls
+        Playback Controls
       </h3>
       
       <div className="bg-white rounded-xl p-6 shadow-inner border border-slate-200">
