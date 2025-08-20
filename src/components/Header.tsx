@@ -26,6 +26,14 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       
       <div className="relative max-w-7xl mx-auto px-6 py-12">
         <div className="text-center">
+          {/* App Name */}
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-light text-purple-200 mb-2">
+              Sorting Algorithm Visualizer
+            </h2>
+            <div className="w-24 h-px bg-gradient-to-r from-purple-400 to-blue-400 mx-auto"></div>
+          </div>
+          
           {/* Algorithm icon */}
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
             <span className="text-4xl">{getAlgorithmIcon(currentAlgorithm)}</span>
