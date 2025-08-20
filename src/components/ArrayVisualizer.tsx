@@ -95,15 +95,6 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
                 width: `${barWidth}px`
               }}
             >
-              {/* Value label on top - only show for arrays with reasonable size */}
-              {displayArray.length <= 30 && (
-                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  <div className="bg-slate-800 text-white px-2 py-1 rounded-lg text-xs font-semibold shadow-lg">
-                    {value}
-                  </div>
-                </div>
-              )}
-              
               {/* Bar */}
               <div
                 className={`relative rounded-t-xl transition-all duration-500 ease-out ${displayArray.length <= 50 ? 'group-hover:scale-110' : ''} ${getBarGlow(index)}`}
