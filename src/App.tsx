@@ -7,7 +7,6 @@ import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { ArrayControls } from './components/ArrayControls';
 import { AnimationControls } from './components/AnimationControls';
 import { StatisticsPanel } from './components/StatisticsPanel';
-import { CompletionStats } from './components/CompletionStats';
 import { ColorLegend } from './components/ColorLegend';
 import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
@@ -33,7 +32,6 @@ function App() {
     setAnimationSpeed,
     canPlayNext,
     canPlayPrev,
-    isCompleted,
     arraySize,
     changeArraySize
   } = hookResult;
@@ -94,14 +92,6 @@ function App() {
               currentStep={currentStep}
               totalSteps={steps.length}
             />
-
-            {/* Final Statistics */}
-            {isCompleted && currentStepData && (
-              <CompletionStats 
-                currentStepData={currentStepData}
-                arrayLength={displayArray.length}
-              />
-            )}
 
             <ColorLegend />
           </div>
