@@ -52,6 +52,15 @@ function App() {
       />
       
       <main className="max-w-7xl mx-auto p-6 space-y-6">
+        {/* Array Controls */}
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+            <ArrayControls
+              onGenerateArray={generateNewArray}
+              arraySize={arraySize}
+              onArraySizeChange={changeArraySize}
+            />
+        </section>
+
         {/* Array Visualization */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
           <div className="p-8">
@@ -80,20 +89,8 @@ function App() {
           </div>
         </section>
 
-        {/* Array Controls */}
-        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-          <div className="p-8">
-            <ArrayControls
-              onGenerateArray={generateNewArray}
-              arraySize={arraySize}
-              onArraySizeChange={changeArraySize}
-            />
-          </div>
-        </section>
-
         {/* Animation Controls */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-          <div className="p-8">
             <AnimationControls
               onPlay={playAnimation}
               onPause={pauseAnimation}
@@ -106,7 +103,6 @@ function App() {
               animationSpeed={animationSpeed}
               onSpeedChange={setAnimationSpeed}
             />
-          </div>
         </section>
 
         <ImplementationSection currentAlgorithm={currentAlgorithm} />
