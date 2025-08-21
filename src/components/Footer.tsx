@@ -22,8 +22,8 @@ export function Footer() {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">Paulo J.S. Ferreira</h3>
-              <p className="text-purple-200">Sorting Algorithm Visualizer</p>
+              <h3 className="text-xl text-purple-200">Sorting Algorithm Visualizer</h3>
+              <p className="text-xl font-bold text-white">Paulo J.S. Ferreira</p>
               <p className="text-sm text-slate-400 mt-1">Software Engineer</p>
             </div>
           </div>
