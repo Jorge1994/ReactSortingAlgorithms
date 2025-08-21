@@ -64,11 +64,13 @@ export const bubbleSortInfo: AlgorithmInfo = {
     },
     
     phases: [
-      "Multiple passes through the array",
-      "Each pass compares adjacent elements",
-      "Larger elements move towards the end",
-      "Final element is sorted after each pass",
-      "Algorithm stops when no swaps occur"
+      "Initial Setup: Start with the unsorted array and begin the first pass from the leftmost position",
+      "Adjacent Comparison: Compare each pair of adjacent elements (arr[i] and arr[i+1]) moving from left to right",
+      "Conditional Swap: If the left element is greater than the right element, swap them to maintain ascending order",
+      "Bubbling Effect: Larger elements gradually 'bubble up' towards the end of the array with each comparison",
+      "Pass Completion: After each complete pass, the largest unsorted element reaches its final sorted position",
+      "Optimization Check: If no swaps occurred during a pass, the array is sorted and the algorithm terminates early",
+      "Iteration Reduction: In subsequent passes, ignore the already sorted elements at the end to improve efficiency"
     ]
   }
 };

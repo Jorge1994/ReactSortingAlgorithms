@@ -24,7 +24,28 @@ interface SortStep {
 interface SortingAlgorithm {
   name: string;
   execute: (array: number[]) => SortStep[];
-  complexity: { time: { best: string; average: string; worst: string }; space: string };
+  complexity: { 
+    time: { best: string; average: string; worst: string }; 
+    space: string;
+    justifications: {
+      timeComplexity: { best: string; average: string; worst: string };
+      spaceComplexity: string;
+    };
+  };
+}
+
+interface AlgorithmInfo {
+  name: string;
+  description: string;
+  complexity: AlgorithmComplexity;
+  advantages: string[];
+  disadvantages: string[];
+  useCases: string[];
+  keyCharacteristics: string[];
+  visualizationNotes: {
+    colors: { comparing: string; swapping: string; sorted: string; unsorted: string };
+    phases: string[]; // Detailed educational phases - as many as needed for full comprehension
+  };
 }
 ```
 
@@ -46,7 +67,26 @@ npm run dev
 2. Use `createSortingAlgorithm` factory function
 3. Generate `SortStep[]` array for visualization
 4. Register in `src/algorithms/registry.ts`
-5. UI automatically supports new algorithm
+5. Create detailed algorithm info in `src/algorithms/info/[algorithm]Info.ts`
+6. UI automatically supports new algorithm
+
+### Algorithm Information Requirements
+When adding new algorithms, always provide:
+
+#### Complexity Justifications
+- **Time Complexity**: Detailed theoretical explanations for best, average, and worst cases
+- **Space Complexity**: Clear explanation of memory usage patterns
+- Include mathematical reasoning and real-world scenarios for each complexity case
+- Example format: "When the array is already sorted, only one pass is needed (n comparisons) allowing early termination"
+
+#### Educational Algorithm Phases
+- Provide as many detailed, step-by-step phases as necessary to explain the algorithm's execution thoroughly
+- Each phase should be educational and build understanding progressively
+- Use clear, descriptive titles followed by detailed explanations
+- Format: "Phase Title: Detailed explanation of what happens and why"
+- Focus on helping users understand the underlying logic, not just what happens
+- Connect phases to the visual representation when possible
+- Prioritize comprehension over brevity - if 100 steps are needed for clarity, use 100 steps
 
 ### Color System (Tailwind Custom)
 - `comparing: '#3B82F6'` (Blue) - Elements being compared

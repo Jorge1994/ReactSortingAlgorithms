@@ -60,10 +60,14 @@ export const selectionSortInfo: AlgorithmInfo = {
       unsorted: 'Gray bars show elements not yet processed'
     },
     phases: [
-      'Find minimum element in unsorted portion',
-      'Swap minimum with first unsorted element',
-      'Mark current position as sorted',
-      'Move to next position and repeat'
+      "Initialize: Start with the entire array as unsorted, position pointer at the first element (index 0)",
+      "Search for Minimum: Scan through all remaining unsorted elements to find the smallest value",
+      "Track Minimum Index: Keep track of the index where the minimum element is located during the search",
+      "Swap Elements: Exchange the smallest element found with the first unsorted element, placing the minimum in its correct position",
+      "Mark as Sorted: The smallest element is now at the beginning of the unsorted portion and becomes part of the sorted section",
+      "Advance Position: Move the position pointer one step to the right, reducing the unsorted portion by one element",
+      "Repeat Process: Continue the process for the remaining unsorted elements until the entire array is sorted",
+      "Final State: When only one element remains unsorted, it's automatically in the correct position"
     ]
   }
 };

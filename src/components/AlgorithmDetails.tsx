@@ -91,13 +91,22 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
               Algorithm Phases
             </h3>
             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {algorithmInfo.visualizationNotes.phases.map((phase, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
-                    <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
+                  <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg border border-slate-100 hover:shadow-md transition-shadow duration-200">
+                    <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm font-bold shadow-sm">
                       {index + 1}
                     </div>
-                    <span className="text-slate-700 leading-relaxed">{phase}</span>
+                    <div className="flex-grow text-left">
+                      <span className="text-slate-800 leading-relaxed">
+                        <span className="font-bold text-slate-900">
+                          {phase.split(':')[0]}:
+                        </span>
+                        <span className="font-medium ml-1">
+                          {phase.split(':').slice(1).join(':').trim()}
+                        </span>
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
