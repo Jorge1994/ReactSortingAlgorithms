@@ -35,37 +35,37 @@ export function AnimationControls({
       
       <div className="bg-white rounded-xl p-6 shadow-inner border border-slate-200">
         {/* Main Controls */}
-        <div className="flex items-center justify-center gap-2 mb-6">
+        <div className="flex items-center justify-center gap-4 mb-6">
           <button
             onClick={onPrev}
             disabled={!canPlayPrev}
-            className="group relative flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-slate-200 disabled:bg-slate-50 disabled:cursor-not-allowed rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:shadow-none"
+            className="animation-control-button group relative flex items-center justify-center w-16 h-16 disabled:cursor-not-allowed transition-all duration-200"
           >
-            <span className="text-lg group-disabled:opacity-30">⏮️</span>
+            <span className="text-3xl group-disabled:opacity-30">⏮️</span>
           </button>
           
           <button
             onClick={isPlaying ? onPause : onPlay}
-            className="group relative flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md mx-3"
+            className="animation-control-button group relative flex items-center justify-center w-16 h-16 text-slate-700 transition-all duration-200 mx-4"
           >
-            <span className="text-lg">{isPlaying ? '⏸️' : '▶️'}</span>
+            <span className="text-3xl">{isPlaying ? '⏸️' : '▶️'}</span>
           </button>
           
           <button
             onClick={onNext}
             disabled={!canPlayNext}
-            className="group relative flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-slate-200 disabled:bg-slate-50 disabled:cursor-not-allowed rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:shadow-none"
+            className="animation-control-button group relative flex items-center justify-center w-16 h-16 disabled:cursor-not-allowed transition-all duration-200"
           >
-            <span className="text-lg group-disabled:opacity-30">⏭️</span>
+            <span className="text-3xl group-disabled:opacity-30">⏭️</span>
           </button>
           
-          <div className="w-px h-8 bg-slate-300 mx-3"></div>
+          <div className="w-px h-10 bg-slate-300 mx-4"></div>
           
           <button
             onClick={onReset}
-            className="group relative flex items-center justify-center w-12 h-12 bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
+            className="animation-control-button group relative flex items-center justify-center w-16 h-16 text-orange-700 transition-all duration-200"
           >
-            <span className="text-lg">🔄</span>
+            <span className="text-3xl">🔄</span>
           </button>
         </div>
 

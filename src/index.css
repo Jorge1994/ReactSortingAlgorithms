@@ -418,6 +418,33 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+/* Override global button styles for animation controls */
+.animation-control-button {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.animation-control-button:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.animation-control-button:focus,
+.animation-control-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.animation-control-button span {
+  background-color: transparent !important;
+  color: inherit !important;
+}
 button:hover {
   border-color: #646cff;
 }
