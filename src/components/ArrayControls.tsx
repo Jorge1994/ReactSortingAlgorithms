@@ -88,10 +88,10 @@ export function ArrayControls({
                 background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
               }}
             />
-            <div className="flex justify-between text-xs text-slate-500 mt-1">
-              <span>5</span>
-              <span>50</span>
-              <span>100</span>
+            <div className="relative flex text-xs text-slate-500 mt-1">
+              <span style={{ position: 'absolute', left: '0%', transform: 'translateX(0%)' }}>5</span>
+              <span style={{ position: 'absolute', left: '47.37%', transform: 'translateX(-50%)' }}>50</span>
+              <span style={{ position: 'absolute', left: '100%', transform: 'translateX(-100%)' }}>100</span>
             </div>
           </div>
         </div>
