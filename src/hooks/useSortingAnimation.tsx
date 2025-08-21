@@ -103,6 +103,7 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
 
   const reset = () => {
     setCurrentStep(0);
+    setSteps([]);
     setIsAnimating(false);
     setIsPlaying(false);
   };
