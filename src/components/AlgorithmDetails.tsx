@@ -27,18 +27,27 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                   <span className="text-xl">⏱️</span>
                   Time Complexity
                 </h4>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium text-blue-700">Best Case:</span>
-                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.best}</code>
+                <div className="space-y-4">
+                  <div className="bg-white/80 rounded-lg p-4 border border-blue-200">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-blue-700">Best Case:</span>
+                      <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.best}</code>
+                    </div>
+                    <p className="text-sm text-blue-600 leading-relaxed">{algorithmInfo.complexity.justifications.timeComplexity.best}</p>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium text-blue-700">Average Case:</span>
-                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.average}</code>
+                  <div className="bg-white/80 rounded-lg p-4 border border-blue-200">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-blue-700">Average Case:</span>
+                      <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.average}</code>
+                    </div>
+                    <p className="text-sm text-blue-600 leading-relaxed">{algorithmInfo.complexity.justifications.timeComplexity.average}</p>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium text-blue-700">Worst Case:</span>
-                    <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.worst}</code>
+                  <div className="bg-white/80 rounded-lg p-4 border border-blue-200">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-blue-700">Worst Case:</span>
+                      <code className="bg-blue-200 text-blue-800 px-2 py-1 rounded font-mono text-sm">{algorithmInfo.complexity.time.worst}</code>
+                    </div>
+                    <p className="text-sm text-blue-600 leading-relaxed">{algorithmInfo.complexity.justifications.timeComplexity.worst}</p>
                   </div>
                 </div>
               </div>
@@ -47,8 +56,11 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                   <span className="text-xl">💾</span>
                   Space Complexity
                 </h4>
-                <div className="flex items-center justify-center h-16">
-                  <code className="bg-purple-200 text-purple-800 px-4 py-2 rounded-lg font-mono text-lg font-bold">{algorithmInfo.complexity.space}</code>
+                <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
+                  <div className="flex items-center justify-center mb-4">
+                    <code className="bg-purple-200 text-purple-800 px-4 py-2 rounded-lg font-mono text-lg font-bold">{algorithmInfo.complexity.space}</code>
+                  </div>
+                  <p className="text-sm text-purple-600 leading-relaxed">{algorithmInfo.complexity.justifications.spaceComplexity}</p>
                 </div>
               </div>
             </div>

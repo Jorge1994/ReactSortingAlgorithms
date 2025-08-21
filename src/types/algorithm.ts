@@ -19,6 +19,14 @@ export interface AlgorithmComplexity {
     worst: string;
   };
   space: string;
+  justifications: {
+    timeComplexity: {
+      best: string;
+      average: string;
+      worst: string;
+    };
+    spaceComplexity: string;
+  };
 }
 
 export interface SortingAlgorithm {
