@@ -76,8 +76,8 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
       <div 
         className="array-container relative w-full flex items-end justify-between px-8 py-4 pt-16 max-w-6xl mx-auto"
         style={{ 
-          height: displayArray.length > 50 ? '350px' : '400px',
-          paddingBottom: displayArray.length > 50 ? '20px' : '80px',
+          height: displayArray.length > 50 ? '320px' : '360px',
+          paddingBottom: displayArray.length > 50 ? '10px' : '40px',
           gap: displayArray.length > 80 ? '1px' : displayArray.length > 50 ? '2px' : '3px'
         }}
       >

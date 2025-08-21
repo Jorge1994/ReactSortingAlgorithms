@@ -63,14 +63,32 @@ function App() {
 
         {/* Array Visualization */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-8">
+          <div className="p-8 pb-4">
             <ArrayVisualizer 
               displayArray={displayArray} 
               currentStepData={currentStepData}
               steps={steps}
               currentStep={currentStep}
             />
-            
+          </div>
+          
+          {/* Animation Controls - Seamlessly integrated */}
+          <div className="px-8 pb-4">
+            <AnimationControls
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              isPlaying={isPlaying}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              animationSpeed={animationSpeed}
+              onSpeedChange={setAnimationSpeed}
+            />
+          </div>
+          
+          <div className="px-8 pb-8 pt-2">
             <StatisticsPanel 
               currentStepData={currentStepData}
               currentStep={currentStep}
@@ -87,22 +105,6 @@ function App() {
 
             <ColorLegend />
           </div>
-        </section>
-
-        {/* Animation Controls */}
-        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-            <AnimationControls
-              onPlay={playAnimation}
-              onPause={pauseAnimation}
-              onNext={nextStep}
-              onPrev={prevStep}
-              onReset={reset}
-              isPlaying={isPlaying}
-              canPlayNext={canPlayNext}
-              canPlayPrev={canPlayPrev}
-              animationSpeed={animationSpeed}
-              onSpeedChange={setAnimationSpeed}
-            />
         </section>
 
         <ImplementationSection currentAlgorithm={currentAlgorithm} />
