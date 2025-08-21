@@ -46,10 +46,9 @@ export function AnimationControls({
           
           <button
             onClick={isPlaying ? onPause : onPlay}
-            className="group relative flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-110 mx-3"
+            className="group relative flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md mx-3"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-            <span className="relative text-3xl">{isPlaying ? '⏸️' : '▶️'}</span>
+            <span className="text-lg">{isPlaying ? '⏸️' : '▶️'}</span>
           </button>
           
           <button

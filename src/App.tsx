@@ -80,15 +80,20 @@ function App() {
           </div>
         </section>
 
-        {/* Controls */}
+        {/* Array Controls */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-          <div className="p-8 space-y-6">
+          <div className="p-8">
             <ArrayControls
               onGenerateArray={generateNewArray}
               arraySize={arraySize}
               onArraySizeChange={changeArraySize}
             />
-            
+          </div>
+        </section>
+
+        {/* Animation Controls */}
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+          <div className="p-8">
             <AnimationControls
               onPlay={playAnimation}
               onPause={pauseAnimation}
