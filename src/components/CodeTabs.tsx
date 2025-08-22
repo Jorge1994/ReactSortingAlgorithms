@@ -13,9 +13,10 @@ interface CodeTabsProps {
   isExpanded?: boolean;
   title?: string;
   description?: string;
+  headerless?: boolean;
 }
 
-export function CodeTabs({ examples, isExpanded = false, title = "Implementation Examples", description }: CodeTabsProps) {
+export function CodeTabs({ examples, isExpanded = false, title = "Implementation Examples", description, headerless = false }: CodeTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [copiedStates, setCopiedStates] = useState<{ [key: number]: boolean }>({});
   const [internalExpanded, setInternalExpanded] = useState(isExpanded);
@@ -98,36 +99,38 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
 
   return (
     <div className="w-full">
-      {/* Header with toggle button */}
-      <div className="p-6 border-b border-slate-100">
-        <div className="flex items-center justify-between">
-          <div style={{ display: 'grid', gridTemplateColumns: '48px 1fr', gap: '16px', alignItems: 'center' }}>
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-white text-2xl">💻</span>
+      {/* Header with toggle button - only show if not headerless */}
+      {!headerless && (
+        <div className="p-6 border-b border-slate-100">
+          <div className="flex items-center justify-between">
+            <div style={{ display: 'grid', gridTemplateColumns: '48px 1fr', gap: '16px', alignItems: 'center' }}>
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white text-2xl">💻</span>
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <h3 className="text-2xl font-bold text-slate-800 mb-1" style={{ lineHeight: '1.2', margin: '0', padding: '0', textAlign: 'left' }}>
+                  {title}
+                </h3>
+                <p className="text-slate-600">
+                  Complete code implementations in different languages
+                </p>
+              </div>
             </div>
-            <div style={{ textAlign: 'left' }}>
-              <h3 className="text-2xl font-bold text-slate-800 mb-1" style={{ lineHeight: '1.2', margin: '0', padding: '0', textAlign: 'left' }}>
-                {title}
-              </h3>
-              <p className="text-slate-600">
-                Complete code implementations in different languages
-              </p>
-            </div>
+            <button
+              onClick={() => setInternalExpanded(!internalExpanded)}
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
+            >
+              <span className="text-lg">
+                {internalExpanded ? '🔼' : '🔽'}
+              </span>
+              {internalExpanded ? 'Hide Code' : 'Show Code'}
+            </button>
           </div>
-          <button
-            onClick={() => setInternalExpanded(!internalExpanded)}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
-          >
-            <span className="text-lg">
-              {internalExpanded ? '🔼' : '🔽'}
-            </span>
-            {internalExpanded ? 'Hide Code' : 'Show Code'}
-          </button>
         </div>
-      </div>
+      )}
 
-      {/* Content - only show if expanded */}
-      {internalExpanded && (
+      {/* Content - show if expanded (internal or external control) */}
+      {(headerless ? isExpanded : internalExpanded) && (
         <div className="p-8 space-y-6">
           {/* Description Card */}
           {description && (
