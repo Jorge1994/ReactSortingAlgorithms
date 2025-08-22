@@ -8,6 +8,8 @@ export interface AlgorithmInfo {
   name: string;
   description: string;
   complexity: AlgorithmComplexity;
+  stable: boolean;
+  inPlace: boolean;
   advantages: string[];
   disadvantages: string[];
   useCases: string[];

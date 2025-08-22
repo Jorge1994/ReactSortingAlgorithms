@@ -25,6 +25,9 @@ export const bubbleSortInfo: AlgorithmInfo = {
     }
   },
 
+  stable: true,
+  inPlace: true,
+
   advantages: [
     "Simple to implement and understand",
     "In-place sorting (constant extra space)",

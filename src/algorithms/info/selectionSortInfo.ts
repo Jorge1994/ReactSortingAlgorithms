@@ -21,6 +21,9 @@ export const selectionSortInfo: AlgorithmInfo = {
     }
   },
   
+  stable: false,
+  inPlace: true,
+  
   advantages: [
     'Simple implementation and easy to understand',
     'In-place sorting (uses O(1) extra memory)',

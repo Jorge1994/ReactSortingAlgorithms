@@ -66,6 +66,55 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
             </div>
           </div>
 
+          {/* Algorithm Properties */}
+          <div>
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+              Algorithm Properties
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${algorithmInfo.stable ? 'bg-green-500' : 'bg-red-500'}`}>
+                    <span className="text-white text-sm font-bold">{algorithmInfo.stable ? '✓' : '✗'}</span>
+                  </div>
+                  <h4 className="font-semibold text-slate-800">Stability</h4>
+                </div>
+                <div className="space-y-2">
+                  <p className={`font-medium ${algorithmInfo.stable ? 'text-green-700' : 'text-red-700'}`}>
+                    {algorithmInfo.stable ? 'Stable Algorithm' : 'Not Stable'}
+                  </p>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {algorithmInfo.stable 
+                      ? 'Preserves the relative order of equal elements during sorting'
+                      : 'May change the relative order of equal elements during sorting'
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${algorithmInfo.inPlace ? 'bg-blue-500' : 'bg-orange-500'}`}>
+                    <span className="text-white text-sm font-bold">{algorithmInfo.inPlace ? '✓' : '✗'}</span>
+                  </div>
+                  <h4 className="font-semibold text-slate-800">Memory Usage</h4>
+                </div>
+                <div className="space-y-2">
+                  <p className={`font-medium ${algorithmInfo.inPlace ? 'text-blue-700' : 'text-orange-700'}`}>
+                    {algorithmInfo.inPlace ? 'In-Place Algorithm' : 'Requires Additional Memory'}
+                  </p>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {algorithmInfo.inPlace 
+                      ? 'Sorts elements within the original array using only O(1) extra space'
+                      : 'Requires additional memory proportional to the input size'
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Key Characteristics */}
           <div>
             <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
