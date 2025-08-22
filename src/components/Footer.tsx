@@ -15,7 +15,7 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <div className="relative">
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
-                <span className="text-white font-bold text-2xl">P</span>
+                <span className="text-white font-bold text-2xl">PJ</span>
               </div>
               <div className="absolute -top-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
                 <span className="text-xs">✨</span>
