@@ -51,11 +51,14 @@ export const insertionSortInfo: AlgorithmInfo = {
   ],
 
   keyCharacteristics: [
-    'Builds sorted array incrementally from left to right',
-    'Each iteration places one element in its correct position',
-    'Maintains a sorted portion and an unsorted portion',
-    'Elements are shifted rather than swapped',
-    'Natural behavior similar to sorting playing cards by hand'
+    'Temporarily holds each element while creating the perfect insertion spot in the sorted section',
+    'Divides the array into two conceptual regions: an organized left side and an unprocessed right side',
+    'Examines the sorted section backwards to efficiently find the correct insertion position',
+    'Moves elements by sliding them to create space rather than exchanging positions',
+    'Performs exceptionally well on data that is already mostly organized, requiring minimal work',
+    'Maintains the original order of identical elements, preserving data relationships',
+    'Operates entirely within the original array boundaries without needing extra storage space',
+    'Mirrors the intuitive process humans use when organizing physical objects like playing cards'
   ],
 
   visualizationNotes: {
@@ -66,19 +69,18 @@ export const insertionSortInfo: AlgorithmInfo = {
       unsorted: '#6B7280'      // Gray - elements not yet processed
     },
     phases: [
-      'Initialization: Start with the first element as the sorted portion (trivially sorted)',
-      'Element Selection: Pick the next element from the unsorted portion as the key',
-      'Position Finding: Compare the key with elements in the sorted portion from right to left',
-      'Element Shifting: Shift elements greater than the key one position to the right',
-      'Insertion: Place the key in its correct position in the sorted portion',
-      'Sorted Portion Growth: The sorted portion now includes one more element',
-      'Iteration: Repeat the process for all remaining unsorted elements',
-      'Comparison Process: Each comparison determines if shifting is needed',
-      'Shifting Mechanism: Elements are moved rather than swapped for efficiency',
-      'Adaptive Behavior: Fewer operations needed when array is nearly sorted',
-      'Key Preservation: The current element being inserted is preserved during shifts',
-      'Boundary Checking: Algorithm stops shifting when correct position is found or beginning is reached',
-      'Final Verification: All elements are in their correct positions when algorithm completes'
+      'Foundation Building: Begin by considering the first element as an already sorted section, since any single element is naturally in order',
+      'Element Selection: Choose the next unsorted element to be placed into its correct position within the sorted section',
+      'Value Preservation: Remember the chosen element temporarily while making space for it in the sorted portion',
+      'Backward Exploration: Start examining the sorted section from right to left to find where the new element belongs',
+      'Comparison Process: Compare the chosen element with each element in the sorted section, moving from right to left',
+      'Space Creation: When encountering elements larger than our chosen element, shift them one position to the right to create insertion space',
+      'Continued Searching: Keep moving leftward through the sorted section, shifting larger elements as needed',
+      'Position Discovery: Identify the exact location where our chosen element should be inserted to maintain sorted order',
+      'Element Placement: Insert the chosen element into its determined correct position within the sorted section',
+      'Section Expansion: The sorted portion now grows by one element, extending the organized area of the array',
+      'Progress Verification: Confirm that all elements in the expanded sorted section are properly arranged in ascending order',
+      'Process Continuation: Repeat the insertion process for each remaining unsorted element until the entire array is sorted'
     ]
   }
 };
