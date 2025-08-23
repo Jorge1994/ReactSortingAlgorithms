@@ -22,69 +22,78 @@ function insertionSortExecute(array: number[]): SortStep[] {
     metadata: { 
       comparisons, 
       swaps, 
-      currentPhase: 'Starting with first element (trivially sorted portion)' 
+      currentPhase: 'Starting: first element forms initial sorted portion' 
     }
   });
 
-  // Start from the second element (index 1)
+  // Main insertion sort loop - same logic but with swaps instead of shifts
   for (let i = 1; i < arr.length; i++) {
     const key = arr[i];
     let j = i - 1;
 
-    // Highlight the element being inserted
+    // Highlight the key element
     steps.push({
-      type: 'compare',
+      type: 'highlight',
       indices: [i],
       array: [...arr],
       metadata: { 
         comparisons, 
         swaps, 
-        currentPhase: `Selecting element ${key} to insert into sorted portion` 
+        currentPhase: `Key = ${key} (element to be inserted)` 
       }
     });
 
-    // Move elements greater than key one position ahead
-    while (j >= 0) {
+    // Move elements greater than key one position ahead using swaps
+    while (j >= 0 && arr[j] > key) {
       comparisons++;
       
-      // Compare current element with key
+      // Show comparison
       steps.push({
         type: 'compare',
-        indices: [j, i],
+        indices: [j, j + 1],
         array: [...arr],
         metadata: { 
           comparisons, 
           swaps, 
-          currentPhase: `Comparing ${arr[j]} with ${key}` 
+          currentPhase: `Compare: ${arr[j]} > ${arr[j + 1]}? Yes, swap them` 
         }
       });
 
-      if (arr[j] > key) {
-        // Shift element to the right
-        arr[j + 1] = arr[j];
-        swaps++;
-        
-        steps.push({
-          type: 'swap',
-          indices: [j, j + 1],
-          array: [...arr],
-          metadata: { 
-            comparisons, 
-            swaps, 
-            currentPhase: `Shifting ${arr[j]} to position ${j + 1}` 
-          }
-        });
-        
-        j--;
-      } else {
-        break;
-      }
+      // Swap elements instead of shifting (this avoids duplicates!)
+      [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      swaps++;
+      
+      // Show the swap
+      steps.push({
+        type: 'swap',
+        indices: [j, j + 1],
+        array: [...arr],
+        metadata: { 
+          comparisons, 
+          swaps, 
+          currentPhase: `Swapped ${arr[j + 1]} with ${arr[j]}` 
+        }
+      });
+      
+      j = j - 1;
     }
 
-    // Insert the key at its correct position
-    arr[j + 1] = key;
-    
-    // Show the insertion step
+    // If we stopped because arr[j] <= arr[j+1], show that comparison
+    if (j >= 0) {
+      comparisons++;
+      steps.push({
+        type: 'compare',
+        indices: [j, j + 1],
+        array: [...arr],
+        metadata: { 
+          comparisons, 
+          swaps, 
+          currentPhase: `Compare: ${arr[j]} > ${arr[j + 1]}? No, ${key} is in correct position` 
+        }
+      });
+    }
+
+    // Show the element in its final position
     steps.push({
       type: 'highlight',
       indices: [j + 1],
@@ -92,10 +101,35 @@ function insertionSortExecute(array: number[]): SortStep[] {
       metadata: { 
         comparisons, 
         swaps, 
-        currentPhase: `Inserted ${key} at position ${j + 1}` 
+        currentPhase: `${key} is now in correct position ${j + 1}` 
+      }
+    });
+
+    // Show the expanded sorted portion
+    const sortedIndices = Array.from({ length: i + 1 }, (_, idx) => idx);
+    steps.push({
+      type: 'highlight',
+      indices: sortedIndices,
+      array: [...arr],
+      metadata: { 
+        comparisons, 
+        swaps, 
+        currentPhase: `Elements 0-${i} are sorted relative to each other` 
       }
     });
   }
+
+  // Final step: Mark entire array as completely sorted
+  steps.push({
+    type: 'set-sorted',
+    indices: Array.from({ length: arr.length }, (_, i) => i),
+    array: [...arr],
+    metadata: { 
+      comparisons, 
+      swaps, 
+      currentPhase: 'Array is completely sorted!' 
+    }
+  });
 
   // Mark entire array as sorted
   steps.push({
