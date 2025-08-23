@@ -87,6 +87,46 @@ export function TechnicalGlossary({ isExpanded = false }: TechnicalGlossaryProps
         "Non-comparison sorts like Counting Sort use element values directly, not comparisons"
       ],
       icon: "🔍"
+    },
+    {
+      term: "Online Algorithm",
+      definition: "An online algorithm can process input data as it arrives, without needing to see the entire dataset beforehand. For sorting, this means the algorithm can start sorting elements before all data has been received.",
+      examples: [
+        "Insertion Sort is online - you can insert new elements into an already sorted portion",
+        "Selection Sort is not online - it needs to scan the entire unsorted portion to find the minimum",
+        "Useful for real-time data processing and streaming applications"
+      ],
+      icon: "📡"
+    },
+    {
+      term: "Best/Average/Worst Case Analysis",
+      definition: "Performance analysis considers three scenarios: best case (optimal input), average case (typical input), and worst case (most challenging input). Each scenario can have different time and space complexity.",
+      examples: [
+        "Bubble Sort: Best O(n) when already sorted, Worst O(n²) when reverse sorted",
+        "Insertion Sort: Best O(n) for sorted arrays, Worst O(n²) for reverse sorted",
+        "Selection Sort: Always O(n²) regardless of input - no best/worst case difference"
+      ],
+      icon: "📊"
+    },
+    {
+      term: "Internal vs External Sorting",
+      definition: "Internal sorting works entirely in main memory (RAM), while external sorting handles datasets too large for memory by using secondary storage (disk). Internal sorting is faster but limited by available RAM.",
+      examples: [
+        "Internal: Sorting 1000 numbers in RAM using Bubble Sort",
+        "External: Sorting millions of records that don't fit in memory, requiring disk I/O",
+        "Most educational sorting algorithms assume internal sorting"
+      ],
+      icon: "💿"
+    },
+    {
+      term: "Iterative vs Recursive Implementation",
+      definition: "Iterative algorithms use loops to repeat operations, while recursive algorithms call themselves with smaller subproblems. Both approaches can solve the same problems but have different memory and performance characteristics.",
+      examples: [
+        "Iterative: Using for/while loops like in Bubble Sort and Selection Sort",
+        "Recursive: Algorithm calls itself with smaller arrays (common in Merge Sort)",
+        "Iterative typically uses less memory (no function call stack)"
+      ],
+      icon: "🔄"
     }
   ];
 
