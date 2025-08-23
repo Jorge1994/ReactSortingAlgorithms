@@ -143,7 +143,15 @@ export const selectionSortAlgorithm = createSortingAlgorithm(
       average: 'O(n²)',
       worst: 'O(n²)'
     },
-    space: 'O(1)'
+    space: 'O(1)',
+    justifications: {
+      timeComplexity: {
+        best: 'Always performs n(n-1)/2 comparisons regardless of input order, as it must find the minimum in each iteration',
+        average: 'Consistently performs n(n-1)/2 comparisons and n swaps for any input configuration',
+        worst: 'Same as best case - the algorithm\'s performance is not affected by the initial order of elements'
+      },
+      spaceComplexity: 'Uses only a constant amount of extra space for variables (minIndex, temp) regardless of input size'
+    }
   },
   executeSelectionSort
 );

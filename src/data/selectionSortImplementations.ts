@@ -6,8 +6,8 @@ export const selectionSortImplementations: AlgorithmImplementations = {
     `def selection_sort(arr):
     """
     Selection Sort implementation in Python
-    Time Complexity: O(n²)
-    Space Complexity: O(1)
+    Time Complexity: O(n²) for all cases
+    Space Complexity: O(1) - in-place sorting
     """
     n = len(arr)
     
@@ -21,49 +21,19 @@ export const selectionSortImplementations: AlgorithmImplementations = {
                 min_idx = j
         
         # Swap the found minimum element with the first element
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        if min_idx != i:
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
     
     return arr
 
-# Example usage:
-# numbers = [64, 34, 25, 12, 22, 11, 90]
-# sorted_numbers = selection_sort(numbers)
-# print(f"Sorted array: {sorted_numbers}")
-
-def selection_sort_optimized(arr):
-    """
-    Optimized Selection Sort with bidirectional selection
-    Finds both min and max in each pass, reducing iterations by half
-    """
-    left = 0
-    right = len(arr) - 1
+# Example usage
+if __name__ == "__main__":
+    numbers = [64, 34, 25, 12, 22, 11, 90]
+    print("Original array:", numbers)
     
-    while left < right:
-        min_idx = left
-        max_idx = left
-        
-        # Find both minimum and maximum in one pass
-        for i in range(left, right + 1):
-            if arr[i] < arr[min_idx]:
-                min_idx = i
-            elif arr[i] > arr[max_idx]:
-                max_idx = i
-        
-        # Place minimum at the left
-        arr[left], arr[min_idx] = arr[min_idx], arr[left]
-        
-        # If maximum was at the left position, it's now at min_idx
-        if max_idx == left:
-            max_idx = min_idx
-        
-        # Place maximum at the right
-        arr[right], arr[max_idx] = arr[max_idx], arr[right]
-        
-        left += 1
-        right -= 1
-    
-    return arr`,
-    'py'
+    selection_sort(numbers)
+    print("Sorted array:", numbers)`,
+    '.py'
   ),
 
   java: createAlgorithmImplementation(
@@ -72,8 +42,8 @@ def selection_sort_optimized(arr):
     
     /**
      * Selection Sort implementation in Java
-     * Time Complexity: O(n²)
-     * Space Complexity: O(1)
+     * Time Complexity: O(n²) for all cases
+     * Space Complexity: O(1) - in-place sorting
      */
     public static void selectionSort(int[] arr) {
         int n = arr.length;
@@ -98,70 +68,17 @@ def selection_sort_optimized(arr):
         }
     }
     
-    /**
-     * Optimized Selection Sort with bidirectional selection
-     */
-    public static void selectionSortOptimized(int[] arr) {
-        int left = 0;
-        int right = arr.length - 1;
-        
-        while (left < right) {
-            int minIdx = left;
-            int maxIdx = left;
-            
-            // Find both minimum and maximum in one pass
-            for (int i = left; i <= right; i++) {
-                if (arr[i] < arr[minIdx]) {
-                    minIdx = i;
-                } else if (arr[i] > arr[maxIdx]) {
-                    maxIdx = i;
-                }
-            }
-            
-            // Swap minimum to left position
-            if (minIdx != left) {
-                int temp = arr[left];
-                arr[left] = arr[minIdx];
-                arr[minIdx] = temp;
-            }
-            
-            // If maximum was at left position, it's now at minIdx
-            if (maxIdx == left) {
-                maxIdx = minIdx;
-            }
-            
-            // Swap maximum to right position
-            if (maxIdx != right) {
-                int temp = arr[right];
-                arr[right] = arr[maxIdx];
-                arr[maxIdx] = temp;
-            }
-            
-            left++;
-            right--;
-        }
-    }
-    
     // Example usage
     public static void main(String[] args) {
         int[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
-        System.out.println("Original array:");
-        printArray(numbers);
+        System.out.println("Original array: " + java.util.Arrays.toString(numbers));
         
         selectionSort(numbers);
         
-        System.out.println("Sorted array:");
-        printArray(numbers);
-    }
-    
-    public static void printArray(int[] arr) {
-        for (int value : arr) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
+        System.out.println("Sorted array: " + java.util.Arrays.toString(numbers));
     }
 }`,
-    'java'
+    '.java'
   )
 };

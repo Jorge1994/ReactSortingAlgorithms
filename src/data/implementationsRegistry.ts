@@ -1,5 +1,6 @@
 import { bubbleSortImplementations } from './bubbleSortImplementations';
 import { selectionSortImplementations } from './selectionSortImplementations';
+import { insertionSortImplementations } from './insertionSortImplementations';
 import type { AlgorithmImplementations } from '../types/implementations';
 import type { AlgorithmKey } from '../algorithms/registry';
 
@@ -9,6 +10,7 @@ import type { AlgorithmKey } from '../algorithms/registry';
 export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementations> = {
   'bubble-sort': bubbleSortImplementations,
   'selection-sort': selectionSortImplementations,
+  'insertion-sort': insertionSortImplementations,
 } as const;
 
 /**

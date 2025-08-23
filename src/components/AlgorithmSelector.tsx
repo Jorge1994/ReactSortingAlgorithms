@@ -43,6 +43,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
     const icons: Record<AlgorithmKey, string> = {
       'bubble-sort': '🫧',
       'selection-sort': '🎯',
+      'insertion-sort': '📝',
     };
     return icons[algorithmKey] || '⚡';
   };

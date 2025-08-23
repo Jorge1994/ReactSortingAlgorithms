@@ -1,5 +1,6 @@
 import { bubbleSortAlgorithm } from './core/bubbleSort';
 import { selectionSortAlgorithm } from './core/selectionSort';
+import { insertionSort } from './core/insertionSort';
 
 /**
  * Centralized registry for all sorting algorithms
@@ -8,6 +9,7 @@ import { selectionSortAlgorithm } from './core/selectionSort';
 export const algorithmRegistry = {
   'bubble-sort': bubbleSortAlgorithm,
   'selection-sort': selectionSortAlgorithm,
+  'insertion-sort': insertionSort,
 } as const;
 
 export type AlgorithmKey = keyof typeof algorithmRegistry;

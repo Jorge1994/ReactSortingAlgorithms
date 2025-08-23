@@ -12,6 +12,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
     const icons: Record<AlgorithmKey, string> = {
       'bubble-sort': '🫧',
       'selection-sort': '🎯',
+      'insertion-sort': '📝',
     };
     return icons[algorithmKey] || '⚡';
   };
