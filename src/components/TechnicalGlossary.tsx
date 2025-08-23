@@ -109,16 +109,6 @@ export function TechnicalGlossary({ isExpanded = false }: TechnicalGlossaryProps
       icon: "📊"
     },
     {
-      term: "Internal vs External Sorting",
-      definition: "Internal sorting works entirely in main memory (RAM), while external sorting handles datasets too large for memory by using secondary storage (disk). Internal sorting is faster but limited by available RAM.",
-      examples: [
-        "Internal: Sorting 1000 numbers in RAM using Bubble Sort",
-        "External: Sorting millions of records that don't fit in memory, requiring disk I/O",
-        "Most educational sorting algorithms assume internal sorting"
-      ],
-      icon: "💿"
-    },
-    {
       term: "Iterative vs Recursive Implementation",
       definition: "Iterative algorithms use loops to repeat operations, while recursive algorithms call themselves with smaller subproblems. Both approaches can solve the same problems but have different memory and performance characteristics.",
       examples: [
