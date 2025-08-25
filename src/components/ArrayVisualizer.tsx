@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { SortStep } from '../types';
 
 interface ArrayVisualizerProps {
@@ -8,6 +9,13 @@ interface ArrayVisualizerProps {
 }
 
 export function ArrayVisualizer({ displayArray, currentStepData, steps, currentStep }: ArrayVisualizerProps) {
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const getBarColor = (index: number): string => {
     // Check if this element was marked as sorted in any previous step
     const wasSorted = steps.slice(0, currentStep + 1).some(step => 
@@ -74,35 +82,53 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
       
       {/* Array container with proper spacing for labels */}
       <div 
-        className="array-container relative w-full flex items-end justify-between px-8 py-4 pt-16"
+        className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-4 pt-8 sm:pt-12 md:pt-16"
         style={{ 
-          height: displayArray.length > 50 ? '320px' : '360px',
+          height: displayArray.length > 75 ? '250px' : displayArray.length > 50 ? '320px' : displayArray.length > 30 ? '380px' : '420px',
           paddingBottom: displayArray.length > 50 ? '10px' : '40px',
-          gap: displayArray.length > 80 ? '1px' : displayArray.length > 50 ? '2px' : '3px'
+          gap: displayArray.length > 80 ? '0.5px' : displayArray.length > 50 ? '1px' : '2px'
         }}
       >
         {displayArray.map((value, index) => {
-          // Simple flex-based approach: let CSS handle the distribution
-          const maxBarWidth = displayArray.length < 20 ? 50 : displayArray.length < 50 ? 20 : 10;
-          const minBarWidth = 2;
-          const barWidth = Math.max(minBarWidth, Math.min(maxBarWidth, 800 / displayArray.length));
+          // Let CSS flexbox handle the distribution naturally
+          const isMobile = windowWidth < 640;
+          const isTablet = windowWidth >= 640 && windowWidth < 1024;
+          
+          // Calculate reasonable width based on array size and screen
+          const baseWidth = Math.max(
+            1,
+            Math.min(
+              isMobile ? 15 : isTablet ? 25 : 40,
+              Math.floor((windowWidth - 100) / displayArray.length) // Simple division with margin
+            )
+          );
           
           return (
             <div
               key={`${index}-${value}`}
-              className="group relative flex flex-col items-center flex-shrink-0"
+              className="group relative flex flex-col items-center"
               style={{ 
-                width: `${barWidth}px`
+                flex: '1 1 0',
+                maxWidth: `${baseWidth}px`,
+                minWidth: '1px'
               }}
             >
               {/* Bar */}
               <div
                 className={`relative rounded-t-xl transition-all duration-500 ease-out ${getBarGlow(index)}`}
                 style={{
-                  width: `${barWidth}px`,
-                  height: `${(value / Math.max(...displayArray)) * (displayArray.length > 50 ? 200 : 250)}px`,
+                  width: '100%',
+                  height: `${(value / Math.max(...displayArray)) * (
+                    displayArray.length > 75 
+                      ? (isMobile ? 160 : isTablet ? 180 : 200)
+                      : displayArray.length > 50 
+                      ? (isMobile ? 180 : isTablet ? 220 : 240)
+                      : displayArray.length > 30 
+                      ? (isMobile ? 200 : isTablet ? 260 : 280)
+                      : (isMobile ? 220 : isTablet ? 280 : 320)
+                  )}px`,
                   backgroundColor: getBarColor(index),
-                  minHeight: displayArray.length > 75 ? '5px' : displayArray.length > 50 ? '10px' : '20px'
+                  minHeight: displayArray.length > 100 ? '4px' : displayArray.length > 75 ? '6px' : displayArray.length > 50 ? '8px' : '12px'
                 }}
               >
                 {/* Shine effect */}
@@ -114,14 +140,14 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
                 )}
               </div>
               
-              {/* Value at bottom - only show for smaller arrays */}
-              {displayArray.length <= 30 && (
-                <div className="mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
+              {/* Value at bottom - only for smaller arrays where it makes sense */}
+              {displayArray.length <= 20 && baseWidth > 8 && (
+                <div className="mt-2 sm:mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
                   <span className="text-xs font-semibold text-slate-700">{value}</span>
                 </div>
               )}
-              {displayArray.length > 30 && displayArray.length <= 50 && (
-                <div className="mt-2 text-xs text-slate-500 font-medium">
+              {displayArray.length > 20 && displayArray.length <= 40 && baseWidth > 6 && !isMobile && (
+                <div className="mt-1 sm:mt-2 text-xs text-slate-500 font-medium">
                   {value}
                 </div>
               )}
