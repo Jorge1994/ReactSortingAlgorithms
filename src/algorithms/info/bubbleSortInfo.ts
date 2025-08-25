@@ -27,6 +27,7 @@ export const bubbleSortInfo: AlgorithmInfo = {
 
   stable: true,
   inPlace: true,
+  online: false,
 
   advantages: [
     "Simple to implement and understand",

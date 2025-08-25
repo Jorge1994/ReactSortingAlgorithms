@@ -6,6 +6,7 @@ export const insertionSortInfo: AlgorithmInfo = {
   
   stable: true,
   inPlace: true,
+  online: true,
   
   complexity: {
     time: {

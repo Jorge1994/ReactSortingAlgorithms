@@ -10,6 +10,7 @@ export interface AlgorithmInfo {
   complexity: AlgorithmComplexity;
   stable: boolean;
   inPlace: boolean;
+  online: boolean;
   advantages: string[];
   disadvantages: string[];
   useCases: string[];

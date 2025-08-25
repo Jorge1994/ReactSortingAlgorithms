@@ -14,6 +14,7 @@ interface ComparisonData {
   inPlace: boolean;
   stable: boolean;
   adaptive: boolean;
+  online: boolean;
 }
 
 /**
@@ -33,7 +34,8 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
         space: info.complexity.space,
         inPlace: info.inPlace,
         stable: info.stable,
-        adaptive: isAdaptive(info.name) // We'll determine this based on algorithm characteristics
+        adaptive: isAdaptive(info.name), // We'll determine this based on algorithm characteristics
+        online: info.online
       };
     });
   };
@@ -115,6 +117,9 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
                   <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-800 border-b border-slate-300 align-middle">
                     Adaptive
                   </th>
+                  <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-800 border-b border-slate-300 align-middle">
+                    Online
+                  </th>
                 </tr>
                 <tr className="bg-gradient-to-r from-slate-100 to-slate-200">
                   <th className="px-4 py-2 text-center font-bold text-slate-800 border-b border-slate-300">
@@ -170,6 +175,11 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
                     <td className="px-4 py-4 text-center border-b border-slate-200">
                       <span className={`px-3 py-2 rounded-lg border text-sm font-semibold ${getBooleanColor(algorithm.adaptive, true)}`}>
                         {algorithm.adaptive ? '✓ Yes' : '✗ No'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-center border-b border-slate-200">
+                      <span className={`px-3 py-2 rounded-lg border text-sm font-semibold ${getBooleanColor(algorithm.online, true)}`}>
+                        {algorithm.online ? '✓ Yes' : '✗ No'}
                       </span>
                     </td>
                   </tr>

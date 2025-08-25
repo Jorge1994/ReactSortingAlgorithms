@@ -23,6 +23,7 @@ export const selectionSortInfo: AlgorithmInfo = {
   
   stable: false,
   inPlace: true,
+  online: false,
   
   advantages: [
     'Simple implementation and easy to understand',
