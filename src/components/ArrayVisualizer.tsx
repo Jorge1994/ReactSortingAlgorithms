@@ -74,7 +74,7 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
       
       {/* Array container with proper spacing for labels */}
       <div 
-        className="array-container relative w-full flex items-end justify-between px-8 py-4 pt-16 max-w-6xl mx-auto"
+        className="array-container relative w-full flex items-end justify-between px-8 py-4 pt-16"
         style={{ 
           height: displayArray.length > 50 ? '320px' : '360px',
           paddingBottom: displayArray.length > 50 ? '10px' : '40px',

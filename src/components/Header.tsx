@@ -25,7 +25,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
         <div className="absolute top-0 right-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
       </div>
       
-      <div className="relative max-w-7xl mx-auto px-6 py-12">
+      <div className="relative w-full px-6 py-12">
         <div className="text-center">
           {/* App Name */}
           <div className="mb-8">

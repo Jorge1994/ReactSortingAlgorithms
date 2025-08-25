@@ -49,7 +49,7 @@ function App() {
         onAlgorithmChange={handleAlgorithmChange}
       />
       
-      <main className="max-w-7xl mx-auto p-6 space-y-6">
+      <main className="w-full px-4 py-6 space-y-6">
         {/* Array Controls */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
             <ArrayControls
