@@ -91,8 +91,8 @@ export function CountingSortVisualizer({
     if (countArray.length === 0) return null;
 
     return (
-      <div className="mb-8">
-        <h4 className="text-lg font-semibold mb-4 text-gray-800">Count Array</h4>
+      <div className="mb-2">
+        <h4 className="text-lg font-semibold mb-2 text-gray-800">Count Array</h4>
         <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm overflow-x-auto">
           <table className="w-full border-collapse">
             <tbody>
@@ -136,24 +136,24 @@ export function CountingSortVisualizer({
     const maxValue = Math.max(...array.filter(v => v !== undefined && v !== 0 && !isNaN(v)));
     const effectiveMaxValue = maxValue > 0 ? maxValue : 1;
     
-    // Standard height for both arrays - increased to prevent cutting
-    const containerHeight = '380px';
-    const maxBarHeight = 280;
+    // Reduced height for better viewport fitting
+    const containerHeight = '200px';
+    const maxBarHeight = 120;
     
     return (
-      <div className="mb-8">
-        <h4 className="text-lg font-semibold mb-4 text-gray-800">{title}</h4>
+      <div className="mb-2">
+        <h4 className="text-lg font-semibold mb-2 text-gray-800">{title}</h4>
         <div className="relative overflow-hidden">
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
           
           {/* Array container */}
           <div 
-            className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-4"
+            className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-2"
             style={{ 
               height: containerHeight,
-              paddingBottom: '40px',
-              paddingTop: '40px',
+              paddingBottom: '25px',
+              paddingTop: '15px',
               gap: array.length > 15 ? '1px' : '2px'
             }}
           >
@@ -248,7 +248,7 @@ export function CountingSortVisualizer({
           )}
 
           {/* Array visualizations */}
-          <div className="space-y-6">
+          <div className="space-y-1">
             {renderArray(displayArray, 'Original Array', 'original')}
             
             {currentCountArray.length > 0 && 
