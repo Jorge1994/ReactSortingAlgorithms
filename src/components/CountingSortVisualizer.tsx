@@ -232,9 +232,7 @@ export function CountingSortVisualizer({
     <div className="counting-sort-visualizer">
       <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-8 pb-4">
-          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-            Counting Sort Visualization
-          </h2>
+         
 
           {/* Current phase indicator */}
           {currentPhase && (
