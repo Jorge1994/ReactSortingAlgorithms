@@ -77,62 +77,59 @@ function mergeSortSteps(array: number[]): SortStep[] {
       }
     });
 
+    // Create a temporary result array to build the merged sequence
+    const tempResult = new Array(right - left + 1);
     let i = 0, j = 0;
-    let k = left;
+    let resultIndex = 0;
 
-    // Merge the temp arrays back into arr[left..right]
+    // Merge the temp arrays into tempResult first
     while (i < n1 && j < n2) {
       comparisons++;
 
       if (L[i] <= R[j]) {
-        // Update arrays first
-        arr[k] = L[i];
-        workingArray[k] = L[i];
+        tempResult[resultIndex] = L[i];
         
-        // Show the placement step with correct array state
+        // Show comparison and placement
         steps.push({
           type: 'highlight',
-          indices: [k],
+          indices: [left + resultIndex],
           array: [...workingArray],
           metadata: {
             comparisons,
             swaps,
-            currentPhase: `Placed ${L[i]} at position ${k} (comparing ${L[i]} ≤ ${R[j]})`
+            currentPhase: `Comparing: ${L[i]} ≤ ${R[j]} → placing ${L[i]} at position ${left + resultIndex}`
           }
         });
         
         i++;
       } else {
-        // Update arrays first
-        arr[k] = R[j];
-        workingArray[k] = R[j];
+        tempResult[resultIndex] = R[j];
         swaps++;
         
-        // Show the placement step with correct array state
+        // Show comparison and placement
         steps.push({
           type: 'highlight',
-          indices: [k],
+          indices: [left + resultIndex],
           array: [...workingArray],
           metadata: {
             comparisons,
             swaps,
-            currentPhase: `Placed ${R[j]} at position ${k} (comparing ${L[i]} > ${R[j]})`
+            currentPhase: `Comparing: ${L[i]} > ${R[j]} → placing ${R[j]} at position ${left + resultIndex}`
           }
         });
         
         j++;
       }
-      k++;
+      resultIndex++;
     }
 
-    // Copy the remaining elements of L[], if there are any
+    // Copy remaining elements from L[]
     while (i < n1) {
-      arr[k] = L[i];
-      workingArray[k] = L[i];
+      tempResult[resultIndex] = L[i];
       
       steps.push({
         type: 'highlight',
-        indices: [k],
+        indices: [left + resultIndex],
         array: [...workingArray],
         metadata: {
           comparisons,
@@ -142,17 +139,16 @@ function mergeSortSteps(array: number[]): SortStep[] {
       });
       
       i++;
-      k++;
+      resultIndex++;
     }
 
-    // Copy the remaining elements of R[], if there are any
+    // Copy remaining elements from R[]
     while (j < n2) {
-      arr[k] = R[j];
-      workingArray[k] = R[j];
+      tempResult[resultIndex] = R[j];
       
       steps.push({
         type: 'highlight',
-        indices: [k],
+        indices: [left + resultIndex],
         array: [...workingArray],
         metadata: {
           comparisons,
@@ -162,10 +158,17 @@ function mergeSortSteps(array: number[]): SortStep[] {
       });
       
       j++;
-      k++;
+      resultIndex++;
     }
 
-    // Show completed merge
+    // Now copy the complete sorted sequence back to the working arrays
+    // This is done all at once to avoid any intermediate visual conflicts
+    for (let k = 0; k < tempResult.length; k++) {
+      arr[left + k] = tempResult[k];
+      workingArray[left + k] = tempResult[k];
+    }
+
+    // Show the final merged result with the correct array state
     steps.push({
       type: 'temp-sorted',
       indices: Array.from({ length: right - left + 1 }, (_, i) => left + i),
