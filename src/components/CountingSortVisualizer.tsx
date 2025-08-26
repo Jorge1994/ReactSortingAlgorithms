@@ -101,10 +101,10 @@ export function CountingSortVisualizer({
                 {countArray.map((count, index) => (
                   <td
                     key={`count-${index}`}
-                    className={`border border-gray-300 p-2 text-center font-semibold text-sm min-w-[40px] transition-all duration-300 ${
+                    className={`border border-gray-300 p-2 text-center font-bold text-base min-w-[40px] min-h-[40px] transition-all duration-300 ${
                       countIndex === index
                         ? 'bg-red-100 border-red-400 text-red-800'
-                        : 'bg-gray-50'
+                        : 'bg-white text-gray-800'
                     }`}
                     style={{
                       boxShadow: countIndex === index ? '0 0 10px rgba(239, 68, 68, 0.3)' : 'none'
@@ -119,7 +119,7 @@ export function CountingSortVisualizer({
                 {countArray.map((_, index) => (
                   <td
                     key={`index-${index}`}
-                    className="border border-gray-300 p-2 text-center text-xs text-gray-600 bg-gray-100"
+                    className="border border-gray-300 p-2 text-center text-sm font-medium text-gray-700 bg-gray-100 min-h-[32px]"
                   >
                     {index}
                   </td>
