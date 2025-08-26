@@ -2,7 +2,8 @@ export function ColorLegend() {
   const legendItems = [
     { color: 'bg-blue-500', label: 'Comparing', description: 'Elements being compared' },
     { color: 'bg-red-500', label: 'Swapping', description: 'Elements being swapped' },
-    { color: 'bg-amber-500', label: 'Highlighting', description: 'Current minimum or special element' },
+    { color: 'bg-amber-500', label: 'Highlighting', description: 'Current section or special element' },
+    { color: 'bg-emerald-400', label: 'Temp Sorted', description: 'Temporarily sorted sections (Merge Sort)' },
     { color: 'bg-emerald-500', label: 'Sorted', description: 'Elements in final position' },
     { color: 'bg-slate-400', label: 'Unsorted', description: 'Elements waiting to be processed' }
   ];

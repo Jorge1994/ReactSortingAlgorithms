@@ -17,13 +17,21 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   const getBarColor = (index: number): string => {
-    // Check if this element was marked as sorted in any previous step
-    const wasSorted = steps.slice(0, currentStep + 1).some(step => 
+    // Check if this element was marked as finally sorted in any previous step
+    const wasFinallySorted = steps.slice(0, currentStep + 1).some(step => 
       step.type === 'set-sorted' && step.indices.includes(index)
     );
     
-    if (wasSorted) {
-      return '#10B981'; // emerald-500 for sorted elements
+    if (wasFinallySorted) {
+      return '#10B981'; // emerald-500 for finally sorted elements
+    }
+
+    // Check if this element is temporarily sorted in current step
+    const isTempSorted = currentStepData?.type === 'temp-sorted' && 
+                        currentStepData.indices.includes(index);
+    
+    if (isTempSorted) {
+      return '#34D399'; // emerald-400 for temporarily sorted elements
     }
 
     if (!currentStepData) return '#94A3B8'; // slate-400
@@ -37,6 +45,8 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
         return indices.includes(index) ? '#EF4444' : '#94A3B8'; // red-500 for swapping
       case 'set-sorted':
         return indices.includes(index) ? '#10B981' : '#94A3B8'; // emerald-500 for sorted
+      case 'temp-sorted':
+        return indices.includes(index) ? '#34D399' : '#94A3B8'; // emerald-400 for temp sorted
       case 'highlight':
         return indices.includes(index) ? '#F59E0B' : '#94A3B8'; // amber-500 for highlight
       default:
@@ -45,12 +55,12 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
   };
 
   const getBarGlow = (index: number): string => {
-    // Check if this element was marked as sorted in any previous step
-    const wasSorted = steps.slice(0, currentStep + 1).some(step => 
+    // Check if this element was marked as finally sorted in any previous step
+    const wasFinallySorted = steps.slice(0, currentStep + 1).some(step => 
       step.type === 'set-sorted' && step.indices.includes(index)
     );
     
-    if (wasSorted) {
+    if (wasFinallySorted) {
       return 'shadow-lg shadow-emerald-500/40';
     }
 
@@ -66,6 +76,8 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
           return 'shadow-lg shadow-red-500/40';
         case 'set-sorted':
           return 'shadow-lg shadow-emerald-500/40';
+        case 'temp-sorted':
+          return 'shadow-lg shadow-emerald-400/40';
         case 'highlight':
           return 'shadow-lg shadow-amber-500/40';
         default:

@@ -44,6 +44,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
       'bubble-sort': '🫧',
       'selection-sort': '🎯',
       'insertion-sort': '📝',
+      'merge-sort': '🔀',
     };
     return icons[algorithmKey] || '⚡';
   };

@@ -13,6 +13,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       'bubble-sort': '🫧',
       'selection-sort': '🎯',
       'insertion-sort': '📝',
+      'merge-sort': '🔀',
     };
     return icons[algorithmKey] || '⚡';
   };

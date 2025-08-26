@@ -1,7 +1,7 @@
 // Core interfaces for the sorting algorithm visualizer
 
 export interface SortStep {
-  type: 'compare' | 'swap' | 'set-sorted' | 'highlight';
+  type: 'compare' | 'swap' | 'set-sorted' | 'highlight' | 'temp-sorted';
   indices: number[];
   array: number[];
   metadata?: {
