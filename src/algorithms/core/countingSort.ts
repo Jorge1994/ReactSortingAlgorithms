@@ -45,7 +45,7 @@ function countingSortSteps(array: number[]): SortStep[] {
       metadata: {
         comparisons,
         swaps,
-        currentPhase: `Counting element ${value} at position ${i}`,
+        currentPhase: `Counting element ${value} at position ${i} - adding to count[${countIndex}] (value ${value} - min ${min} = ${countIndex})`,
         countArray: [...countArray],
         outputArray: [...outputArray],
         currentValue: value,
@@ -69,6 +69,8 @@ function countingSortSteps(array: number[]): SortStep[] {
   });
 
   for (let i = 1; i < countArray.length; i++) {
+    const previousValue = countArray[i];
+    const previousCumulative = countArray[i - 1];
     countArray[i] += countArray[i - 1];
     
     steps.push({
@@ -78,7 +80,7 @@ function countingSortSteps(array: number[]): SortStep[] {
       metadata: {
         comparisons,
         swaps,
-        currentPhase: `Building cumulative count: count[${i}] = ${countArray[i]}`,
+        currentPhase: `Building cumulative count: count[${i}] = ${previousValue} + ${previousCumulative} = ${countArray[i]} (this tells us: elements with value ≤ ${i + min} should fill the first ${countArray[i]} positions in the sorted array)`,
         countArray: [...countArray],
         outputArray: [...outputArray],
         countIndex: i

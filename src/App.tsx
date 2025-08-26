@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { type AlgorithmKey } from './algorithms/registry';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { type AlgorithmKey, algorithmRegistry } from './algorithms/registry';
 import { useSortingAnimation } from './hooks/useSortingAnimation';
 import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
 import { Header } from './components/Header';
@@ -12,8 +13,29 @@ import { ColorLegend } from './components/ColorLegend';
 import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
 
-function App() {
-  const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmKey>('bubble-sort');
+function VisualizerPage() {
+  const { algorithm } = useParams<{ algorithm?: string }>();
+  const navigate = useNavigate();
+  
+  // Validate and set algorithm from URL
+  const getAlgorithmFromUrl = (urlAlgorithm?: string): AlgorithmKey => {
+    if (urlAlgorithm && urlAlgorithm in algorithmRegistry) {
+      return urlAlgorithm as AlgorithmKey;
+    }
+    return 'bubble-sort'; // fallback
+  };
+  
+  const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmKey>(
+    getAlgorithmFromUrl(algorithm)
+  );
+
+  // Update algorithm when URL changes
+  useEffect(() => {
+    const newAlgorithm = getAlgorithmFromUrl(algorithm);
+    if (newAlgorithm !== currentAlgorithm) {
+      setCurrentAlgorithm(newAlgorithm);
+    }
+  }, [algorithm, currentAlgorithm]);
 
   const hookResult: UseSortingAnimationReturn = useSortingAnimation(currentAlgorithm);
   
@@ -39,6 +61,7 @@ function App() {
 
   const handleAlgorithmChange = (algorithmKey: AlgorithmKey) => {
     setCurrentAlgorithm(algorithmKey);
+    navigate(`/visualize/${algorithmKey}`);
     // Reset the visualization when switching algorithms
     reset();
   };
@@ -122,6 +145,15 @@ function App() {
 
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<VisualizerPage />} />
+      <Route path="/visualize/:algorithm" element={<VisualizerPage />} />
+    </Routes>
   );
 }
 
