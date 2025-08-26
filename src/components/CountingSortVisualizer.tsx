@@ -136,9 +136,9 @@ export function CountingSortVisualizer({
     const maxValue = Math.max(...array.filter(v => v !== undefined && v !== 0 && !isNaN(v)));
     const effectiveMaxValue = maxValue > 0 ? maxValue : 1;
     
-    // Standard height for both arrays
-    const containerHeight = '320px';
-    const maxBarHeight = 240;
+    // Standard height for both arrays - increased to prevent cutting
+    const containerHeight = '380px';
+    const maxBarHeight = 280;
     
     return (
       <div className="mb-8">
@@ -153,7 +153,7 @@ export function CountingSortVisualizer({
             style={{ 
               height: containerHeight,
               paddingBottom: '40px',
-              paddingTop: '20px',
+              paddingTop: '40px',
               gap: array.length > 15 ? '1px' : '2px'
             }}
           >
