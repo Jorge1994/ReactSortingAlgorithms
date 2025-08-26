@@ -43,6 +43,10 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
         return indices.includes(index) ? '#3B82F6' : '#94A3B8'; // blue-500 for comparing
       case 'swap':
         return indices.includes(index) ? '#EF4444' : '#94A3B8'; // red-500 for swapping
+      case 'move':
+        return indices.includes(index) ? '#8B5CF6' : '#94A3B8'; // violet-500 for moving
+      case 'clear-for-merge':
+        return indices.includes(index) ? '#F97316' : '#94A3B8'; // orange-500 for cleared slots
       case 'set-sorted':
         return indices.includes(index) ? '#10B981' : '#94A3B8'; // emerald-500 for sorted
       case 'temp-sorted':
@@ -74,6 +78,10 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
           return 'shadow-lg shadow-blue-500/40';
         case 'swap':
           return 'shadow-lg shadow-red-500/40';
+        case 'move':
+          return 'shadow-lg shadow-violet-500/40';
+        case 'clear-for-merge':
+          return 'shadow-lg shadow-orange-500/40';
         case 'set-sorted':
           return 'shadow-lg shadow-emerald-500/40';
         case 'temp-sorted':
@@ -130,7 +138,7 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
                 className={`relative rounded-t-xl transition-all duration-500 ease-out ${getBarGlow(index)}`}
                 style={{
                   width: '100%',
-                  height: `${(value / Math.max(...displayArray)) * (
+                  height: value === -1 ? '20px' : `${(value / Math.max(...displayArray.filter(v => v !== -1))) * (
                     displayArray.length > 75 
                       ? (isMobile ? 160 : isTablet ? 180 : 200)
                       : displayArray.length > 50 
@@ -139,8 +147,9 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
                       ? (isMobile ? 200 : isTablet ? 260 : 280)
                       : (isMobile ? 220 : isTablet ? 280 : 320)
                   )}px`,
-                  backgroundColor: getBarColor(index),
-                  minHeight: displayArray.length > 100 ? '4px' : displayArray.length > 75 ? '6px' : displayArray.length > 50 ? '8px' : '12px'
+                  backgroundColor: value === -1 ? '#F97316' : getBarColor(index),
+                  minHeight: displayArray.length > 100 ? '4px' : displayArray.length > 75 ? '6px' : displayArray.length > 50 ? '8px' : '12px',
+                  opacity: value === -1 ? 0.5 : 1
                 }}
               >
                 {/* Shine effect */}
@@ -155,12 +164,14 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
               {/* Value at bottom - only for smaller arrays where it makes sense */}
               {displayArray.length <= 20 && baseWidth > 8 && (
                 <div className="mt-2 sm:mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
-                  <span className="text-xs font-semibold text-slate-700">{value}</span>
+                  <span className="text-xs font-semibold text-slate-700">
+                    {value === -1 ? '⋯' : value}
+                  </span>
                 </div>
               )}
               {displayArray.length > 20 && displayArray.length <= 40 && baseWidth > 6 && !isMobile && (
                 <div className="mt-1 sm:mt-2 text-xs text-slate-500 font-medium">
-                  {value}
+                  {value === -1 ? '⋯' : value}
                 </div>
               )}
             </div>

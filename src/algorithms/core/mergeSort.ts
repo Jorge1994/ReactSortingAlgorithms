@@ -65,7 +65,7 @@ function mergeSortSteps(array: number[]): SortStep[] {
       R[j] = arr[mid + 1 + j];
     }
 
-    // Show the arrays being merged
+    // Show the arrays being merged (before state)
     steps.push({
       type: 'highlight',
       indices: Array.from({ length: right - left + 1 }, (_, i) => left + i),
@@ -73,102 +73,45 @@ function mergeSortSteps(array: number[]): SortStep[] {
       metadata: {
         comparisons,
         swaps,
-        currentPhase: `Merging: Left [${L.join(', ')}] with Right [${R.join(', ')}]`
+        currentPhase: `About to merge: Left [${L.join(', ')}] with Right [${R.join(', ')}]`
       }
     });
 
-    // Create a temporary result array to build the merged sequence
-    const tempResult = new Array(right - left + 1);
+    // Create the merged sequence without modifying the original positions
+    const mergedSequence = [];
     let i = 0, j = 0;
-    let resultIndex = 0;
 
-    // Merge the temp arrays into tempResult first
+    // Build the merged sequence
     while (i < n1 && j < n2) {
       comparisons++;
-
+      
       if (L[i] <= R[j]) {
-        tempResult[resultIndex] = L[i];
-        
-        // Show comparison and placement
-        steps.push({
-          type: 'highlight',
-          indices: [left + resultIndex],
-          array: [...workingArray],
-          metadata: {
-            comparisons,
-            swaps,
-            currentPhase: `Comparing: ${L[i]} ≤ ${R[j]} → placing ${L[i]} at position ${left + resultIndex}`
-          }
-        });
-        
+        mergedSequence.push(L[i]);
         i++;
       } else {
-        tempResult[resultIndex] = R[j];
+        mergedSequence.push(R[j]);
         swaps++;
-        
-        // Show comparison and placement
-        steps.push({
-          type: 'highlight',
-          indices: [left + resultIndex],
-          array: [...workingArray],
-          metadata: {
-            comparisons,
-            swaps,
-            currentPhase: `Comparing: ${L[i]} > ${R[j]} → placing ${R[j]} at position ${left + resultIndex}`
-          }
-        });
-        
         j++;
       }
-      resultIndex++;
     }
 
-    // Copy remaining elements from L[]
+    // Add remaining elements
     while (i < n1) {
-      tempResult[resultIndex] = L[i];
-      
-      steps.push({
-        type: 'highlight',
-        indices: [left + resultIndex],
-        array: [...workingArray],
-        metadata: {
-          comparisons,
-          swaps,
-          currentPhase: `Copying remaining element ${L[i]} from left subarray`
-        }
-      });
-      
+      mergedSequence.push(L[i]);
       i++;
-      resultIndex++;
     }
-
-    // Copy remaining elements from R[]
     while (j < n2) {
-      tempResult[resultIndex] = R[j];
-      
-      steps.push({
-        type: 'highlight',
-        indices: [left + resultIndex],
-        array: [...workingArray],
-        metadata: {
-          comparisons,
-          swaps,
-          currentPhase: `Copying remaining element ${R[j]} from right subarray`
-        }
-      });
-      
+      mergedSequence.push(R[j]);
       j++;
-      resultIndex++;
     }
 
-    // Now copy the complete sorted sequence back to the working arrays
-    // This is done all at once to avoid any intermediate visual conflicts
-    for (let k = 0; k < tempResult.length; k++) {
-      arr[left + k] = tempResult[k];
-      workingArray[left + k] = tempResult[k];
+    // Now update ALL positions at once - atomic operation
+    for (let pos = 0; pos < mergedSequence.length; pos++) {
+      arr[left + pos] = mergedSequence[pos];
+      workingArray[left + pos] = mergedSequence[pos];
     }
 
-    // Show the final merged result with the correct array state
+    // Show the completed merge result
     steps.push({
       type: 'temp-sorted',
       indices: Array.from({ length: right - left + 1 }, (_, i) => left + i),
@@ -176,7 +119,7 @@ function mergeSortSteps(array: number[]): SortStep[] {
       metadata: {
         comparisons,
         swaps,
-        currentPhase: `Merge complete: Section [${left}-${right}] is now sorted`
+        currentPhase: `Merge complete: [${L.join(', ')}] + [${R.join(', ')}] → [${mergedSequence.join(', ')}]`
       }
     });
   }
