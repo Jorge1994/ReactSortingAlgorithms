@@ -45,6 +45,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
       'selection-sort': '🎯',
       'insertion-sort': '📝',
       'merge-sort': '🔀',
+      'counting-sort': '🔢',
     };
     return icons[algorithmKey] || '⚡';
   };

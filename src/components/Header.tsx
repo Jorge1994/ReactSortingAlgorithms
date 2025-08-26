@@ -14,6 +14,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       'selection-sort': '🎯',
       'insertion-sort': '📝',
       'merge-sort': '🔀',
+      'counting-sort': '🔢',
     };
     return icons[algorithmKey] || '⚡';
   };
