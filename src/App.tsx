@@ -62,6 +62,12 @@ function VisualizerPage() {
   const handleAlgorithmChange = (algorithmKey: AlgorithmKey) => {
     setCurrentAlgorithm(algorithmKey);
     navigate(`/visualize/${algorithmKey}`);
+    
+    // Limit array size for counting sort
+    if (algorithmKey === 'counting-sort' && arraySize > 50) {
+      changeArraySize(50);
+    }
+    
     // Reset the visualization when switching algorithms
     reset();
   };
@@ -80,6 +86,7 @@ function VisualizerPage() {
               onGenerateArray={generateNewArray}
               arraySize={arraySize}
               onArraySizeChange={changeArraySize}
+              maxSize={currentAlgorithm === 'counting-sort' ? 50 : 100}
             />
         </section>
 

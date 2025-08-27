@@ -2,15 +2,17 @@ interface ArrayControlsProps {
   onGenerateArray: (type: 'random' | 'nearly-sorted' | 'reverse') => void;
   arraySize: number;
   onArraySizeChange: (size: number) => void;
+  maxSize?: number; // Optional max size limit
 }
 
 export function ArrayControls({
   onGenerateArray,
   arraySize,
-  onArraySizeChange
+  onArraySizeChange,
+  maxSize = 100 // Default to 100 if not specified
 }: ArrayControlsProps) {
   // Calculate progress percentage for slider fill
-  const arraySizeProgress = ((arraySize - 5) / (100 - 5)) * 100;
+  const arraySizeProgress = ((arraySize - 5) / (maxSize - 5)) * 100;
 
   return (
     <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-6 border border-slate-200">
@@ -35,7 +37,7 @@ export function ArrayControls({
               id="array-size"
               type="range"
               min="5"
-              max="100"
+              max={maxSize}
               value={arraySize}
               onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
               className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
@@ -45,8 +47,8 @@ export function ArrayControls({
             />
             <div className="relative flex text-xs text-slate-500 mt-1">
               <span style={{ position: 'absolute', left: '0%', transform: 'translateX(0%)' }}>5</span>
-              <span style={{ position: 'absolute', left: '47.37%', transform: 'translateX(-50%)' }}>50</span>
-              <span style={{ position: 'absolute', left: '100%', transform: 'translateX(-100%)' }}>100</span>
+              <span style={{ position: 'absolute', left: '47.37%', transform: 'translateX(-50%)' }}>{Math.floor(maxSize / 2)}</span>
+              <span style={{ position: 'absolute', left: '100%', transform: 'translateX(-100%)' }}>{maxSize}</span>
             </div>
           </div>
         </div>

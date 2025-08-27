@@ -15,8 +15,8 @@ export const generateRandomArray = (size: number, min: number = 1, max: number =
 /**
  * Generate a nearly sorted array (helpful for testing best-case scenarios)
  */
-export const generateNearlySortedArray = (size: number): number[] => {
-  const array = Array.from({ length: size }, (_, i) => i + 1);
+export const generateNearlySortedArray = (size: number, maxValue: number = 100): number[] => {
+  const array = Array.from({ length: size }, (_, i) => Math.floor((i + 1) * maxValue / size));
   
   // Swap a few random elements to make it "nearly" sorted
   const swaps = Math.max(1, Math.floor(size * 0.1)); // 10% of elements
@@ -33,6 +33,6 @@ export const generateNearlySortedArray = (size: number): number[] => {
 /**
  * Generate a reverse sorted array (worst-case for bubble sort)
  */
-export const generateReverseSortedArray = (size: number): number[] => {
-  return Array.from({ length: size }, (_, i) => size - i);
+export const generateReverseSortedArray = (size: number, maxValue: number = 100): number[] => {
+  return Array.from({ length: size }, (_, i) => Math.floor((size - i) * maxValue / size));
 };

@@ -33,7 +33,10 @@ export interface UseSortingAnimationReturn {
 
 export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingAnimationReturn {
   const [arraySize, setArraySize] = useState(15);
-  const [array, setArray] = useState<number[]>(() => generateRandomArray(15, 1, 100));
+  const [array, setArray] = useState<number[]>(() => {
+    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
+    return generateRandomArray(15, 1, maxValue);
+  });
   const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -56,15 +59,18 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const generateNewArray = (type: 'random' | 'nearly-sorted' | 'reverse' = 'random') => {
     let newArray: number[];
     
+    // For counting sort, limit max value to 50
+    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
+    
     switch (type) {
       case 'nearly-sorted':
-        newArray = generateNearlySortedArray(arraySize);
+        newArray = generateNearlySortedArray(arraySize, maxValue);
         break;
       case 'reverse':
-        newArray = generateReverseSortedArray(arraySize);
+        newArray = generateReverseSortedArray(arraySize, maxValue);
         break;
       default:
-        newArray = generateRandomArray(arraySize, 1, 100);
+        newArray = generateRandomArray(arraySize, 1, maxValue);
     }
     
     setArray(newArray);
@@ -111,7 +117,8 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const changeArraySize = (newSize: number) => {
     setArraySize(newSize);
     // Generate new array with the new size
-    const newArray = generateRandomArray(newSize, 1, 100);
+    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
+    const newArray = generateRandomArray(newSize, 1, maxValue);
     setArray(newArray);
     setSteps([]);
     setCurrentStep(0);

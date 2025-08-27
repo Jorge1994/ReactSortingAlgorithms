@@ -90,43 +90,66 @@ export function CountingSortVisualizer({
   const renderCountTable = (countArray: number[]) => {
     if (countArray.length === 0) return null;
 
+    // Find the min value to calculate the actual values being represented
+    const minValue = Math.min(...displayArray);
+
     return (
       <div className="mb-2">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">Count Array</h4>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm overflow-x-auto">
-          <table className="w-full border-collapse">
-            <tbody>
-              {/* Row for counts */}
-              <tr>
-                {countArray.map((count, index) => (
-                  <td
-                    key={`count-${index}`}
-                    className={`border border-gray-300 p-2 text-center font-bold text-base min-w-[40px] min-h-[40px] transition-all duration-300 ${
-                      countIndex === index
-                        ? 'bg-red-100 border-red-400 text-red-800'
-                        : 'bg-white text-gray-800'
-                    }`}
-                    style={{
-                      boxShadow: countIndex === index ? '0 0 10px rgba(239, 68, 68, 0.3)' : 'none'
-                    }}
-                  >
-                    {count}
-                  </td>
-                ))}
-              </tr>
-              {/* Row for indices */}
-              <tr>
-                {countArray.map((_, index) => (
-                  <td
-                    key={`index-${index}`}
-                    className="border border-gray-300 p-2 text-center text-sm font-medium text-gray-700 bg-gray-100 min-h-[32px]"
-                  >
-                    {index}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <tbody>
+                {/* Row for counts */}
+                <tr>
+                  {countArray.map((count, index) => (
+                    <td
+                      key={`count-${index}`}
+                      className={`border border-gray-300 p-1 text-center font-bold text-sm transition-all duration-300 ${
+                        countIndex === index
+                          ? 'bg-red-100 border-red-400 text-red-800'
+                          : 'bg-white text-gray-800'
+                      }`}
+                      style={{
+                        minWidth: '28px',
+                        minHeight: '32px',
+                        boxShadow: countIndex === index ? '0 0 10px rgba(239, 68, 68, 0.3)' : 'none'
+                      }}
+                    >
+                      {count}
+                    </td>
+                  ))}
+                </tr>
+                {/* Row for value labels - always show since we limit to 50 elements max */}
+                <tr>
+                  {countArray.map((_, index) => (
+                    <td
+                      key={`value-${index}`}
+                      className="border border-gray-300 p-1 text-center text-xs font-semibold text-blue-700 bg-blue-50"
+                      style={{
+                        minWidth: '28px',
+                        minHeight: '28px'
+                      }}
+                    >
+                      {index + minValue}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Legend for count table */}
+          <div className="mt-3 flex flex-wrap gap-4 text-xs text-gray-600">
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 bg-white border border-gray-300"></div>
+              <span>Count</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 bg-blue-50 border border-gray-300"></div>
+              <span>Value</span>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -206,17 +229,12 @@ export function CountingSortVisualizer({
                     )}
                   </div>
                   
-                  {/* Value at bottom - only for smaller arrays where it makes sense */}
-                  {array.length <= 20 && baseWidth > 8 && (
+                  {/* Value at bottom - always show for counting sort since max is 50 */}
+                  {array.length <= 50 && baseWidth > 6 && (
                     <div className="mt-2 sm:mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
                       <span className="text-xs font-semibold text-slate-700">
                         {isEmpty ? '-' : displayValue}
                       </span>
-                    </div>
-                  )}
-                  {array.length > 20 && array.length <= 40 && baseWidth > 6 && !isMobile && (
-                    <div className="mt-1 sm:mt-2 text-xs text-slate-500 font-medium">
-                      {isEmpty ? '-' : displayValue}
                     </div>
                   )}
                 </div>
