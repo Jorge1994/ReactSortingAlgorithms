@@ -215,6 +215,23 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
               </div>
             </div>
           </div>
+
+          <div className="mt-6">
+            <div className="p-6 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-xl border border-emerald-200">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">ℹ️</span>
+                <div>
+                  <h4 className="font-semibold text-emerald-800 mb-2">Notation</h4>
+                  <p className="text-emerald-700 leading-relaxed text-sm mb-2">Short explanation of symbols used in the table:</p>
+                  <ul className="list-disc list-inside text-emerald-700 text-sm">
+                    <li><span className="font-semibold">n</span>: Number of elements in the array.</li>
+                    <li><span className="font-semibold">k</span>: Range of distinct values in the array.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       )}
     </div>
