@@ -67,8 +67,30 @@ export function CountingSortVisualizer({
     }
   }, [currentStep, steps, updateVisualizationState]);
 
+  // Reset visualization state when steps are cleared or reset
+  useEffect(() => {
+    if (steps.length === 0 || currentStep === 0) {
+      setCurrentCountArray([]);
+      setCurrentOutputArray([]);
+      setCurrentPhase('');
+      setHighlightedIndices([]);
+      setCurrentValue(undefined);
+      setCountIndex(undefined);
+    }
+  }, [steps.length, currentStep]);
+
   const handlePlay = () => onPlay();
-  const handleReset = () => onReset();
+  const handleReset = () => {
+    // Clear all visualization state immediately
+    setCurrentCountArray([]);
+    setCurrentOutputArray([]);
+    setCurrentPhase('');
+    setHighlightedIndices([]);
+    setCurrentValue(undefined);
+    setCountIndex(undefined);
+    // Call the parent reset function
+    onReset();
+  };
 
   const handleStepForward = () => onNext();
 
