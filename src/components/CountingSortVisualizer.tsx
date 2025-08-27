@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
 import { AnimationControls } from './AnimationControls';
-import { StatisticsPanel } from './StatisticsPanel';
 import { ColorLegend } from './ColorLegend';
 
 interface CountingSortVisualizerProps {
@@ -18,7 +17,6 @@ interface CountingSortVisualizerProps {
   canPlayNext: boolean;
   canPlayPrev: boolean;
   onSpeedChange: (speed: number) => void;
-  currentStepData?: SortStep;
 }
 
 export function CountingSortVisualizer({ 
@@ -34,8 +32,7 @@ export function CountingSortVisualizer({
   onReset,
   canPlayNext,
   canPlayPrev,
-  onSpeedChange,
-  currentStepData
+  onSpeedChange
 }: CountingSortVisualizerProps) {
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
   
@@ -137,19 +134,7 @@ export function CountingSortVisualizer({
                 </tr>
               </tbody>
             </table>
-          </div>
-          
-          {/* Legend for count table */}
-          <div className="mt-3 flex flex-wrap gap-4 text-xs text-gray-600">
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-white border border-gray-300"></div>
-              <span>Count</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-blue-50 border border-gray-300"></div>
-              <span>Value</span>
-            </div>
-          </div>
+          </div>          
         </div>
       </div>
     );
@@ -267,7 +252,7 @@ export function CountingSortVisualizer({
 
           {/* Array visualizations */}
           <div className="space-y-1">
-            {renderArray(displayArray, 'Original Array', 'original')}
+            {renderArray(displayArray, '', 'original')}
             
             {currentCountArray.length > 0 && 
               renderCountTable(currentCountArray)
@@ -295,13 +280,26 @@ export function CountingSortVisualizer({
           />
         </div>
 
-        {/* Statistics */}
+        {/* Statistics - Custom for Counting Sort (only progress bar) */}
         <div className="px-8 pb-8 pt-2">
-          <StatisticsPanel
-            currentStepData={currentStepData}
-            currentStep={currentStep}
-            totalSteps={steps.length}
-          />
+          {/* Custom Statistics Panel for Counting Sort */}
+          {steps.length > 0 && (
+            <div className="flex flex-col items-center mb-8 space-y-4">
+              {/* Progress indicator */}
+              <div className="w-full max-w-md">
+                <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
+                  <span>Progress</span>
+                  <span>{currentStep + 1} / {steps.length}</span>
+                </div>
+                <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                  <div 
+                    className="h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
+                    style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <ColorLegend />
         </div>

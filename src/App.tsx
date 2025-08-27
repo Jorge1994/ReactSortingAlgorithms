@@ -106,7 +106,6 @@ function VisualizerPage() {
             canPlayNext={canPlayNext}
             canPlayPrev={canPlayPrev}
             onSpeedChange={setAnimationSpeed}
-            currentStepData={currentStepData}
           />
         ) : (
           <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
