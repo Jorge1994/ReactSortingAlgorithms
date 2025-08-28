@@ -1,6 +1,7 @@
 import type { AlgorithmKey } from '../algorithms/registry';
 import { getAlgorithm } from '../algorithms/registry';
 import { AlgorithmSelector } from './AlgorithmSelector';
+import { AlgorithmIcon } from '../utils/AlgorithmIcon';
 
 interface HeaderProps {
   currentAlgorithm: AlgorithmKey;
@@ -8,18 +9,7 @@ interface HeaderProps {
 }
 
 export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
-  const getAlgorithmIcon = (algorithmKey: AlgorithmKey): string => {
-    const icons: Record<AlgorithmKey, string> = {
-      'bubble-sort': '🫧',
-      'selection-sort': '🎯',
-      'insertion-sort': '📝',
-      'merge-sort': '🔀',
-  'counting-sort': '🔢',
-    'quick-sort': '⚡',
-  'gnome-sort': '🧙',
-    };
-    return icons[algorithmKey] || '⚡';
-  };
+  // ...existing code...
 
   return (
     <header className="relative bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white">
@@ -41,7 +31,7 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
           
           {/* Algorithm icon */}
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
-            <span className="text-4xl">{getAlgorithmIcon(currentAlgorithm)}</span>
+            <AlgorithmIcon algorithmKey={currentAlgorithm} size="4xl" />
           </div>
           
           {/* Main title */}

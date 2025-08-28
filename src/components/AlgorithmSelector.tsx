@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { AlgorithmKey } from '../algorithms/registry';
 import { algorithmRegistry, getAvailableAlgorithms } from '../algorithms/registry';
+import { AlgorithmIcon } from '../utils/AlgorithmIcon';
 
 interface AlgorithmSelectorProps {
   currentAlgorithm: AlgorithmKey;
@@ -39,18 +40,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
     };
   }, [isOpen]);
 
-  const getAlgorithmIcon = (algorithmKey: AlgorithmKey): string => {
-    const icons: Record<AlgorithmKey, string> = {
-      'bubble-sort': '🫧',
-      'selection-sort': '🎯',
-      'insertion-sort': '📝',
-      'merge-sort': '🔀',
-  'counting-sort': '🔢',
-  'quick-sort': '⚡',
-  'gnome-sort': '🧙',
-    };
-    return icons[algorithmKey] || '⚡';
-  };
+  // ...existing code...
 
   const handleAlgorithmSelect = (algorithmKey: AlgorithmKey) => {
     setIsOpen(false); // Close dropdown first
@@ -74,7 +64,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
         onClick={handleToggleDropdown}
         className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white hover:bg-white/15 transition-all duration-300 group min-w-[280px] sm:min-w-[320px]"
       >
-        <span className="text-2xl">{getAlgorithmIcon(currentAlgorithm)}</span>
+  <AlgorithmIcon algorithmKey={currentAlgorithm} />
         <div className="text-left flex-1">
           <div className="font-semibold text-lg">{currentAlgorithmData.name}</div>
         </div>
@@ -106,7 +96,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
                     onClick={() => handleAlgorithmSelect(algorithmKey)}
                     className="w-full flex items-center gap-4 px-4 py-4 rounded-lg transition-all duration-200 text-left group hover:bg-gray-50 border-2 border-transparent hover:shadow-sm bg-white"
                   >
-                    <span className="text-2xl flex-shrink-0">{getAlgorithmIcon(algorithmKey)}</span>
+                    <AlgorithmIcon algorithmKey={algorithmKey} />
                     <div className="flex-1 min-w-0">
                       <div className="font-semibold text-lg truncate text-white">
                         {algorithm.name}
