@@ -3,6 +3,7 @@ import { selectionSortImplementations } from './selectionSortImplementations';
 import { insertionSortImplementations } from './insertionSortImplementations';
 import { mergeSortImplementations } from './mergeSortImplementations';
 import { countingSortImplementations } from './countingSortImplementations';
+import { quickSortImplementations } from './quickSortImplementations';
 import type { AlgorithmImplementations } from '../types/implementations';
 import type { AlgorithmKey } from '../algorithms/registry';
 
@@ -15,6 +16,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   'insertion-sort': insertionSortImplementations,
   'merge-sort': mergeSortImplementations,
   'counting-sort': countingSortImplementations,
+  'quick-sort': quickSortImplementations,
 } as const;
 
 /**

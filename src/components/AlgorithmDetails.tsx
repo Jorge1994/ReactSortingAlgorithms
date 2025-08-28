@@ -56,11 +56,56 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                   <span className="text-xl">💾</span>
                   Space Complexity
                 </h4>
-                <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
-                  <div className="flex items-center justify-center mb-4">
-                    <code className="bg-purple-200 text-purple-800 px-4 py-2 rounded-lg font-mono text-lg font-bold">{algorithmInfo.complexity.space}</code>
-                  </div>
-                  <p className="text-sm text-purple-600 leading-relaxed">{algorithmInfo.complexity.justifications.spaceComplexity}</p>
+                {/* Replicate Time Complexity mechanics for Space Complexity: Best / Average / Worst */}
+                <div className="space-y-4">
+                  {(() => {
+                    // Attempt to extract explicit O(...) values from the space string
+                    const spaceStr = algorithmInfo.complexity.space || '';
+                    const bestMatch = spaceStr.match(/O\(log n\)/i);
+                    const worstMatch = spaceStr.match(/O\(n\)/i);
+                    const bestCode = bestMatch ? bestMatch[0] : spaceStr;
+                    const averageCode = bestCode; // use same as best when not explicit
+                    const worstCode = worstMatch ? worstMatch[0] : spaceStr;
+
+                    // Try to split justifications into parts using keywords
+                    const spaceJust = algorithmInfo.complexity.justifications.spaceComplexity || '';
+                    // Simple extraction: look for keywords; fallback to full text
+                    const worstJustMatch = spaceJust.match(/worst[:\s-]*case[:\s-]*(.*)/i);
+                    const bestJustMatch = spaceJust.match(/best[:\s-]*case[:\s-]*(.*)/i);
+                    const avgJustMatch = spaceJust.match(/average[:\s-]*case[:\s-]*(.*)/i) || spaceJust.match(/average[:\s-]*(.*)/i);
+
+                    const worstJust = worstJustMatch ? worstJustMatch[1].trim() : spaceJust;
+                    const bestJust = bestJustMatch ? bestJustMatch[1].trim() : (avgJustMatch ? avgJustMatch[1].trim() : spaceJust);
+                    const avgJust = avgJustMatch ? avgJustMatch[1].trim() : bestJust;
+
+                    return (
+                      <>
+                        <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-purple-700">Best Case:</span>
+                            <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{bestCode}</code>
+                          </div>
+                          <p className="text-sm text-purple-600 leading-relaxed">{bestJust}</p>
+                        </div>
+
+                        <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-purple-700">Average Case:</span>
+                            <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{averageCode}</code>
+                          </div>
+                          <p className="text-sm text-purple-600 leading-relaxed">{avgJust}</p>
+                        </div>
+
+                        <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-medium text-purple-700">Worst Case:</span>
+                            <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{worstCode}</code>
+                          </div>
+                          <p className="text-sm text-purple-600 leading-relaxed">{worstJust}</p>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             </div>
