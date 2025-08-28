@@ -16,6 +16,13 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Calculate max height based on the INITIAL array (first step) to keep it constant throughout animation
+  // This prevents height readjustment when elements appear/disappear during merge sort
+  const maxValue = steps.length > 0 
+    ? Math.max(...steps[0].array.filter(v => v !== -1)) 
+    : Math.max(...displayArray.filter(v => v !== -1));
+  
   const getBarColor = (index: number): string => {
     // Check if this element was marked as finally sorted in any previous step
     const wasFinallySorted = steps.slice(0, currentStep + 1).some(step => 
@@ -133,46 +140,50 @@ export function ArrayVisualizer({ displayArray, currentStepData, steps, currentS
                 minWidth: '1px'
               }}
             >
-              {/* Bar */}
-              <div
-                className={`relative rounded-t-xl transition-all duration-500 ease-out ${getBarGlow(index)}`}
-                style={{
-                  width: '100%',
-                  height: value === -1 ? '20px' : `${(value / Math.max(...displayArray.filter(v => v !== -1))) * (
-                    displayArray.length > 75 
-                      ? (isMobile ? 160 : isTablet ? 180 : 200)
-                      : displayArray.length > 50 
-                      ? (isMobile ? 180 : isTablet ? 220 : 240)
-                      : displayArray.length > 30 
-                      ? (isMobile ? 200 : isTablet ? 260 : 280)
-                      : (isMobile ? 220 : isTablet ? 280 : 320)
-                  )}px`,
-                  backgroundColor: value === -1 ? '#F97316' : getBarColor(index),
-                  minHeight: displayArray.length > 100 ? '4px' : displayArray.length > 75 ? '6px' : displayArray.length > 50 ? '8px' : '12px',
-                  opacity: value === -1 ? 0.5 : 1
-                }}
-              >
-                {/* Shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-transparent rounded-t-xl"></div>
-                
-                {/* Animated pulse effect for active elements */}
-                {currentStepData && currentStepData.indices.includes(index) && (
-                  <div className="absolute inset-0 bg-white/20 rounded-t-xl animate-pulse"></div>
-                )}
-              </div>
-              
-              {/* Value at bottom - only for smaller arrays where it makes sense */}
-              {displayArray.length <= 20 && baseWidth > 8 && (
-                <div className="mt-2 sm:mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
-                  <span className="text-xs font-semibold text-slate-700">
-                    {value === -1 ? '⋯' : value}
-                  </span>
-                </div>
-              )}
-              {displayArray.length > 20 && displayArray.length <= 40 && baseWidth > 6 && !isMobile && (
-                <div className="mt-1 sm:mt-2 text-xs text-slate-500 font-medium">
-                  {value === -1 ? '⋯' : value}
-                </div>
+              {/* Only render bar if value is not -1 (empty space) */}
+              {value !== -1 && (
+                <>
+                  {/* Bar */}
+                  <div
+                    className={`relative rounded-t-xl transition-all duration-500 ease-out ${getBarGlow(index)}`}
+                    style={{
+                      width: '100%',
+                      height: `${(value / maxValue) * (
+                        displayArray.length > 75 
+                          ? (isMobile ? 160 : isTablet ? 180 : 200)
+                          : displayArray.length > 50 
+                          ? (isMobile ? 180 : isTablet ? 220 : 240)
+                          : displayArray.length > 30 
+                          ? (isMobile ? 200 : isTablet ? 260 : 280)
+                          : (isMobile ? 220 : isTablet ? 280 : 320)
+                      )}px`,
+                      backgroundColor: getBarColor(index),
+                      minHeight: displayArray.length > 100 ? '4px' : displayArray.length > 75 ? '6px' : displayArray.length > 50 ? '8px' : '12px'
+                    }}
+                  >
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-transparent rounded-t-xl"></div>
+                    
+                    {/* Animated pulse effect for active elements */}
+                    {currentStepData && currentStepData.indices.includes(index) && (
+                      <div className="absolute inset-0 bg-white/20 rounded-t-xl animate-pulse"></div>
+                    )}
+                  </div>
+                  
+                  {/* Value at bottom - only for smaller arrays where it makes sense */}
+                  {displayArray.length <= 20 && baseWidth > 8 && (
+                    <div className="mt-2 sm:mt-3 px-1 py-1 bg-white rounded-lg border border-slate-200 shadow-sm">
+                      <span className="text-xs font-semibold text-slate-700">
+                        {value}
+                      </span>
+                    </div>
+                  )}
+                  {displayArray.length > 20 && displayArray.length <= 40 && baseWidth > 6 && !isMobile && (
+                    <div className="mt-1 sm:mt-2 text-xs text-slate-500 font-medium">
+                      {value}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           );

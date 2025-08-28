@@ -53,11 +53,11 @@ function mergeSortSteps(array: number[]): SortStep[] {
     const n1 = mid - left + 1;
     const n2 = right - mid;
 
-    // Create temp arrays - exactly like the classic implementation
+    // Create temp arrays
     const L = new Array(n1);
     const R = new Array(n2);
 
-    // Copy data to temp arrays L[] and R[]
+    // Copy data to temp arrays
     for (let i = 0; i < n1; i++) {
       L[i] = arr[left + i];
     }
@@ -77,38 +77,106 @@ function mergeSortSteps(array: number[]): SortStep[] {
       }
     });
 
-    // Create the merged sequence without modifying the original positions
-    const mergedSequence = [];
-    let i = 0, j = 0;
+    // Clear the merge area first (create empty spaces)
+    for (let pos = left; pos <= right; pos++) {
+      workingArray[pos] = -1; // Use -1 as placeholder for empty space
+    }
 
-    // Build the merged sequence
+    steps.push({
+      type: 'clear-for-merge',
+      indices: Array.from({ length: right - left + 1 }, (_, i) => left + i),
+      array: [...workingArray],
+      metadata: {
+        comparisons,
+        swaps,
+        currentPhase: `Cleared merge area - preparing to place elements one by one`
+      }
+    });
+
+    // Now merge with gradual placement
+    let i = 0, j = 0, k = left;
+    
     while (i < n1 && j < n2) {
       comparisons++;
       
+      let selectedValue: number;
+      let fromArray: string;
+      
       if (L[i] <= R[j]) {
-        mergedSequence.push(L[i]);
+        selectedValue = L[i];
+        fromArray = 'left';
         i++;
       } else {
-        mergedSequence.push(R[j]);
+        selectedValue = R[j];
+        fromArray = 'right';
         swaps++;
         j++;
       }
+
+      // Place the selected element
+      workingArray[k] = selectedValue;
+      
+      steps.push({
+        type: 'move',
+        indices: [k],
+        array: [...workingArray],
+        metadata: {
+          comparisons,
+          swaps,
+          currentPhase: `Placing ${selectedValue} from ${fromArray} array at position ${k}`,
+          fromValue: selectedValue,
+          toPosition: k
+        }
+      });
+
+      k++;
     }
 
-    // Add remaining elements
+    // Place remaining elements from left array
     while (i < n1) {
-      mergedSequence.push(L[i]);
+      workingArray[k] = L[i];
+      
+      steps.push({
+        type: 'move',
+        indices: [k],
+        array: [...workingArray],
+        metadata: {
+          comparisons,
+          swaps,
+          currentPhase: `Placing remaining ${L[i]} from left array at position ${k}`,
+          fromValue: L[i],
+          toPosition: k
+        }
+      });
+      
       i++;
-    }
-    while (j < n2) {
-      mergedSequence.push(R[j]);
-      j++;
+      k++;
     }
 
-    // Now update ALL positions at once - atomic operation
-    for (let pos = 0; pos < mergedSequence.length; pos++) {
-      arr[left + pos] = mergedSequence[pos];
-      workingArray[left + pos] = mergedSequence[pos];
+    // Place remaining elements from right array
+    while (j < n2) {
+      workingArray[k] = R[j];
+      
+      steps.push({
+        type: 'move',
+        indices: [k],
+        array: [...workingArray],
+        metadata: {
+          comparisons,
+          swaps,
+          currentPhase: `Placing remaining ${R[j]} from right array at position ${k}`,
+          fromValue: R[j],
+          toPosition: k
+        }
+      });
+      
+      j++;
+      k++;
+    }
+
+    // Update the original array
+    for (let pos = left; pos <= right; pos++) {
+      arr[pos] = workingArray[pos];
     }
 
     // Show the completed merge result
@@ -119,7 +187,7 @@ function mergeSortSteps(array: number[]): SortStep[] {
       metadata: {
         comparisons,
         swaps,
-        currentPhase: `Merge complete: [${L.join(', ')}] + [${R.join(', ')}] → [${mergedSequence.join(', ')}]`
+        currentPhase: `Merge complete for range [${left}-${right}]: section is now sorted`
       }
     });
   }

@@ -3,6 +3,7 @@ export function ColorLegend() {
     { color: 'bg-blue-500', label: 'Comparing', description: 'Elements being compared' },
     { color: 'bg-red-500', label: 'Swapping', description: 'Elements being swapped' },
     { color: 'bg-violet-500', label: 'Moving', description: 'Elements being moved to new positions (Merge Sort)' },
+    { color: 'bg-orange-500', label: 'Empty Slots', description: 'Temporary empty spaces during merge operations' },
     { color: 'bg-amber-500', label: 'Highlighting', description: 'Current section or special element' },
     { color: 'bg-emerald-400', label: 'Temp Sorted', description: 'Temporarily sorted sections (Merge Sort)' },
     { color: 'bg-emerald-500', label: 'Sorted', description: 'Elements in final position' },
