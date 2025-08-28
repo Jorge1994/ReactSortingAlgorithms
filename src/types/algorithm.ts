@@ -25,14 +25,22 @@ export interface AlgorithmComplexity {
     average: string;
     worst: string;
   };
-  space: string;
+  space: {
+    best: string;
+    average: string;
+    worst: string;
+  };
   justifications: {
     timeComplexity: {
       best: string;
       average: string;
       worst: string;
     };
-    spaceComplexity: string;
+    spaceComplexity: {
+      best: string;
+      average: string;
+      worst: string;
+    };
   };
 }
 

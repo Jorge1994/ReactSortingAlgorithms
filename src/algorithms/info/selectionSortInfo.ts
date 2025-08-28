@@ -10,14 +10,22 @@ export const selectionSortInfo: AlgorithmInfo = {
       average: 'O(n²)', 
       worst: 'O(n²)'
     },
-    space: 'O(1)',
+    space: {
+      best: 'O(1)',
+      average: 'O(1)',
+      worst: 'O(1)'
+    },
     justifications: {
       timeComplexity: {
         best: "Even when the array is already sorted, the algorithm must still scan the remaining unsorted portion to find the minimum element in each iteration, requiring n + (n-1) + (n-2) + ... + 1 = n(n+1)/2 ≈ O(n²) comparisons.",
         average: "The algorithm always performs the same number of comparisons regardless of input order: for each of the n positions, it scans the remaining unsorted elements to find the minimum, resulting in n² comparisons.",
         worst: "The time complexity remains O(n²) as the algorithm's behavior doesn't change based on the initial order of elements - it always performs the same systematic selection process."
       },
-      spaceComplexity: "The algorithm operates in-place, using only a constant amount of extra memory for variables like the current minimum index and temporary swap variables, regardless of input size."
+      spaceComplexity: {
+        best: "The algorithm operates in-place, using only a constant amount of extra memory for variables like the current minimum index and temporary swap variables, regardless of input size.",
+        average: "Consistent O(1) space usage as no additional data structures are required beyond simple variables.",
+        worst: "Even in worst case scenarios, space complexity remains O(1) as the algorithm maintains its in-place sorting approach."
+      }
     }
   },
   

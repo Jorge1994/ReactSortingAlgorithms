@@ -28,65 +28,12 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
   const getComparisonData = (): ComparisonData[] => {
     return getAvailableAlgorithmInfos().map(key => {
       const info: AlgorithmInfo = getAlgorithmInfo(key);
-      const parseSpace = (spaceStr: string, justification?: string): { best: string; average: string; worst: string } => {
-        const regex = /O\([^)]*\)/g;
-        const spaceMatches = (spaceStr && spaceStr.match(regex)) || [];
-        const justMatches = (justification && justification.match(regex)) || [];
-
-        // Prefer explicit `space` field when available (authoritative)
-        if (spaceMatches.length >= 1) {
-          const matches = spaceMatches.map(m => m.trim());
-          if (matches.length === 1) return { best: matches[0], average: matches[0], worst: matches[0] };
-          if (matches.length === 2) {
-            // Try to detect which match corresponds to 'worst' vs 'best/average' by scanning nearby text
-            const input = spaceStr || '';
-            const idxA = input.indexOf(matches[0]);
-            const idxB = input.indexOf(matches[1]);
-            const near = (idx: number, kw: string) => {
-              if (idx === -1) return false;
-              const start = Math.max(0, idx - 30);
-              const end = Math.min(input.length, idx + 30);
-              return input.slice(start, end).toLowerCase().includes(kw);
-            };
-
-            const aIsWorst = near(idxA, 'worst') || near(idxA, 'worst-case') || near(idxA, 'worst case');
-            const bIsWorst = near(idxB, 'worst') || near(idxB, 'worst-case') || near(idxB, 'worst case');
-
-            if (aIsWorst && !bIsWorst) return { best: matches[1], average: matches[1], worst: matches[0] };
-            if (bIsWorst && !aIsWorst) return { best: matches[0], average: matches[0], worst: matches[1] };
-
-            // Fallback: pick the one containing 'log' as best/average (smaller), else assume second is best/average
-            if (matches[0].includes('log') && !matches[1].includes('log')) return { best: matches[0], average: matches[0], worst: matches[1] };
-            if (matches[1].includes('log') && !matches[0].includes('log')) return { best: matches[1], average: matches[1], worst: matches[0] };
-
-            // Default conservative mapping: assume second is best/average
-            return { best: matches[1], average: matches[1], worst: matches[0] };
-          }
-          return { best: matches[0], average: matches[1] || matches[0], worst: matches[2] || matches[1] || matches[0] };
-        }
-
-        // Fall back to parsing justification if space field is not explicit
-        const matches = justMatches.map(m => m.trim());
-        if (matches.length === 0) {
-          return { best: spaceStr || 'Unknown', average: spaceStr || 'Unknown', worst: spaceStr || 'Unknown' };
-        }
-        if (matches.length === 1) {
-          return { best: matches[0], average: matches[0], worst: matches[0] };
-        }
-        if (matches.length === 2) {
-          // Common pattern: "O(n) worst-case; O(log n) best/average" or vice-versa.
-          // Default conservatively: if one match contains 'log' prefer it as smaller (best/avg), otherwise assume order best/avg/worst
-          const [a, b] = matches;
-          if (a.includes('log') && !b.includes('log')) return { best: a, average: a, worst: b };
-          if (b.includes('log') && !a.includes('log')) return { best: b, average: b, worst: a };
-          // fallback
-          return { best: matches[0], average: matches[1], worst: matches[1] };
-        }
-        // >=3: assume best, average, worst in order
-        return { best: matches[0], average: matches[1], worst: matches[2] };
+      
+      const spaceParts = {
+        best: info.complexity.space.best,
+        average: info.complexity.space.average,
+        worst: info.complexity.space.worst
       };
-
-      const spaceParts = parseSpace(info.complexity.space, info.complexity.justifications?.spaceComplexity);
 
       return {
         name: info.name,

@@ -13,14 +13,22 @@ export const quickSortInfo: AlgorithmInfo = {
       average: 'O(n log n)',
       worst: 'O(n²)'
     },
-  space: 'O(log n) best/average (recursive call stack); O(n) worst-case',
-  justifications: {
+    space: {
+      best: 'O(log n)',
+      average: 'O(log n)',
+      worst: 'O(n)'
+    },
+    justifications: {
       timeComplexity: {
         best: 'Occurs when the pivot element divides the array into two equal halves. This results in a balanced recursion tree with O(log n) depth, and each level requires O(n) time to partition the array, yielding O(n log n).',
         average: 'On average, the pivot divides the array into two parts, but not necessarily equal. This leads to a slightly worse performance than the best case, but still results in O(n log n) time complexity.',
         worst: 'Occurs when the smallest or largest element is always chosen as the pivot (e.g., sorted arrays). This results in highly unbalanced partitions and O(n) recursion depth, yielding O(n²) time complexity.'
       },
-  spaceComplexity: 'O(log n) due to a balanced recursion tree with stack depth O(log n). Deeply unbalanced recursion can produce a call stack of size O(n), resulting in O(n) auxiliary space.'
+      spaceComplexity: {
+        best: 'O(log n) due to a balanced recursion tree with stack depth O(log n) when the pivot consistently divides the array into equal halves.',
+        average: 'O(log n) average case maintains balanced recursion with logarithmic stack depth for most random inputs.',
+        worst: 'Deeply unbalanced recursion can produce a call stack of size O(n), resulting in O(n) auxiliary space when pivot selection is consistently poor.'
+      }
     }
   },
   advantages: [

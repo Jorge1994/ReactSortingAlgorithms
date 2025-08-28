@@ -59,72 +59,18 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                 {/* Replicate Time Complexity mechanics for Space Complexity: Best / Average / Worst */}
                 <div className="space-y-4">
                   {(() => {
-                    const spaceStr = algorithmInfo.complexity.space || '';
-                    const spaceJust = algorithmInfo.complexity.justifications.spaceComplexity || '';
+                    const spaceInfo = algorithmInfo.complexity.space;
+                    const spaceJustInfo = algorithmInfo.complexity.justifications.spaceComplexity;
 
-                    const regex = /O\([^)]*\)/g;
-                    const spaceMatches = (spaceStr.match(regex) || []).map(m => m.trim());
-                    const justMatches = (spaceJust.match(regex) || []).map(m => m.trim());
+                    // Extract complexity codes directly from the new structure
+                    const bestCode = spaceInfo.best || 'Unknown';
+                    const averageCode = spaceInfo.average || 'Unknown';
+                    const worstCode = spaceInfo.worst || 'Unknown';
 
-                    // Determine codes: prefer explicit space field
-                    let bestCode = 'Unknown';
-                    let averageCode = 'Unknown';
-                    let worstCode = 'Unknown';
-
-                    if (spaceMatches.length === 0 && justMatches.length === 0) {
-                      bestCode = averageCode = worstCode = spaceStr || 'Unknown';
-                    } else if (spaceMatches.length === 1) {
-                      bestCode = averageCode = worstCode = spaceMatches[0];
-                    } else if (spaceMatches.length >= 2) {
-                      // prefer O(log n) as best/average if present
-                      const hasLog = spaceMatches.find(m => /log/i.test(m));
-                      if (hasLog) {
-                        bestCode = averageCode = hasLog;
-                        worstCode = spaceMatches.find(m => m !== hasLog) || hasLog;
-                      } else {
-                        // fallback: first = worst, second = best/avg (common pattern 'O(n) worst; O(log n) best')
-                        worstCode = spaceMatches[0];
-                        bestCode = averageCode = spaceMatches[1];
-                      }
-                    } else if (justMatches.length >= 1) {
-                      // fallback to justifications matches
-                      if (justMatches.length === 1) bestCode = averageCode = worstCode = justMatches[0];
-                      else if (justMatches.length >= 2) {
-                        const hasLog = justMatches.find(m => /log/i.test(m));
-                        if (hasLog) {
-                          bestCode = averageCode = hasLog;
-                          worstCode = justMatches.find(m => m !== hasLog) || hasLog;
-                        } else {
-                          worstCode = justMatches[0];
-                          bestCode = averageCode = justMatches[1];
-                        }
-                      }
-                    }
-
-                    // Extract candidate sentences from justification and map them to cases
-                    const sentences = spaceJust.split(/[.;]\s*/).map(s => s.trim()).filter(Boolean);
-                    const findSentence = (keywords: string[]) => {
-                      return sentences.find(s => keywords.some(k => s.toLowerCase().includes(k))) || '';
-                    };
-
-                    let bestJust = findSentence(['best', 'balanced', 'log', 'balanced recursion', 'stack depth']) || '';
-                    let avgJust = findSentence(['average', 'average-case', 'average case']) || bestJust;
-                    let worstJust = findSentence(['worst', 'worst-case', 'worst case', 'unbalanced']) || '';
-
-                    // If justifications are missing, synthesize reasonable defaults (useful for Quick Sort)
-                    if (!bestJust && /log/i.test(bestCode)) {
-                      bestJust = 'Best/average: O(log n) auxiliary space due to a balanced recursion tree with stack depth O(log n).';
-                    }
-                    if (!worstJust && /n/i.test(worstCode) && worstCode !== bestCode) {
-                      worstJust = 'Deeply unbalanced recursion can produce a call stack of size O(n) leading to O(n) auxiliary space in the worst case.';
-                    }
-                    if (!bestJust && !avgJust && !worstJust) {
-                      // fallback to the raw justification or spaceStr
-                      bestJust = avgJust = worstJust = spaceJust || spaceStr || '';
-                    }
-
-                    // Strip leading labels like 'Worst-case:' as the card headers already indicate the case
-                    const stripLabel = (s: string) => s.replace(/^\s*(worst[-\s]*case[:\s-]*)/i, '').replace(/^\s*(best[-\s]*case[:\s-]*)/i, '').replace(/^\s*(average[-\s]*case[:\s-]*)/i, '').trim();
+                    // Extract justifications directly from the new structure
+                    const bestJust = spaceJustInfo.best || '';
+                    const avgJust = spaceJustInfo.average || '';
+                    const worstJust = spaceJustInfo.worst || '';
 
                     return (
                       <>
@@ -133,7 +79,7 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                             <span className="font-medium text-purple-700">Best Case:</span>
                             <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{bestCode}</code>
                           </div>
-                          <p className="text-sm text-purple-600 leading-relaxed">{stripLabel(bestJust)}</p>
+                          <p className="text-sm text-purple-600 leading-relaxed">{bestJust}</p>
                         </div>
 
                         <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
@@ -141,7 +87,7 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                             <span className="font-medium text-purple-700">Average Case:</span>
                             <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{averageCode}</code>
                           </div>
-                          <p className="text-sm text-purple-600 leading-relaxed">{stripLabel(avgJust)}</p>
+                          <p className="text-sm text-purple-600 leading-relaxed">{avgJust}</p>
                         </div>
 
                         <div className="bg-white/80 rounded-lg p-4 border border-purple-200">
@@ -149,7 +95,7 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                             <span className="font-medium text-purple-700">Worst Case:</span>
                             <code className="bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono text-sm">{worstCode}</code>
                           </div>
-                          <p className="text-sm text-purple-600 leading-relaxed">{stripLabel(worstJust)}</p>
+                          <p className="text-sm text-purple-600 leading-relaxed">{worstJust}</p>
                         </div>
                       </>
                     );

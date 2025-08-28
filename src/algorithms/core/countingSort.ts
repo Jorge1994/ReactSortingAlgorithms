@@ -153,14 +153,22 @@ export const countingSort = createSortingAlgorithm(
       average: 'O(n + k)', 
       worst: 'O(n + k)' 
     },
-    space: 'O(k)',
+    space: {
+      best: 'O(k)',
+      average: 'O(k)',
+      worst: 'O(k)'
+    },
     justifications: {
       timeComplexity: {
         best: "Linear time in all cases because we always need to count all n elements and process k possible values. No comparisons between elements are needed.",
         average: "Consistently O(n + k) as the algorithm always performs the same operations: counting n elements, computing cumulative sums for k values, and placing n elements in output.",
         worst: "Still O(n + k) even with large ranges because the algorithm's performance depends only on input size n and range k, not on the arrangement of elements."
       },
-      spaceComplexity: "Requires O(k) additional space for the count array where k is the range of input values (max - min + 1), plus O(n) for the output array."
+      spaceComplexity: {
+        best: "Requires O(k) additional space for the count array where k is the range of input values (max - min + 1), plus O(n) for the output array.",
+        average: "Consistent O(k) space usage as the count array size depends only on the input range, not the distribution of values.",
+        worst: "Space complexity remains O(k) even in worst case as the algorithm's space requirements are determined by the range of values, not their arrangement."
+      }
     }
   },
   countingSortSteps

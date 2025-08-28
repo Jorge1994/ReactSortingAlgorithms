@@ -13,14 +13,22 @@ export const gnomeSortInfo: AlgorithmInfo = {
       average: 'O(n²)',
       worst: 'O(n²)'
     },
-    space: 'O(1)',
+    space: {
+      best: 'O(1)',
+      average: 'O(1)',
+      worst: 'O(1)'
+    },
     justifications: {
       timeComplexity: {
         best: 'Occurs when the array is already sorted; the algorithm makes a single pass and performs only O(n) comparisons with no swaps.',
         average: 'On average elements move backwards multiple times via swaps; behaviour resembles insertion sort and results in O(n²) operations.',
         worst: 'When the array is reverse sorted, every element must be swapped many times to reach its final position, producing O(n²) time.'
       },
-      spaceComplexity: 'Only a constant number of extra variables are used (indices and counters), so auxiliary space is O(1).'
+      spaceComplexity: {
+        best: 'Only a constant number of extra variables are used (indices and counters), so auxiliary space is O(1).',
+        average: 'Consistent O(1) space usage as no additional data structures are required.',
+        worst: 'Even in worst case scenarios, space complexity remains O(1) as the algorithm maintains its in-place approach.'
+      }
     }
   },
   advantages: [

@@ -219,14 +219,22 @@ export const mergeSort = createSortingAlgorithm(
       average: 'O(n log n)',
       worst: 'O(n log n)'
     },
-    space: 'O(n)',
+    space: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
     justifications: {
       timeComplexity: {
         best: 'The array is always divided into log n levels, and each level requires O(n) operations to merge, regardless of initial order',
         average: 'Consistently divides the problem into halves (log n levels) with O(n) merge operations at each level',
         worst: 'Even with reverse-sorted input, the divide-and-conquer approach maintains O(n log n) due to balanced splitting and linear merging'
       },
-      spaceComplexity: 'Requires O(n) additional space for temporary arrays during the merge process, plus O(log n) space for the recursion stack'
+      spaceComplexity: {
+        best: 'Requires O(n) additional space for temporary arrays during the merge process, plus O(log n) space for the recursion stack',
+        average: 'Consistently requires O(n) auxiliary space regardless of input order for temporary arrays during merging',
+        worst: 'Space complexity remains O(n) even in worst case as the same temporary array space is needed regardless of data distribution'
+      }
     }
   },
   mergeSortSteps

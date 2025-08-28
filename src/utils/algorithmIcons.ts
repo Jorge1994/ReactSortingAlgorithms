@@ -7,7 +7,8 @@ export const ICON_MAP: Record<AlgorithmKey, string> = {
   'merge-sort': '🔀',
   'counting-sort': '🔢',
   'quick-sort': '⚡',
-  'gnome-sort': '🧙'
+  'gnome-sort': '🧙',
+  'heap-sort': '🌲'
 } as const;
 
 export const getAlgorithmIcon = (algorithmKey: AlgorithmKey): string => {

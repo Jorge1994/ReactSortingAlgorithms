@@ -14,14 +14,22 @@ export const bubbleSortInfo: AlgorithmInfo = {
       average: "O(n²)",  // Average case
       worst: "O(n²)"     // When array is reverse sorted
     },
-    space: "O(1)",        // In-place sorting (constant extra space)
+    space: {
+      best: "O(1)",
+      average: "O(1)",
+      worst: "O(1)"
+    },
     justifications: {
       timeComplexity: {
         best: "When the array is already sorted, the algorithm only needs one pass through the array (n comparisons) to detect that no swaps are needed, allowing early termination.",
         average: "On average, the algorithm performs n passes, each requiring approximately n/2 comparisons and swaps, resulting in n × n/2 ≈ O(n²) operations.",
         worst: "When the array is sorted in reverse order, every element must be moved to its final position through multiple swaps, requiring n passes with n comparisons each, totaling n² operations."
       },
-      spaceComplexity: "The algorithm only uses a constant amount of extra memory for temporary variables (like swap variables and loop counters), regardless of input size."
+      spaceComplexity: {
+        best: "The algorithm only uses a constant amount of extra memory for temporary variables (like swap variables and loop counters), regardless of input size.",
+        average: "Consistent O(1) space usage across all cases as no additional data structures are needed.",
+        worst: "Even in worst case, space complexity remains O(1) as the algorithm sorts in-place using only temporary variables."
+      }
     }
   },
 

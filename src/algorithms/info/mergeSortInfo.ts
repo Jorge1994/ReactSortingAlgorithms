@@ -9,14 +9,22 @@ export const mergeSortInfo: AlgorithmInfo = {
       average: 'O(n log n)',
       worst: 'O(n log n)'
     },
-    space: 'O(n)',
+    space: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
     justifications: {
       timeComplexity: {
         best: 'The array is always divided into log n levels, and each level requires O(n) operations to merge, regardless of initial order. Even if the array is already sorted, all divisions and merges must still occur.',
         average: 'The divide-and-conquer approach consistently splits the array into halves (creating log n levels), and each level requires exactly n comparisons during the merge phase, resulting in O(n log n) operations.',
         worst: 'Even with completely reverse-sorted input, the algorithm maintains O(n log n) complexity because the division strategy is independent of data order, and merging always requires at most n comparisons per level.'
       },
-      spaceComplexity: 'Requires O(n) additional space for temporary arrays used during the merge process. Additionally, the recursive call stack contributes O(log n) space, but the dominant factor is the O(n) space for auxiliary arrays.'
+      spaceComplexity: {
+        best: 'Requires O(n) additional space for temporary arrays used during the merge process. Additionally, the recursive call stack contributes O(log n) space, but the dominant factor is the O(n) space for auxiliary arrays.',
+        average: 'Consistently requires O(n) auxiliary space regardless of input order, as temporary arrays of the same size are needed for merging.',
+        worst: 'Space complexity remains O(n) even in worst case scenarios, as the merge process always requires the same amount of auxiliary space regardless of data distribution.'
+      }
     }
   },
   stable: true,

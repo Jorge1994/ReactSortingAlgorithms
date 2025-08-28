@@ -5,6 +5,7 @@ import { mergeSort } from './core/mergeSort';
 import { countingSort } from './core/countingSort';
 import { quickSortAlgorithm } from './core/quickSort';
 import { gnomeSortAlgorithm } from './core/gnomeSort';
+import { heapSort } from './core/heapSort';
 
 /**
  * Centralized registry for all sorting algorithms
@@ -18,6 +19,7 @@ export const algorithmRegistry = {
   'counting-sort': countingSort,
   'quick-sort': quickSortAlgorithm,
   'gnome-sort': gnomeSortAlgorithm,
+  'heap-sort': heapSort,
 } as const;
 
 export type AlgorithmKey = keyof typeof algorithmRegistry;
