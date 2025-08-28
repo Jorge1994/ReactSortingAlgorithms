@@ -107,7 +107,7 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
   // Determine if an algorithm is adaptive based on its characteristics
   const isAdaptive = (algorithmName: string): boolean => {
     // Adaptive algorithms perform better on partially sorted data
-    const adaptiveAlgorithms = ['Bubble Sort', 'Insertion Sort'];
+  const adaptiveAlgorithms = ['Bubble Sort', 'Insertion Sort', 'Gnome Sort'];
     return adaptiveAlgorithms.includes(algorithmName);
   };
 

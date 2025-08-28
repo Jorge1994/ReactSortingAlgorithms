@@ -4,6 +4,7 @@ import { insertionSortInfo } from './info/insertionSortInfo';
 import { mergeSortInfo } from './info/mergeSortInfo';
 import { countingSortInfo } from './info/countingSortInfo';
 import { quickSortInfo } from './info/quickSortInfo';
+import { gnomeSortInfo } from './info/gnomeSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -17,6 +18,7 @@ export const algorithmInfoRegistry = {
   'merge-sort': mergeSortInfo,
   'counting-sort': countingSortInfo,
   'quick-sort': quickSortInfo,
+  'gnome-sort': gnomeSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

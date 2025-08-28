@@ -15,7 +15,8 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       'insertion-sort': '📝',
       'merge-sort': '🔀',
   'counting-sort': '🔢',
-  'quick-sort': '⚡',
+    'quick-sort': '⚡',
+    'gnome-sort': '🌳',
     };
     return icons[algorithmKey] || '⚡';
   };
