@@ -59,22 +59,11 @@ def heapify(arr, heap_size, root_index):
 
 # Example usage
 if __name__ == "__main__":
-    # Test with different arrays
-    test_arrays = [
-        [64, 34, 25, 12, 22, 11, 90],
-        [5, 2, 4, 6, 1, 3],
-        [1, 2, 3, 4, 5],  # Already sorted
-        [5, 4, 3, 2, 1],  # Reverse sorted
-        [42],             # Single element
-        []                # Empty array
-    ]
-    
-    for arr in test_arrays:
-        original = arr.copy()
-        heap_sort(arr)
-        print(f"Original: {original}")
-        print(f"Sorted:   {arr}")
-        print("-" * 30)`,
+    numbers = [64, 34, 25, 12, 22, 11, 90]
+    original = numbers.copy()
+    heap_sort(numbers)
+    print(f"Original: {original}")
+    print(f"Sorted: {numbers}")`,
     'py'
   ),
   
@@ -157,24 +146,13 @@ public class HeapSort {
      * Test method to demonstrate heap sort functionality.
      */
     public static void main(String[] args) {
-        // Test with different arrays
-        int[][] testArrays = {
-            {64, 34, 25, 12, 22, 11, 90},
-            {5, 2, 4, 6, 1, 3},
-            {1, 2, 3, 4, 5},    // Already sorted
-            {5, 4, 3, 2, 1},    // Reverse sorted
-            {42},               // Single element
-            {}                  // Empty array
-        };
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        int[] original = Arrays.copyOf(numbers, numbers.length);
         
-        for (int[] arr : testArrays) {
-            int[] original = Arrays.copyOf(arr, arr.length);
-            heapSort(arr);
-            
-            System.out.println("Original: " + Arrays.toString(original));
-            System.out.println("Sorted:   " + Arrays.toString(arr));
-            System.out.println("-".repeat(30));
-        }
+        heapSort(numbers);
+        
+        System.out.println("Original: " + Arrays.toString(original));
+        System.out.println("Sorted: " + Arrays.toString(numbers));
     }
 }`,
     'java'
