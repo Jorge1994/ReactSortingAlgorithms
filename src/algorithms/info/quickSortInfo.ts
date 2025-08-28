@@ -6,6 +6,7 @@ export const quickSortInfo: AlgorithmInfo = {
   stable: false,
   inPlace: true,
   online: false,
+  memoryUsage: 'Quick Sort is generally classified as in-place because it rearranges elements within the input array and uses only a small number of extra variables. However, the recursion stack consumes O(log n) space in the best and average cases (balanced partitions) and can grow to O(n) in the worst case when partitions are highly unbalanced. This means it is not strictly O(1) auxiliary space, but it does not allocate additional arrays proportional to the input size. Iterative variants or tail-call optimizations can reduce stack usage.',
   complexity: {
     time: {
       best: 'O(n log n)',
@@ -46,9 +47,10 @@ export const quickSortInfo: AlgorithmInfo = {
   'Graphics and computational geometry (e.g., convex hull algorithms).'
   ],
   keyCharacteristics: [
-    'Divide-and-conquer',
-    'In-place with swaps',
-    'Pivot selection influences performance'
+  'Divide-and-conquer',
+  'In-place with swaps',
+  'Choice of Pivot affects partition balance and performance. Common strategies: first/last (simple, can trigger worst-case on sorted inputs), random (good practical choice), median-of-three/median (best balance but more overhead)',
+  'Partition algorithms include Naive (uses extra O(n) space), Lomuto (simple, used here), and Hoare (more efficient in swaps). All run in O(n) time'
   ],
   visualizationNotes: {
     colors: {

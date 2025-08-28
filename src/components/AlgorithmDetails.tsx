@@ -198,10 +198,11 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
                     {algorithmInfo.inPlace ? 'In-Place Algorithm' : 'Requires Additional Memory'}
                   </p>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    {algorithmInfo.inPlace 
-                      ? 'Sorts elements within the original array using only O(1) extra space'
-                      : 'Requires additional memory proportional to the input size'
-                    }
+                    {algorithmInfo.memoryUsage ? algorithmInfo.memoryUsage : (
+                      algorithmInfo.inPlace 
+                        ? 'Sorts elements within the original array using only O(1) extra space'
+                        : 'Requires additional memory proportional to the input size'
+                    )}
                   </p>
                 </div>
               </div>

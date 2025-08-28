@@ -11,6 +11,8 @@ export interface AlgorithmInfo {
   stable: boolean;
   inPlace: boolean;
   online: boolean;
+  /** Optional concise memory usage note displayed in Algorithm Properties -> Memory Usage */
+  memoryUsage?: string;
   advantages: string[];
   disadvantages: string[];
   useCases: string[];
