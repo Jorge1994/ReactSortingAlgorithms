@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const countingSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def counting_sort(arr):
     """
     Sorts an array using counting sort algorithm.
@@ -47,11 +50,11 @@ numbers = [4, 2, 2, 8, 3, 3, 1]
 print("Original:", numbers)
 counting_sort(numbers)
 print("Sorted:", numbers)`,
-    '.py'
+    ".py"
   ),
-  
+
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `import java.util.Arrays;
 
 public class CountingSort {
@@ -104,6 +107,6 @@ public class CountingSort {
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

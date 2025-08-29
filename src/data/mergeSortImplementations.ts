@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const mergeSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def merge_sort(arr):
     """
     Sorts an array using the merge sort algorithm.
@@ -78,11 +81,11 @@ if __name__ == "__main__":
         print(f"Original: {original}")
         print(f"Sorted:   {sorted_arr}")
         print("-" * 40)`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `import java.util.*;
 
 public class MergeSort {
@@ -201,6 +204,6 @@ public class MergeSort {
         System.out.println(Arrays.toString(sortedStringArray));
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

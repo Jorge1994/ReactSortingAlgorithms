@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const oddEvenSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def odd_even_sort(arr):
     """
     Odd-Even (Brick) Sort implementation in Python
@@ -35,11 +38,11 @@ if __name__ == '__main__':
     odd_even_sort(numbers)
     print('Sorted:', numbers)
 `,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class OddEvenSort {
     // Odd-Even (Brick) Sort implementation in Java
     // Time Complexity: O(n^2) average/worst, O(n) best
@@ -93,6 +96,6 @@ if __name__ == '__main__':
     }
 }
 `,
-    '.java'
-  )
+    ".java"
+  ),
 };

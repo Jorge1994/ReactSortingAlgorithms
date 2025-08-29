@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const insertionSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def insertion_sort(arr):
     """
     Insertion Sort implementation in Python
@@ -32,11 +35,11 @@ if __name__ == "__main__":
     # Sort the array
     insertion_sort(numbers)
     print("Sorted array:", numbers)`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class InsertionSort {
     
     /**
@@ -89,6 +92,6 @@ if __name__ == "__main__":
         System.out.println("Sorted array: " + java.util.Arrays.toString(numbers));
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

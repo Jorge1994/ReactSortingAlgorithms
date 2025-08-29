@@ -1,8 +1,8 @@
-import { createAlgorithmImplementation } from '../types/implementations';
+import { createAlgorithmImplementation } from "../types/implementations";
 
 export const gnomeSortImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def gnome_sort(arr):
     """
     Simple Gnome Sort implementation in Python.
@@ -29,11 +29,11 @@ numbers = [34, 2, 78, 1, 45, 90, 12]
 sorted_numbers = gnome_sort(numbers.copy())
 print(f"Original: {numbers}")
 print(f"Sorted: {sorted_numbers}")`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class GnomeSort {
 
     /**
@@ -79,6 +79,6 @@ print(f"Sorted: {sorted_numbers}")`,
         System.out.println();
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

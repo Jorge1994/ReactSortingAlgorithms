@@ -1,9 +1,12 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const quickSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-  'Python',
-  `# partition function
+    "Python",
+    `# partition function
 def partition(arr, low, high):
   """
   Partition the subarray arr[low..high] using the Lomuto scheme.
@@ -42,33 +45,12 @@ if __name__ == "__main__":
     quickSort(test, 0, len(test) - 1)
   print(f"Original: {original} -> Sorted: {test}")
 `,
-  '.py'
-  ),
-
-  javascript: createAlgorithmImplementation(
-    'JavaScript',
-    `// Simple functional Quick Sort (not in-place)
-function quickSort(arr) {
-  if (arr.length <= 1) return arr;
-  const pivot = arr[Math.floor(arr.length / 2)];
-  const left = arr.filter(x => x < pivot);
-  const middle = arr.filter(x => x === pivot);
-  const right = arr.filter(x => x > pivot);
-  return quickSort(left).concat(middle, quickSort(right));
-}
-
-// Example usage
-if (typeof require !== 'undefined' && require.main === module) {
-  const tests = [[], [1], [3,1,2], [5,4,3,2,1], [2,3,2,1,3]];
-  tests.forEach(t => console.log('Original:', t, 'Sorted:', quickSort(t.slice())));
-}
-`,
-    '.js'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
-  `import java.util.Arrays;
+    "Java",
+    `import java.util.Arrays;
 
 public class QuickSort {
   /**
@@ -116,6 +98,6 @@ public class QuickSort {
   }
 }
 `,
-  '.java'
-  )
+    ".java"
+  ),
 };

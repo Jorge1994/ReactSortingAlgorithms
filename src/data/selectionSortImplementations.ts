@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const selectionSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def selection_sort(arr):
     """
     Selection Sort implementation in Python
@@ -33,11 +36,11 @@ if __name__ == "__main__":
     
     selection_sort(numbers)
     print("Sorted array:", numbers)`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class SelectionSort {
     
     /**
@@ -79,6 +82,6 @@ if __name__ == "__main__":
         System.out.println("Sorted array: " + java.util.Arrays.toString(numbers));
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

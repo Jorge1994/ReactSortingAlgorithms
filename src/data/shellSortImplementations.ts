@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const shellSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def shell_sort(arr):
     """
     Shell Sort implementation in Python using gap = floor(gap/2) sequence
@@ -31,11 +34,11 @@ if __name__ == "__main__":
     shell_sort(numbers)
     print("Sorted array:", numbers)
 `,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class ShellSort {
     public static void shellSort(int[] arr) {
         int n = arr.length;
@@ -61,6 +64,6 @@ if __name__ == "__main__":
     }
 }
 `,
-    '.java'
-  )
+    ".java"
+  ),
 };

@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const cocktailSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def cocktail_shaker_sort(arr):
     """
     Cocktail Shaker Sort implementation in Python (bidirectional bubble sort)
@@ -48,11 +51,11 @@ numbers = [5, 1, 4, 2, 8, 0, 2]
 sorted_numbers = cocktail_shaker_sort(numbers.copy())
 print(f"Original: {numbers}")
 print(f"Sorted: {sorted_numbers}")`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class CocktailShakerSort {
 
     /**
@@ -120,6 +123,6 @@ print(f"Sorted: {sorted_numbers}")`,
         System.out.println();
     }
 }`,
-    '.java'
-  )
+    ".java"
+  ),
 };

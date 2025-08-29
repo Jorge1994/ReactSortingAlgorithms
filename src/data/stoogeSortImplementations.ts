@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const stoogeSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def stooge_sort(arr, l=0, r=None):
     """
     Stooge Sort (educational): recursively sorts by overlapping 2/3 segments.
@@ -29,37 +32,12 @@ export const stoogeSortImplementations: AlgorithmImplementations = {
 # Example
 nums = [2, 4, 5, 3, 1]
 print(stooge_sort(nums.copy()))`,
-    '.py'
+    ".py"
   ),
 
-  javascript: createAlgorithmImplementation(
-    'JavaScript',
-    `function stoogeSort(arr, l = 0, r = arr.length - 1) {
-  if (l >= r) return arr;
-
-  if (arr[l] > arr[r]) {
-    [arr[l], arr[r]] = [arr[r], arr[l]];
-  }
-
-  if (r - l + 1 > 2) {
-    const t = Math.floor((r - l + 1) / 3);
-    stoogeSort(arr, l, r - t);
-    stoogeSort(arr, l + t, r);
-    stoogeSort(arr, l, r - t);
-  }
-
-  return arr;
-}
-
-// Example
-console.log(stoogeSort([2,4,5,3,1]));`,
-    '.js'
-  )
-  ,
-
   java: createAlgorithmImplementation(
-  'Java',
-  `public class StoogeSort {
+    "Java",
+    `public class StoogeSort {
 
   /**
    * Stooge Sort: recursively sorts by overlapping 2/3 segments.
@@ -91,6 +69,6 @@ console.log(stoogeSort([2,4,5,3,1]));`,
   }
 }
 `,
-  '.java'
-  )
+    ".java"
+  ),
 };

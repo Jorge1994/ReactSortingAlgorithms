@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const bogoSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `import random
 def is_sorted(a):
     return all(a[i] <= a[i+1] for i in range(len(a)-1))
@@ -15,24 +18,12 @@ def bogo_sort(a):
 # Example usage
 arr = [3, 1, 2]
 print(bogo_sort(arr))`,
-    '.py'
+    ".py"
   ),
 
-  javascript: createAlgorithmImplementation(
-    'JavaScript',
-    `function isSorted(arr) { for (let i = 1; i < arr.length; i++) if (arr[i-1] > arr[i]) return false; return true; }
-function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } }
-function bogoSort(arr) { while (!isSorted(arr)) shuffle(arr); return arr; }
-
-// Example
-console.log(bogoSort([3,1,2]));`,
-    '.js'
-  )
-  ,
-
   java: createAlgorithmImplementation(
-  'Java',
-  `import java.util.Random;
+    "Java",
+    `import java.util.Random;
 import java.util.Arrays;
 
 public class BogoSort {
@@ -66,6 +57,6 @@ public class BogoSort {
   }
 }
 `,
-  '.java'
-  )
+    ".java"
+  ),
 };

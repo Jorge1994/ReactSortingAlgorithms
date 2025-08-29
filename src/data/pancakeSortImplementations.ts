@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const pancakeSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def flip(arr, i):
     start = 0
     while start < i:
@@ -31,11 +34,11 @@ if __name__ == '__main__':
     pancake_sort(nums)
     print('Sorted:  ', nums)
 `,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `public class PancakeSort {
     static void flip(int[] arr, int i) {
         int start = 0;
@@ -81,6 +84,6 @@ if __name__ == '__main__':
     }
 }
 `,
-    '.java'
-  )
+    ".java"
+  ),
 };

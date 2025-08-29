@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const heapSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def heap_sort(arr):
     """
     Sorts an array using the heap sort algorithm.
@@ -64,11 +67,11 @@ if __name__ == "__main__":
     heap_sort(numbers)
     print(f"Original: {original}")
     print(f"Sorted: {numbers}")`,
-    'py'
+    "py"
   ),
-  
+
   java: createAlgorithmImplementation(
-    'Java',
+    "Java",
     `import java.util.Arrays;
 
 public class HeapSort {
@@ -155,6 +158,6 @@ public class HeapSort {
         System.out.println("Sorted: " + Arrays.toString(numbers));
     }
 }`,
-    'java'
-  )
+    "java"
+  ),
 };
