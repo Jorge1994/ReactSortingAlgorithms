@@ -1,6 +1,6 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
-import { oddEvenSortInfo } from '../info/oddEvenSortInfo.ts';
+import { oddEvenSortInfo } from '../info/oddEvenSortInfo';
 
 /**
  * Odd-Even Sort (Brick Sort) implementation that generates visualization steps
