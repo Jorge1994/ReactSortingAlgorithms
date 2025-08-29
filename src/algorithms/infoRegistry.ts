@@ -7,6 +7,7 @@ import { quickSortInfo } from './info/quickSortInfo';
 import { gnomeSortInfo } from './info/gnomeSortInfo';
 import { heapSortInfo } from './info/heapSortInfo';
 import { cocktailSortInfo } from './info/cocktailSortInfo';
+import { bogoSortInfo } from './info/bogoSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -23,6 +24,7 @@ export const algorithmInfoRegistry = {
   'gnome-sort': gnomeSortInfo,
   'heap-sort': heapSortInfo,
   'cocktail-sort': cocktailSortInfo,
+  'bogo-sort': bogoSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

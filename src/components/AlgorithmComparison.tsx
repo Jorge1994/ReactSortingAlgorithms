@@ -60,7 +60,13 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
 
   // Color coding functions
   const getTimeComplexityColor = (complexity: string): string => {
-    switch (complexity) {
+    // Normalize and quick checks for special notations (factorial, unbounded)
+    const normalized = (complexity || '').trim();
+    if (normalized.includes('!') || /factorial/i.test(normalized) || /unbound/i.test(normalized)) {
+      return 'bg-red-100 text-red-800 border-red-200'; // Very Poor
+    }
+
+    switch (normalized) {
       case 'O(1)': return 'bg-green-100 text-green-800 border-green-200'; // Excellent
       case 'O(log n)': return 'bg-green-100 text-green-800 border-green-200'; // Excellent
       case 'O(n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good
