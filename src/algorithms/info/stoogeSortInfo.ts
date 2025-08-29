@@ -4,13 +4,13 @@ export const stoogeSortInfo: AlgorithmInfo = {
   name: 'Stooge Sort',
   description: 'Stooge Sort is a highly inefficient recursive sorting algorithm used for educational purposes. It sorts by recursively sorting the initial 2/3, the final 2/3, and then the initial 2/3 again.',
   complexity: {
-    time: { best: 'O(n^{log 3 / log 1.5}) ~ O(n^{2.7})', average: 'O(n^{2.7})', worst: 'O(n^{2.7})' },
-    space: { best: 'O(n) (recursive stack)', average: 'O(n)', worst: 'O(n)' },
+    time: { best: 'O(n²·⁷)', average: 'O(n²·⁷)', worst: 'O(n²·⁷)' },
+    space: { best: 'O(n)', average: 'O(n)', worst: 'O(n)' },
     justifications: {
       timeComplexity: {
-        best: 'Recurrence T(n) = 3T(2n/3) + O(1) leads to n^{log_ (3) / log_(3/2)} ≈ n^{2.7}.',
-        average: 'Same recurrence applies in general due to recursive structure.',
-        worst: 'Same as best/average due to deterministic recursion pattern.'
+        best: 'Recurrence T(n) = 3T(2n/3) + O(1) leads to n elevado ao expoente (log 3 / log 1.5), que é aproximadamente n²·⁷.',
+        average: 'A mesma recorrência aplica-se em geral devido à estrutura recursiva.',
+        worst: 'Idêntico ao caso melhor/médio devido ao padrão recursivo determinístico.'
       },
       spaceComplexity: {
         best: 'Uses recursion depth proportional to O(log_{3/2} n) — working array copy is O(n) when recording steps for visualization.',
@@ -25,7 +25,7 @@ export const stoogeSortInfo: AlgorithmInfo = {
   advantages: ['Very simple to describe and implement', 'Good for demonstrating recursion and poor algorithm design'],
   disadvantages: ['Extremely inefficient', 'Not suitable for practical use'],
   useCases: ['Educational demonstration of recursion and algorithm analysis'],
-  keyCharacteristics: ['Recursive', 'Divide into overlapping sections (2/3)', 'Poor time complexity ~ O(n^{2.7})'],
+  keyCharacteristics: ['Recursive', 'Divide into overlapping sections (2/3)', 'Poor time complexity ~ O(n²·⁷)'],
   visualizationNotes: {
     colors: { comparing: '#3B82F6', swapping: '#EF4444', sorted: '#10B981', unsorted: '#6B7280' },
     phases: [
