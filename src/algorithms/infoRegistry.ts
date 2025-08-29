@@ -10,6 +10,7 @@ import { cocktailSortInfo } from './info/cocktailSortInfo';
 import { bogoSortInfo } from './info/bogoSortInfo';
 import { stoogeSortInfo } from './info/stoogeSortInfo';
 import { oddEvenSortInfo } from './info/oddEvenSortInfo';
+import { pancakeSortInfo } from './info/pancakeSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -29,6 +30,7 @@ export const algorithmInfoRegistry = {
   'odd-even-sort': oddEvenSortInfo,
   'bogo-sort': bogoSortInfo,
   'stooge-sort': stoogeSortInfo,
+  'pancake-sort': pancakeSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

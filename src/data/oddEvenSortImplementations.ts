@@ -43,6 +43,7 @@ if __name__ == '__main__':
     `public class OddEvenSort {
     // Odd-Even (Brick) Sort implementation in Java
     // Time Complexity: O(n^2) average/worst, O(n) best
+    // Time Complexity: O(n²) average/worst, O(n) best
     // Space Complexity: O(1)
 
     public static void oddEvenSort(int[] arr) {

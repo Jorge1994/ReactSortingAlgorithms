@@ -10,6 +10,7 @@ import { heapSort } from './core/heapSort';
 import { cocktailSortAlgorithm } from './core/cocktailSort';
 import { bogoSortAlgorithm } from './core/bogoSort';
 import { stoogeSortAlgorithm } from './core/stoogeSort';
+import { pancakeSortAlgorithm } from './core/pancakeSort';
 
 /**
  * Centralized registry for all sorting algorithms
@@ -28,6 +29,7 @@ export const algorithmRegistry = {
   'odd-even-sort': oddEvenSortAlgorithm,
   'bogo-sort': bogoSortAlgorithm,
   'stooge-sort': stoogeSortAlgorithm,
+  'pancake-sort': pancakeSortAlgorithm,
 } as const;
 
 export type AlgorithmKey = keyof typeof algorithmRegistry;

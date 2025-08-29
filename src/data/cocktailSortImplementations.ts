@@ -6,7 +6,7 @@ export const cocktailSortImplementations: AlgorithmImplementations = {
     `def cocktail_shaker_sort(arr):
     """
     Cocktail Shaker Sort implementation in Python (bidirectional bubble sort)
-    Time Complexity: O(n^2) worst/average, O(n) best
+    Time Complexity: O(n²) worst/average, O(n) best
     Space Complexity: O(1)
     """
     n = len(arr)
