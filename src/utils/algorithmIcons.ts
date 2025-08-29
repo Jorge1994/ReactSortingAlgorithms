@@ -10,6 +10,7 @@ export const ICON_MAP: Record<AlgorithmKey, string> = {
   'gnome-sort': '🧙',
   'heap-sort': '🌲',
   'cocktail-sort': '🍸',
+  'odd-even-sort': '🧱',
   'bogo-sort': '😂',
   'stooge-sort': '🌀'
 } as const;

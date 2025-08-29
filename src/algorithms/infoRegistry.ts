@@ -9,6 +9,7 @@ import { heapSortInfo } from './info/heapSortInfo';
 import { cocktailSortInfo } from './info/cocktailSortInfo';
 import { bogoSortInfo } from './info/bogoSortInfo';
 import { stoogeSortInfo } from './info/stoogeSortInfo';
+import { oddEvenSortInfo } from './info/oddEvenSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -25,6 +26,7 @@ export const algorithmInfoRegistry = {
   'gnome-sort': gnomeSortInfo,
   'heap-sort': heapSortInfo,
   'cocktail-sort': cocktailSortInfo,
+  'odd-even-sort': oddEvenSortInfo,
   'bogo-sort': bogoSortInfo,
   'stooge-sort': stoogeSortInfo,
 } as const;

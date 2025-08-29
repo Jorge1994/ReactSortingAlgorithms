@@ -1,6 +1,7 @@
 import { bubbleSortAlgorithm } from './core/bubbleSort';
 import { selectionSortAlgorithm } from './core/selectionSort';
 import { insertionSort } from './core/insertionSort';
+import { oddEvenSortAlgorithm } from './core/oddEvenSort';
 import { mergeSort } from './core/mergeSort';
 import { countingSort } from './core/countingSort';
 import { quickSortAlgorithm } from './core/quickSort';
@@ -24,6 +25,7 @@ export const algorithmRegistry = {
   'gnome-sort': gnomeSortAlgorithm,
   'heap-sort': heapSort,
   'cocktail-sort': cocktailSortAlgorithm,
+  'odd-even-sort': oddEvenSortAlgorithm,
   'bogo-sort': bogoSortAlgorithm,
   'stooge-sort': stoogeSortAlgorithm,
 } as const;
