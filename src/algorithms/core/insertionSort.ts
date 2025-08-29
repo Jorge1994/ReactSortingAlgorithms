@@ -1,12 +1,10 @@
 import type { SortStep } from '../../types/algorithm';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { insertionSortInfo } from '../info/insertionSortInfo';
 
 /**
- * Insertion Sort Algorithm Implementation
- * 
- * Insertion sort builds the final sorted array one item at a time.
- * It works by taking elements from the unsorted portion and inserting
- * them into their correct position in the sorted portion.
+ * Insertion Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
  */
 function insertionSortExecute(array: number[]): SortStep[] {
   const steps: SortStep[] = [];
@@ -147,31 +145,8 @@ function insertionSortExecute(array: number[]): SortStep[] {
 }
 
 export const insertionSort = createSortingAlgorithm(
-  'Insertion Sort',
-  'Builds the final sorted array one item at a time by inserting each element into its correct position in the sorted portion',
-  {
-    time: {
-      best: 'O(n)',
-      average: 'O(n²)',
-      worst: 'O(n²)'
-    },
-    space: {
-      best: 'O(1)',
-      average: 'O(1)',
-      worst: 'O(1)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: 'When the array is already sorted, only one comparison is made for each element (n-1 comparisons total) as no shifting is needed',
-        average: 'On average, each element needs to be compared with half of the preceding elements, resulting in approximately n²/4 comparisons',
-        worst: 'When the array is sorted in reverse order, each element must be compared with all preceding elements, resulting in n(n-1)/2 comparisons'
-      },
-      spaceComplexity: {
-        best: 'Uses only a constant amount of extra space for variables (key, i, j) regardless of input size, making it an in-place sorting algorithm',
-        average: 'Consistent O(1) space usage as no additional data structures are required.',
-        worst: 'Even in worst case scenarios, space complexity remains O(1) as the algorithm maintains its in-place approach.'
-      }
-    }
-  },
+  insertionSortInfo.name,
+  insertionSortInfo.description,
+  insertionSortInfo.complexity,
   insertionSortExecute
 );

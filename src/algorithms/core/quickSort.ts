@@ -1,5 +1,6 @@
 import { createSortingAlgorithm } from './templateAlgorithm';
 import type { SortStep } from '../../types';
+import { quickSortInfo } from '../info/quickSortInfo';
 
 function quickSortSteps(array: number[]): SortStep[] {
   const steps: SortStep[] = [];
@@ -77,27 +78,8 @@ function quickSortSteps(array: number[]): SortStep[] {
 }
 
 export const quickSortAlgorithm = createSortingAlgorithm(
-  'Quick Sort',
-  'In-place quick sort using Lomuto partition scheme. Suitable for visualization with comparisons and swaps, marking pivots and final positions.',
-  {
-    time: { best: 'O(n log n)', average: 'O(n log n)', worst: 'O(n^2)' },
-    space: {
-      best: 'O(log n)',
-      average: 'O(log n)',
-      worst: 'O(n)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: 'Balanced partitions give n log n behavior because each level of recursion processes all n elements and there are log n levels.',
-        average: 'Random data typically yields balanced partitions on average, producing n log n comparisons/swaps.',
-        worst: 'Already sorted or adversarial pivots produce O(n^2) when partitions are maximally unbalanced.'
-      },
-      spaceComplexity: {
-        best: 'Recursion stack depth in best case is O(log n) due to balanced partitions.',
-        average: 'Average case maintains O(log n) stack depth for most random inputs.',
-        worst: 'Worst-case O(n) occurs for highly unbalanced partitions when poor pivot selection creates deep recursion.'
-      }
-    }
-  },
+  quickSortInfo.name,
+  quickSortInfo.description,
+  quickSortInfo.complexity,
   quickSortSteps
 );

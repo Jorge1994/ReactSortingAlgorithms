@@ -1,5 +1,6 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { heapSortInfo } from '../info/heapSortInfo';
 
 function heapSortSteps(array: number[]): SortStep[] {
   const steps: SortStep[] = [];
@@ -98,31 +99,8 @@ function heapSortSteps(array: number[]): SortStep[] {
 }
 
 export const heapSort = createSortingAlgorithm(
-  'Heap Sort',
-  'A comparison-based sorting algorithm that uses a binary heap data structure. It divides the input into a sorted and an unsorted region, and iteratively shrinks the unsorted region by extracting the largest element from it and inserting it into the sorted region.',
-  {
-    time: { 
-      best: 'O(n log n)', 
-      average: 'O(n log n)', 
-      worst: 'O(n log n)' 
-    },
-    space: {
-      best: 'O(log n)',
-      average: 'O(log n)', 
-      worst: 'O(log n)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: "Even when the array is already sorted, Heap Sort must build the initial heap (O(n)) and then perform n-1 extract-max operations, each requiring O(log n) time to restore the heap property. This gives O(n log n) total time.",
-        average: "The algorithm performs two main phases: building the initial heap takes O(n) time, and extracting n elements from the heap takes O(n log n) time since each extraction requires O(log n) time to heapify. The dominant factor is O(n log n).",
-        worst: "The worst case occurs when the heap property is maximally violated after each extraction, requiring the maximum number of comparisons and swaps during heapify operations. However, this still results in O(n log n) time complexity due to the logarithmic height of the heap."
-      },
-      spaceComplexity: {
-        best: "Standard recursive implementation requires O(log n) auxiliary space due to the recursion call stack during heapify operations, with stack depth proportional to the height of the heap.",
-        average: "Best case and average case both maintain O(log n) space complexity as the heap structure ensures logarithmic depth.",
-        worst: "Worst case also remains O(log n) as the heap height is always logarithmic. Alternative iterative implementation can achieve O(1) auxiliary space complexity by avoiding recursion entirely."
-      }
-    }
-  },
+  heapSortInfo.name,
+  heapSortInfo.description,
+  heapSortInfo.complexity,
   heapSortSteps
 );

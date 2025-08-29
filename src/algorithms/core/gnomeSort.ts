@@ -1,5 +1,6 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { gnomeSortInfo } from '../info/gnomeSortInfo';
 
 /**
  * Gnome Sort implementation generating visualization steps.
@@ -79,27 +80,8 @@ const gnomeSortFunction = (arr: number[]): SortStep[] => {
 };
 
 export const gnomeSortAlgorithm = createSortingAlgorithm(
-  'Gnome Sort',
-  'Gnome Sort is a simple, intuitive sorting algorithm similar to insertion sort but using swaps to move elements to their correct position by stepping backwards when necessary.',
-  {
-    time: { best: 'O(n)', average: 'O(n²)', worst: 'O(n²)' },
-    space: {
-      best: 'O(1)',
-      average: 'O(1)',
-      worst: 'O(1)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: 'Occurs when the array is already sorted; the algorithm makes a single pass and performs only O(n) comparisons with no swaps.',
-        average: 'On average elements move backwards multiple times via swaps; behaviour resembles insertion sort and results in O(n²) operations.',
-        worst: 'When the array is reverse sorted, every element must be swapped many times to reach its final position, producing O(n²) time.'
-      },
-      spaceComplexity: {
-        best: 'Only a constant number of extra variables are used (indices and counters), so auxiliary space is O(1).',
-        average: 'Consistent O(1) space usage as no additional data structures are required.',
-        worst: 'Even in worst case scenarios, space complexity remains O(1) as the algorithm maintains its in-place approach.'
-      }
-    }
-  },
+  gnomeSortInfo.name,
+  gnomeSortInfo.description,
+  gnomeSortInfo.complexity,
   gnomeSortFunction
 );

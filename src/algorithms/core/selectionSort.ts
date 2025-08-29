@@ -1,18 +1,10 @@
 import { createSortingAlgorithm } from './templateAlgorithm';
 import type { SortStep } from '../../types/algorithm';
+import { selectionSortInfo } from '../info/selectionSortInfo';
 
 /**
- * Selection Sort Algorithm Implementation
- * 
- * Selection sort works by finding the minimum element from the unsorted portion
- * and placing it at the beginning. This process continues until the entire array is sorted.
- * 
- * Time Complexity:
- * - Best Case: O(n²) - Even if array is sorted, we still need to check all elements
- * - Average Case: O(n²) - Typical performance
- * - Worst Case: O(n²) - Maximum comparisons needed
- * 
- * Space Complexity: O(1) - Only uses a constant amount of extra space
+ * Selection Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
  */
 function* selectionSortGenerator(array: number[]): Generator<SortStep> {
   const arr = [...array];
@@ -127,39 +119,9 @@ const executeSelectionSort = (array: number[]): SortStep[] => {
   return steps;
 };
 
-/**
- * Selection Sort Algorithm
- * 
- * An in-place comparison sorting algorithm that divides the input list into
- * a sorted and unsorted region, and repeatedly selects the smallest element
- * from the unsorted region to place at the end of the sorted region.
- */
 export const selectionSortAlgorithm = createSortingAlgorithm(
-  'Selection Sort',
-  'An in-place comparison sorting algorithm that repeatedly selects the smallest element from the unsorted region and places it at the beginning.',
-  {
-    time: {
-      best: 'O(n²)',
-      average: 'O(n²)',
-      worst: 'O(n²)'
-    },
-    space: {
-      best: 'O(1)',
-      average: 'O(1)',
-      worst: 'O(1)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: 'Always performs n(n-1)/2 comparisons regardless of input order, as it must find the minimum in each iteration',
-        average: 'Consistently performs n(n-1)/2 comparisons and n swaps for any input configuration',
-        worst: 'Same as best case - the algorithm\'s performance is not affected by the initial order of elements'
-      },
-      spaceComplexity: {
-        best: 'Uses only a constant amount of extra space for variables (minIndex, temp) regardless of input size',
-        average: 'Consistent O(1) space usage as no additional data structures are required.',
-        worst: 'Even in worst case scenarios, space complexity remains O(1) as the algorithm maintains its in-place approach.'
-      }
-    }
-  },
+  selectionSortInfo.name,
+  selectionSortInfo.description,
+  selectionSortInfo.complexity,
   executeSelectionSort
 );

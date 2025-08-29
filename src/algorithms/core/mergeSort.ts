@@ -1,12 +1,10 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { mergeSortInfo } from '../info/mergeSortInfo';
 
 /**
  * Merge Sort implementation with careful visualization steps
- * Time Complexity: O(n log n) for all cases
- * Space Complexity: O(n) for temporary arrays
- * Stable: Yes, maintains relative order of equal elements
- * In-place: No, requires additional memory for merging
+ * Pure algorithm logic separated from theoretical information
  */
 
 function mergeSortSteps(array: number[]): SortStep[] {
@@ -211,31 +209,8 @@ function mergeSortSteps(array: number[]): SortStep[] {
 }
 
 export const mergeSort = createSortingAlgorithm(
-  'Merge Sort',
-  'A divide-and-conquer algorithm that recursively divides the array into halves, sorts them separately, and then merges them back together in sorted order.',
-  {
-    time: {
-      best: 'O(n log n)',
-      average: 'O(n log n)',
-      worst: 'O(n log n)'
-    },
-    space: {
-      best: 'O(n)',
-      average: 'O(n)',
-      worst: 'O(n)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: 'The array is always divided into log n levels, and each level requires O(n) operations to merge, regardless of initial order',
-        average: 'Consistently divides the problem into halves (log n levels) with O(n) merge operations at each level',
-        worst: 'Even with reverse-sorted input, the divide-and-conquer approach maintains O(n log n) due to balanced splitting and linear merging'
-      },
-      spaceComplexity: {
-        best: 'Requires O(n) additional space for temporary arrays during the merge process, plus O(log n) space for the recursion stack',
-        average: 'Consistently requires O(n) auxiliary space regardless of input order for temporary arrays during merging',
-        worst: 'Space complexity remains O(n) even in worst case as the same temporary array space is needed regardless of data distribution'
-      }
-    }
-  },
+  mergeSortInfo.name,
+  mergeSortInfo.description,
+  mergeSortInfo.complexity,
   mergeSortSteps
 );
