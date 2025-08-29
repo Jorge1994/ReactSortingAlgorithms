@@ -8,9 +8,9 @@ export const stoogeSortInfo: AlgorithmInfo = {
     space: { best: 'O(n)', average: 'O(n)', worst: 'O(n)' },
     justifications: {
       timeComplexity: {
-        best: 'Recurrence T(n) = 3T(2n/3) + O(1) leads to n elevado ao expoente (log 3 / log 1.5), que é aproximadamente n²·⁷.',
-        average: 'A mesma recorrência aplica-se em geral devido à estrutura recursiva.',
-        worst: 'Idêntico ao caso melhor/médio devido ao padrão recursivo determinístico.'
+  best: 'Recurrence T(n) = 3T(2n/3) + O(1) leads to n raised to the power (log 3 / log 1.5), which is approximately n²·⁷.',
+  average: 'The same recurrence applies in general due to the recursive structure.',
+  worst: 'Same as best/average due to the deterministic recursive pattern.'
       },
       spaceComplexity: {
         best: 'Uses recursion depth proportional to O(log_{3/2} n) — working array copy is O(n) when recording steps for visualization.',

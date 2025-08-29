@@ -62,13 +62,42 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
   const getTimeComplexityColor = (complexity: string): string => {
     // Normalize and quick checks for special notations (factorial, unbounded)
     const normalized = (complexity || '').trim();
+    // Handle factorial or unbounded notations
     if (normalized.includes('!') || /factorial/i.test(normalized) || /unbound/i.test(normalized)) {
       return 'bg-red-100 text-red-800 border-red-200'; // Very Poor
+    }
+
+    // Handle underscript log notation like log_{3/2} n -> treat as logarithmic
+    if (/log_\{.*\}/i.test(normalized) || /log\s*\(/i.test(normalized)) {
+      return 'bg-green-100 text-green-800 border-green-200'; // Excellent (logarithmic)
+    }
+
+    // Handle unicode superscript or decimal exponents like n²·⁷ or numeric exponents 2.7
+    // If exponent >= 3 -> very poor; if between 2 and 3 -> poor; if 2 -> poor; between 1 and 2 -> yellow
+  const supExpMatch = normalized.match(/n[^\d]*([\d²³⁴⁵⁶⁷⁸⁹⁰·,.]+)/i);
+    if (supExpMatch) {
+      const expRaw = supExpMatch[1];
+      // Normalize common superscript digits to ascii (quick map for common digits)
+      const supMap: Record<string,string> = { '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','·':'.' };
+      let expNormalized = '';
+      for (const ch of expRaw) {
+        expNormalized += supMap[ch] ?? ch;
+      }
+      // replace comma with dot
+      expNormalized = expNormalized.replace(',', '.');
+      const num = parseFloat(expNormalized);
+      if (!isNaN(num)) {
+        if (num >= 3) return 'bg-red-100 text-red-800 border-red-200';
+        if (num > 2) return 'bg-red-100 text-red-800 border-red-200';
+        if (num === 2) return 'bg-orange-100 text-orange-800 border-orange-200';
+        if (num > 1) return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      }
     }
 
     switch (normalized) {
       case 'O(1)': return 'bg-green-100 text-green-800 border-green-200'; // Excellent
       case 'O(log n)': return 'bg-green-100 text-green-800 border-green-200'; // Excellent
+  case 'O(log_{3/2} n)': return 'bg-green-100 text-green-800 border-green-200';
       case 'O(n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good
       case 'O(n + k)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good (linear-ish when k small)
       case 'O(n+k)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // accept variant without spaces
