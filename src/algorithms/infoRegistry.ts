@@ -11,6 +11,7 @@ import { bogoSortInfo } from './info/bogoSortInfo';
 import { stoogeSortInfo } from './info/stoogeSortInfo';
 import { oddEvenSortInfo } from './info/oddEvenSortInfo';
 import { pancakeSortInfo } from './info/pancakeSortInfo';
+import { shellSortInfo } from './info/shellSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -31,6 +32,7 @@ export const algorithmInfoRegistry = {
   'bogo-sort': bogoSortInfo,
   'stooge-sort': stoogeSortInfo,
   'pancake-sort': pancakeSortInfo,
+  'shell-sort': shellSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

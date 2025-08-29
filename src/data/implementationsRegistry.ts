@@ -11,6 +11,7 @@ import { bogoSortImplementations } from './bogoSortImplementations';
 import { stoogeSortImplementations } from './stoogeSortImplementations';
 import { oddEvenSortImplementations } from './oddEvenSortImplementations';
 import { pancakeSortImplementations } from './pancakeSortImplementations';
+import { shellSortImplementations } from './shellSortImplementations';
 import type { AlgorithmImplementations } from '../types/implementations';
 import type { AlgorithmKey } from '../algorithms/registry';
 
@@ -31,6 +32,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   'bogo-sort': bogoSortImplementations,
   'stooge-sort': stoogeSortImplementations,
   'pancake-sort': pancakeSortImplementations,
+  'shell-sort': shellSortImplementations,
 } as const;
 
 /**
