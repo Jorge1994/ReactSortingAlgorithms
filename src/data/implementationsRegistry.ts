@@ -8,6 +8,7 @@ import { gnomeSortImplementations } from './gnomeSortImplementations';
 import { heapSortImplementations } from './heapSortImplementations';
 import { cocktailSortImplementations } from './cocktailSortImplementations';
 import { bogoSortImplementations } from './bogoSortImplementations';
+import { stoogeSortImplementations } from './stoogeSortImplementations';
 import type { AlgorithmImplementations } from '../types/implementations';
 import type { AlgorithmKey } from '../algorithms/registry';
 
@@ -25,6 +26,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   'heap-sort': heapSortImplementations,
   'cocktail-sort': cocktailSortImplementations,
   'bogo-sort': bogoSortImplementations,
+  'stooge-sort': stoogeSortImplementations,
 } as const;
 
 /**
