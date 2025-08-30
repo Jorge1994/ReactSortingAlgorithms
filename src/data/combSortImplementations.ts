@@ -1,8 +1,11 @@
-import { createAlgorithmImplementation, type AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const combSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
-    'Python',
+    "Python",
     `def comb_sort(arr):
     """
     Comb Sort implementation in Python
@@ -29,12 +32,12 @@ export const combSortImplementations: AlgorithmImplementations = {
 # Example
 nums = [8, 4, 1, 56, 3, -44, 23, -6, 28, 0]
 print(comb_sort(nums.copy()))`,
-    '.py'
+    ".py"
   ),
 
   java: createAlgorithmImplementation(
-  'Java',
-  `import java.util.Arrays;
+    "Java",
+    `import java.util.Arrays;
 
 public class CombSort {
   /**
@@ -72,6 +75,6 @@ public class CombSort {
   }
 }
 `,
-  '.java'
-  )
+    ".java"
+  ),
 };
