@@ -4,7 +4,7 @@ export const combSortInfo: AlgorithmInfo = {
   name: 'Comb Sort',
   description: 'Comb Sort improves on Bubble Sort by comparing elements a certain gap apart and shrinking the gap over time, which helps eliminate small values near the end (turtles).',
   complexity: {
-    time: { best: 'O(n log n)', average: 'O(n^2)', worst: 'O(n^2)' },
+    time: { best: 'O(n log n)', average: 'O(n²)', worst: 'O(n²)' },
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     justifications: {
       timeComplexity: {
@@ -23,8 +23,9 @@ export const combSortInfo: AlgorithmInfo = {
   stable: false,
   inPlace: true,
   online: false,
+  
   advantages: ['Faster than bubble sort for many inputs', 'Simple to implement', 'In-place and constant extra memory'],
-  disadvantages: ['Not stable', 'Worst-case still O(n^2)'],
+  disadvantages: ['Not stable', 'Worst-case still O(n²)'],
   useCases: ['Educational comparisons with bubble and shell sorts', 'Small to medium arrays where simplicity is desired'],
   keyCharacteristics: ['Gap-based comparisons', 'Shrinking gap factor (commonly 1.3)'],
   visualizationNotes: {
