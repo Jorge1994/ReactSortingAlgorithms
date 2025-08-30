@@ -12,6 +12,7 @@ import { bogoSortAlgorithm } from './core/bogoSort';
 import { stoogeSortAlgorithm } from './core/stoogeSort';
 import { pancakeSortAlgorithm } from './core/pancakeSort';
 import { shellSort } from './core/shellSort';
+import { combSortAlgorithm } from './core/combSort';
 
 /**
  * Centralized registry for all sorting algorithms
@@ -32,6 +33,7 @@ export const algorithmRegistry = {
   'stooge-sort': stoogeSortAlgorithm,
   'pancake-sort': pancakeSortAlgorithm,
   'shell-sort': shellSort,
+  'comb-sort': combSortAlgorithm,
 } as const;
 
 export type AlgorithmKey = keyof typeof algorithmRegistry;
