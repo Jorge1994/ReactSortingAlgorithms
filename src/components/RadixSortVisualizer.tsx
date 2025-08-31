@@ -137,16 +137,16 @@ export function RadixSortVisualizer({
         <h4 className="text-lg font-semibold mb-2 text-gray-800">
           Count Array {digitPosition !== undefined && `(${getDigitName(digitPosition)} Digit)`}
         </h4>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex justify-center">
+          <div className="inline-block">
+            <table className="border-collapse">
               <tbody>
                 {/* Row for counts */}
                 <tr>
                   {countArray.map((count, index) => (
                     <td
                       key={`count-${index}`}
-                      className={`border border-gray-300 p-2 text-center font-bold text-sm transition-all duration-300 ${
+                      className={`border border-gray-300 text-center font-bold transition-all duration-300 ${
                         countIndex === index
                           ? 'bg-red-100 border-red-400 text-red-800'
                           : currentDigit === index
@@ -154,8 +154,9 @@ export function RadixSortVisualizer({
                           : 'bg-white text-gray-800'
                       }`}
                       style={{
-                        minWidth: '35px',
-                        minHeight: '35px',
+                        width: '50px',
+                        height: '50px',
+                        fontSize: '18px',
                         boxShadow: countIndex === index 
                           ? '0 0 10px rgba(239, 68, 68, 0.3)' 
                           : currentDigit === index 
@@ -172,14 +173,15 @@ export function RadixSortVisualizer({
                   {countArray.map((_, index) => (
                     <td
                       key={`digit-${index}`}
-                      className={`border border-gray-300 p-2 text-center text-xs font-semibold transition-all duration-300 ${
+                      className={`border border-gray-300 text-center font-semibold transition-all duration-300 ${
                         currentDigit === index 
                           ? 'text-blue-700 bg-blue-50' 
                           : 'text-gray-700 bg-gray-50'
                       }`}
                       style={{
-                        minWidth: '35px',
-                        minHeight: '30px'
+                        width: '50px',
+                        height: '40px',
+                        fontSize: '16px'
                       }}
                     >
                       {index}
