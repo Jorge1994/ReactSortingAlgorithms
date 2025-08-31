@@ -200,13 +200,13 @@ export function RadixSortVisualizer({
     const effectiveMaxValue = maxValue > 0 ? maxValue : 1;
     
     // Fixed height for consistent visualization
-    const containerHeight = '200px';
+    const containerHeight = '250px'; // Increased height to accommodate digit indicators
     const maxBarHeight = 120;
     
     return (
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">{title}</h4>
-        <div className="relative overflow-hidden">
+        <div className="relative">
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
           
@@ -216,7 +216,7 @@ export function RadixSortVisualizer({
             style={{ 
               height: containerHeight,
               paddingBottom: '25px',
-              paddingTop: '15px',
+              paddingTop: '50px', // Increased padding to accommodate digit indicators
               gap: array.length > 15 ? '1px' : '2px'
             }}
           >
@@ -276,7 +276,7 @@ export function RadixSortVisualizer({
 
                     {/* Digit highlight indicator */}
                     {showDigitHighlight && digitPosition !== undefined && (
-                      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs px-1 py-0.5 rounded">
+                      <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs px-2 py-1 rounded shadow-lg z-20">
                         {Math.floor(displayValue / Math.pow(10, digitPosition)) % 10}
                       </div>
                     )}
