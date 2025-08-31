@@ -42,7 +42,14 @@ export const cycleSortImplementations: AlgorithmImplementations = {
         writes += 1
 
   return arr
-`,
+
+if __name__ == '__main__':
+  # Example usage: copy-paste this snippet into a file and run python filename.py
+  data = [3, 5, 2, 1, 4]
+  print('Original:', data)
+  sorted_data = cycle_sort(data.copy())
+  print('Sorted:  ', sorted_data)
+  `,
   fileExtension: '.py'
   },
   java: {
