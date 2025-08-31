@@ -14,6 +14,7 @@ import { oddEvenSortInfo } from './info/oddEvenSortInfo';
 import { pancakeSortInfo } from './info/pancakeSortInfo';
 import { shellSortInfo } from './info/shellSortInfo';
 import { combSortInfo } from './info/combSortInfo';
+import { cycleSortInfo } from './info/cycleSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -37,6 +38,7 @@ export const algorithmInfoRegistry = {
   'pancake-sort': pancakeSortInfo,
   'shell-sort': shellSortInfo,
   'comb-sort': combSortInfo,
+  'cycle-sort': cycleSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

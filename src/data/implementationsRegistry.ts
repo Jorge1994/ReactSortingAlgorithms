@@ -14,6 +14,7 @@ import { oddEvenSortImplementations } from "./oddEvenSortImplementations";
 import { pancakeSortImplementations } from "./pancakeSortImplementations";
 import { shellSortImplementations } from "./shellSortImplementations";
 import { combSortImplementations } from "./combSortImplementations";
+import { cycleSortImplementations } from "./cycleSortImplementations";
 import type { AlgorithmImplementations } from "../types/implementations";
 import type { AlgorithmKey } from "../algorithms/registry";
 
@@ -37,6 +38,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   "pancake-sort": pancakeSortImplementations,
   "shell-sort": shellSortImplementations,
   "comb-sort": combSortImplementations,
+  "cycle-sort": cycleSortImplementations,
 } as const;
 
 /**
