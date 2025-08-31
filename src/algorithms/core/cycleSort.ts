@@ -24,10 +24,10 @@ const cycleSortFunction = (input: number[]): SortStep[] => {
     // count all smaller elements on right side of item.
     let pos = cycle_start;
     for (let i = cycle_start + 1; i < n; i++) {
-      // emit compare for visualization
+      // emit highlight for counting visualization
       comparisons++;
       steps.push({
-        type: 'compare',
+        type: 'highlight',
         indices: [i, cycle_start],
         array: [...arr],
         metadata: { comparisons, swaps, currentPhase: `Counting position for index ${cycle_start}` }
@@ -63,7 +63,7 @@ const cycleSortFunction = (input: number[]): SortStep[] => {
       for (let i = cycle_start + 1; i < n; i++) {
         comparisons++;
         steps.push({
-          type: 'compare',
+          type: 'highlight',
           indices: [i, cycle_start],
           array: [...arr],
           metadata: { comparisons, swaps, currentPhase: `Finding new position in rotation for index ${cycle_start}` }
