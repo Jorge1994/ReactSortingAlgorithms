@@ -88,6 +88,7 @@ function VisualizerPage() {
               arraySize={arraySize}
               onArraySizeChange={changeArraySize}
               maxSize={currentAlgorithm === 'counting-sort' ? 50 : 100}
+              selectedAlgorithm={currentAlgorithm}
             />
         </section>
 

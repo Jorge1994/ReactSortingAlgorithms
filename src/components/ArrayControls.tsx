@@ -3,6 +3,7 @@ interface ArrayControlsProps {
   arraySize: number;
   onArraySizeChange: (size: number) => void;
   maxSize?: number; // Optional max size limit
+  selectedAlgorithm?: string; // optional algorithm key to allow custom UI behavior
 }
 
 export function ArrayControls({
@@ -10,7 +11,29 @@ export function ArrayControls({
   arraySize,
   onArraySizeChange,
   maxSize = 100 // Default to 100 if not specified
+  , selectedAlgorithm
 }: ArrayControlsProps) {
+  // If bitonic sort is selected, only allow sizes 16, 32 or 64
+  const isBitonic = selectedAlgorithm === 'bitonic-sort';
+  const bitonicAllowed = [16, 32, 64];
+
+  const handleSizeChange = (value: number) => {
+    if (isBitonic) {
+      // Snap to the nearest allowed size
+      let nearest = bitonicAllowed[0];
+      let minDiff = Math.abs(value - nearest);
+      for (const s of bitonicAllowed) {
+        const d = Math.abs(value - s);
+        if (d < minDiff) {
+          minDiff = d;
+          nearest = s;
+        }
+      }
+      onArraySizeChange(nearest);
+    } else {
+      onArraySizeChange(value);
+    }
+  };
   // Calculate progress percentage for slider fill
   const arraySizeProgress = ((arraySize - 5) / (maxSize - 5)) * 100;
 
@@ -39,7 +62,7 @@ export function ArrayControls({
               min="5"
               max={maxSize}
               value={arraySize}
-              onChange={(e) => onArraySizeChange(parseInt(e.target.value))}
+              onChange={(e) => handleSizeChange(parseInt(e.target.value))}
               className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
               style={{
                 background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
@@ -93,6 +116,12 @@ export function ArrayControls({
             </div>
           </button>
         </div>
+        {/* If bitonic sort is selected, show allowed sizes */}
+        {isBitonic && (
+          <div className="mt-3 text-sm text-slate-600">
+            Bitonic sort requires array sizes: {bitonicAllowed.join(', ')}. The slider will snap to the nearest allowed size.
+          </div>
+        )}
       </div>
     </div>
   );
