@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import Prism from 'prismjs';
 // Import CSS for syntax highlighting - using a better dark theme
 import 'prismjs/themes/prism-tomorrow.css';
@@ -41,24 +41,70 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
     }
   };
 
-  // Get language icon
-  const getLanguageIcon = (language: string): string => {
-    switch (language.toLowerCase()) {
-      case 'python':
-        return '🐍';
-      case 'java':
-        return '☕';
+  // Format language display (Title casing and special cases)
+  const formatLanguageDisplay = (language: string | undefined): string => {
+    if (!language) return '';
+    const l = language.trim().toLowerCase();
+    switch (l) {
       case 'javascript':
-        return '🟨';
+      case 'js':
+        return 'JavaScript';
+      case 'typescript':
+      case 'ts':
+        return 'TypeScript';
+      case 'python':
+        return 'Python';
+      case 'java':
+        return 'Java';
       case 'c++':
       case 'cpp':
-        return '⚡';
+        return 'C++';
       case 'c#':
       case 'csharp':
-        return '🔷';
+        return 'C#';
+      case 'ruby':
+        return 'Ruby';
+      case 'go':
+        return 'Go';
+      case 'rust':
+        return 'Rust';
       default:
-        return '📝';
+        return language.charAt(0).toUpperCase() + language.slice(1);
     }
+  };
+
+  // Get language icon element (tries .svg then falls back to .png)
+  const getLanguageIcon = (language: string): ReactNode => {
+    const lang = language.toLowerCase().trim();
+
+    const mapFilename = (l: string) => {
+      if (l === 'c++' || l === 'cpp') return 'cpp';
+      if (l === 'c#' || l === 'csharp') return 'csharp';
+      if (l === 'js' || l === 'javascript') return 'javascript';
+      if (l === 'ts' || l === 'typescript') return 'typescript';
+      // normalize spaces and non-alphanumeric to hyphen
+      return l.replace(/[^a-z0-9]+/g, '-');
+    };
+
+    const filename = mapFilename(lang);
+    const srcSvg = `/icons/languages/${filename}.svg`;
+    const srcPng = `/icons/languages/${filename}.png`;
+
+    // Return an <img> that will try SVG then PNG
+    return (
+      <img
+        src={srcSvg}
+        alt={`${language} icon`}
+        className="w-5 h-5 object-contain"
+        onError={(e) => {
+          const t = e.currentTarget as HTMLImageElement;
+          if (!t.dataset.retry) {
+            t.dataset.retry = '1';
+            t.src = srcPng;
+          }
+        }}
+      />
+    );
   };
 
   // Copy to clipboard function with feedback
@@ -161,7 +207,7 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {getLanguageIcon(example.language)}
-                  {example.language}
+                  {formatLanguageDisplay(example.language)}
                 </span>
                 {activeTab === index && (
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-sm opacity-50"></div>
@@ -181,7 +227,7 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
                 <span className="text-slate-300 text-sm font-medium">
-                  {examples[activeTab]?.language} Implementation
+                  {formatLanguageDisplay(examples[activeTab]?.language)} Implementation
                 </span>
               </div>
               
