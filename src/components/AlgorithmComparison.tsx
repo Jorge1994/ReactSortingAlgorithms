@@ -116,6 +116,7 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
       case 'O(log n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good - logarithmic space
       case 'O(k)': return 'bg-orange-100 text-orange-800 border-orange-200'; // Poor - depends on value range
       case 'O(n)': return 'bg-orange-100 text-orange-800 border-orange-200'; // Poor - linear space
+      case 'O(n+k)': return 'bg-orange-100 text-orange-800 border-orange-200'; // Poor - linear space plus range
       case 'O(n²)': return 'bg-red-100 text-red-800 border-red-200'; // Very Poor - quadratic space
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
