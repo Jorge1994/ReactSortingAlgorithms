@@ -1,9 +1,16 @@
-import type { AlgorithmImplementations } from '../types/implementations';
+import {
+  createAlgorithmImplementation,
+  type AlgorithmImplementations,
+} from "../types/implementations";
 
 export const bitonicSortImplementations: AlgorithmImplementations = {
-  python: {
-    language: 'python',
-    code: `def bitonic_sort(arr):
+  python: createAlgorithmImplementation(
+    "Python",
+    `def bitonic_sort(arr):
+    """
+    Bitonic sort implementation in Python (in-place).
+    Note: input length must be a power of two (this visualizer supports 16, 32, 64).
+    """
     n = len(arr)
     k = 2
     while k <= n:
@@ -17,7 +24,56 @@ export const bitonicSortImplementations: AlgorithmImplementations = {
             j //= 2
         k *= 2
     return arr
+
+# Example usage
+if __name__ == "__main__":
+    numbers = [64, 34, 25, 12, 22, 11, 90, 1, 5, 3, 9, 8, 7, 6, 2, 0]  # 16 elements
+    print("Original:", numbers)
+    bitonic_sort(numbers)
+    print("Sorted:", numbers)
 `,
-    fileExtension: '.py'
-  }
+    ".py"
+  ),
+
+  java: createAlgorithmImplementation(
+    "Java",
+    `public class BitonicSort {
+    // Bitonic sort implementation in Java (in-place). Requires array length power of 2.
+    public static void bitonicSort(int[] arr) {
+        int n = arr.length;
+        for (int k = 2; k <= n; k <<= 1) {
+            for (int j = k >> 1; j > 0; j >>= 1) {
+                for (int i = 0; i < n; i++) {
+                    int l = i ^ j;
+                    if (l > i) {
+                        if (((i & k) == 0 && arr[i] > arr[l]) || (((i & k) != 0) && arr[i] < arr[l])) {
+                            int tmp = arr[i];
+                            arr[i] = arr[l];
+                            arr[l] = tmp;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {64,34,25,12,22,11,90,1,5,3,9,8,7,6,2,0}; // 16 elements
+        System.out.println("Original:");
+        printArray(numbers);
+
+        bitonicSort(numbers);
+
+        System.out.println("Sorted:");
+        printArray(numbers);
+    }
+
+    private static void printArray(int[] arr) {
+        for (int v : arr) System.out.print(v + " ");
+        System.out.println();
+    }
+}
+`,
+    ".java"
+  ),
 };
