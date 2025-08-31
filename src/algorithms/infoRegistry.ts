@@ -3,6 +3,7 @@ import { selectionSortInfo } from './info/selectionSortInfo';
 import { insertionSortInfo } from './info/insertionSortInfo';
 import { mergeSortInfo } from './info/mergeSortInfo';
 import { countingSortInfo } from './info/countingSortInfo';
+import { radixSortInfo } from './info/radixSortInfo';
 import { quickSortInfo } from './info/quickSortInfo';
 import { gnomeSortInfo } from './info/gnomeSortInfo';
 import { heapSortInfo } from './info/heapSortInfo';
@@ -25,6 +26,7 @@ export const algorithmInfoRegistry = {
   'insertion-sort': insertionSortInfo,
   'merge-sort': mergeSortInfo,
   'counting-sort': countingSortInfo,
+  'radix-sort': radixSortInfo,
   'quick-sort': quickSortInfo,
   'gnome-sort': gnomeSortInfo,
   'heap-sort': heapSortInfo,

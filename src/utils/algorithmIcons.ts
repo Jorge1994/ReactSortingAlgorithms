@@ -6,6 +6,7 @@ export const ICON_MAP: Record<AlgorithmKey, string> = {
   'insertion-sort': '📝',
   'merge-sort': '🔀',
   'counting-sort': '🔢',
+  'radix-sort': '📊',
   'quick-sort': '⚡',
   'gnome-sort': '🧙',
   'heap-sort': '🌲',

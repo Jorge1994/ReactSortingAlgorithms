@@ -3,6 +3,7 @@ import { selectionSortImplementations } from "./selectionSortImplementations";
 import { insertionSortImplementations } from "./insertionSortImplementations";
 import { mergeSortImplementations } from "./mergeSortImplementations";
 import { countingSortImplementations } from "./countingSortImplementations";
+import { radixSortImplementations } from "./radixSortImplementations";
 import { quickSortImplementations } from "./quickSortImplementations";
 import { gnomeSortImplementations } from "./gnomeSortImplementations";
 import { heapSortImplementations } from "./heapSortImplementations";
@@ -25,6 +26,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   "insertion-sort": insertionSortImplementations,
   "merge-sort": mergeSortImplementations,
   "counting-sort": countingSortImplementations,
+  "radix-sort": radixSortImplementations,
   "quick-sort": quickSortImplementations,
   "gnome-sort": gnomeSortImplementations,
   "heap-sort": heapSortImplementations,

@@ -6,6 +6,7 @@ import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
 import { Header } from './components/Header';
 import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { CountingSortVisualizer } from './components/CountingSortVisualizer';
+import { RadixSortVisualizer } from './components/RadixSortVisualizer';
 import { ArrayControls } from './components/ArrayControls';
 import { AnimationControls } from './components/AnimationControls';
 import { StatisticsPanel } from './components/StatisticsPanel';
@@ -93,6 +94,22 @@ function VisualizerPage() {
         {/* Array Visualization */}
         {currentAlgorithm === 'counting-sort' ? (
           <CountingSortVisualizer 
+            displayArray={displayArray}
+            steps={steps}
+            currentStep={currentStep}
+            isPlaying={isPlaying}
+            speed={animationSpeed}
+            onPlay={playAnimation}
+            onPause={pauseAnimation}
+            onNext={nextStep}
+            onPrev={prevStep}
+            onReset={reset}
+            canPlayNext={canPlayNext}
+            canPlayPrev={canPlayPrev}
+            onSpeedChange={setAnimationSpeed}
+          />
+        ) : currentAlgorithm === 'radix-sort' ? (
+          <RadixSortVisualizer 
             displayArray={displayArray}
             steps={steps}
             currentStep={currentStep}

@@ -99,6 +99,7 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
       case 'O(log n)': return 'bg-green-100 text-green-800 border-green-200'; // Excellent
   case 'O(log_{3/2} n)': return 'bg-green-100 text-green-800 border-green-200';
       case 'O(n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good
+      case 'O(d×n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good (linear when d is small)
       case 'O(n + k)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good (linear-ish when k small)
       case 'O(n+k)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // accept variant without spaces
       case 'O(n log n)': return 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Good
@@ -293,6 +294,7 @@ export function AlgorithmComparison({ isExpanded = false }: AlgorithmComparisonP
                   <p className="text-emerald-700 leading-relaxed text-sm mb-2">Short explanation of symbols used in the table:</p>
                   <ul className="list-disc list-inside text-emerald-700 text-sm">
                     <li><span className="font-semibold">n</span>: Number of elements in the array.</li>
+                    <li><span className="font-semibold">d</span>: Number of digits in the maximum number (for Radix Sort). When d is small and constant, O(d×n) approaches linear time complexity.</li>
                     <li>
                       <span className="font-semibold">k</span>: Range of distinct integer values (computed as max - min + 1). In the context of Counting Sort, k is the number of "buckets" required to count occurrences; it directly affects both time and extra space since the algorithm runs in O(n + k) time and requires O(k) additional space for the count array. Example: for values between 2 and 5, k = 5 - 2 + 1 = 4.
                     </li>

@@ -4,6 +4,7 @@ import { insertionSort } from './core/insertionSort';
 import { oddEvenSortAlgorithm } from './core/oddEvenSort';
 import { mergeSort } from './core/mergeSort';
 import { countingSort } from './core/countingSort';
+import { radixSort } from './core/radixSort';
 import { quickSortAlgorithm } from './core/quickSort';
 import { gnomeSortAlgorithm } from './core/gnomeSort';
 import { heapSort } from './core/heapSort';
@@ -24,6 +25,7 @@ export const algorithmRegistry = {
   'insertion-sort': insertionSort,
   'merge-sort': mergeSort,
   'counting-sort': countingSort,
+  'radix-sort': radixSort,
   'quick-sort': quickSortAlgorithm,
   'gnome-sort': gnomeSortAlgorithm,
   'heap-sort': heapSort,
