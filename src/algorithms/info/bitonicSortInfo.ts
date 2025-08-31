@@ -27,7 +27,19 @@ export const bitonicSortInfo: AlgorithmInfo = {
   useCases: ['GPU/parallel sorting networks', 'Educational demonstrations of data-oblivious algorithms'],
   keyCharacteristics: ['Data-oblivious', 'Compare-exchange network', 'Requires power-of-two length'],
   visualizationNotes: {
-    colors: { comparing: '#3B82F6', swapping: '#EF4444', sorted: '#10B981', unsorted: '#6B7280' },
-    phases: ['Constructing bitonic sequences', 'Merging bitonic sequences', 'Final sorted output']
+    colors: {
+      comparing: "Blue bars indicate elements currently being compared",
+      swapping: "Red bars show elements that are being swapped",
+      sorted: "Green bars mark elements that have reached final position",
+      unsorted: "Gray bars represent unprocessed or idle elements"
+    },
+    phases: [
+      "Initial setup: Ensure array length is a power of two (this visualizer allows 16, 32, 64).",
+      "Form pairs: First passes form bitonic pairs (size 2) by comparing adjacent elements.",
+      "Merge blocks: Merge small bitonic blocks into larger ones (4, 8, ...) using compare-exchange passes.",
+      "Index pairing: Pairs are chosen with l = i ^ j—XOR pairing creates non-local exchanges across blocks.",
+      "Direction & stages: (i & k) selects ascending/descending order; k doubles each stage while j controls partner offsets.",
+      "Finalize: After final merges all elements are sorted. Complexity: O(n log² n); useful for parallel/hardware implementations.",
+    ]
   }
 };
