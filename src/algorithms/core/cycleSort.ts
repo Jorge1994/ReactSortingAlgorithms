@@ -15,25 +15,38 @@ const cycleSortFunction = (input: number[]): SortStep[] => {
   let comparisons = 0;
   let swaps = 0;
 
-  for (let cycle_start = 0; cycle_start <= n - 2; cycle_start++) {
+  for (let cycle_start = 0; cycle_start <= n - 2; cycle_start++)
+  {
+    // initialize item as starting point
     let item = arr[cycle_start];
 
-    // Find position where we put the item. Count smaller elements on right.
+    // Find position where we put the item. We basically
+    // count all smaller elements on right side of item.
     let pos = cycle_start;
     for (let i = cycle_start + 1; i < n; i++) {
       // emit compare for visualization
-      steps.push({ type: 'compare', indices: [i, cycle_start], array: [...arr], metadata: { comparisons: ++comparisons, swaps, currentPhase: `Counting position for index ${cycle_start}` } });
-      if (arr[i] < item) pos++;
+      comparisons++;
+      steps.push({
+        type: 'compare',
+        indices: [i, cycle_start],
+        array: [...arr],
+        metadata: { comparisons, swaps, currentPhase: `Counting position for index ${cycle_start}` }
+      });
+      if (arr[i] < item)
+        pos++;
     }
 
     // If item is already in correct position
-    if (pos === cycle_start) continue;
+    if (pos == cycle_start)
+      continue;
 
-    // ignore duplicates
-    while (item === arr[pos]) pos += 1;
+    // ignore all duplicate elements
+    while (item == arr[pos])
+      pos += 1;
 
-    // put the item to its right position (first swap/write)
-    if (pos !== cycle_start) {
+    // put the item to it's right position
+    if (pos != cycle_start)
+    {
       const temp = item;
       item = arr[pos];
       arr[pos] = temp;
@@ -42,17 +55,29 @@ const cycleSortFunction = (input: number[]): SortStep[] => {
     }
 
     // Rotate rest of the cycle
-    while (pos !== cycle_start) {
+    while (pos != cycle_start)
+    {
       pos = cycle_start;
 
+      // Find position where we put the element
       for (let i = cycle_start + 1; i < n; i++) {
-        steps.push({ type: 'compare', indices: [i, cycle_start], array: [...arr], metadata: { comparisons: ++comparisons, swaps, currentPhase: `Finding new position in rotation for index ${cycle_start}` } });
-        if (arr[i] < item) pos += 1;
+        comparisons++;
+        steps.push({
+          type: 'compare',
+          indices: [i, cycle_start],
+          array: [...arr],
+          metadata: { comparisons, swaps, currentPhase: `Finding new position in rotation for index ${cycle_start}` }
+        });
+        if (arr[i] < item)
+          pos += 1;
       }
 
-      while (item === arr[pos]) pos += 1;
+      // ignore all duplicate elements
+      while (item == arr[pos])
+        pos += 1;
 
-      if (item !== arr[pos]) {
+      // put the item to it's right position
+      if (item != arr[pos]) {
         const temp = item;
         item = arr[pos];
         arr[pos] = temp;
@@ -61,7 +86,7 @@ const cycleSortFunction = (input: number[]): SortStep[] => {
       }
     }
 
-    // mark the element at cycle_start as sorted (it ended up in its final position)
+    // mark the element at cycle_start as sorted
     steps.push({ type: 'set-sorted', indices: [cycle_start], array: [...arr], metadata: { comparisons, swaps, currentPhase: `Finalized position for index ${cycle_start}` } });
   }
 
