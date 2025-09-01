@@ -17,6 +17,7 @@ import { combSortImplementations } from "./combSortImplementations";
 import { cycleSortImplementations } from "./cycleSortImplementations";
 import { bitonicSortImplementations } from "./bitonicSortImplementations";
 import { bucketSortImplementations } from "./bucketSortImplementations";
+import { introsortImplementations } from "./introsortImplementations";
 import type { AlgorithmImplementations } from "../types/implementations";
 import type { AlgorithmKey } from "../algorithms/registry";
 
@@ -43,6 +44,7 @@ export const implementationsRegistry: Record<AlgorithmKey, AlgorithmImplementati
   "cycle-sort": cycleSortImplementations,
   "bitonic-sort": bitonicSortImplementations,
   "bucket-sort": bucketSortImplementations,
+  "introsort": introsortImplementations,
 } as const;
 
 /**
