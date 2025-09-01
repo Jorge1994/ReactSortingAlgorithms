@@ -1,7 +1,12 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { introsortInfo } from '../info/introsortInfo';
 
-function introsortSteps(array: number[]): SortStep[] {
+/**
+ * Introsort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
+ */
+const introsortFunction = (array: number[]): SortStep[] => {
   const steps: SortStep[] = [];
   const workingArray = [...array];
   let comparisons = 0;
@@ -460,34 +465,16 @@ function introsortSteps(array: number[]): SortStep[] {
   });
 
   return steps;
-}
+};
 
+/**
+ * Export the complete Introsort algorithm with separated concerns:
+ * - Algorithm logic (this file)
+ * - Theoretical information (introsortInfo.ts)
+ */
 export const introsort = createSortingAlgorithm(
-  'Introsort',
-  'Introspective Sort - A hybrid stable sorting algorithm that provides both fast average performance and excellent worst-case performance by combining quicksort, heapsort, and insertion sort',
-  {
-    time: { 
-      best: 'O(n log n)', 
-      average: 'O(n log n)', 
-      worst: 'O(n log n)' 
-    },
-    space: {
-      best: 'O(log n)',
-      average: 'O(log n)', 
-      worst: 'O(log n)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: "Achieves O(n log n) in the best case through efficient quicksort partitioning with median-of-three pivot selection, minimizing the number of comparisons needed when the array is well-distributed.",
-        average: "Maintains O(n log n) average performance by primarily using quicksort, which has excellent cache performance and low constant factors, while the median-of-three pivot selection helps avoid common worst-case scenarios.",
-        worst: "Guarantees O(n log n) worst-case performance by monitoring recursion depth and switching to heapsort when the depth exceeds 2×log₂(n), preventing quicksort's O(n²) worst case from ever occurring."
-      },
-      spaceComplexity: {
-        best: "Uses O(log n) space for the recursion stack when quicksort efficiently partitions well-balanced subarrays, requiring minimal recursive calls.",
-        average: "Maintains O(log n) space complexity through controlled recursion depth, with the algorithm primarily using quicksort's logarithmic stack depth.",
-        worst: "Guarantees O(log n) space by limiting recursion depth to 2×log₂(n) before switching to heapsort, which operates in-place with O(1) additional space."
-      }
-    }
-  },
-  introsortSteps
+  introsortInfo.name,
+  introsortInfo.description,
+  introsortInfo.complexity,
+  introsortFunction
 );
