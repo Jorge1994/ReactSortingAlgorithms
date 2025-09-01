@@ -1,7 +1,7 @@
 // Core interfaces for the sorting algorithm visualizer
 
 export interface SortStep {
-  type: 'compare' | 'swap' | 'set-sorted' | 'highlight' | 'temp-sorted' | 'move' | 'clear-for-merge' | 'counting-phase' | 'count-increment' | 'count-prefix' | 'count-placement';
+  type: 'compare' | 'swap' | 'set-sorted' | 'highlight' | 'temp-sorted' | 'move' | 'clear-for-merge' | 'counting-phase' | 'count-increment' | 'count-prefix' | 'count-placement' | 'bucket-operation';
   indices: number[];
   array: number[];
   metadata?: {
@@ -16,6 +16,10 @@ export interface SortStep {
     outputArray?: number[]; // for counting sort - output array
     currentValue?: number; // for counting sort - current value being processed
     countIndex?: number; // for counting sort - index in count array
+    buckets?: number[][]; // for bucket sort - all buckets state
+    bucketIndex?: number; // for bucket sort - target bucket index
+    elementValue?: number; // for bucket sort - element being moved
+    operationType?: 'distribute' | 'sort-internal' | 'bucket-sorted' | 'concatenate'; // for bucket sort - operation type
   };
 }
 

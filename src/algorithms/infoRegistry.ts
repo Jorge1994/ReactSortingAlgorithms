@@ -16,6 +16,7 @@ import { shellSortInfo } from './info/shellSortInfo';
 import { combSortInfo } from './info/combSortInfo';
 import { cycleSortInfo } from './info/cycleSortInfo';
 import { bitonicSortInfo } from './info/bitonicSortInfo';
+import { bucketSortInfo } from './info/bucketSortInfo';
 import type { AlgorithmInfo } from '../types/algorithmInfo';
 
 /**
@@ -41,6 +42,7 @@ export const algorithmInfoRegistry = {
   'comb-sort': combSortInfo,
   'cycle-sort': cycleSortInfo,
   'bitonic-sort': bitonicSortInfo,
+  'bucket-sort': bucketSortInfo,
 } as const;
 
 export type AlgorithmInfoKey = keyof typeof algorithmInfoRegistry;

@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { CountingSortVisualizer } from './components/CountingSortVisualizer';
 import { RadixSortVisualizer } from './components/RadixSortVisualizer';
+import { BucketSortVisualizer } from './components/BucketSortVisualizer';
 import { ArrayControls } from './components/ArrayControls';
 import { AnimationControls } from './components/AnimationControls';
 import { StatisticsPanel } from './components/StatisticsPanel';
@@ -124,6 +125,11 @@ function VisualizerPage() {
             canPlayNext={canPlayNext}
             canPlayPrev={canPlayPrev}
             onSpeedChange={setAnimationSpeed}
+          />
+        ) : currentAlgorithm === 'bucket-sort' ? (
+          <BucketSortVisualizer 
+            algorithm={currentAlgorithm}
+            initialArray={displayArray}
           />
         ) : (
           <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
