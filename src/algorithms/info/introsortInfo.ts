@@ -1,7 +1,7 @@
 import type { AlgorithmInfo } from '../../types';
 
 export const introsortInfo: AlgorithmInfo = {
-  name: 'Introsort',
+  name: 'Intro Sort',
   description: 'Introspective Sort (Introsort) is a hybrid sorting algorithm that provides both fast average performance and excellent worst-case performance. It begins with quicksort and switches to heapsort when the recursion depth exceeds a level based on the number of elements being sorted. For small arrays, it uses insertion sort. This design makes it ideal for real-world applications where performance guarantees are important.',
   complexity: {
     time: { 
