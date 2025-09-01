@@ -28,6 +28,23 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(100);
   const intervalRef = useRef<number | undefined>(undefined);
+  const timeoutsRef = useRef<Set<number>>(new Set());
+  
+  // Helper to track timeouts
+  const createTimeout = (callback: () => void, delay: number): number => {
+    const timeoutId = window.setTimeout(() => {
+      timeoutsRef.current.delete(timeoutId);
+      callback();
+    }, delay);
+    timeoutsRef.current.add(timeoutId);
+    return timeoutId;
+  };
+  
+  // Helper to clear all timeouts
+  const clearAllTimeouts = () => {
+    timeoutsRef.current.forEach(id => clearTimeout(id));
+    timeoutsRef.current.clear();
+  };
   
   // State for element positions and animations
   const [originalArrayElements, setOriginalArrayElements] = useState<ElementPosition[]>([]);
@@ -78,6 +95,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
       if (intervalRef.current) {
         clearTimeout(intervalRef.current);
       }
+      clearAllTimeouts();
     };
   }, [isPlaying, currentStep, steps.length, speed]);
 
@@ -102,7 +120,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
       );
       
       // Add element to bucket first
-      setTimeout(() => {
+      createTimeout(() => {
         setBucketElements(prev => {
           const newBuckets = [...prev];
           
@@ -126,7 +144,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
         });
         
         // Then remove element from original array
-        setTimeout(() => {
+        createTimeout(() => {
           setOriginalArrayElements(prev => 
             prev.filter(el => !(el.value === elementValue && el.isInOriginalArray))
           );
@@ -183,7 +201,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
             );
             
             // Remove element from bucket after delay
-            setTimeout(() => {
+            createTimeout(() => {
               setBucketElements(prev2 => {
                 const newBuckets2 = [...prev2];
                 newBuckets2[bucketIndex] = newBuckets2[bucketIndex].filter(el => el.value !== elementValue);
@@ -216,9 +234,21 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
   const operationType = currentStepData?.metadata?.operationType || 'distribute';
 
   const resetArray = () => {
-    setArray(initialArray || [64, 34, 25, 12, 22, 11, 90, 5]);
+    // Cancel any pending timeouts
+    if (intervalRef.current) {
+      clearTimeout(intervalRef.current);
+    }
+    clearAllTimeouts();
+    
+    // Reset animation state
     setCurrentStep(0);
     setIsPlaying(false);
+    
+    // Reset array (this will trigger the useEffect to regenerate steps)
+    const newArray = initialArray || [64, 34, 25, 12, 22, 11, 90, 5];
+    setArray([...newArray]); // Force new array reference to trigger useEffect
+    
+    // Reset bucket state
     setBucketElements([]);
     setNumBuckets(0);
   };
