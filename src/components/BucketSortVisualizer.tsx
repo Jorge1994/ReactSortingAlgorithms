@@ -358,7 +358,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
                   <span className="text-sm font-medium text-gray-700 w-20">
                     Bucket {bucketIndex}:
                   </span>
-                  <div className="flex flex-wrap gap-2 min-h-[56px] items-center">
+                  <div className="flex flex-wrap gap-2 h-[40px] items-center">
                     <AnimatePresence mode="popLayout">
                       {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
                         <motion.span
