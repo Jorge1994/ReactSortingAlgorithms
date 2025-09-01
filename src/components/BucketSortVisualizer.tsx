@@ -69,7 +69,7 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
     if (isPlaying && currentStep < steps.length - 1) {
       intervalRef.current = window.setTimeout(() => {
         setCurrentStep(prev => prev + 1);
-      }, 1100 - speed * 10);
+      }, speed * 10);
     } else {
       setIsPlaying(false);
     }
