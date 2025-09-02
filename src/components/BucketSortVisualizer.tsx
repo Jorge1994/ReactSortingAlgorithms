@@ -115,14 +115,26 @@ export function BucketSortVisualizer({
         return newBuckets;
       });
       
-      // Update original array elements to remove distributed ones
-      setOriginalArrayElements(prev => {
-        const distributedValues = new Set();
-        buckets.forEach(bucket => {
-          bucket.forEach(value => distributedValues.add(value));
-        });
+      // For distribution, show only elements that haven't been distributed yet
+      // Use the step index to determine how many elements have been processed
+      const elementsDistributed = Math.floor(currentStep / 2); // Each element has 2 steps (highlight + place)
+      
+      setOriginalArrayElements(() => {
+        // Get original full array from initialization
+        const originalArray = displayArray;
         
-        return prev.filter(el => !distributedValues.has(el.value));
+        // Show only elements that haven't been distributed yet
+        const remainingElements = originalArray.slice(elementsDistributed);
+        
+        return remainingElements.map((value, index) => ({
+          value,
+          originalIndex: elementsDistributed + index,
+          isInOriginalArray: true,
+          bucketIndex: undefined,
+          isMoving: false,
+          isSorted: false,
+          elementId: `element-${elementsDistributed + index}-${value}`
+        }));
       });
       
     } else if (operationType === 'sort-internal') {
@@ -292,7 +304,7 @@ export function BucketSortVisualizer({
         });
       }
     }
-  }, [currentStep, steps, numBuckets]);
+  }, [currentStep, steps, numBuckets, displayArray]);
 
   const currentStepData = steps[currentStep];
   const currentPhase = currentStepData?.metadata?.currentPhase || '';
@@ -362,23 +374,23 @@ export function BucketSortVisualizer({
           {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
         </h3>
         <div className="flex flex-wrap gap-2 justify-center min-h-[80px] items-center">
-          <AnimatePresence mode="wait">
-            {isArrayEmpty && operationType !== 'concatenate' ? (
-              <motion.div
-                key="empty-message"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-gray-400 italic text-lg"
-              >
-                All elements moved to buckets
-              </motion.div>
-            ) : (
-              originalArrayElements
+          {isArrayEmpty && operationType !== 'concatenate' ? (
+            <motion.div
+              key="empty-message"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-gray-400 italic text-lg"
+            >
+              All elements moved to buckets
+            </motion.div>
+          ) : (
+            <AnimatePresence>
+              {originalArrayElements
                 .filter(el => el.isInOriginalArray)
                 .map((element) => (
                   <motion.div
-                    key={`original-${element.value}-${element.originalIndex}`}
+                    key={element.elementId}
                     className="w-16 h-16 flex items-center justify-center rounded-lg border-2 text-white font-bold"
                     style={{ backgroundColor: getElementColor(element) }}
                     layout
@@ -395,9 +407,9 @@ export function BucketSortVisualizer({
                   >
                     {element.value}
                   </motion.div>
-                ))
-            )}
-          </AnimatePresence>
+                ))}
+            </AnimatePresence>
+          )}
         </div>
       </div>
 
