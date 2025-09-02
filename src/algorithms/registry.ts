@@ -18,6 +18,7 @@ import { cycleSort } from './core/cycleSort';
 import { bitonicSort } from './core/bitonicSort';
 import { bucketSort } from './core/bucketSort';
 import { introsort } from './core/introsort';
+import { timSort } from './core/timSort';
 
 /**
  * Centralized registry for all sorting algorithms
@@ -44,6 +45,7 @@ export const algorithmRegistry = {
   'bitonic-sort': bitonicSort,
   'bucket-sort': bucketSort,
   'introsort': introsort,
+  'tim-sort': timSort,
 } as const;
 
 export type AlgorithmKey = keyof typeof algorithmRegistry;
