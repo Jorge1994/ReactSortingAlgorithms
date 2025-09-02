@@ -1,44 +1,52 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { SortStep } from '../types';
-import { getAlgorithm } from '../algorithms/registry';
-import type { AlgorithmKey } from '../algorithms/registry';
 import { AnimationControls } from './AnimationControls';
 import { StatisticsPanel } from './StatisticsPanel';
 import { ColorLegend } from './ColorLegend';
-
-interface BucketSortVisualizerProps {
-  algorithm: string;
-  initialArray?: number[];
-}
 
 interface ElementPosition {
   value: number;
   originalIndex: number;
   isInOriginalArray: boolean;
   bucketIndex?: number;
-  isMoving: boolean;
-  isSorted: boolean;
+  isMoving?: boolean;
+  isSorted?: boolean;
+  elementId: string; // Add unique identifier
 }
 
-export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisualizerProps) {
-  const [array, setArray] = useState<number[]>(initialArray || [64, 34, 25, 12, 22, 11, 90, 5]);
-  const [steps, setSteps] = useState<SortStep[]>([]);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [speed, setSpeed] = useState(100);
-  const intervalRef = useRef<number | undefined>(undefined);
+interface BucketSortVisualizerProps {
+  displayArray: number[];
+  steps: SortStep[];
+  currentStep: number;
+  isPlaying: boolean;
+  speed: number;
+  onPlay: () => void;
+  onPause: () => void;
+  onNext: () => void;
+  onPrev: () => void;
+  onReset: () => void;
+  canPlayNext: boolean;
+  canPlayPrev: boolean;
+  onSpeedChange: (speed: number) => void;
+}
+
+export function BucketSortVisualizer({ 
+  displayArray,
+  steps,
+  currentStep,
+  isPlaying,
+  speed,
+  onPlay,
+  onPause,
+  onNext,
+  onPrev,
+  onReset,
+  canPlayNext,
+  canPlayPrev,
+  onSpeedChange
+}: BucketSortVisualizerProps) {
   const timeoutsRef = useRef<Set<number>>(new Set());
-  
-  // Helper to track timeouts
-  const createTimeout = (callback: () => void, delay: number): number => {
-    const timeoutId = window.setTimeout(() => {
-      timeoutsRef.current.delete(timeoutId);
-      callback();
-    }, delay);
-    timeoutsRef.current.add(timeoutId);
-    return timeoutId;
-  };
   
   // Helper to clear all timeouts
   const clearAllTimeouts = () => {
@@ -53,126 +61,104 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
 
   // Initialize element positions
   useEffect(() => {
-    const elements: ElementPosition[] = array.map((value, index) => ({
+    const elements: ElementPosition[] = displayArray.map((value, index) => ({
       value,
       originalIndex: index,
       isInOriginalArray: true,
       bucketIndex: undefined,
       isMoving: false,
-      isSorted: false
+      isSorted: false,
+      elementId: `element-${index}-${value}`
     }));
     setOriginalArrayElements(elements);
-  }, [array]);
+  }, [displayArray]);
 
-  // Generate steps when array changes
+  // Initialize buckets from steps
   useEffect(() => {
-    const algorithmImpl = getAlgorithm(algorithm as AlgorithmKey);
-    if (algorithmImpl) {
-      const newSteps = algorithmImpl.execute(array);
-      setSteps(newSteps);
-      setCurrentStep(0);
-      
-      // Initialize buckets from first step
-      if (newSteps.length > 0 && newSteps[0].metadata?.buckets) {
-        const buckets = newSteps[0].metadata.buckets;
-        setNumBuckets(buckets.length);
-        setBucketElements(Array.from({ length: buckets.length }, () => []));
-      }
+    if (steps.length > 0 && steps[0].metadata?.buckets) {
+      const buckets = steps[0].metadata.buckets;
+      setNumBuckets(buckets.length);
+      setBucketElements(Array.from({ length: buckets.length }, () => []));
     }
-  }, [array, algorithm]);
+  }, [steps]);
 
-  // Animation control
-  useEffect(() => {
-    if (isPlaying && currentStep < steps.length - 1) {
-      intervalRef.current = window.setTimeout(() => {
-        setCurrentStep(prev => prev + 1);
-      }, speed * 10);
-    } else {
-      setIsPlaying(false);
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearTimeout(intervalRef.current);
-      }
-      clearAllTimeouts();
-    };
-  }, [isPlaying, currentStep, steps.length, speed]);
-
-  // Update element positions based on current step
+  // Update element positions based on current step - COMPLETELY REBUILD STATE FROM STEP
   useEffect(() => {
     if (steps.length === 0 || currentStep >= steps.length) return;
     
     const currentStepData = steps[currentStep];
     const operationType = currentStepData.metadata?.operationType;
     const buckets = currentStepData.metadata?.buckets || [];
-    const elementValue = currentStepData.metadata?.elementValue;
     const bucketIndex = currentStepData.metadata?.bucketIndex;
 
-    if (operationType === 'distribute' && elementValue !== undefined && bucketIndex !== undefined) {
-      // Mark element as moving in original array
-      setOriginalArrayElements(prev => 
-        prev.map(el => 
-          el.value === elementValue && el.isInOriginalArray
-            ? { ...el, isMoving: true }
-            : el
-        )
-      );
-      
-      // Add element to bucket first
-      createTimeout(() => {
-        setBucketElements(prev => {
-          const newBuckets = [...prev];
-          
-          // Get current elements from state
-          setOriginalArrayElements(currentOriginal => {
-            const movingElement = currentOriginal.find(el => 
-              el.value === elementValue && el.isInOriginalArray
-            );
-            if (movingElement) {
-              newBuckets[bucketIndex] = [...newBuckets[bucketIndex], { 
-                ...movingElement, 
-                isInOriginalArray: false,
-                bucketIndex,
-                isMoving: false 
-              }];
-            }
-            return currentOriginal;
-          });
-          
-          return newBuckets;
-        });
+    // Handle different operation types
+    if (operationType === 'distribute') {
+      // Rebuild bucket elements from step metadata during distribution phase
+      setBucketElements(() => {
+        const newBuckets = Array(numBuckets).fill(null).map(() => [] as ElementPosition[]);
         
-        // Then remove element from original array
-        createTimeout(() => {
-          setOriginalArrayElements(prev => 
-            prev.filter(el => !(el.value === elementValue && el.isInOriginalArray))
-          );
-        }, 200);
-      }, 200);
-      
-    } else if (operationType === 'sort-internal') {
-      // Update bucket with sorted order (but preserve isSorted state for other buckets)
-      setBucketElements(prev => {
-        const newBuckets = [...prev];
         buckets.forEach((bucket, idx) => {
-          if (bucket.length > 0) {
-            // Preserve isSorted state from previous elements in this bucket
-            const existingElements = newBuckets[idx] || [];
-            const wasPreviouslySorted = existingElements.length > 0 && existingElements[0].isSorted;
-            
-            newBuckets[idx] = bucket.map((value) => ({
+          bucket.forEach((value, elementIdx) => {
+            const elementId = `bucket-${idx}-${elementIdx}-${value}`;
+            newBuckets[idx].push({
               value,
-              originalIndex: -1,
+              originalIndex: -1, // Will be set later during concatenation
               isInOriginalArray: false,
               bucketIndex: idx,
               isMoving: false,
-              isSorted: wasPreviouslySorted // Preserve sorted state
-            }));
-          }
+              isSorted: false,
+              elementId
+            });
+          });
         });
+        
         return newBuckets;
       });
+      
+      // Update original array elements to remove distributed ones
+      setOriginalArrayElements(prev => {
+        const distributedValues = new Set();
+        buckets.forEach(bucket => {
+          bucket.forEach(value => distributedValues.add(value));
+        });
+        
+        return prev.filter(el => !distributedValues.has(el.value));
+      });
+      
+    } else if (operationType === 'sort-internal') {
+      // During sorting internal, update bucket contents while preserving element IDs
+      setBucketElements(prev => {
+        const newBuckets = [...prev];
+        
+        buckets.forEach((bucket, idx) => {
+          if (newBuckets[idx]) {
+            // Update the order and contents of this bucket while preserving IDs
+            const updatedBucket: ElementPosition[] = bucket.map((value, elementIdx) => {
+              // Try to find existing element with same value in this bucket
+              const existingElement = newBuckets[idx].find(el => el.value === value);
+              if (existingElement) {
+                return existingElement;
+              }
+              // If not found, create new element (shouldn't happen during sort-internal)
+              return {
+                value,
+                originalIndex: -1,
+                isInOriginalArray: false,
+                bucketIndex: idx,
+                isMoving: false,
+                isSorted: false,
+                elementId: `bucket-${idx}-${elementIdx}-${value}`
+              };
+            });
+            newBuckets[idx] = updatedBucket;
+          }
+        });
+        
+        return newBuckets;
+      });
+      
+      // Ensure original array stays empty during internal sorting
+      setOriginalArrayElements([]);
       
     } else if (operationType === 'bucket-sorted' && bucketIndex !== undefined) {
       // Mark all elements in this specific bucket as sorted
@@ -187,47 +173,126 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
         return newBuckets;
       });
       
-    } else if (operationType === 'concatenate' && elementValue !== undefined && bucketIndex !== undefined) {
-      // Move element from bucket back to original array
-      const targetIndex = currentStepData.indices[0];
-      if (targetIndex !== undefined) {
-        setBucketElements(prev => {
-          const newBuckets = [...prev];
-          const elementToMove = newBuckets[bucketIndex].find(el => el.value === elementValue);
-          if (elementToMove) {
-            // Mark element as moving
-            newBuckets[bucketIndex] = newBuckets[bucketIndex].map(el => 
-              el.value === elementValue ? { ...el, isMoving: true } : el
-            );
-            
-            // Remove element from bucket after delay
-            createTimeout(() => {
-              setBucketElements(prev2 => {
-                const newBuckets2 = [...prev2];
-                newBuckets2[bucketIndex] = newBuckets2[bucketIndex].filter(el => el.value !== elementValue);
-                return newBuckets2;
-              });
-              
-              // Add element back to original array
-              setOriginalArrayElements(prev => {
-                const newArray = [...prev];
-                newArray[targetIndex] = {
-                  value: elementValue,
-                  originalIndex: targetIndex,
+      // Ensure original array stays empty until concatenation phase
+      setOriginalArrayElements([]);
+      
+    } else if (operationType === 'concatenate') {
+      // During concatenation, elements should move from buckets back to array progressively
+      const currentArray = currentStepData?.array || [];
+      const buckets = currentStepData?.metadata?.buckets || [];
+      const currentPhase = currentStepData?.metadata?.currentPhase || '';
+      
+      // Check if this is the initial concatenation step
+      if (currentPhase === 'Concatenation: Combining sorted buckets into final array') {
+        // Initial concatenation step - keep array empty, buckets full
+        setOriginalArrayElements([]);
+        setBucketElements(() => {
+          const newBuckets: ElementPosition[][] = [];
+          buckets.forEach((bucket, idx) => {
+            newBuckets[idx] = bucket.map((value, elementIdx) => ({
+              value,
+              originalIndex: -1,
+              isInOriginalArray: false,
+              bucketIndex: idx,
+              isMoving: false,
+              isSorted: true,
+              elementId: `bucket-${idx}-${elementIdx}-${value}`
+            }));
+          });
+          return newBuckets;
+        });
+      } else if (currentPhase === 'Completed: Array is now sorted') {
+        // Final completion step - show full array, empty buckets
+        setOriginalArrayElements(() => {
+          return currentArray.map((value, index) => ({
+            value,
+            originalIndex: index,
+            isInOriginalArray: true,
+            bucketIndex: -1,
+            isMoving: false,
+            isSorted: true,
+            elementId: `final-${index}-${value}`
+          }));
+        });
+        
+        // Set all buckets to empty
+        setBucketElements(() => {
+          const newBuckets: ElementPosition[][] = [];
+          buckets.forEach((_, idx) => {
+            newBuckets[idx] = [];
+          });
+          return newBuckets;
+        });
+      } else {
+        // Progressive concatenation - show only the elements that should be in final array at this step
+        // and remove them from buckets
+        
+        // Extract the placed elements count from step index or metadata
+        const targetIndex = currentStepData?.indices?.[0];
+        const finalArrayLength = targetIndex !== undefined ? targetIndex + 1 : currentArray.length;
+        
+        // Build the progressive final array in bucket order (bucket 0 first, then bucket 1, etc.)
+        setOriginalArrayElements(() => {
+          const finalElements = [];
+          let elementsPlaced = 0;
+          
+          // Iterate through buckets in order and add elements sequentially
+          for (let bucketIdx = 0; bucketIdx < buckets.length; bucketIdx++) {
+            const bucket = buckets[bucketIdx];
+            for (let elementIdx = 0; elementIdx < bucket.length; elementIdx++) {
+              if (elementsPlaced < finalArrayLength) {
+                finalElements.push({
+                  value: bucket[elementIdx],
+                  originalIndex: elementsPlaced,
                   isInOriginalArray: true,
-                  bucketIndex: undefined,
+                  bucketIndex: -1,
                   isMoving: false,
-                  isSorted: true
-                };
-                return newArray.sort((a, b) => a.originalIndex - b.originalIndex);
-              });
-            }, 400);
+                  isSorted: true,
+                  elementId: `final-${elementsPlaced}-${bucket[elementIdx]}`
+                });
+                elementsPlaced++;
+              } else {
+                break;
+              }
+            }
+            if (elementsPlaced >= finalArrayLength) break;
           }
+          return finalElements;
+        });
+        
+        // Update buckets to remove elements that have been moved to final array
+        setBucketElements(() => {
+          const newBuckets: ElementPosition[][] = [];
+          let elementsPlacedSoFar = 0;
+          
+          buckets.forEach((bucket, bucketIdx) => {
+            newBuckets[bucketIdx] = [];
+            
+            bucket.forEach((value, elementIdx) => {
+              // Only keep elements that haven't been moved to final array yet
+              // Elements are moved in order: bucket 0 completely, then bucket 1, etc.
+              if (elementsPlacedSoFar >= finalArrayLength) {
+                // This element hasn't been moved to final array yet, keep it in bucket
+                newBuckets[bucketIdx].push({
+                  value,
+                  originalIndex: -1,
+                  isInOriginalArray: false,
+                  bucketIndex: bucketIdx,
+                  isMoving: false,
+                  isSorted: true,
+                  elementId: `bucket-${bucketIdx}-${elementIdx}-${value}`
+                });
+              }
+              // Always increment counter to track position in concatenation sequence
+              elementsPlacedSoFar++;
+            });
+          });
+          
           return newBuckets;
         });
       }
     }
-  }, [currentStep, steps]);
+  }, [currentStep, steps, numBuckets]);
 
   const currentStepData = steps[currentStep];
   const currentPhase = currentStepData?.metadata?.currentPhase || '';
@@ -235,18 +300,10 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
 
   const resetArray = () => {
     // Cancel any pending timeouts
-    if (intervalRef.current) {
-      clearTimeout(intervalRef.current);
-    }
     clearAllTimeouts();
     
-    // Reset animation state
-    setCurrentStep(0);
-    setIsPlaying(false);
-    
-    // Reset array (this will trigger the useEffect to regenerate steps)
-    const newArray = initialArray || [64, 34, 25, 12, 22, 11, 90, 5];
-    setArray([...newArray]); // Force new array reference to trigger useEffect
+    // Use the parent's reset function
+    onReset();
     
     // Reset bucket state
     setBucketElements([]);
@@ -254,18 +311,22 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
   };
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      onPause();
+    } else {
+      onPlay();
+    }
   };
 
   const stepForward = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
+    if (canPlayNext) {
+      onNext();
     }
   };
 
   const stepBackward = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+    if (canPlayPrev) {
+      onPrev();
     }
   };
 
@@ -406,14 +467,14 @@ export function BucketSortVisualizer({ algorithm, initialArray }: BucketSortVisu
       <AnimationControls
         isPlaying={isPlaying}
         onPlay={togglePlay}
-        onPause={() => setIsPlaying(false)}
+        onPause={onPause}
         onNext={stepForward}
         onPrev={stepBackward}
         onReset={resetArray}
-        canPlayNext={currentStep < steps.length - 1}
-        canPlayPrev={currentStep > 0}
+        canPlayNext={canPlayNext}
+        canPlayPrev={canPlayPrev}
         animationSpeed={speed}
-        onSpeedChange={setSpeed}
+        onSpeedChange={onSpeedChange}
       />
 
       {/* Statistics */}

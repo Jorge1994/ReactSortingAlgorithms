@@ -128,8 +128,19 @@ function VisualizerPage() {
           />
         ) : currentAlgorithm === 'bucket-sort' ? (
           <BucketSortVisualizer 
-            algorithm={currentAlgorithm}
-            initialArray={displayArray}
+            displayArray={displayArray}
+            steps={steps}
+            currentStep={currentStep}
+            isPlaying={isPlaying}
+            speed={animationSpeed}
+            onPlay={playAnimation}
+            onPause={pauseAnimation}
+            onNext={nextStep}
+            onPrev={prevStep}
+            onReset={reset}
+            canPlayNext={canPlayNext}
+            canPlayPrev={canPlayPrev}
+            onSpeedChange={setAnimationSpeed}
           />
         ) : (
           <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
