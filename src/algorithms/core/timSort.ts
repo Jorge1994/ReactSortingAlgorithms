@@ -1,5 +1,11 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { timSortInfo } from '../info/timSortInfo';
+
+/**
+ * Tim Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
+ */
 
 const MIN_MERGE = 32;
 
@@ -163,7 +169,11 @@ function extendRunToMinLength(array: number[], run: Run, minRun: number, steps: 
   return { start: run.start, length: targetLength, isNatural: false };
 }
 
-function timSortSteps(array: number[]): SortStep[] {
+/**
+ * Tim Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
+ */
+const timSortSteps = (array: number[]): SortStep[] => {
   const steps: SortStep[] = [];
   const workingArray = [...array];
   const comparisons = { value: 0 };
@@ -536,32 +546,14 @@ function mergeArrays(arr: number[], left: number, mid: number, right: number, st
   });
 }
 
-export const timSort = createSortingAlgorithm(
-  'Tim Sort',
-  'Hybrid sorting algorithm that combines insertion sort for small runs and merge sort for larger sequences, achieving excellent performance on real-world data',
-  {
-    time: { 
-      best: 'O(n)', 
-      average: 'O(n log n)', 
-      worst: 'O(n log n)' 
-    },
-    space: {
-      best: 'O(n)',
-      average: 'O(n)',
-      worst: 'O(n)'
-    },
-    justifications: {
-      timeComplexity: {
-        best: "When the array has many pre-existing ordered runs, Tim Sort can achieve linear time by identifying and merging these natural sequences efficiently",
-        average: "In typical cases, Tim Sort performs merge operations on runs of size 32-64, resulting in O(n log n) comparisons and merges",
-        worst: "Even when no natural runs exist, Tim Sort creates artificial runs using insertion sort and merges them in O(n log n) time"
-      },
-      spaceComplexity: {
-        best: "Requires O(n) auxiliary space for temporary arrays during merge operations",
-        average: "Requires O(n) auxiliary space for temporary arrays during merge operations", 
-        worst: "Requires O(n) auxiliary space for temporary arrays during merge operations"
-      }
-    }
-  },
+/**
+ * Export the complete Tim Sort algorithm with separated concerns:
+ * - Algorithm logic (this file)
+ * - Theoretical information (timSortInfo.ts)
+ */
+export const timSortAlgorithm = createSortingAlgorithm(
+  timSortInfo.name,
+  timSortInfo.description,
+  timSortInfo.complexity,
   timSortSteps
 );
