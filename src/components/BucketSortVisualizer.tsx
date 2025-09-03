@@ -353,15 +353,6 @@ export function BucketSortVisualizer({
 
   return (
     <div className="w-full px-4 py-6 space-y-6">
-      {/* Algorithm Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Bucket Sort Visualization</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Watch how elements fly from the original array to buckets, get sorted internally, 
-          then fly back to their final sorted positions.
-        </p>
-      </div>
-
       {/* Unified Visualization Section */}
       <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-8 pb-4 space-y-6">
