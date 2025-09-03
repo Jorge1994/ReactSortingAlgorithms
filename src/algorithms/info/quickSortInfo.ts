@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const quickSortInfo: AlgorithmInfo = {
   name: 'Quick Sort',
-  description: 'Quick Sort is one of the most widely used sorting algorithms, employing a divide-and-conquer strategy that makes it exceptionally fast in practice. The algorithm works by selecting a \'pivot\' element from the array and partitioning the other elements into two subarrays according to whether they are less than or greater than the pivot. This partitioning process places the pivot in its final sorted position, and the algorithm then recursively applies the same process to the subarrays. While Quick Sort can degrade to O(n²) in the worst case when poor pivots are chosen, its average-case performance of O(n log n) combined with excellent cache locality and in-place operation makes it the default choice for many standard library implementations.',
+  description: '**Quick Sort** is one of the most widely used sorting algorithms, employing a divide-and-conquer strategy that makes it exceptionally fast in practice. The algorithm works by selecting a \'pivot\' element from the array and partitioning the other elements into two subarrays according to whether they are less than or greater than the pivot. This partitioning process places the pivot in its final sorted position, and the algorithm then recursively applies the same process to the subarrays. While **Quick Sort** can degrade to O(n²) in the worst case when poor pivots are chosen, its average-case performance of O(n log n) combined with excellent cache locality and in-place operation makes it the default choice for many standard library implementations.',
   stable: false,
   inPlace: true,
   online: false,

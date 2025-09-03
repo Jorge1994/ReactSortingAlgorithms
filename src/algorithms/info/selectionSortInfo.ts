@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const selectionSortInfo: AlgorithmInfo = {
   name: 'Selection Sort',
-  description: 'Selection Sort is an in-place comparison sorting algorithm that divides the input array into two parts: a sorted portion at the beginning and an unsorted portion at the end. The algorithm repeatedly selects the smallest (or largest) element from the unsorted portion and moves it to the end of the sorted portion. This process continues until the entire array is sorted. While Selection Sort performs fewer writes compared to algorithms like Bubble Sort, it still maintains a quadratic time complexity, making it inefficient for large datasets but useful for educational purposes and small arrays.',
+  description: '**Selection Sort** is an in-place comparison sorting algorithm that divides the input array into two parts: a sorted portion at the beginning and an unsorted portion at the end. The algorithm repeatedly selects the smallest (or largest) element from the unsorted portion and moves it to the end of the sorted portion. This process continues until the entire array is sorted. While **Selection Sort** performs fewer writes compared to algorithms like **Bubble Sort**, it still maintains a quadratic time complexity, making it inefficient for large datasets but useful for educational purposes and small arrays.',
   
   complexity: {
     time: {

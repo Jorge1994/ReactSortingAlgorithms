@@ -6,6 +6,13 @@ interface AlgorithmDetailsProps {
 }
 
 /**
+ * Convert simple Markdown bold syntax to HTML
+ */
+function convertMarkdownBold(text: string): string {
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
+
+/**
  * Component to display detailed algorithm information
  * Uses theoretical data separated from implementation
  */
@@ -22,9 +29,12 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
               Description
             </h3>
             <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl p-6 border border-slate-200">
-              <p className="text-slate-700 leading-relaxed text-base">
-                {algorithmInfo.description}
-              </p>
+              <p 
+                className="text-slate-700 leading-relaxed text-base"
+                dangerouslySetInnerHTML={{
+                  __html: convertMarkdownBold(algorithmInfo.description)
+                }}
+              />
             </div>
           </div>
 

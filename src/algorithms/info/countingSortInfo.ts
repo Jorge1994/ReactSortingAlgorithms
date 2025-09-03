@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const countingSortInfo: AlgorithmInfo = {
   name: 'Counting Sort',
-  description: 'Counting Sort is a non-comparison based sorting algorithm that achieves linear time complexity by leveraging the constraint that input elements are integers within a specific range. Instead of comparing elements, it counts the frequency of each distinct element and uses this information to determine each element\'s position in the sorted output. The algorithm creates a frequency array where each index represents a possible input value and stores the count of occurrences. It then transforms this count array into a cumulative sum array, which directly provides the sorted positions. This approach makes Counting Sort extremely efficient for sorting integers with a limited range, but impractical when the range is significantly larger than the number of elements.',
+  description: '**Counting Sort** is a non-comparison based sorting algorithm that achieves linear time complexity by leveraging the constraint that input elements are integers within a specific range. Instead of comparing elements, it counts the frequency of each distinct element and uses this information to determine each element\'s position in the sorted output. The algorithm creates a frequency array where each index represents a possible input value and stores the count of occurrences. It then transforms this count array into a cumulative sum array, which directly provides the sorted positions. This approach makes **Counting Sort** extremely efficient for sorting integers with a limited range, but impractical when the range is significantly larger than the number of elements.',
   complexity: {
     time: { 
       best: 'O(n + k)', 

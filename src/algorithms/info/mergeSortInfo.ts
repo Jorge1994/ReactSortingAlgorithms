@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const mergeSortInfo: AlgorithmInfo = {
   name: 'Merge Sort',
-  description: 'Merge Sort is a highly efficient, stable divide-and-conquer sorting algorithm that consistently delivers O(n log n) performance regardless of input distribution. The algorithm works by recursively dividing the array into smaller subarrays until each subarray contains only one element, then systematically merging these subarrays back together in sorted order. The key insight is that merging two already-sorted arrays is a linear operation. This predictable performance makes Merge Sort ideal for applications requiring guaranteed performance, such as real-time systems, though it requires additional memory proportional to the input size. It serves as the foundation for many hybrid sorting algorithms like Timsort.',
+  description: '**Merge Sort** is a highly efficient, stable divide-and-conquer sorting algorithm that consistently delivers O(n log n) performance regardless of input distribution. The algorithm works by recursively dividing the array into smaller subarrays until each subarray contains only one element, then systematically merging these subarrays back together in sorted order. The key insight is that merging two already-sorted arrays is a linear operation. This predictable performance makes **Merge Sort** ideal for applications requiring guaranteed performance, such as real-time systems, though it requires additional memory proportional to the input size. It serves as the foundation for many hybrid sorting algorithms like **Timsort**.',
   complexity: {
     time: {
       best: 'O(n log n)',

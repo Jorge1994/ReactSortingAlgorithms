@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const insertionSortInfo: AlgorithmInfo = {
   name: 'Insertion Sort',
-  description: 'Insertion Sort is an efficient algorithm for sorting small arrays and is the algorithm of choice for small datasets or as the final stage of sophisticated algorithms. It works similarly to how people sort playing cards in their hands - taking one card at a time and inserting it into its correct position among the already sorted cards. The algorithm maintains a sorted portion at the beginning of the array and repeatedly takes the next element from the unsorted portion, finding its correct position in the sorted portion through comparison and shifting. Despite its quadratic worst-case complexity, Insertion Sort is adaptive, stable, and performs exceptionally well on nearly sorted data.',
+  description: '**Insertion Sort** is an efficient algorithm for sorting small arrays and is the algorithm of choice for small datasets or as the final stage of sophisticated algorithms. It works similarly to how people sort playing cards in their hands - taking one card at a time and inserting it into its correct position among the already sorted cards. The algorithm maintains a sorted portion at the beginning of the array and repeatedly takes the next element from the unsorted portion, finding its correct position in the sorted portion through comparison and shifting. Despite its quadratic worst-case complexity, **Insertion Sort** is adaptive, stable, and performs exceptionally well on nearly sorted data.',
   
   stable: true,
   inPlace: true,
