@@ -57,9 +57,17 @@ export const oddEvenSortInfo: AlgorithmInfo = {
       unsorted: '#6B7280'
     },
     phases: [
-      'Even-Odd Pass: Compare (0,1), (2,3), (4,5), ... and swap when necessary',
-      'Odd-Even Pass: Compare (1,2), (3,4), (5,6), ... and swap when necessary',
-      'Repeat until no swaps occur in a full cycle (even + odd pass)'
+      'Initialization: Prepare for alternating even-odd comparison pattern that enables parallel processing',
+      
+      'Even Pass: Compare adjacent pairs (0,1), (2,3), (4,5)... and swap if out of order. All comparisons can run simultaneously',
+      
+      'Odd Pass: Compare adjacent pairs (1,2), (3,4), (5,6)... and swap if out of order. Independent operations allow parallelization',
+      
+      'Swap Tracking: Monitor whether any swaps occurred during the current cycle to detect completion',
+      
+      'Cycle Evaluation: Check if both even and odd passes completed without swaps, indicating the array is sorted',
+      
+      'Continue or Terminate: Repeat even-odd cycles until no swaps occur, achieving early termination on sorted data'
     ]
   }
 };
