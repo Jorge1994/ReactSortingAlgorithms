@@ -369,11 +369,11 @@ export function BucketSortVisualizer({
       </div>
 
       {/* Original Array */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white border border-gray-200 rounded-lg p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">
           {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
         </h3>
-        <div className="flex flex-wrap gap-2 justify-center min-h-[60px] items-center">
+        <div className="flex flex-wrap gap-2 justify-center min-h-[48px] items-center">
           {isArrayEmpty && operationType !== 'concatenate' ? (
             <motion.div
               key="empty-message"
