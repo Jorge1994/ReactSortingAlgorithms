@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const pancakeSortInfo: AlgorithmInfo = {
   name: 'Pancake Sort',
-  description: 'Pancake Sort sorts by repeatedly flipping the prefix of the array to move the largest remaining element to its final position.',
+  description: 'Pancake Sort is a whimsical sorting algorithm inspired by the problem of sorting a stack of pancakes using only a spatula to flip portions of the stack. The algorithm can only perform "flip" operations, which reverse the order of elements from the beginning of the array up to a chosen position. To sort the array, Pancake Sort repeatedly finds the largest unsorted element, flips the array to bring this element to the front (if it\'s not already there), then flips again to move it to its correct position at the end of the unsorted portion. While highly inefficient with its quadratic time complexity, Pancake Sort serves as an excellent educational tool for understanding algorithmic constraints and creative problem-solving. It also has practical applications in robotics and scenarios where only specific types of operations are allowed.',
   complexity: {
     time: {
       best: 'O(n²)',

@@ -15,6 +15,19 @@ export function AlgorithmDetails({ algorithmInfo, isExpanded = false }: Algorith
       {/* Content - only show if expanded */}
       {isExpanded && (
         <div className="p-8 space-y-8 bg-gradient-to-br from-slate-50 to-white">
+          {/* Description */}
+          <div>
+            <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-slate-500 rounded-full"></span>
+              Description
+            </h3>
+            <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl p-6 border border-slate-200">
+              <p className="text-slate-700 leading-relaxed text-base">
+                {algorithmInfo.description}
+              </p>
+            </div>
+          </div>
+
           {/* Complexity Analysis */}
           <div>
             <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">

@@ -6,7 +6,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
  */
 export const bubbleSortInfo: AlgorithmInfo = {
   name: "Bubble Sort",
-  description: "Compares adjacent elements and swaps them if they are in the wrong order. Repeats until no swaps are needed.",
+  description: "Bubble Sort is a simple comparison-based sorting algorithm that repeatedly steps through the array, compares adjacent elements and swaps them if they are in the wrong order. The algorithm gets its name because smaller elements 'bubble' to the beginning of the array, just like air bubbles rising to the surface of water. Despite being one of the most intuitive sorting algorithms to understand and implement, it's also one of the least efficient for large datasets due to its quadratic time complexity. The algorithm is primarily used for educational purposes to introduce sorting concepts.",
   
   complexity: {
     time: {

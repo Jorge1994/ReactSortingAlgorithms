@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const timSortInfo: AlgorithmInfo = {
   name: 'Tim Sort',
-  description: 'Tim Sort is a hybrid sorting algorithm derived from merge sort and insertion sort. It was designed by Tim Peters for Python and has become the standard sorting algorithm for Python, Java, and many other languages. It performs exceptionally well on real-world data by identifying existing ordered sequences (runs) and merging them efficiently.',
+  description: 'Timsort is a highly sophisticated hybrid sorting algorithm that represents the pinnacle of practical sorting algorithm design. Created by Tim Peters for Python, it has become the standard sorting algorithm for Python, Java, and many other major programming languages. Timsort excels by recognizing and exploiting existing order in real-world data through its innovative approach of identifying natural runs (consecutive ordered elements) and merging them intelligently. The algorithm uses a combination of merge sort and insertion sort strategies, but goes far beyond simple hybridization. It employs advanced techniques like binary insertion sort for small runs, galloping mode for uneven merge operations, and a sophisticated merging strategy that minimizes temporary memory usage. This makes Timsort exceptionally fast on partially sorted data while maintaining excellent worst-case guarantees.',
   complexity: {
     time: { 
       best: 'O(n)', 

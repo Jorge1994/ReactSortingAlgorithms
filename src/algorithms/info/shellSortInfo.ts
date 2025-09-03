@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const shellSortInfo: AlgorithmInfo = {
   name: 'Shell Sort',
-  description: 'An in-place comparison sort that generalizes insertion sort by allowing the exchange of items that are far apart using a diminishing gap sequence.',
+  description: 'Shell Sort is an innovative generalization of Insertion Sort that overcomes the limitation of only moving elements one position at a time. The algorithm introduces the concept of a \'gap\' or \'increment\' sequence, allowing elements to be compared and moved across larger distances initially, then gradually reducing the gap until it becomes 1 (at which point it performs a final Insertion Sort pass). This approach helps move elements closer to their final positions early in the process, significantly reducing the number of shifts required. The choice of gap sequence dramatically affects performance - while the worst case remains O(n²), many gap sequences achieve sub-quadratic performance. Shell Sort is particularly valuable when Quicksort is undesirable due to its worst-case behavior, and when constant space complexity is required.',
 
   stable: false,
   inPlace: true,

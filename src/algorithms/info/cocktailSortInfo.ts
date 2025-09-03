@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const cocktailSortInfo: AlgorithmInfo = {
   name: 'Cocktail Shaker Sort',
-  description: 'A bidirectional variation of Bubble Sort that passes through the list in both directions alternately to move large elements to the end and small elements to the beginning in each full iteration.',
+  description: 'Cocktail Shaker Sort, also known as Bidirectional Bubble Sort, is an enhanced variation of Bubble Sort that addresses one of its key weaknesses: the tendency for small elements to move slowly toward the beginning of the array. While traditional Bubble Sort only traverses the array in one direction, Cocktail Sort alternates between forward and backward passes. The forward pass moves large elements toward the end, while the backward pass moves small elements toward the beginning. This bidirectional approach can reduce the number of passes required, especially when the array has small elements trapped at the end. Despite these improvements, Cocktail Sort maintains the same asymptotic complexity as Bubble Sort and is primarily used for educational purposes to demonstrate algorithmic variations.',
   complexity: {
     time: { best: 'O(n)', average: 'O(n²)', worst: 'O(n²)' },
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },

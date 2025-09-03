@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const introsortInfo: AlgorithmInfo = {
   name: 'Intro Sort',
-  description: 'Introspective Sort (Introsort) is a hybrid sorting algorithm that provides both fast average performance and excellent worst-case performance. It begins with quicksort and switches to heapsort when the recursion depth exceeds a level based on the number of elements being sorted. For small arrays, it uses insertion sort. This design makes it ideal for real-world applications where performance guarantees are important.',
+  description: 'Introspective Sort (Introsort) is a sophisticated hybrid sorting algorithm that combines the best characteristics of three different sorting strategies to achieve both excellent average performance and guaranteed worst-case behavior. The algorithm begins with Quicksort, leveraging its exceptional average-case performance and cache efficiency. However, it monitors the recursion depth, and when it exceeds a threshold (typically 2×log n), it switches to Heapsort to avoid Quicksort\'s quadratic worst-case scenario. For small subarrays (usually fewer than 16 elements), it employs Insertion Sort, which excels on small datasets. This intelligent combination makes Introsort the algorithm of choice for many standard library implementations, including C++\'s std::sort, as it provides the speed of Quicksort with the reliability of Heapsort.',
   complexity: {
     time: { 
       best: 'O(n log n)', 

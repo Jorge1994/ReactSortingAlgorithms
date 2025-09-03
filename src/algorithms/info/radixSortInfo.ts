@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const radixSortInfo: AlgorithmInfo = {
   name: 'Radix Sort',
-  description: 'A non-comparative sorting algorithm that sorts integers by processing individual digits from least significant to most significant. Uses counting sort as a stable subroutine to sort elements digit by digit.',
+  description: 'Radix Sort is a sophisticated non-comparison sorting algorithm that sorts integers by processing their digits from least significant to most significant. Unlike comparison-based algorithms, Radix Sort achieves linear time complexity by exploiting the structure of numbers themselves. The algorithm works by repeatedly sorting the entire array based on each digit position, using a stable sorting algorithm (typically Counting Sort) as a subroutine. Starting with the least significant digit, it ensures that after processing all digits, elements are completely sorted. The key insight is that numbers with more digits are inherently larger, and among numbers with the same number of digits, lexicographic ordering by digits produces numerical ordering. This makes Radix Sort particularly effective for sorting large datasets of integers or fixed-length strings.',
   stable: true,
   inPlace: false,
   online: false,

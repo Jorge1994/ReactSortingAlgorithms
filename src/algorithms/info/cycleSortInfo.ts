@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const cycleSortInfo: AlgorithmInfo = {
   name: 'Cycle Sort',
-  description: 'Cycle Sort is an in-place, unstable sorting algorithm, optimal in terms of number of writes. It minimizes the number of memory writes by rotating elements into their correct positions through cycles.',
+  description: 'Cycle Sort is a unique in-place sorting algorithm that minimizes the number of memory writes, making it particularly valuable when write operations are expensive (such as with flash memory or EEPROM). The algorithm works by calculating the exact final position of each element and placing it there directly, rather than through a series of swaps. It does this by counting how many elements are smaller than the current element to determine where it should go. When an element is placed in its correct position, it displaces another element, which then needs to be placed in its correct position, creating a "cycle" of moves. Despite its quadratic time complexity, Cycle Sort\'s minimal write characteristic makes it useful in specialized scenarios where reducing wear on memory devices is more important than execution speed.',
   complexity: {
     time: { best: 'O(n^2)', average: 'O(n^2)', worst: 'O(n^2)' },
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },

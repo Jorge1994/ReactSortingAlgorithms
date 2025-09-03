@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const oddEvenSortInfo: AlgorithmInfo = {
   name: 'Odd-Even Sort',
-  description: 'Also known as Brick Sort; repeatedly performs bubble-like passes on even-odd and odd-even indexed pairs until the array is sorted.',
+  description: 'Odd-Even Sort, also known as Brick Sort, is a parallel sorting algorithm that demonstrates how bubble sort concepts can be adapted for concurrent execution. The algorithm alternates between two phases: in the odd phase, it compares and swaps elements at positions (1,2), (3,4), (5,6), etc., while in the even phase, it compares elements at positions (0,1), (2,3), (4,5), etc. This separation allows multiple comparisons to occur simultaneously without interference, as no two operations access the same memory location. While maintaining the same O(n²) sequential complexity as bubble sort, Odd-Even Sort can achieve significant speedup on parallel processors. The algorithm is particularly valuable for teaching parallel algorithm concepts and has practical applications in parallel computing environments and SIMD (Single Instruction, Multiple Data) architectures.',
   complexity: {
     time: {
       best: 'O(n)',

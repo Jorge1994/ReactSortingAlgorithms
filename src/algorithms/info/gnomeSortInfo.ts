@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from "../../types/algorithmInfo";
 
 export const gnomeSortInfo: AlgorithmInfo = {
   name: "Gnome Sort",
-  description: "Gnome Sort is a simple, intuitive sorting algorithm similar to insertion sort but using swaps to move elements to their correct position by stepping backwards when necessary. However, this sorting algorithm is adaptive and performs better when the array is already or partially sorted.",
+  description: "Gnome Sort, also known as Stupid Sort, is a delightfully simple sorting algorithm that mimics the way a garden gnome might sort a line of flower pots. The algorithm works by moving forward through the array, and whenever it encounters two adjacent elements that are out of order, it swaps them and steps backward to check if the newly placed element needs to be moved further back. This process continues until the element finds its correct position, at which point the algorithm resumes moving forward. While Gnome Sort has the same time complexity as Bubble Sort, its straightforward logic makes it one of the easiest sorting algorithms to understand and implement. The algorithm is adaptive, performing significantly better on partially sorted data, and maintains stability throughout the sorting process.",
   stable: true,
   inPlace: true,
   online: false,

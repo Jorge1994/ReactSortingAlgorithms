@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const heapSortInfo: AlgorithmInfo = {
   name: 'Heap Sort',
-  description: 'Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure to efficiently sort elements. It works by first building a max heap from the input array, then repeatedly extracting the maximum element and placing it at the end of the array. This algorithm combines the better attributes of merge sort and insertion sort: like merge sort, it has O(n log n) time complexity, and like insertion sort, it sorts in-place with O(1) space complexity.',
+  description: 'Heap Sort is a comparison-based sorting algorithm that leverages the binary heap data structure to achieve consistent O(n log n) performance. The algorithm operates in two main phases: first, it transforms the input array into a max heap where each parent node is greater than its children; then, it repeatedly extracts the maximum element (root of the heap) and places it at the end of the array while maintaining the heap property for the remaining elements. This approach combines the best aspects of merge sort\'s guaranteed performance with insertion sort\'s in-place operation. Unlike Quick Sort, Heap Sort never degrades beyond O(n log n), making it suitable for real-time systems where predictable performance is crucial.',
   stable: false,
   inPlace: true,
   online: false,
