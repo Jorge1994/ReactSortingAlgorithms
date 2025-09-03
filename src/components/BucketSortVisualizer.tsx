@@ -352,7 +352,7 @@ export function BucketSortVisualizer({
   const isArrayEmpty = originalArrayElements.filter(el => el.isInOriginalArray).length === 0;
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-6 space-y-3">
+    <div className="w-full px-4 py-6 space-y-6">
       {/* Algorithm Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Bucket Sort Visualization</h1>
@@ -362,18 +362,21 @@ export function BucketSortVisualizer({
         </p>
       </div>
 
-      {/* Current Phase Display */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-        <h3 className="font-semibold text-blue-900 mb-1">Current Phase</h3>
-        <p className="text-blue-800">{currentPhase}</p>
-      </div>
+      {/* Unified Visualization Section */}
+      <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div className="p-8 pb-4 space-y-6">
+          {/* Current Phase Display */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="font-semibold text-blue-900 mb-1">Current Phase</h3>
+            <p className="text-blue-800">{currentPhase}</p>
+          </div>
 
-      {/* Original Array */}
-      <div className="bg-white border border-gray-200 rounded-lg p-3">
-        <h3 className="text-lg font-semibold text-gray-900 mb-1">
-          {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
-        </h3>
-        <div className="flex flex-wrap gap-2 justify-center min-h-[48px] items-center">
+          {/* Original Array */}
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
+            </h3>
+            <div className="flex flex-wrap gap-2 justify-center min-h-[48px] items-center">
           {isArrayEmpty && operationType !== 'concatenate' ? (
             <motion.div
               key="empty-message"
@@ -410,16 +413,16 @@ export function BucketSortVisualizer({
                 ))}
             </AnimatePresence>
           )}
+          </div>
         </div>
-      </div>
 
-      {/* Buckets Display */}
-      {numBuckets > 0 && (
-        <div className="bg-white border border-gray-200 rounded-lg p-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Buckets ({numBuckets} total)
-          </h3>
-          <div className="space-y-2">
+        {/* Buckets Display */}
+        {numBuckets > 0 && (
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Buckets ({numBuckets} total)
+            </h3>
+            <div className="space-y-2">
             {Array.from({ length: numBuckets }, (_, bucketIndex) => (
               <motion.div
                 key={`bucket-${bucketIndex}`}
@@ -471,9 +474,11 @@ export function BucketSortVisualizer({
                 </div>
               </motion.div>
             ))}
+            </div>
           </div>
+        )}
         </div>
-      )}
+      </section>
 
       {/* Controls */}
       <AnimationControls
