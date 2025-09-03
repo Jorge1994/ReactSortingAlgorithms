@@ -72,16 +72,16 @@ export const timSortInfo: AlgorithmInfo = {
       unsorted: '#6B7280'      // Gray for unsorted elements
     },
     phases: [
-      "Phase 1: Run Detection - Identify existing ordered sequences in the input",
-      "Phase 2: Minimum Run Length - Calculate optimal run size (typically 32-64 elements)",
-      "Phase 3: Insertion Sort - Sort individual runs using insertion sort for efficiency",
-      "Phase 4: Run Creation - Create artificial runs if natural ones are too small",
-      "Phase 5: Merge Strategy - Plan optimal merging order using stack-based approach",
-      "Phase 6: Binary Merge - Merge adjacent runs using binary insertion techniques",
-      "Phase 7: Galloping Mode - Optimize merging when one run consistently wins",
-      "Phase 8: Stack Management - Maintain invariants to ensure balanced merging",
-      "Phase 9: Final Merge - Complete remaining merge operations",
-      "Phase 10: Verification - Ensure final array is completely sorted and stable"
+      "Run Detection - Identify existing ordered sequences in the input",
+      "Minimum Run Length - Calculate optimal run size (typically 32-64 elements)",
+      "Insertion Sort - Sort individual runs using insertion sort for efficiency",
+      "Run Creation - Create artificial runs if natural ones are too small",
+      "Merge Strategy - Plan optimal merging order using stack-based approach",
+      "Binary Merge - Merge adjacent runs using binary insertion techniques",
+      "Galloping Mode - Optimize merging when one run consistently wins",
+      "Stack Management - Maintain invariants to ensure balanced merging",
+      "Final Merge - Complete remaining merge operations",
+      "Verification - Ensure final array is completely sorted and stable"
     ]
   }
 };
