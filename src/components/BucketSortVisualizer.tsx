@@ -363,14 +363,14 @@ export function BucketSortVisualizer({
       </div>
 
       {/* Current Phase Display */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 mb-2">Current Phase</h3>
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+        <h3 className="font-semibold text-blue-900 mb-1">Current Phase</h3>
         <p className="text-blue-800">{currentPhase}</p>
       </div>
 
       {/* Original Array */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+      <div className="bg-white border border-gray-200 rounded-lg p-3">
+        <h3 className="text-lg font-semibold text-gray-900 mb-1">
           {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
         </h3>
         <div className="flex flex-wrap gap-2 justify-center min-h-[48px] items-center">
@@ -415,8 +415,8 @@ export function BucketSortVisualizer({
 
       {/* Buckets Display */}
       {numBuckets > 0 && (
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
             Buckets ({numBuckets} total)
           </h3>
           <div className="space-y-2">
