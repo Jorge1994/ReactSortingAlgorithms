@@ -99,12 +99,24 @@ public class CountingSort {
         System.arraycopy(output, 0, arr, 0, arr.length);
     }
     
-    // Example usage
     public static void main(String[] args) {
-        int[] numbers = {4, 2, 2, 8, 3, 3, 1};
-        System.out.println("Original: " + Arrays.toString(numbers));
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
         countingSort(numbers);
-        System.out.println("Sorted: " + Arrays.toString(numbers));
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     ".java"

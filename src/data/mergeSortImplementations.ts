@@ -168,27 +168,24 @@ public class MergeSort {
         }
     }
     
-    /**
-     * Main method with examples and testing.
-     */
     public static void main(String[] args) {
-        // Test with integers
-        Integer[] intArray = {64, 34, 25, 12, 22, 11, 90};
-        System.out.println("Original integer array:");
-        System.out.println(Arrays.toString(intArray));
+        Integer[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
-        Integer[] sortedIntArray = mergeSort(intArray);
-        System.out.println("Sorted integer array:");
-        System.out.println(Arrays.toString(sortedIntArray));
+        System.out.println("Original array:");
+        printArray(numbers);
         
-        // Test with strings
-        String[] stringArray = {"banana", "apple", "cherry", "date"};
-        System.out.println("\\nOriginal string array:");
-        System.out.println(Arrays.toString(stringArray));
+        Integer[] sorted = mergeSort(numbers);
         
-        String[] sortedStringArray = mergeSort(stringArray);
-        System.out.println("Sorted string array:");
-        System.out.println(Arrays.toString(sortedStringArray));
+        System.out.println("Sorted array:");
+        printArray(sorted);
+    }
+    
+    // Helper method to print array
+    public static void printArray(Integer[] arr) {
+        for (Integer value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     ".java"

@@ -263,18 +263,24 @@ public class IntroSort {
         arr[j] = temp;
     }
     
-    // Performance testing
     public static void main(String[] args) {
-        Integer[] numbers = {64, 34, 25, 12, 22, 11, 90, 88, 5, 76, 50, 3};
-        String[] words = {"banana", "apple", "cherry", "date", "elderberry"};
+        Integer[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
-        System.out.println("Before sorting numbers: " + Arrays.toString(numbers));
+        System.out.println("Original array:");
+        printArray(numbers);
+        
         sort(numbers);
-        System.out.println("After sorting numbers: " + Arrays.toString(numbers));
         
-        System.out.println("\\nBefore sorting words: " + Arrays.toString(words));
-        sort(words);
-        System.out.println("After sorting words: " + Arrays.toString(words));
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(Integer[] arr) {
+        for (Integer value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     "java"

@@ -54,12 +54,24 @@ print(f"Sorted: {sorted_numbers}")
         }
     }
 
-    // Example usage - runnable from command line
     public static void main(String[] args) {
         int[] numbers = {64, 34, 25, 12, 22, 11, 90};
-        System.out.println("Original array: " + java.util.Arrays.toString(numbers));
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
         shellSort(numbers);
-        System.out.println("Sorted array: " + java.util.Arrays.toString(numbers));
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }
 `,

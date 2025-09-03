@@ -145,17 +145,24 @@ public class HeapSort {
         arr[j] = temp;
     }
     
-    /**
-     * Test method to demonstrate heap sort functionality.
-     */
     public static void main(String[] args) {
         int[] numbers = {64, 34, 25, 12, 22, 11, 90};
-        int[] original = Arrays.copyOf(numbers, numbers.length);
+        
+        System.out.println("Original array:");
+        printArray(numbers);
         
         heapSort(numbers);
         
-        System.out.println("Original: " + Arrays.toString(original));
-        System.out.println("Sorted: " + Arrays.toString(numbers));
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     "java"

@@ -76,20 +76,23 @@ print(f"Sorted: {sorted_numbers}")`,
         }
     }
 
-    private static void printArray(int[] arr) {
-        for (int v : arr) System.out.print(v + " ");
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
         System.out.println();
     }
 
     public static void main(String[] args) {
-        int[] numbers = {3, 2, 5, 1, 4};
-
-        System.out.print("Original: ");
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
         printArray(numbers);
-
+        
         oddEvenSort(numbers);
-
-        System.out.print("Sorted:   ");
+        
+        System.out.println("Sorted array:");
         printArray(numbers);
     }
 }

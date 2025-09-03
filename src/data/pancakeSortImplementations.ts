@@ -70,17 +70,23 @@ print(f"Sorted: {sorted_numbers}")
         }
     }
 
-    // Runnable example
     public static void main(String[] args) {
-        int[] nums = {3, 6, 1, 5, 2, 4};
-        System.out.print("Original: ");
-        for (int v : nums) System.out.print(v + " ");
-        System.out.println();
-
-        pancakeSort(nums);
-
-        System.out.print("Sorted:   ");
-        for (int v : nums) System.out.print(v + " ");
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        pancakeSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
         System.out.println();
     }
 }

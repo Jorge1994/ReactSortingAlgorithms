@@ -63,19 +63,22 @@ print(f"Sorted: {sorted_numbers}")`,
     }
 
     public static void main(String[] args) {
-        int[] numbers = {34, 2, 78, 1, 45, 90, 12};
-
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
         System.out.println("Original array:");
         printArray(numbers);
-
+        
         gnomeSort(numbers);
-
+        
         System.out.println("Sorted array:");
         printArray(numbers);
     }
-
-    private static void printArray(int[] arr) {
-        for (int v : arr) System.out.print(v + " ");
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
         System.out.println();
     }
 }`,

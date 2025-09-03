@@ -57,18 +57,22 @@ print(f"Sorted: {sorted_numbers}")
     }
 
     public static void main(String[] args) {
-        int[] numbers = {64,34,25,12,22,11,90,1,5,3,9,8,7,6,2,0}; // 16 elements
-        System.out.println("Original:");
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90, 0}; // 8 elements (power of 2)
+        
+        System.out.println("Original array:");
         printArray(numbers);
-
+        
         bitonicSort(numbers);
-
-        System.out.println("Sorted:");
+        
+        System.out.println("Sorted array:");
         printArray(numbers);
     }
-
-    private static void printArray(int[] arr) {
-        for (int v : arr) System.out.print(v + " ");
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
         System.out.println();
     }
 }

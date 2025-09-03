@@ -186,13 +186,24 @@ public class TimSort {
         }
     }
     
-    // Example usage
     public static void main(String[] args) {
-        int[] testArray = {64, 34, 25, 12, 22, 11, 90, 5, 77, 30};
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
-        System.out.println("Original array: " + Arrays.toString(testArray));
-        timSort(testArray);
-        System.out.println("Sorted array: " + Arrays.toString(testArray));
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        timSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     "java"

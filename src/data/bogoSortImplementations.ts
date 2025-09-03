@@ -53,10 +53,24 @@ public class BogoSort {
   }
 
   public static void main(String[] args) {
-    int[] arr = {3, 1, 2};
-    bogoSort(arr);
-    System.out.println(Arrays.toString(arr));
-  }
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        bogoSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
 }
 `,
     ".java"

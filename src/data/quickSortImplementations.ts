@@ -92,12 +92,24 @@ public class QuickSort {
   }
 
   public static void main(String[] args) {
-    // Single example array (before -> after)
-    int[] test = {64, 34, 25, 12, 22, 11, 90};
-    int[] original = Arrays.copyOf(test, test.length);
-    if (test.length > 0) quickSort(test, 0, test.length - 1);
-    System.out.println("Original: " + Arrays.toString(original) + " -> Sorted: " + Arrays.toString(test));
-  }
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        if (numbers.length > 0) quickSort(numbers, 0, numbers.length - 1);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
 }
 `,
     ".java"

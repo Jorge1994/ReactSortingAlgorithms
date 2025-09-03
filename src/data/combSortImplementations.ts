@@ -71,10 +71,24 @@ public class CombSort {
   }
 
   public static void main(String[] args) {
-    int[] nums = {8, 4, 1, 56, 3, -44, 23, -6, 28, 0};
-    combSort(nums);
-    System.out.println(Arrays.toString(nums));
-  }
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        combSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
 }
 `,
     ".java"

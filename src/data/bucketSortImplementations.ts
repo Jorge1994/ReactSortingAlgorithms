@@ -140,22 +140,24 @@ public class BucketSort {
     
     public static void main(String[] args) {
         List<Double> numbers = Arrays.asList(
-            64.5, 34.2, 25.8, 12.1, 22.9, 11.3, 90.7, 5.4
+            64.0, 34.0, 25.0, 12.0, 22.0, 11.0, 90.0
         );
         
-        System.out.println("Original: " + numbers);
-        List<Double> sorted = bucketSort(numbers);
-        System.out.println("Sorted: " + sorted);
+        System.out.println("Original array:");
+        printArray(numbers);
         
-        // Verify sorting
-        boolean isSorted = true;
-        for (int i = 1; i < sorted.size(); i++) {
-            if (sorted.get(i - 1) > sorted.get(i)) {
-                isSorted = false;
-                break;
-            }
+        List<Double> sorted = bucketSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(sorted);
+    }
+    
+    // Helper method to print array
+    public static void printArray(List<Double> arr) {
+        for (double value : arr) {
+            System.out.print(value + " ");
         }
-        System.out.println("Is sorted: " + isSorted);
+        System.out.println();
     }
 }`,
     "java"

@@ -94,12 +94,25 @@ print(f"Sorted: {sorted_numbers}")
     }
   }
 
-  // Optional: helper to test
   public static void main(String[] args) {
-    int[] data = {3, 5, 2, 1, 4};
-    cycleSort(data);
-    for (int v : data) System.out.print(v + " ");
-  }
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        
+        System.out.println("Original array:");
+        printArray(numbers);
+        
+        cycleSort(numbers);
+        
+        System.out.println("Sorted array:");
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
 }
 `,
   fileExtension: '.java'

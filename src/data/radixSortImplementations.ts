@@ -212,39 +212,24 @@ public class RadixSort {
         System.out.println(Arrays.toString(arr));
     }
     
-    /**
-     * Main method for testing
-     */
     public static void main(String[] args) {
-        int[] testArray = {170, 45, 75, 90, 2, 802, 24, 66};
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
         System.out.println("Original array:");
-        printArray(testArray);
+        printArray(numbers);
         
-        radixSort(testArray);
+        radixSort(numbers);
         
         System.out.println("Sorted array:");
-        printArray(testArray);
-        
-        // Test with edge cases
-        int[] emptyArray = {};
-        int[] singleElement = {42};
-        int[] alreadySorted = {1, 2, 3, 4, 5};
-        int[] reverseSorted = {9, 8, 7, 6, 5};
-        
-        System.out.println("\\nTesting edge cases:");
-        
-        radixSort(emptyArray);
-        System.out.println("Empty array: " + Arrays.toString(emptyArray));
-        
-        radixSort(singleElement);
-        System.out.println("Single element: " + Arrays.toString(singleElement));
-        
-        radixSort(alreadySorted);
-        System.out.println("Already sorted: " + Arrays.toString(alreadySorted));
-        
-        radixSort(reverseSorted);
-        System.out.println("Reverse sorted: " + Arrays.toString(reverseSorted));
+        printArray(numbers);
+    }
+    
+    // Helper method to print array
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }`,
     "java"
