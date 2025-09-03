@@ -29,9 +29,11 @@ export const stoogeSortImplementations: AlgorithmImplementations = {
 
     return arr
 
-# Example
-nums = [2, 4, 5, 3, 1]
-print(stooge_sort(nums.copy()))`,
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = stooge_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     ".py"
   ),
 

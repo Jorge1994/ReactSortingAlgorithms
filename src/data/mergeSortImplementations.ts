@@ -64,23 +64,10 @@ def merge(left, right):
     return result
 
 # Example usage
-if __name__ == "__main__":
-    # Test with various arrays
-    test_arrays = [
-        [64, 34, 25, 12, 22, 11, 90],
-        [5, 2, 4, 6, 1, 3],
-        [1],  # Single element
-        [],   # Empty array
-        [3, 3, 3, 3],  # Duplicate elements
-        [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]  # Reverse sorted
-    ]
-    
-    for arr in test_arrays:
-        original = arr.copy()
-        sorted_arr = merge_sort(arr)
-        print(f"Original: {original}")
-        print(f"Sorted:   {sorted_arr}")
-        print("-" * 40)`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = merge_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     ".py"
   ),
 

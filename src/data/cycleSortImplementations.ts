@@ -43,12 +43,11 @@ export const cycleSortImplementations: AlgorithmImplementations = {
 
   return arr
 
-if __name__ == '__main__':
-  # Example usage: copy-paste this snippet into a file and run python filename.py
-  data = [3, 5, 2, 1, 4]
-  print('Original:', data)
-  sorted_data = cycle_sort(data.copy())
-  print('Sorted:  ', sorted_data)
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = cycle_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")
   `,
   fileExtension: '.py'
   },

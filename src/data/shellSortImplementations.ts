@@ -28,11 +28,10 @@ export const shellSortImplementations: AlgorithmImplementations = {
     return arr
 
 # Example usage
-if __name__ == "__main__":
-    numbers = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", numbers)
-    shell_sort(numbers)
-    print("Sorted array:", numbers)
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = shell_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")
 `,
     ".py"
   ),

@@ -16,8 +16,10 @@ def bogo_sort(a):
     return a
 
 # Example usage
-arr = [3, 1, 2]
-print(bogo_sort(arr))`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = bogo_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     ".py"
   ),
 

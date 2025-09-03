@@ -25,7 +25,7 @@ export const gnomeSortImplementations = {
     return arr
 
 # Example usage
-numbers = [34, 2, 78, 1, 45, 90, 12]
+numbers = [64, 34, 25, 12, 22, 11, 90]
 sorted_numbers = gnome_sort(numbers.copy())
 print(f"Original: {numbers}")
 print(f"Sorted: {sorted_numbers}")`,

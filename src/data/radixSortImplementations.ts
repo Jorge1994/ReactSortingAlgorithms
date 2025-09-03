@@ -57,12 +57,10 @@ def counting_sort_by_digit(arr, exp):
         arr[i] = output[i]
 
 # Example usage
-if __name__ == "__main__":
-    test_array = [170, 45, 75, 90, 2, 802, 24, 66]
-    print(f"Original array: {test_array}")
-    
-    radix_sort(test_array)
-    print(f"Sorted array: {test_array}")`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = radix_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     "python"
   ),
   

@@ -47,7 +47,7 @@ export const cocktailSortImplementations: AlgorithmImplementations = {
     return arr
 
 # Example usage
-numbers = [5, 1, 4, 2, 8, 0, 2]
+numbers = [64, 34, 25, 12, 22, 11, 90]
 sorted_numbers = cocktail_shaker_sort(numbers.copy())
 print(f"Original: {numbers}")
 print(f"Sorted: {sorted_numbers}")`,

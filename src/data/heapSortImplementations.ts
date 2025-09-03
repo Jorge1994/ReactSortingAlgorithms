@@ -17,7 +17,7 @@ export const heapSortImplementations: AlgorithmImplementations = {
         arr: List of comparable elements to sort
     
     Returns:
-        None (sorts in-place)
+        Sorted array
     """
     n = len(arr)
     
@@ -33,6 +33,8 @@ export const heapSortImplementations: AlgorithmImplementations = {
         
         # Call heapify on the reduced heap
         heapify(arr, i, 0)
+    
+    return arr
 
 def heapify(arr, heap_size, root_index):
     """
@@ -61,12 +63,10 @@ def heapify(arr, heap_size, root_index):
         heapify(arr, heap_size, largest)
 
 # Example usage
-if __name__ == "__main__":
-    numbers = [64, 34, 25, 12, 22, 11, 90]
-    original = numbers.copy()
-    heap_sort(numbers)
-    print(f"Original: {original}")
-    print(f"Sorted: {numbers}")`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = heap_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     "py"
   ),
 

@@ -29,9 +29,11 @@ export const combSortImplementations: AlgorithmImplementations = {
 
     return arr
 
-# Example
-nums = [8, 4, 1, 56, 3, -44, 23, -6, 28, 0]
-print(comb_sort(nums.copy()))`,
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = comb_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     ".py"
   ),
 

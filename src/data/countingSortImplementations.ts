@@ -46,10 +46,10 @@ export const countingSortImplementations: AlgorithmImplementations = {
     return arr
 
 # Example usage
-numbers = [4, 2, 2, 8, 3, 3, 1]
-print("Original:", numbers)
-counting_sort(numbers)
-print("Sorted:", numbers)`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = counting_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     ".py"
   ),
 

@@ -129,25 +129,10 @@ def heapsort(arr, begin, end):
         heapify(arr, i, 0, begin)
 
 # Example usage
-if __name__ == "__main__":
-    # Test with various array sizes and patterns
-    test_arrays = [
-        [64, 34, 25, 12, 22, 11, 90, 88, 5],  # Random
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],          # Already sorted
-        [9, 8, 7, 6, 5, 4, 3, 2, 1],          # Reverse sorted
-        [5, 5, 5, 5, 5],                       # All equal
-        [1],                                   # Single element
-        []                                     # Empty array
-    ]
-    
-    for i, arr in enumerate(test_arrays):
-        original = arr.copy()
-        sorted_arr = introsort(arr.copy())
-        print(f"Test {i + 1}:")
-        print(f"Original: {original}")
-        print(f"Sorted:   {sorted_arr}")
-        print(f"Correct:  {sorted_arr == sorted(original)}")
-        print()`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = introsort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     "py"
   ),
 

@@ -26,11 +26,10 @@ export const bitonicSortImplementations: AlgorithmImplementations = {
     return arr
 
 # Example usage
-if __name__ == "__main__":
-    numbers = [64, 34, 25, 12, 22, 11, 90, 1, 5, 3, 9, 8, 7, 6, 2, 0]  # 16 elements
-    print("Original:", numbers)
-    bitonic_sort(numbers)
-    print("Sorted:", numbers)
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = bitonic_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")
 `,
     ".py"
   ),

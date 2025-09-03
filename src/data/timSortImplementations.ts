@@ -86,12 +86,10 @@ def tim_sort(arr):
     return arr
 
 # Example usage
-if __name__ == "__main__":
-    test_array = [64, 34, 25, 12, 22, 11, 90, 5, 77, 30]
-    print("Original array:", test_array)
-    
-    sorted_array = tim_sort(test_array.copy())
-    print("Sorted array:", sorted_array)`,
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = tim_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")`,
     "py"
   ),
   

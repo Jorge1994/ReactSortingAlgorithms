@@ -36,14 +36,16 @@ def quickSort(arr, low, high):
     quickSort(arr, low, pi - 1)
     quickSort(arr, pi + 1, high)
 
+def quick_sort(arr):
+    if len(arr) > 0:
+        quickSort(arr, 0, len(arr) - 1)
+    return arr
 
 # Example usage
-if __name__ == "__main__":
-  test = [64, 34, 25, 12, 22, 11, 90]
-  original = test.copy()
-  if len(test) > 0:
-    quickSort(test, 0, len(test) - 1)
-  print(f"Original: {original} -> Sorted: {test}")
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = quick_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")
 `,
     ".py"
   ),

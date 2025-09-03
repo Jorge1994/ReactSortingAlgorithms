@@ -27,12 +27,13 @@ def pancake_sort(arr):
         if mi != curr_size - 1:
             flip(arr, mi)
             flip(arr, curr_size - 1)
+    return arr
 
-if __name__ == '__main__':
-    nums = [3, 6, 1, 5, 2, 4]
-    print('Original:', nums)
-    pancake_sort(nums)
-    print('Sorted:  ', nums)
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+sorted_numbers = pancake_sort(numbers.copy())
+print(f"Original: {numbers}")
+print(f"Sorted: {sorted_numbers}")
 `,
     ".py"
   ),
