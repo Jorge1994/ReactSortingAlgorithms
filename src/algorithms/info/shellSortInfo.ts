@@ -66,9 +66,21 @@ export const shellSortInfo: AlgorithmInfo = {
       unsorted: '#6B7280'
     },
     phases: [
-      'Gap Phases: Repeated passes over the array using a diminishing gap sequence',
-      'Gapped Insertion: Each pass performs insertion-sort-like swaps but only between elements gap apart',
-      'Refinement: As gap decreases, the array becomes more locally sorted until a final pass with gap=1 finishes the sort'
+      "Gap Sequence Initialization: Start with a large gap (typically n/2) to allow elements to move across long distances",
+
+      "Large Gap Sorting: Perform insertion sort on elements that are 'gap' positions apart, creating multiple sorted subsequences",
+
+      "Gap Reduction: Reduce the gap size (commonly by dividing by 2) to create more, smaller subsequences for progressive refinement",
+
+      "Medium Gap Processing: Continue insertion sorting with reduced gap, fine-tuning element positions with fewer movements required",
+
+      "Progressive Refinement: Repeat gap reduction and sorting process, making the array increasingly ordered with each iteration",
+
+      "Small Gap Optimization: As gaps become smaller, insertion sort operations become more efficient due to pre-sorting",
+
+      "Final Pass (Gap = 1): Perform standard insertion sort pass, which is highly efficient on the substantially pre-sorted array",
+
+      "Local Adjustments: Final pass makes minor local adjustments, moving elements short distances to complete the sorting process"
     ]
   }
 };
