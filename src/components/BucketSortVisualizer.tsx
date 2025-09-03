@@ -419,7 +419,7 @@ export function BucketSortVisualizer({
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Buckets ({numBuckets} total)
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {Array.from({ length: numBuckets }, (_, bucketIndex) => (
               <motion.div
                 key={`bucket-${bucketIndex}`}
