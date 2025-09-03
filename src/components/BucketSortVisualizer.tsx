@@ -373,7 +373,7 @@ export function BucketSortVisualizer({
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
         </h3>
-        <div className="flex flex-wrap gap-2 justify-center min-h-[80px] items-center">
+        <div className="flex flex-wrap gap-2 justify-center min-h-[60px] items-center">
           {isArrayEmpty && operationType !== 'concatenate' ? (
             <motion.div
               key="empty-message"
@@ -431,7 +431,7 @@ export function BucketSortVisualizer({
                   <span className="text-sm font-medium text-gray-700 w-20">
                     Bucket {bucketIndex}:
                   </span>
-                  <div className="flex flex-wrap gap-2 h-[40px] items-center">
+                  <div className="flex flex-wrap gap-2 h-[24px] items-center">
                     <AnimatePresence mode="popLayout">
                       {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
                         <motion.span
