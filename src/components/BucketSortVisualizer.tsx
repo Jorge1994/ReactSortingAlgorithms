@@ -391,7 +391,7 @@ export function BucketSortVisualizer({
                 .map((element) => (
                   <motion.div
                     key={element.elementId}
-                    className="w-16 h-16 flex items-center justify-center rounded-lg border-2 text-white font-bold"
+                    className="w-12 h-12 flex items-center justify-center rounded-lg border-2 text-white font-bold"
                     style={{ backgroundColor: getElementColor(element) }}
                     layout
                     initial={{ scale: 0, opacity: 0 }}
@@ -447,7 +447,7 @@ export function BucketSortVisualizer({
                         bucketElements[bucketIndex].map((element, elementIndex) => (
                           <motion.div
                             key={`bucket-${bucketIndex}-${element.value}-${elementIndex}`}
-                            className="w-12 h-12 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white"
+                            className="w-10 h-10 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white"
                             style={{ backgroundColor: getElementColor(element) }}
                             layout
                             initial={{ scale: 0, opacity: 0, x: -30 }}
