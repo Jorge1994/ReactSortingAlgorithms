@@ -88,7 +88,7 @@ function VisualizerPage() {
               onGenerateArray={generateNewArray}
               arraySize={arraySize}
               onArraySizeChange={changeArraySize}
-              maxSize={currentAlgorithm === 'counting-sort' ? 50 : 100}
+              maxSize={currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort' ? 50 : 100}
               selectedAlgorithm={currentAlgorithm}
             />
         </section>
