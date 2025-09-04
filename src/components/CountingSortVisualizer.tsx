@@ -286,6 +286,7 @@ export function CountingSortVisualizer({
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
       showStatistics={false}
+      showAnimationControls={false}
       customControls={customStatistics}
     >
       <div className="space-y-6">

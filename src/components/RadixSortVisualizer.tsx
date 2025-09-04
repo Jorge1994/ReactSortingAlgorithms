@@ -360,6 +360,7 @@ export function RadixSortVisualizer({
       onSpeedChange={onSpeedChange}
       showStatistics={false}
       showColorLegend={false}
+      showAnimationControls={false}
       customControls={customStatistics}
     >
       <div className="space-y-6">

@@ -21,6 +21,7 @@ interface VisualizerTemplateProps {
   onSpeedChange: (speed: number) => void;
   showStatistics?: boolean;
   showColorLegend?: boolean;
+  showAnimationControls?: boolean;
   customControls?: ReactNode;
 }
 
@@ -41,6 +42,7 @@ export function VisualizerTemplate({
   onSpeedChange,
   showStatistics = true,
   showColorLegend = true,
+  showAnimationControls = true,
   customControls
 }: VisualizerTemplateProps) {
   const togglePlay = () => {
@@ -80,18 +82,20 @@ export function VisualizerTemplate({
       )}
 
       {/* Animation Controls */}
-      <AnimationControls
-        isPlaying={isPlaying}
-        onPlay={togglePlay}
-        onPause={onPause}
-        onNext={stepForward}
-        onPrev={stepBackward}
-        onReset={onReset}
-        canPlayNext={canPlayNext}
-        canPlayPrev={canPlayPrev}
-        animationSpeed={speed}
-        onSpeedChange={onSpeedChange}
-      />
+      {showAnimationControls && (
+        <AnimationControls
+          isPlaying={isPlaying}
+          onPlay={togglePlay}
+          onPause={onPause}
+          onNext={stepForward}
+          onPrev={stepBackward}
+          onReset={onReset}
+          canPlayNext={canPlayNext}
+          canPlayPrev={canPlayPrev}
+          animationSpeed={speed}
+          onSpeedChange={onSpeedChange}
+        />
+      )}
 
       {/* Statistics Panel */}
       {showStatistics && currentStepData && (

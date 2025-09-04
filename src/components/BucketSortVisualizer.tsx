@@ -69,6 +69,10 @@ export function BucketSortVisualizer({
       elementId: `element-${index}-${value}`
     }));
     setOriginalArrayElements(elements);
+    
+    // Clear buckets when display array changes (like on reset)
+    setBucketElements([]);
+    setNumBuckets(0);
   }, [displayArray]);
 
   // Initialize buckets from steps
@@ -77,12 +81,39 @@ export function BucketSortVisualizer({
       const buckets = steps[0].metadata.buckets;
       setNumBuckets(buckets.length);
       setBucketElements(Array.from({ length: buckets.length }, () => []));
+    } else {
+      // If no steps or no buckets metadata, clear everything
+      setNumBuckets(0);
+      setBucketElements([]);
     }
   }, [steps]);
 
   // Update element positions based on current step - COMPLETELY REBUILD STATE FROM STEP
   useEffect(() => {
     if (steps.length === 0 || currentStep >= steps.length) return;
+    
+    // If we're at step 0 after a reset, clear all bucket states
+    if (currentStep === 0) {
+      setBucketElements(() => {
+        if (numBuckets > 0) {
+          return Array.from({ length: numBuckets }, () => []);
+        }
+        return [];
+      });
+      
+      // Reset original array to initial state
+      const elements: ElementPosition[] = displayArray.map((value, index) => ({
+        value,
+        originalIndex: index,
+        isInOriginalArray: true,
+        bucketIndex: undefined,
+        isMoving: false,
+        isSorted: false,
+        elementId: `element-${index}-${value}`
+      }));
+      setOriginalArrayElements(elements);
+      return;
+    }
     
     const currentStepData = steps[currentStep];
     const operationType = currentStepData.metadata?.operationType;
@@ -312,12 +343,13 @@ export function BucketSortVisualizer({
     // Cancel any pending timeouts
     clearAllTimeouts();
     
-    // Use the parent's reset function
-    onReset();
-    
-    // Reset bucket state
+    // Reset all bucket and element state first
     setBucketElements([]);
     setNumBuckets(0);
+    setOriginalArrayElements([]);
+    
+    // Use the parent's reset function
+    onReset();
   };
 
   const getElementColor = (element: ElementPosition) => {
@@ -344,6 +376,7 @@ export function BucketSortVisualizer({
       canPlayNext={canPlayNext}
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
+      showAnimationControls={false}
     >
       <div className="space-y-6">
         {/* Current Phase Display */}

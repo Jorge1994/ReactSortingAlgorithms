@@ -8,7 +8,7 @@ import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { CountingSortVisualizer } from './components/CountingSortVisualizer';
 import { RadixSortVisualizer } from './components/RadixSortVisualizer';
 import { BucketSortVisualizer } from './components/BucketSortVisualizer';
-import { ArrayControls } from './components/ArrayControls';
+import { CombinedControls } from './components/CombinedControls';
 import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
 
@@ -78,83 +78,95 @@ function VisualizerPage() {
       />
       
       <main className="w-full px-4 py-6 space-y-6">
-        {/* Array Controls */}
+        {/* Combined Controls - Array and Animation */}
         <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
-            <ArrayControls
+            <CombinedControls
               onGenerateArray={generateNewArray}
               arraySize={arraySize}
               onArraySizeChange={changeArraySize}
               maxSize={currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort' ? 50 : 100}
               selectedAlgorithm={currentAlgorithm}
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              isPlaying={isPlaying}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              animationSpeed={animationSpeed}
+              onSpeedChange={setAnimationSpeed}
             />
         </section>
 
         {/* Array Visualization */}
-        {currentAlgorithm === 'counting-sort' ? (
-          <CountingSortVisualizer 
-            displayArray={displayArray}
-            steps={steps}
-            currentStep={currentStep}
-            isPlaying={isPlaying}
-            speed={animationSpeed}
-            onPlay={playAnimation}
-            onPause={pauseAnimation}
-            onNext={nextStep}
-            onPrev={prevStep}
-            onReset={reset}
-            canPlayNext={canPlayNext}
-            canPlayPrev={canPlayPrev}
-            onSpeedChange={setAnimationSpeed}
-          />
-        ) : currentAlgorithm === 'radix-sort' ? (
-          <RadixSortVisualizer 
-            displayArray={displayArray}
-            steps={steps}
-            currentStep={currentStep}
-            isPlaying={isPlaying}
-            speed={animationSpeed}
-            onPlay={playAnimation}
-            onPause={pauseAnimation}
-            onNext={nextStep}
-            onPrev={prevStep}
-            onReset={reset}
-            canPlayNext={canPlayNext}
-            canPlayPrev={canPlayPrev}
-            onSpeedChange={setAnimationSpeed}
-          />
-        ) : currentAlgorithm === 'bucket-sort' ? (
-          <BucketSortVisualizer 
-            displayArray={displayArray}
-            steps={steps}
-            currentStep={currentStep}
-            isPlaying={isPlaying}
-            speed={animationSpeed}
-            onPlay={playAnimation}
-            onPause={pauseAnimation}
-            onNext={nextStep}
-            onPrev={prevStep}
-            onReset={reset}
-            canPlayNext={canPlayNext}
-            canPlayPrev={canPlayPrev}
-            onSpeedChange={setAnimationSpeed}
-          />
-        ) : (
-          <ArrayVisualizer 
-            displayArray={displayArray} 
-            steps={steps}
-            currentStep={currentStep}
-            isPlaying={isPlaying}
-            speed={animationSpeed}
-            onPlay={playAnimation}
-            onPause={pauseAnimation}
-            onNext={nextStep}
-            onPrev={prevStep}
-            onReset={reset}
-            canPlayNext={canPlayNext}
-            canPlayPrev={canPlayPrev}
-            onSpeedChange={setAnimationSpeed}
-          />
-        )}
+        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+          {currentAlgorithm === 'counting-sort' ? (
+            <CountingSortVisualizer 
+              displayArray={displayArray}
+              steps={steps}
+              currentStep={currentStep}
+              isPlaying={isPlaying}
+              speed={animationSpeed}
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              onSpeedChange={setAnimationSpeed}
+            />
+          ) : currentAlgorithm === 'radix-sort' ? (
+            <RadixSortVisualizer 
+              displayArray={displayArray}
+              steps={steps}
+              currentStep={currentStep}
+              isPlaying={isPlaying}
+              speed={animationSpeed}
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              onSpeedChange={setAnimationSpeed}
+            />
+          ) : currentAlgorithm === 'bucket-sort' ? (
+            <BucketSortVisualizer 
+              displayArray={displayArray}
+              steps={steps}
+              currentStep={currentStep}
+              isPlaying={isPlaying}
+              speed={animationSpeed}
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              onSpeedChange={setAnimationSpeed}
+            />
+          ) : (
+            <ArrayVisualizer 
+              displayArray={displayArray} 
+              steps={steps}
+              currentStep={currentStep}
+              isPlaying={isPlaying}
+              speed={animationSpeed}
+              onPlay={playAnimation}
+              onPause={pauseAnimation}
+              onNext={nextStep}
+              onPrev={prevStep}
+              onReset={reset}
+              canPlayNext={canPlayNext}
+              canPlayPrev={canPlayPrev}
+              onSpeedChange={setAnimationSpeed}
+            />
+          )}
+        </section>
 
         <ImplementationSection currentAlgorithm={currentAlgorithm} />
       </main>

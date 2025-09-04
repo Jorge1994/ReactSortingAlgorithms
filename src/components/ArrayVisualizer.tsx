@@ -144,6 +144,7 @@ export function ArrayVisualizer({
       canPlayNext={canPlayNext}
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
+      showAnimationControls={false}
     >
       <div className="relative overflow-hidden">
         {/* Background gradient */}
