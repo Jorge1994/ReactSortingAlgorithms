@@ -367,45 +367,76 @@ export function BucketSortVisualizer({
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
             </h3>
-            <div className="flex flex-wrap gap-2 justify-center min-h-[48px] items-center">
-          {isArrayEmpty && operationType !== 'concatenate' ? (
-            <motion.div
-              key="empty-message"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-gray-400 italic text-lg"
+            <div 
+              className="w-full min-h-[48px] flex justify-center items-center"
+              style={{ 
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '48px'
+              }}
             >
-              All elements moved to buckets
-            </motion.div>
-          ) : (
-            <AnimatePresence>
-              {originalArrayElements
-                .filter(el => el.isInOriginalArray)
-                .map((element) => (
-                  <motion.div
-                    key={element.elementId}
-                    className="w-10 h-10 flex items-center justify-center rounded-lg border-2 text-white font-bold"
-                    style={{ backgroundColor: getElementColor(element) }}
-                    layout
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    transition={{ 
-                      duration: 0.4,
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 25
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    {element.value}
-                  </motion.div>
-                ))}
-            </AnimatePresence>
-          )}
+              {isArrayEmpty && operationType !== 'concatenate' ? (
+                <motion.div
+                  key="empty-message"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-gray-400 italic text-lg"
+                >
+                  All elements moved to buckets
+                </motion.div>
+              ) : (
+                <div 
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '8px',
+                    maxWidth: '100%'
+                  }}
+                >
+                  {originalArrayElements
+                    .filter(el => el.isInOriginalArray)
+                    .map((element) => (
+                      <motion.div
+                        key={element.elementId}
+                        className="w-10 h-10 flex items-center justify-center rounded-lg border-2 text-white font-bold"
+                        style={{ 
+                          backgroundColor: getElementColor(element),
+                          width: '40px',
+                          height: '40px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ 
+                          scale: 1, 
+                          opacity: 1,
+                          transition: { 
+                            duration: 0.4,
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 25
+                          }
+                        }}
+                        exit={{ 
+                          scale: 0, 
+                          opacity: 0,
+                          transition: { duration: 0.3 }
+                        }}
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        {element.value}
+                      </motion.div>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
         {/* Buckets Display */}
         {numBuckets > 0 && (
