@@ -410,43 +410,45 @@ export function BucketSortVisualizer({
         {/* Buckets Display */}
         {numBuckets > 0 && (
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Buckets ({numBuckets} total)
             </h3>
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {Array.from({ length: numBuckets }, (_, bucketIndex) => (
               <motion.div
                 key={`bucket-${bucketIndex}`}
-                className="p-4 rounded-lg border-2 border-gray-200 bg-gray-50"
+                className="p-3 rounded-lg border-2 border-gray-200 bg-white min-h-[120px] flex flex-col"
                 layout
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center gap-4">
-                  <span className="text-sm font-medium text-gray-700 w-20">
-                    Bucket {bucketIndex}:
+                <div className="text-center mb-3">
+                  <span className="text-sm font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded">
+                    Bucket {bucketIndex}
                   </span>
-                  <div className="flex flex-wrap gap-2 h-[24px] items-center">
-                    <AnimatePresence mode="popLayout">
-                      {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
-                        <motion.span
-                          key={`empty-${bucketIndex}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="text-gray-400 italic"
-                        >
-                          empty
-                        </motion.span>
-                      ) : (
-                        bucketElements[bucketIndex].map((element, elementIndex) => (
+                </div>
+                <div className="flex-1 flex flex-col items-center justify-start gap-2">
+                  <AnimatePresence mode="popLayout">
+                    {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
+                      <motion.span
+                        key={`empty-${bucketIndex}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-gray-400 italic text-sm mt-4"
+                      >
+                        empty
+                      </motion.span>
+                    ) : (
+                      <div className="flex flex-wrap gap-1 justify-center">
+                        {bucketElements[bucketIndex].map((element, elementIndex) => (
                           <motion.div
                             key={`bucket-${bucketIndex}-${element.value}-${elementIndex}`}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white"
+                            className="w-8 h-8 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white text-sm"
                             style={{ backgroundColor: getElementColor(element) }}
                             layout
-                            initial={{ scale: 0, opacity: 0, x: -30 }}
-                            animate={{ scale: 1, opacity: 1, x: 0 }}
-                            exit={{ scale: 0, opacity: 0, x: 30 }}
+                            initial={{ scale: 0, opacity: 0, y: -20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0, opacity: 0, y: 20 }}
                             transition={{ 
                               duration: 0.5, 
                               delay: elementIndex * 0.1,
@@ -458,10 +460,10 @@ export function BucketSortVisualizer({
                           >
                             {element.value}
                           </motion.div>
-                        ))
-                      )}
-                    </AnimatePresence>
-                  </div>
+                        ))}
+                      </div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             ))}
