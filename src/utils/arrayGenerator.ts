@@ -15,8 +15,11 @@ export const generateRandomArray = (size: number, min: number = 1, max: number =
 /**
  * Generate a nearly sorted array (helpful for testing best-case scenarios)
  */
-export const generateNearlySortedArray = (size: number, maxValue: number = 100): number[] => {
-  const array = Array.from({ length: size }, (_, i) => Math.floor((i + 1) * maxValue / size));
+export const generateNearlySortedArray = (size: number, maxValue: number = 100, minValue: number = 1): number[] => {
+  const array = Array.from({ length: size }, (_, i) => {
+    const normalizedValue = (i + 1) / size; // 0 to 1
+    return Math.floor(minValue + normalizedValue * (maxValue - minValue));
+  });
   
   // Swap a few random elements to make it "nearly" sorted
   const swaps = Math.max(1, Math.floor(size * 0.1)); // 10% of elements
@@ -33,6 +36,9 @@ export const generateNearlySortedArray = (size: number, maxValue: number = 100):
 /**
  * Generate a reverse sorted array (worst-case for bubble sort)
  */
-export const generateReverseSortedArray = (size: number, maxValue: number = 100): number[] => {
-  return Array.from({ length: size }, (_, i) => Math.floor((size - i) * maxValue / size));
+export const generateReverseSortedArray = (size: number, maxValue: number = 100, minValue: number = 1): number[] => {
+  return Array.from({ length: size }, (_, i) => {
+    const normalizedValue = (size - i) / size; // 1 to 0
+    return Math.floor(minValue + normalizedValue * (maxValue - minValue));
+  });
 };

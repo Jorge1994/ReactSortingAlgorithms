@@ -34,8 +34,9 @@ export interface UseSortingAnimationReturn {
 export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingAnimationReturn {
   const [arraySize, setArraySize] = useState(15);
   const [array, setArray] = useState<number[]>(() => {
-    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
-    return generateRandomArray(15, 1, maxValue);
+    const maxValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 50 : 100;
+    const minValue = 1;
+    return generateRandomArray(15, minValue, maxValue);
   });
   const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -59,18 +60,19 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const generateNewArray = (type: 'random' | 'nearly-sorted' | 'reverse' = 'random') => {
     let newArray: number[];
     
-    // For counting sort, limit max value to 50
-    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
+    // For counting sort and bucket sort, limit max value to 50
+    const maxValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 50 : 100;
+    const minValue = 1;
     
     switch (type) {
       case 'nearly-sorted':
-        newArray = generateNearlySortedArray(arraySize, maxValue);
+        newArray = generateNearlySortedArray(arraySize, maxValue, minValue);
         break;
       case 'reverse':
-        newArray = generateReverseSortedArray(arraySize, maxValue);
+        newArray = generateReverseSortedArray(arraySize, maxValue, minValue);
         break;
       default:
-        newArray = generateRandomArray(arraySize, 1, maxValue);
+        newArray = generateRandomArray(arraySize, minValue, maxValue);
     }
     
     setArray(newArray);
@@ -117,8 +119,9 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const changeArraySize = (newSize: number) => {
     setArraySize(newSize);
     // Generate new array with the new size
-    const maxValue = currentAlgorithm === 'counting-sort' ? 50 : 100;
-    const newArray = generateRandomArray(newSize, 1, maxValue);
+    const maxValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 50 : 100;
+    const minValue = 1;
+    const newArray = generateRandomArray(newSize, minValue, maxValue);
     setArray(newArray);
     setSteps([]);
     setCurrentStep(0);

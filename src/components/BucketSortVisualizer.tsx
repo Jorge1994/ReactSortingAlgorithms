@@ -69,24 +69,37 @@ export function BucketSortVisualizer({
       elementId: `element-${index}-${value}`
     }));
     setOriginalArrayElements(elements);
-    
-    // Clear buckets when display array changes (like on reset)
-    setBucketElements([]);
-    setNumBuckets(0);
   }, [displayArray]);
 
-  // Initialize buckets from steps
+  // Initialize buckets from steps - ONLY when we have steps available
   useEffect(() => {
-    if (steps.length > 0 && steps[0].metadata?.buckets) {
-      const buckets = steps[0].metadata.buckets;
-      setNumBuckets(buckets.length);
-      setBucketElements(Array.from({ length: buckets.length }, () => []));
-    } else {
-      // If no steps or no buckets metadata, clear everything
+    if (steps.length > 0) {
+      // Look for bucket metadata in any of the early steps
+      let bucketsFound = false;
+      for (let i = 0; i < Math.min(5, steps.length); i++) {
+        const stepBuckets = steps[i].metadata?.buckets;
+        if (stepBuckets && Array.isArray(stepBuckets)) {
+          setNumBuckets(stepBuckets.length);
+          setBucketElements(Array.from({ length: stepBuckets.length }, () => []));
+          bucketsFound = true;
+          break;
+        }
+      }
+      
+      if (!bucketsFound) {
+        setNumBuckets(0);
+        setBucketElements([]);
+      }
+    }
+  }, [steps]);
+
+  // Clear buckets when we reset (no steps but we had buckets before)
+  useEffect(() => {
+    if (steps.length === 0 && numBuckets > 0) {
       setNumBuckets(0);
       setBucketElements([]);
     }
-  }, [steps]);
+  }, [steps.length, numBuckets]);
 
   // Update element positions based on current step - COMPLETELY REBUILD STATE FROM STEP
   useEffect(() => {
@@ -124,21 +137,25 @@ export function BucketSortVisualizer({
     if (operationType === 'distribute') {
       // Rebuild bucket elements from step metadata during distribution phase
       setBucketElements(() => {
-        const newBuckets = Array(numBuckets).fill(null).map(() => [] as ElementPosition[]);
+        if (numBuckets <= 0) return [];
+        
+        const newBuckets = Array.from({ length: numBuckets }, () => [] as ElementPosition[]);
         
         buckets.forEach((bucket, idx) => {
-          bucket.forEach((value, elementIdx) => {
-            const elementId = `bucket-${idx}-${elementIdx}-${value}`;
-            newBuckets[idx].push({
-              value,
-              originalIndex: -1, // Will be set later during concatenation
-              isInOriginalArray: false,
-              bucketIndex: idx,
-              isMoving: false,
-              isSorted: false,
-              elementId
+          if (bucket && Array.isArray(bucket) && idx < numBuckets && newBuckets[idx]) {
+            bucket.forEach((value, elementIdx) => {
+              const elementId = `bucket-${idx}-${elementIdx}-${value}`;
+              newBuckets[idx].push({
+                value,
+                originalIndex: -1, // Will be set later during concatenation
+                isInOriginalArray: false,
+                bucketIndex: idx,
+                isMoving: false,
+                isSorted: false,
+                elementId
+              });
             });
-          });
+          }
         });
         
         return newBuckets;
@@ -169,10 +186,12 @@ export function BucketSortVisualizer({
     } else if (operationType === 'sort-internal') {
       // During sorting internal, update bucket contents while preserving element IDs
       setBucketElements(prev => {
+        if (!prev || prev.length === 0) return [];
+        
         const newBuckets = [...prev];
         
         buckets.forEach((bucket, idx) => {
-          if (newBuckets[idx]) {
+          if (bucket && Array.isArray(bucket) && idx < newBuckets.length && newBuckets[idx]) {
             // Update the order and contents of this bucket while preserving IDs
             const updatedBucket: ElementPosition[] = bucket.map((value, elementIdx) => {
               // Try to find existing element with same value in this bucket
@@ -204,8 +223,10 @@ export function BucketSortVisualizer({
     } else if (operationType === 'bucket-sorted' && bucketIndex !== undefined) {
       // Mark all elements in this specific bucket as sorted
       setBucketElements(prev => {
+        if (!prev || prev.length === 0) return [];
+        
         const newBuckets = [...prev];
-        if (newBuckets[bucketIndex]) {
+        if (bucketIndex >= 0 && bucketIndex < newBuckets.length && newBuckets[bucketIndex]) {
           newBuckets[bucketIndex] = newBuckets[bucketIndex].map(element => ({
             ...element,
             isSorted: true
@@ -230,15 +251,17 @@ export function BucketSortVisualizer({
         setBucketElements(() => {
           const newBuckets: ElementPosition[][] = [];
           buckets.forEach((bucket, idx) => {
-            newBuckets[idx] = bucket.map((value, elementIdx) => ({
-              value,
-              originalIndex: -1,
-              isInOriginalArray: false,
-              bucketIndex: idx,
-              isMoving: false,
-              isSorted: true,
-              elementId: `bucket-${idx}-${elementIdx}-${value}`
-            }));
+            if (bucket && Array.isArray(bucket)) {
+              newBuckets[idx] = bucket.map((value, elementIdx) => ({
+                value,
+                originalIndex: -1,
+                isInOriginalArray: false,
+                bucketIndex: idx,
+                isMoving: false,
+                isSorted: true,
+                elementId: `bucket-${idx}-${elementIdx}-${value}`
+              }));
+            }
           });
           return newBuckets;
         });
@@ -280,20 +303,22 @@ export function BucketSortVisualizer({
           // Iterate through buckets in order and add elements sequentially
           for (let bucketIdx = 0; bucketIdx < buckets.length; bucketIdx++) {
             const bucket = buckets[bucketIdx];
-            for (let elementIdx = 0; elementIdx < bucket.length; elementIdx++) {
-              if (elementsPlaced < finalArrayLength) {
-                finalElements.push({
-                  value: bucket[elementIdx],
-                  originalIndex: elementsPlaced,
-                  isInOriginalArray: true,
-                  bucketIndex: -1,
-                  isMoving: false,
-                  isSorted: true,
-                  elementId: `final-${elementsPlaced}-${bucket[elementIdx]}`
-                });
-                elementsPlaced++;
-              } else {
-                break;
+            if (bucket && Array.isArray(bucket)) {
+              for (let elementIdx = 0; elementIdx < bucket.length; elementIdx++) {
+                if (elementsPlaced < finalArrayLength) {
+                  finalElements.push({
+                    value: bucket[elementIdx],
+                    originalIndex: elementsPlaced,
+                    isInOriginalArray: true,
+                    bucketIndex: -1,
+                    isMoving: false,
+                    isSorted: true,
+                    elementId: `final-${elementsPlaced}-${bucket[elementIdx]}`
+                  });
+                  elementsPlaced++;
+                } else {
+                  break;
+                }
               }
             }
             if (elementsPlaced >= finalArrayLength) break;
@@ -309,24 +334,26 @@ export function BucketSortVisualizer({
           buckets.forEach((bucket, bucketIdx) => {
             newBuckets[bucketIdx] = [];
             
-            bucket.forEach((value, elementIdx) => {
-              // Only keep elements that haven't been moved to final array yet
-              // Elements are moved in order: bucket 0 completely, then bucket 1, etc.
-              if (elementsPlacedSoFar >= finalArrayLength) {
-                // This element hasn't been moved to final array yet, keep it in bucket
-                newBuckets[bucketIdx].push({
-                  value,
-                  originalIndex: -1,
-                  isInOriginalArray: false,
-                  bucketIndex: bucketIdx,
-                  isMoving: false,
-                  isSorted: true,
-                  elementId: `bucket-${bucketIdx}-${elementIdx}-${value}`
-                });
-              }
-              // Always increment counter to track position in concatenation sequence
-              elementsPlacedSoFar++;
-            });
+            if (bucket && Array.isArray(bucket)) {
+              bucket.forEach((value, elementIdx) => {
+                // Only keep elements that haven't been moved to final array yet
+                // Elements are moved in order: bucket 0 completely, then bucket 1, etc.
+                if (elementsPlacedSoFar >= finalArrayLength) {
+                  // This element hasn't been moved to final array yet, keep it in bucket
+                  newBuckets[bucketIdx].push({
+                    value,
+                    originalIndex: -1,
+                    isInOriginalArray: false,
+                    bucketIndex: bucketIdx,
+                    isMoving: false,
+                    isSorted: true,
+                    elementId: `bucket-${bucketIdx}-${elementIdx}-${value}`
+                  });
+                }
+                // Always increment counter to track position in concatenation sequence
+                elementsPlacedSoFar++;
+              });
+            }
           });
           
           return newBuckets;
@@ -462,13 +489,14 @@ export function BucketSortVisualizer({
         </div>
 
         {/* Buckets Display */}
-        {numBuckets > 0 && (
+        {(numBuckets > 0 || steps.length > 0) && (
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Buckets ({numBuckets} total)
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {Array.from({ length: numBuckets }, (_, bucketIndex) => (
+            {numBuckets > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                {Array.from({ length: numBuckets }, (_, bucketIndex) => (
                 <motion.div
                   key={`bucket-${bucketIndex}`}
                   className="p-3 rounded-lg border-2 border-gray-200 bg-white min-h-[120px] flex flex-col"
@@ -482,7 +510,7 @@ export function BucketSortVisualizer({
                   </div>
                   <div className="flex-1 flex flex-col items-center justify-start gap-2">
                     <AnimatePresence mode="popLayout">
-                      {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
+                      {!bucketElements[bucketIndex] || !Array.isArray(bucketElements[bucketIndex]) || bucketElements[bucketIndex].length === 0 ? (
                         <motion.span
                           key={`empty-${bucketIndex}`}
                           initial={{ opacity: 0 }}
@@ -521,7 +549,12 @@ export function BucketSortVisualizer({
                   </div>
                 </motion.div>
               ))}
-            </div>
+              </div>
+            ) : (
+              <div className="text-center text-gray-500 italic">
+                Buckets will appear when algorithm starts
+              </div>
+            )}
           </div>
         )}
       </div>
