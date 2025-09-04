@@ -9,9 +9,6 @@ import { CountingSortVisualizer } from './components/CountingSortVisualizer';
 import { RadixSortVisualizer } from './components/RadixSortVisualizer';
 import { BucketSortVisualizer } from './components/BucketSortVisualizer';
 import { ArrayControls } from './components/ArrayControls';
-import { AnimationControls } from './components/AnimationControls';
-import { StatisticsPanel } from './components/StatisticsPanel';
-import { ColorLegend } from './components/ColorLegend';
 import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
 
@@ -47,7 +44,6 @@ function VisualizerPage() {
     currentStep,
     isPlaying,
     animationSpeed,
-    currentStepData,
     generateNewArray,
     playAnimation,
     pauseAnimation,
@@ -143,42 +139,21 @@ function VisualizerPage() {
             onSpeedChange={setAnimationSpeed}
           />
         ) : (
-          <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-8 pb-4">
-              <ArrayVisualizer 
-                displayArray={displayArray} 
-                currentStepData={currentStepData}
-                steps={steps}
-                currentStep={currentStep}
-              />
-            </div>
-            
-            {/* Animation Controls - Seamlessly integrated */}
-            <div className="px-8 pb-4">
-              <AnimationControls
-                onPlay={playAnimation}
-                onPause={pauseAnimation}
-                onNext={nextStep}
-                onPrev={prevStep}
-                onReset={reset}
-                isPlaying={isPlaying}
-                canPlayNext={canPlayNext}
-                canPlayPrev={canPlayPrev}
-                animationSpeed={animationSpeed}
-                onSpeedChange={setAnimationSpeed}
-              />
-            </div>
-            
-            <div className="px-8 pb-8 pt-2">
-              <StatisticsPanel 
-                currentStepData={currentStepData}
-                currentStep={currentStep}
-                totalSteps={steps.length}
-              />
-
-              <ColorLegend />
-            </div>
-          </section>
+          <ArrayVisualizer 
+            displayArray={displayArray} 
+            steps={steps}
+            currentStep={currentStep}
+            isPlaying={isPlaying}
+            speed={animationSpeed}
+            onPlay={playAnimation}
+            onPause={pauseAnimation}
+            onNext={nextStep}
+            onPrev={prevStep}
+            onReset={reset}
+            canPlayNext={canPlayNext}
+            canPlayPrev={canPlayPrev}
+            onSpeedChange={setAnimationSpeed}
+          />
         )}
 
         <ImplementationSection currentAlgorithm={currentAlgorithm} />

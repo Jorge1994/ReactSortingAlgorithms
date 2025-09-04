@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
-import { AnimationControls } from './AnimationControls';
+import { VisualizerTemplate } from './VisualizerTemplate';
 
 interface RadixSortStep extends SortStep {
   countArray?: number[];
@@ -93,7 +93,6 @@ export function RadixSortVisualizer({
     }
   }, [steps.length, currentStep]);
 
-  const handlePlay = () => onPlay();
   const handleReset = () => {
     // Clear all visualization state immediately
     setCurrentCountArray([]);
@@ -107,9 +106,6 @@ export function RadixSortVisualizer({
     // Call the parent reset function
     onReset();
   };
-
-  const handleStepForward = () => onNext();
-  const handleStepBackward = () => onPrev();
 
   const getElementColor = (index: number, arrayType: 'main' | 'auxiliary') => {
     if (arrayType === 'main' && highlightedIndices.includes(index)) {
@@ -301,116 +297,117 @@ export function RadixSortVisualizer({
     );
   };
 
-  return (
-    <div className="radix-sort-visualizer">
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-8 pb-4">
-          {/* Current phase indicator */}
-          {currentPhase && (
-            <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">Current Phase:</h3>
-              <p className="text-blue-700">{currentPhase}</p>
-              <div className="mt-2 flex flex-wrap gap-2 text-sm">
-                {currentValue !== undefined && (
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                    Processing: <span className="font-bold">{currentValue}</span>
-                  </span>
-                )}
-                {currentDigit !== undefined && (
-                  <span className="px-2 py-1 bg-green-100 text-green-800 rounded">
-                    Digit: <span className="font-bold">{currentDigit}</span>
-                  </span>
-                )}
-                {digitPosition !== undefined && (
-                  <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded">
-                    Position: <span className="font-bold">{getDigitName(digitPosition)}</span>
-                  </span>
-                )}
-              </div>
+  // Custom statistics and legend component for Radix Sort
+  const customStatistics = (
+    <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6">
+      {steps.length > 0 && (
+        <div className="flex flex-col items-center space-y-4 mb-6">
+          {/* Progress indicator */}
+          <div className="w-full max-w-md">
+            <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
+              <span>Progress</span>
+              <span>{currentStep + 1} / {steps.length}</span>
             </div>
-          )}
-
-          {/* Array visualizations */}
-          <div className="space-y-2">
-            {/* Main Array */}
-            {renderArray(displayArray, 'Main Array', 'main')}
-            
-            {/* Count Array - Always visible when steps exist */}
-            {steps.length > 0 && 
-              renderCountTable(currentCountArray.length > 0 ? currentCountArray : Array(10).fill(0))
-            }
-            
-            {/* Auxiliary Array - Always visible when steps exist */}
-            {steps.length > 0 && 
-              renderArray(
-                currentAuxiliaryArray.length > 0 ? currentAuxiliaryArray : Array(displayArray.length).fill(undefined), 
-                'Auxiliary Array', 
-                'auxiliary'
-              )
-            }
+            <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+              <div 
+                className="h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
+                style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+              ></div>
+            </div>
           </div>
         </div>
+      )}
 
-        {/* Animation controls */}
-        <div className="px-8 pb-4">
-          <AnimationControls
-            isPlaying={isPlaying}
-            onPlay={handlePlay}
-            onPause={onPause}
-            onNext={handleStepForward}
-            onPrev={handleStepBackward}
-            onReset={handleReset}
-            canPlayNext={canPlayNext}
-            canPlayPrev={canPlayPrev}
-            animationSpeed={speed}
-            onSpeedChange={onSpeedChange}
-          />
-        </div>
-
-        {/* Statistics and Legend */}
-        <div className="px-8 pb-8 pt-2">
-          {/* Progress indicator */}
-          {steps.length > 0 && (
-            <div className="flex flex-col items-center mb-8 space-y-4">
-              <div className="w-full max-w-md">
-                <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
-                  <span>Progress</span>
-                  <span>{currentStep + 1} / {steps.length}</span>
-                </div>
-                <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-                  <div 
-                    className="h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
-                    style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Custom Color Legend for Radix Sort */}
-          <div className="mt-4">
-            <h4 className="text-sm font-semibold text-slate-700 mb-3">Color Legend:</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded" style={{ backgroundColor: '#3B82F6' }}></div>
-                <span className="text-slate-600">Processing/Analyzing</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded" style={{ backgroundColor: '#EF4444' }}></div>
-                <span className="text-slate-600">Count Array Active</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded" style={{ backgroundColor: '#10B981' }}></div>
-                <span className="text-slate-600">Auxiliary Array</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 rounded" style={{ backgroundColor: '#6B7280' }}></div>
-                <span className="text-slate-600">Unprocessed</span>
-              </div>
-            </div>
+      {/* Custom Color Legend for Radix Sort */}
+      <div>
+        <h4 className="text-sm font-semibold text-slate-700 mb-3">Color Legend:</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#3B82F6' }}></div>
+            <span className="text-slate-600">Processing/Analyzing</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#EF4444' }}></div>
+            <span className="text-slate-600">Count Array Active</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#10B981' }}></div>
+            <span className="text-slate-600">Auxiliary Array</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#6B7280' }}></div>
+            <span className="text-slate-600">Unprocessed</span>
           </div>
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <VisualizerTemplate
+      currentStepData={steps[currentStep]}
+      currentStep={currentStep}
+      totalSteps={steps.length}
+      isPlaying={isPlaying}
+      speed={speed}
+      onPlay={onPlay}
+      onPause={onPause}
+      onNext={onNext}
+      onPrev={onPrev}
+      onReset={handleReset}
+      canPlayNext={canPlayNext}
+      canPlayPrev={canPlayPrev}
+      onSpeedChange={onSpeedChange}
+      showStatistics={false}
+      showColorLegend={false}
+      customControls={customStatistics}
+    >
+      <div className="space-y-6">
+        {/* Current phase indicator */}
+        {currentPhase && (
+          <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+            <h3 className="text-lg font-semibold text-blue-800 mb-2">Current Phase:</h3>
+            <p className="text-blue-700">{currentPhase}</p>
+            <div className="mt-2 flex flex-wrap gap-2 text-sm">
+              {currentValue !== undefined && (
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                  Processing: <span className="font-bold">{currentValue}</span>
+                </span>
+              )}
+              {currentDigit !== undefined && (
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded">
+                  Digit: <span className="font-bold">{currentDigit}</span>
+                </span>
+              )}
+              {digitPosition !== undefined && (
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                  Position: <span className="font-bold">{getDigitName(digitPosition)}</span>
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Array visualizations */}
+        <div className="space-y-2">
+          {/* Main Array */}
+          {renderArray(displayArray, 'Main Array', 'main')}
+          
+          {/* Count Array - Always visible when steps exist */}
+          {steps.length > 0 && 
+            renderCountTable(currentCountArray.length > 0 ? currentCountArray : Array(10).fill(0))
+          }
+          
+          {/* Auxiliary Array - Always visible when steps exist */}
+          {steps.length > 0 && 
+            renderArray(
+              currentAuxiliaryArray.length > 0 ? currentAuxiliaryArray : Array(displayArray.length).fill(undefined), 
+              'Auxiliary Array', 
+              'auxiliary'
+            )
+          }
+        </div>
+      </div>
+    </VisualizerTemplate>
   );
 }

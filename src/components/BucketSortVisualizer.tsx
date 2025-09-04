@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { SortStep } from '../types';
-import { AnimationControls } from './AnimationControls';
-import { StatisticsPanel } from './StatisticsPanel';
-import { ColorLegend } from './ColorLegend';
+import { VisualizerTemplate } from './VisualizerTemplate';
 
 interface ElementPosition {
   value: number;
@@ -322,26 +320,6 @@ export function BucketSortVisualizer({
     setNumBuckets(0);
   };
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      onPause();
-    } else {
-      onPlay();
-    }
-  };
-
-  const stepForward = () => {
-    if (canPlayNext) {
-      onNext();
-    }
-  };
-
-  const stepBackward = () => {
-    if (canPlayPrev) {
-      onPrev();
-    }
-  };
-
   const getElementColor = (element: ElementPosition) => {
     if (element.isMoving) return '#3B82F6'; // Blue - moving
     if (element.isSorted) return '#10B981'; // Green - sorted
@@ -352,91 +330,103 @@ export function BucketSortVisualizer({
   const isArrayEmpty = originalArrayElements.filter(el => el.isInOriginalArray).length === 0;
 
   return (
-    <div className="w-full px-4 py-6 space-y-6">
-      {/* Unified Visualization Section */}
-      <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-8 pb-4 space-y-6">
-          {/* Current Phase Display */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-900 mb-1">Current Phase</h3>
-            <p className="text-blue-800">{currentPhase}</p>
-          </div>
+    <VisualizerTemplate
+      currentStepData={currentStepData}
+      currentStep={currentStep}
+      totalSteps={steps.length}
+      isPlaying={isPlaying}
+      speed={speed}
+      onPlay={onPlay}
+      onPause={onPause}
+      onNext={onNext}
+      onPrev={onPrev}
+      onReset={resetArray}
+      canPlayNext={canPlayNext}
+      canPlayPrev={canPlayPrev}
+      onSpeedChange={onSpeedChange}
+    >
+      <div className="space-y-6">
+        {/* Current Phase Display */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-900 mb-1">Current Phase</h3>
+          <p className="text-blue-800">{currentPhase}</p>
+        </div>
 
-          {/* Original Array */}
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
-            </h3>
-            <div 
-              className="w-full min-h-[48px] flex justify-center items-center"
-              style={{ 
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '48px'
-              }}
-            >
-              {isArrayEmpty && operationType !== 'concatenate' ? (
-                <motion.div
-                  key="empty-message"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-gray-400 italic text-lg"
-                >
-                  All elements moved to buckets
-                </motion.div>
-              ) : (
-                <div 
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '8px',
-                    maxWidth: '100%'
-                  }}
-                >
-                  {originalArrayElements
-                    .filter(el => el.isInOriginalArray)
-                    .map((element) => (
-                      <motion.div
-                        key={element.elementId}
-                        className="w-10 h-10 flex items-center justify-center rounded-lg border-2 text-white font-bold"
-                        style={{ 
-                          backgroundColor: getElementColor(element),
-                          width: '40px',
-                          height: '40px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          flexShrink: 0
-                        }}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ 
-                          scale: 1, 
-                          opacity: 1,
-                          transition: { 
-                            duration: 0.4,
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 25
-                          }
-                        }}
-                        exit={{ 
-                          scale: 0, 
-                          opacity: 0,
-                          transition: { duration: 0.3 }
-                        }}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        {element.value}
-                      </motion.div>
-                    ))}
-                </div>
-              )}
-            </div>
+        {/* Original Array */}
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            {operationType === 'concatenate' ? 'Final Sorted Array' : 'Original Array'}
+          </h3>
+          <div 
+            className="w-full min-h-[48px] flex justify-center items-center"
+            style={{ 
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '48px'
+            }}
+          >
+            {isArrayEmpty && operationType !== 'concatenate' ? (
+              <motion.div
+                key="empty-message"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-gray-400 italic text-lg"
+              >
+                All elements moved to buckets
+              </motion.div>
+            ) : (
+              <div 
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '8px',
+                  maxWidth: '100%'
+                }}
+              >
+                {originalArrayElements
+                  .filter(el => el.isInOriginalArray)
+                  .map((element) => (
+                    <motion.div
+                      key={element.elementId}
+                      className="w-10 h-10 flex items-center justify-center rounded-lg border-2 text-white font-bold"
+                      style={{ 
+                        backgroundColor: getElementColor(element),
+                        width: '40px',
+                        height: '40px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ 
+                        scale: 1, 
+                        opacity: 1,
+                        transition: { 
+                          duration: 0.4,
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 25
+                        }
+                      }}
+                      exit={{ 
+                        scale: 0, 
+                        opacity: 0,
+                        transition: { duration: 0.3 }
+                      }}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      {element.value}
+                    </motion.div>
+                  ))}
+              </div>
+            )}
           </div>
+        </div>
 
         {/* Buckets Display */}
         {numBuckets > 0 && (
@@ -445,90 +435,63 @@ export function BucketSortVisualizer({
               Buckets ({numBuckets} total)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {Array.from({ length: numBuckets }, (_, bucketIndex) => (
-              <motion.div
-                key={`bucket-${bucketIndex}`}
-                className="p-3 rounded-lg border-2 border-gray-200 bg-white min-h-[120px] flex flex-col"
-                layout
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-center mb-3">
-                  <span className="text-sm font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded">
-                    Bucket {bucketIndex}
-                  </span>
-                </div>
-                <div className="flex-1 flex flex-col items-center justify-start gap-2">
-                  <AnimatePresence mode="popLayout">
-                    {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
-                      <motion.span
-                        key={`empty-${bucketIndex}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="text-gray-400 italic text-sm mt-4"
-                      >
-                        empty
-                      </motion.span>
-                    ) : (
-                      <div className="flex flex-wrap gap-1 justify-center">
-                        {bucketElements[bucketIndex].map((element, elementIndex) => (
-                          <motion.div
-                            key={`bucket-${bucketIndex}-${element.value}-${elementIndex}`}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white text-sm"
-                            style={{ backgroundColor: getElementColor(element) }}
-                            layout
-                            initial={{ scale: 0, opacity: 0, y: -20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0, opacity: 0, y: 20 }}
-                            transition={{ 
-                              duration: 0.5, 
-                              delay: elementIndex * 0.1,
-                              type: "spring",
-                              stiffness: 300,
-                              damping: 25
-                            }}
-                            whileHover={{ scale: 1.1 }}
-                          >
-                            {element.value}
-                          </motion.div>
-                        ))}
-                      </div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ))}
+              {Array.from({ length: numBuckets }, (_, bucketIndex) => (
+                <motion.div
+                  key={`bucket-${bucketIndex}`}
+                  className="p-3 rounded-lg border-2 border-gray-200 bg-white min-h-[120px] flex flex-col"
+                  layout
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-center mb-3">
+                    <span className="text-sm font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded">
+                      Bucket {bucketIndex}
+                    </span>
+                  </div>
+                  <div className="flex-1 flex flex-col items-center justify-start gap-2">
+                    <AnimatePresence mode="popLayout">
+                      {!bucketElements[bucketIndex] || bucketElements[bucketIndex].length === 0 ? (
+                        <motion.span
+                          key={`empty-${bucketIndex}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="text-gray-400 italic text-sm mt-4"
+                        >
+                          empty
+                        </motion.span>
+                      ) : (
+                        <div className="flex flex-wrap gap-1 justify-center">
+                          {bucketElements[bucketIndex].map((element, elementIndex) => (
+                            <motion.div
+                              key={`bucket-${bucketIndex}-${element.value}-${elementIndex}`}
+                              className="w-8 h-8 flex items-center justify-center rounded-lg text-white font-bold border-2 border-white text-sm"
+                              style={{ backgroundColor: getElementColor(element) }}
+                              layout
+                              initial={{ scale: 0, opacity: 0, y: -20 }}
+                              animate={{ scale: 1, opacity: 1, y: 0 }}
+                              exit={{ scale: 0, opacity: 0, y: 20 }}
+                              transition={{ 
+                                duration: 0.5, 
+                                delay: elementIndex * 0.1,
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 25
+                              }}
+                              whileHover={{ scale: 1.1 }}
+                            >
+                              {element.value}
+                            </motion.div>
+                          ))}
+                        </div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         )}
-        </div>
-      </section>
-
-      {/* Controls */}
-      <AnimationControls
-        isPlaying={isPlaying}
-        onPlay={togglePlay}
-        onPause={onPause}
-        onNext={stepForward}
-        onPrev={stepBackward}
-        onReset={resetArray}
-        canPlayNext={canPlayNext}
-        canPlayPrev={canPlayPrev}
-        animationSpeed={speed}
-        onSpeedChange={onSpeedChange}
-      />
-
-      {/* Statistics */}
-      {currentStepData && (
-        <StatisticsPanel
-          currentStepData={currentStepData}
-          currentStep={currentStep}
-          totalSteps={steps.length}
-        />
-      )}
-
-      {/* Color Legend */}
-      <ColorLegend />
-    </div>
+      </div>
+    </VisualizerTemplate>
   );
 }
