@@ -7,13 +7,7 @@ export const countingSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def counting_sort(arr):
-    """
-    Sorts an array using counting sort algorithm.
-    Only works with non-negative integers.
-    
-    Time Complexity: O(n + k) where k is the range of input
-    Space Complexity: O(k) for the count array
-    """
+
     if not arr:
         return arr
     
@@ -59,13 +53,6 @@ print(f"Sorted: {sorted_numbers}")`,
 
 public class CountingSort {
     
-    /**
-     * Counting Sort implementation in Java
-     * Works with arrays of non-negative integers
-     * 
-     * Time Complexity: O(n + k) where k is the range
-     * Space Complexity: O(k) for count array + O(n) for output
-     */
     public static void countingSort(int[] arr) {
         if (arr.length == 0) return;
         
