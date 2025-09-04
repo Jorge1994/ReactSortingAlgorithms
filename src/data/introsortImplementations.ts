@@ -138,19 +138,17 @@ print(f"Sorted: {sorted_numbers}")`,
 
   java: createAlgorithmImplementation(
     "Java",
-    `import java.util.*;
-
-public class IntroSort {
+    `public class IntroSort {
     private static final int INSERTION_SORT_THRESHOLD = 16;
     
-    public static <T extends Comparable<T>> void sort(T[] arr) {
+    public static void sort(int[] arr) {
         if (arr.length <= 1) return;
         
         int depthLimit = 2 * (int) Math.floor(Math.log(arr.length) / Math.log(2));
         introsortUtil(arr, 0, arr.length - 1, depthLimit);
     }
     
-    private static <T extends Comparable<T>> void introsortUtil(T[] arr, int begin, int end, int depthLimit) {
+    private static void introsortUtil(int[] arr, int begin, int end, int depthLimit) {
         int size = end - begin + 1;
         
         // Use insertion sort for small arrays
@@ -180,26 +178,24 @@ public class IntroSort {
         }
     }
     
-    private static <T extends Comparable<T>> int medianOfThree(T[] arr, int a, int b, int c) {
-        T A = arr[a], B = arr[b], C = arr[c];
+    private static int medianOfThree(int[] arr, int a, int b, int c) {
+        int A = arr[a], B = arr[b], C = arr[c];
         
-        if ((A.compareTo(B) <= 0 && B.compareTo(C) <= 0) || 
-            (C.compareTo(B) <= 0 && B.compareTo(A) <= 0)) {
+        if ((A <= B && B <= C) || (C <= B && B <= A)) {
             return b;
         }
-        if ((B.compareTo(A) <= 0 && A.compareTo(C) <= 0) || 
-            (C.compareTo(A) <= 0 && A.compareTo(B) <= 0)) {
+        if ((B <= A && A <= C) || (C <= A && A <= B)) {
             return a;
         }
         return c;
     }
     
-    private static <T extends Comparable<T>> int partition(T[] arr, int low, int high) {
-        T pivot = arr[high];
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
         int i = low - 1;
         
         for (int j = low; j < high; j++) {
-            if (arr[j].compareTo(pivot) <= 0) {
+            if (arr[j] <= pivot) {
                 i++;
                 swap(arr, i, j);
             }
@@ -209,12 +205,12 @@ public class IntroSort {
         return i + 1;
     }
     
-    private static <T extends Comparable<T>> void insertionSort(T[] arr, int begin, int end) {
+    private static void insertionSort(int[] arr, int begin, int end) {
         for (int i = begin + 1; i <= end; i++) {
-            T key = arr[i];
+            int key = arr[i];
             int j = i - 1;
             
-            while (j >= begin && arr[j].compareTo(key) > 0) {
+            while (j >= begin && arr[j] > key) {
                 arr[j + 1] = arr[j];
                 j--;
             }
@@ -223,7 +219,7 @@ public class IntroSort {
         }
     }
     
-    private static <T extends Comparable<T>> void heapsort(T[] arr, int begin, int end) {
+    private static void heapsort(int[] arr, int begin, int end) {
         int n = end - begin + 1;
         
         // Build heap
@@ -238,16 +234,16 @@ public class IntroSort {
         }
     }
     
-    private static <T extends Comparable<T>> void heapify(T[] arr, int n, int i, int offset) {
+    private static void heapify(int[] arr, int n, int i, int offset) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
         
-        if (left < n && arr[offset + left].compareTo(arr[offset + largest]) > 0) {
+        if (left < n && arr[offset + left] > arr[offset + largest]) {
             largest = left;
         }
         
-        if (right < n && arr[offset + right].compareTo(arr[offset + largest]) > 0) {
+        if (right < n && arr[offset + right] > arr[offset + largest]) {
             largest = right;
         }
         
@@ -257,14 +253,14 @@ public class IntroSort {
         }
     }
     
-    private static <T> void swap(T[] arr, int i, int j) {
-        T temp = arr[i];
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
     
     public static void main(String[] args) {
-        Integer[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
         
         System.out.println("Original array:");
         printArray(numbers);
@@ -276,8 +272,8 @@ public class IntroSort {
     }
     
     // Helper method to print array
-    public static void printArray(Integer[] arr) {
-        for (Integer value : arr) {
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
             System.out.print(value + " ");
         }
         System.out.println();
