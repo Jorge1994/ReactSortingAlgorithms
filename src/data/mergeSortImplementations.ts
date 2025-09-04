@@ -57,15 +57,6 @@ print(f"Sorted: {sorted_numbers}")`,
 
 public class MergeSort {
     
-    /**
-     * Merge sort implementation for integer arrays.
-     * 
-     * @param arr Array to sort
-     * @return New sorted array
-     * 
-     * Time Complexity: O(n log n)
-     * Space Complexity: O(n)
-     */
     public static int[] mergeSort(int[] arr) {
         if (arr == null || arr.length <= 1) {
             return Arrays.copyOf(arr, arr.length);
@@ -77,13 +68,6 @@ public class MergeSort {
         return result;
     }
     
-    /**
-     * Recursive helper method for merge sort.
-     * 
-     * @param arr Array to sort
-     * @param left Starting index
-     * @param right Ending index
-     */
     private static void mergeSortHelper(int[] arr, int left, int right) {
         if (left < right) {
             // Prevent integer overflow
@@ -98,14 +82,6 @@ public class MergeSort {
         }
     }
     
-    /**
-     * Merges two sorted subarrays into a single sorted array.
-     * 
-     * @param arr Array containing both subarrays
-     * @param left Start index of first subarray
-     * @param mid End index of first subarray
-     * @param right End index of second subarray
-     */
     private static void merge(int[] arr, int left, int mid, int right) {
         // Calculate sizes of subarrays
         int leftSize = mid - left + 1;
