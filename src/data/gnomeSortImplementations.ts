@@ -4,11 +4,6 @@ export const gnomeSortImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def gnome_sort(arr):
-    """
-    Simple Gnome Sort implementation in Python.
-    Time Complexity: O(n²) worst/average, O(n) best
-    Space Complexity: O(1)
-    """
     i = 1
     n = len(arr)
 
@@ -36,11 +31,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class GnomeSort {
 
-    /**
-     * Simple Gnome Sort implementation in Java
-     * Time Complexity: O(n²) worst/average, O(n) best
-     * Space Complexity: O(1)
-     */
     public static void gnomeSort(int[] arr) {
         int i = 1;
         int n = arr.length;

@@ -7,18 +7,6 @@ export const heapSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def heap_sort(arr):
-    """
-    Sorts an array using the heap sort algorithm.
-    
-    Time Complexity: O(n log n) in all cases
-    Space Complexity: O(1) - in-place sorting
-    
-    Args:
-        arr: List of comparable elements to sort
-    
-    Returns:
-        Sorted array
-    """
     n = len(arr)
     
     # Phase 1: Build max heap from the array
@@ -37,14 +25,6 @@ export const heapSortImplementations: AlgorithmImplementations = {
     return arr
 
 def heapify(arr, heap_size, root_index):
-    """
-    Maintains the max heap property for a subtree rooted at root_index.
-    
-    Args:
-        arr: The array representing the heap
-        heap_size: Size of the heap
-        root_index: Index of the root of the subtree to heapify
-    """
     largest = root_index
     left_child = 2 * root_index + 1
     right_child = 2 * root_index + 2
@@ -76,14 +56,6 @@ print(f"Sorted: {sorted_numbers}")`,
 
 public class HeapSort {
     
-    /**
-     * Sorts an array using the heap sort algorithm.
-     * 
-     * Time Complexity: O(n log n) in all cases
-     * Space Complexity: O(1) - in-place sorting
-     * 
-     * @param arr array to be sorted
-     */
     public static void heapSort(int[] arr) {
         int n = arr.length;
         
@@ -103,13 +75,6 @@ public class HeapSort {
         }
     }
     
-    /**
-     * Maintains the max heap property for a subtree rooted at rootIndex.
-     * 
-     * @param arr the array representing the heap
-     * @param heapSize size of the heap
-     * @param rootIndex index of the root of the subtree to heapify
-     */
     private static void heapify(int[] arr, int heapSize, int rootIndex) {
         int largest = rootIndex;
         int leftChild = 2 * rootIndex + 1;
@@ -132,13 +97,6 @@ public class HeapSort {
         }
     }
     
-    /**
-     * Utility method to swap two elements in an array.
-     * 
-     * @param arr the array
-     * @param i first index
-     * @param j second index
-     */
     private static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];

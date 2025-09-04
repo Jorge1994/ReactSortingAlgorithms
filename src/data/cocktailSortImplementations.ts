@@ -7,11 +7,6 @@ export const cocktailSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def cocktail_shaker_sort(arr):
-    """
-    Cocktail Shaker Sort implementation in Python (bidirectional bubble sort)
-    Time Complexity: O(n²) worst/average, O(n) best
-    Space Complexity: O(1)
-    """
     n = len(arr)
     if n <= 1:
         return arr
@@ -58,11 +53,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class CocktailShakerSort {
 
-    /**
-     * Cocktail Shaker Sort (bidirectional bubble sort) in Java
-     * Time Complexity: O(n^2) worst/average, O(n) best
-     * Space Complexity: O(1)
-     */
     public static void cocktailShakerSort(int[] arr) {
         int n = arr.length;
         if (n <= 1) return;

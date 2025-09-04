@@ -7,11 +7,6 @@ export const radixSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def radix_sort(arr):
-    """
-    Sorts an array using Radix Sort algorithm
-    Time Complexity: O(d * n) where d is number of digits
-    Space Complexity: O(n + k) where k is the range of digit values (0-9)
-    """
     if not arr or len(arr) <= 1:
         return arr
     
@@ -29,10 +24,6 @@ export const radixSortImplementations: AlgorithmImplementations = {
     return arr
 
 def counting_sort_by_digit(arr, exp):
-    """
-    Counting sort subroutine for a specific digit position
-    Maintains stability by processing elements from right to left
-    """
     n = len(arr)
     output = [0] * n  # Auxiliary array
     count = [0] * 10  # Count array for digits 0-9
@@ -138,11 +129,6 @@ console.log('Final sorted array:', testArray);`,
 
 public class RadixSort {
     
-    /**
-     * Radix Sort implementation in Java
-     * Time Complexity: O(d * n) where d is number of digits
-     * Space Complexity: O(n + k) where k is the range of digit values (0-9)
-     */
     public static void radixSort(int[] arr) {
         if (arr == null || arr.length <= 1) {
             return;
@@ -158,9 +144,6 @@ public class RadixSort {
         }
     }
     
-    /**
-     * Find maximum element in array
-     */
     private static int findMax(int[] arr) {
         int max = arr[0];
         for (int i = 1; i < arr.length; i++) {
@@ -171,10 +154,6 @@ public class RadixSort {
         return max;
     }
     
-    /**
-     * Counting sort subroutine for a specific digit position
-     * Maintains stability by processing elements from right to left
-     */
     private static void countingSortByDigit(int[] arr, int exp) {
         int n = arr.length;
         int[] output = new int[n];  // Auxiliary array
@@ -203,13 +182,6 @@ public class RadixSort {
         
         // Copy output array back to original array
         System.arraycopy(output, 0, arr, 0, n);
-    }
-    
-    /**
-     * Utility method to print array
-     */
-    public static void printArray(int[] arr) {
-        System.out.println(Arrays.toString(arr));
     }
     
     public static void main(String[] args) {
