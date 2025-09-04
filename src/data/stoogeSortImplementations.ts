@@ -7,10 +7,6 @@ export const stoogeSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def stooge_sort(arr, l=0, r=None):
-    """
-    Stooge Sort (educational): recursively sorts by overlapping 2/3 segments.
-    Time complexity: O(n^{2.7}) approx.
-    """
     if r is None:
         r = len(arr) - 1
 
@@ -41,10 +37,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class StoogeSort {
 
-  /**
-   * Stooge Sort: recursively sorts by overlapping 2/3 segments.
-   * Time complexity: O(n^{2.7}) approx.
-   */
   public static void stoogeSort(int[] arr, int l, int r) {
     if (l >= r) return;
 

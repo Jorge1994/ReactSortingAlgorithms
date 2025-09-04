@@ -7,12 +7,6 @@ export const bucketSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def bucket_sort(arr):
-    """
-    Sorts an array using bucket sort algorithm.
-    
-    Time Complexity: O(n + k) average, O(n²) worst case
-    Space Complexity: O(n + k)
-    """
     if len(arr) <= 1:
         return arr
     
@@ -58,7 +52,6 @@ export const bucketSortImplementations: AlgorithmImplementations = {
     return sorted_array
 
 def insertion_sort(arr):
-    """Helper function: Insertion sort for individual buckets"""
     for i in range(1, len(arr)):
         key = arr[i]
         j = i - 1

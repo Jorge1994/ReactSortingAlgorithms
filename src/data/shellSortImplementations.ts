@@ -7,11 +7,6 @@ export const shellSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def shell_sort(arr):
-    """
-    Shell Sort implementation in Python using gap = floor(gap/2) sequence
-    Time Complexity: depends on gap sequence; commonly sub-quadratic in practice
-    Space Complexity: O(1) - in-place sorting
-    """
     n = len(arr)
     gap = n // 2
 

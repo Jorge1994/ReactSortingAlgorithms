@@ -7,11 +7,6 @@ export const oddEvenSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def odd_even_sort(arr):
-    """
-    Odd-Even (Brick) Sort implementation in Python
-    Time Complexity: O(n²) average/worst, O(n) best
-    Space Complexity: O(1)
-    """
     n = len(arr)
     is_sorted = False
 
@@ -42,10 +37,6 @@ print(f"Sorted: {sorted_numbers}")`,
   java: createAlgorithmImplementation(
     "Java",
     `public class OddEvenSort {
-    // Odd-Even (Brick) Sort implementation in Java
-    // Time Complexity: O(n^2) average/worst, O(n) best
-    // Time Complexity: O(n²) average/worst, O(n) best
-    // Space Complexity: O(1)
 
     public static void oddEvenSort(int[] arr) {
         boolean isSorted = false;

@@ -7,9 +7,6 @@ export const combSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def comb_sort(arr):
-    """
-    Comb Sort implementation in Python
-    """
     shrink = 1.3
     n = len(arr)
     gap = n
@@ -42,9 +39,7 @@ print(f"Sorted: {sorted_numbers}")`,
     `import java.util.Arrays;
 
 public class CombSort {
-  /**
-   * Comb Sort implementation in Java
-   */
+
   public static void combSort(int[] arr) {
     int n = arr.length;
     double shrink = 1.3;
