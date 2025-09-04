@@ -7,11 +7,7 @@ export const selectionSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def selection_sort(arr):
-    """
-    Selection Sort implementation in Python
-    Time Complexity: O(n²) for all cases
-    Space Complexity: O(1) - in-place sorting
-    """
+
     n = len(arr)
     
     # Traverse through all array elements
@@ -41,11 +37,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class SelectionSort {
     
-    /**
-     * Selection Sort implementation in Java
-     * Time Complexity: O(n²) for all cases
-     * Space Complexity: O(1) - in-place sorting
-     */
     public static void selectionSort(int[] arr) {
         int n = arr.length;
         

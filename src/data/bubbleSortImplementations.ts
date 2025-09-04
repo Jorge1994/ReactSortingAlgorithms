@@ -7,11 +7,7 @@ export const bubbleSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def bubble_sort(arr):
-    """
-    Optimized Bubble Sort implementation in Python
-    Time Complexity: O(n²) worst case, O(n) best case
-    Space Complexity: O(1)
-    """
+ 
     n = len(arr)
     
     for i in range(n):
@@ -43,11 +39,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class BubbleSort {
     
-    /**
-     * Optimized Bubble Sort implementation in Java
-     * Time Complexity: O(n²) worst case, O(n) best case
-     * Space Complexity: O(1)
-     */
     public static void bubbleSort(int[] arr) {
         int n = arr.length;
         boolean swapped;

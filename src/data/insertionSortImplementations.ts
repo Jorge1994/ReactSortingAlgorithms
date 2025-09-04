@@ -7,11 +7,7 @@ export const insertionSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def insertion_sort(arr):
-    """
-    Insertion Sort implementation in Python
-    Time Complexity: O(n²) average and worst case, O(n) best case
-    Space Complexity: O(1) - in-place sorting
-    """
+
     # Start from the second element (index 1)
     for i in range(1, len(arr)):
         key = arr[i]  # Current element to be inserted
@@ -39,11 +35,6 @@ print(f"Sorted: {sorted_numbers}")`,
     "Java",
     `public class InsertionSort {
     
-    /**
-     * Insertion Sort implementation in Java
-     * Time Complexity: O(n²) average and worst case, O(n) best case
-     * Space Complexity: O(1) - in-place sorting
-     */
     public static void insertionSort(int[] arr) {
         // Start from the second element (index 1)
         for (int i = 1; i < arr.length; i++) {

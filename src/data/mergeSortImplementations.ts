@@ -7,18 +7,7 @@ export const mergeSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
     `def merge_sort(arr):
-    """
-    Sorts an array using the merge sort algorithm.
-    
-    Args:
-        arr: List of comparable elements to sort
-    
-    Returns:
-        Sorted list in ascending order
-    
-    Time Complexity: O(n log n) in all cases
-    Space Complexity: O(n) for auxiliary arrays
-    """
+   
     if len(arr) <= 1:
         return arr
     
@@ -35,16 +24,7 @@ export const mergeSortImplementations: AlgorithmImplementations = {
     return merge(left_sorted, right_sorted)
 
 def merge(left, right):
-    """
-    Merges two sorted arrays into a single sorted array.
-    
-    Args:
-        left: First sorted array
-        right: Second sorted array
-    
-    Returns:
-        Merged sorted array
-    """
+   
     result = []
     i = j = 0
     
