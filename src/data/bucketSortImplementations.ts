@@ -6,21 +6,32 @@ import {
 export const bucketSortImplementations: AlgorithmImplementations = {
   python: createAlgorithmImplementation(
     "Python",
-    `def bucket_sort(arr):
+    `def calculate_buckets(size):
+    """Calculate optimal number of buckets based on array size"""
+    if size <= 10:
+        return max(2, size // 2)
+    elif size <= 25:
+        return size // 3
+    elif size <= 50:
+        return int(size ** 0.5)
+    else:
+        return min(10, int(size ** 0.5))
+
+def insertion_sort(arr):
+    """Helper function to sort individual buckets"""
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+
+def bucket_sort(arr):
     if len(arr) <= 1:
         return arr
     
     # Calculate number of buckets (adaptive formula)
-    def calculate_buckets(size):
-        if size <= 10:
-            return max(2, size // 2)
-        elif size <= 25:
-            return size // 3
-        elif size <= 50:
-            return int(size ** 0.5)
-        else:
-            return min(10, int(size ** 0.5))
-    
     num_buckets = calculate_buckets(len(arr))
     
     # Find min and max for range calculation
@@ -51,15 +62,6 @@ export const bucketSortImplementations: AlgorithmImplementations = {
     
     return sorted_array
 
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        key = arr[i]
-        j = i - 1
-        while j >= 0 and arr[j] > key:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = key
-
 # Example usage
 numbers = [64, 34, 25, 12, 22, 11, 90]
 sorted_numbers = bucket_sort(numbers.copy())
@@ -74,11 +76,6 @@ print(f"Sorted: {sorted_numbers}")`,
 
 public class BucketSort {
     
-    /**
-     * Generic bucket sort implementation for Double values
-     * @param arr Array of Double values to sort
-     * @return Sorted array
-     */
     public static List<Double> bucketSort(List<Double> arr) {
         if (arr.size() <= 1) {
             return new ArrayList<>(arr);
