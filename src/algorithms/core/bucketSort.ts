@@ -1,6 +1,11 @@
 import type { SortStep } from '../../types';
 import { createSortingAlgorithm } from './templateAlgorithm';
+import { bucketSortInfo } from '../info/bucketSortInfo';
 
+/**
+ * Bucket Sort implementation that generates visualization steps
+ * Pure algorithm logic separated from theoretical information
+ */
 function calculateOptimalBuckets(arraySize: number): number {
   if (arraySize <= 10) {
     return Math.max(2, Math.floor(arraySize / 2)); // Min 2, max 5 buckets
@@ -286,23 +291,8 @@ function bucketSortSteps(array: number[]): SortStep[] {
 }
 
 export const bucketSort = createSortingAlgorithm(
-  'Bucket Sort',
-  'A distribution sorting algorithm that divides elements into buckets, sorts each bucket individually using insertion sort, then concatenates the sorted buckets.',
-  {
-    time: { best: 'O(n + k)', average: 'O(n + k)', worst: 'O(n²)' },
-    space: { best: 'O(n + k)', average: 'O(n + k)', worst: 'O(n + k)' },
-    justifications: {
-      timeComplexity: {
-        best: 'When elements are uniformly distributed across buckets, each bucket has O(n/k) elements. Insertion sort on each bucket takes O((n/k)²), and with k buckets: O(k × (n/k)²) = O(n²/k). If k = n, then O(n²/n) = O(n). Total: O(n) for distribution + O(n) for sorting = O(n + k).',
-        average: 'With uniform distribution, expected time is O(n + k) where k is the number of buckets. The distribution phase takes O(n) and sorting k buckets with average n/k elements each takes O(n + k).',
-        worst: 'When all elements fall into the same bucket, bucket sort degenerates to insertion sort on the entire array, giving O(n²) time complexity.'
-      },
-      spaceComplexity: {
-        best: 'Requires space for k buckets plus the original array, giving O(n + k) space complexity.',
-        average: 'Requires space for k buckets plus the original array, giving O(n + k) space complexity.',
-        worst: 'Requires space for k buckets plus the original array, giving O(n + k) space complexity.'
-      }
-    }
-  },
+  bucketSortInfo.name,
+  bucketSortInfo.description,
+  bucketSortInfo.complexity,
   bucketSortSteps
 );
