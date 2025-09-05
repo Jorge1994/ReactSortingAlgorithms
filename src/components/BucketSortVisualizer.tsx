@@ -10,6 +10,7 @@ interface ElementPosition {
   bucketIndex?: number;
   isMoving?: boolean;
   isSorted?: boolean;
+  isHighlighted?: boolean;
   elementId: string; // Add unique identifier
 }
 
@@ -66,6 +67,7 @@ export function BucketSortVisualizer({
       bucketIndex: undefined,
       isMoving: false,
       isSorted: false,
+      isHighlighted: false,
       elementId: `element-${index}-${value}`
     }));
     setOriginalArrayElements(elements);
@@ -122,6 +124,7 @@ export function BucketSortVisualizer({
         bucketIndex: undefined,
         isMoving: false,
         isSorted: false,
+        isHighlighted: false,
         elementId: `element-${index}-${value}`
       }));
       setOriginalArrayElements(elements);
@@ -132,6 +135,69 @@ export function BucketSortVisualizer({
     const operationType = currentStepData.metadata?.operationType;
     const buckets = currentStepData.metadata?.buckets || [];
     const bucketIndex = currentStepData.metadata?.bucketIndex;
+    const stepType = currentStepData.type;
+    const highlightedIndices = currentStepData.indices || [];
+
+    // Handle highlighting steps - highlight elements being moved to buckets
+    if (stepType === 'highlight' && operationType === 'distribute') {
+      // Calculate how many elements have been completely processed BEFORE this highlight step
+      let elementsDistributed = 0;
+      if (currentStep > 0) {
+        // Count how many 'bucket-operation' steps with operationType 'distribute' have occurred BEFORE current step
+        for (let i = 0; i < currentStep && i < steps.length; i++) {
+          const step = steps[i];
+          if (step.type === 'bucket-operation' && step.metadata?.operationType === 'distribute' && 
+              step.metadata?.currentPhase?.includes('placed in bucket')) {
+            elementsDistributed++;
+          }
+        }
+      }
+      
+      // Update bucket elements based on current step metadata
+      setBucketElements(() => {
+        if (numBuckets <= 0) return [];
+        
+        const newBuckets = Array.from({ length: numBuckets }, () => [] as ElementPosition[]);
+        
+        buckets.forEach((bucket, idx) => {
+          if (bucket && Array.isArray(bucket) && idx < numBuckets && newBuckets[idx]) {
+            bucket.forEach((value, elementIdx) => {
+              const elementId = `bucket-${idx}-${elementIdx}-${value}`;
+              newBuckets[idx].push({
+                value,
+                originalIndex: -1,
+                isInOriginalArray: false,
+                bucketIndex: idx,
+                isMoving: false,
+                isSorted: false,
+                isHighlighted: false,
+                elementId
+              });
+            });
+          }
+        });
+        
+        return newBuckets;
+      });
+      
+      // Update original array elements: show only remaining elements + highlight the current one
+      setOriginalArrayElements(() => {
+        const originalArray = displayArray;
+        const remainingElements = originalArray.slice(elementsDistributed);
+        
+        return remainingElements.map((value, index) => ({
+          value,
+          originalIndex: elementsDistributed + index,
+          isInOriginalArray: true,
+          bucketIndex: undefined,
+          isMoving: false,
+          isSorted: false,
+          isHighlighted: highlightedIndices.includes(elementsDistributed + index),
+          elementId: `element-${elementsDistributed + index}-${value}`
+        }));
+      });
+      return; // Don't process other logic for highlight steps
+    }
 
     // Handle different operation types
     if (operationType === 'distribute') {
@@ -152,6 +218,7 @@ export function BucketSortVisualizer({
                 bucketIndex: idx,
                 isMoving: false,
                 isSorted: false,
+                isHighlighted: false,
                 elementId
               });
             });
@@ -161,9 +228,20 @@ export function BucketSortVisualizer({
         return newBuckets;
       });
       
-      // For distribution, show only elements that haven't been distributed yet
-      // Use the step index to determine how many elements have been processed
-      const elementsDistributed = Math.floor(currentStep / 2); // Each element has 2 steps (highlight + place)
+      // For distribution, calculate how many elements have been completely processed
+      // Each element has 2 steps: highlight + bucket-operation
+      // Step 0 is initialization, so actual distribution starts at step 1
+      let elementsDistributed = 0;
+      if (currentStep > 0) {
+        // Count how many 'bucket-operation' steps with operationType 'distribute' have occurred
+        for (let i = 0; i <= currentStep && i < steps.length; i++) {
+          const step = steps[i];
+          if (step.type === 'bucket-operation' && step.metadata?.operationType === 'distribute' && 
+              step.metadata?.currentPhase?.includes('placed in bucket')) {
+            elementsDistributed++;
+          }
+        }
+      }
       
       setOriginalArrayElements(() => {
         // Get original full array from initialization
@@ -179,38 +257,32 @@ export function BucketSortVisualizer({
           bucketIndex: undefined,
           isMoving: false,
           isSorted: false,
+          isHighlighted: false,
           elementId: `element-${elementsDistributed + index}-${value}`
         }));
       });
       
     } else if (operationType === 'sort-internal') {
-      // During sorting internal, update bucket contents while preserving element IDs
+      // During sorting internal, completely rebuild bucket from metadata with unique IDs
       setBucketElements(prev => {
         if (!prev || prev.length === 0) return [];
         
-        const newBuckets = [...prev];
+        const newBuckets = Array.from({ length: numBuckets }, () => [] as ElementPosition[]);
         
         buckets.forEach((bucket, idx) => {
-          if (bucket && Array.isArray(bucket) && idx < newBuckets.length && newBuckets[idx]) {
-            // Update the order and contents of this bucket while preserving IDs
-            const updatedBucket: ElementPosition[] = bucket.map((value, elementIdx) => {
-              // Try to find existing element with same value in this bucket
-              const existingElement = newBuckets[idx].find(el => el.value === value);
-              if (existingElement) {
-                return existingElement;
-              }
-              // If not found, create new element (shouldn't happen during sort-internal)
-              return {
-                value,
-                originalIndex: -1,
-                isInOriginalArray: false,
-                bucketIndex: idx,
-                isMoving: false,
-                isSorted: false,
-                elementId: `bucket-${idx}-${elementIdx}-${value}`
-              };
-            });
-            newBuckets[idx] = updatedBucket;
+          if (bucket && Array.isArray(bucket) && idx < numBuckets) {
+            // For sorting internal phase, create completely new elements with position-based IDs
+            // This ensures no ID conflicts even with duplicate values
+            newBuckets[idx] = bucket.map((value, elementIdx) => ({
+              value,
+              originalIndex: -1,
+              isInOriginalArray: false,
+              bucketIndex: idx,
+              isMoving: false,
+              isSorted: false,
+              isHighlighted: false,
+              elementId: `sort-internal-bucket-${idx}-pos-${elementIdx}-value-${value}-step-${currentStep}`
+            }));
           }
         });
         
@@ -259,6 +331,7 @@ export function BucketSortVisualizer({
                 bucketIndex: idx,
                 isMoving: false,
                 isSorted: true,
+                isHighlighted: false,
                 elementId: `bucket-${idx}-${elementIdx}-${value}`
               }));
             }
@@ -275,6 +348,7 @@ export function BucketSortVisualizer({
             bucketIndex: -1,
             isMoving: false,
             isSorted: true,
+            isHighlighted: false,
             elementId: `final-${index}-${value}`
           }));
         });
@@ -313,6 +387,7 @@ export function BucketSortVisualizer({
                     bucketIndex: -1,
                     isMoving: false,
                     isSorted: true,
+                    isHighlighted: false,
                     elementId: `final-${elementsPlaced}-${bucket[elementIdx]}`
                   });
                   elementsPlaced++;
@@ -347,6 +422,7 @@ export function BucketSortVisualizer({
                     bucketIndex: bucketIdx,
                     isMoving: false,
                     isSorted: true,
+                    isHighlighted: false,
                     elementId: `bucket-${bucketIdx}-${elementIdx}-${value}`
                   });
                 }
@@ -380,6 +456,7 @@ export function BucketSortVisualizer({
   };
 
   const getElementColor = (element: ElementPosition) => {
+    if (element.isHighlighted) return '#3B82F6'; // Blue - highlighted/being moved to bucket
     if (element.isMoving) return '#3B82F6'; // Blue - moving
     if (element.isSorted) return '#10B981'; // Green - sorted
     if (!element.isInOriginalArray) return '#F59E0B'; // Amber - in bucket

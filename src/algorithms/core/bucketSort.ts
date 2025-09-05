@@ -145,7 +145,7 @@ function bucketSortSteps(array: number[]): SortStep[] {
       const key = bucket[i];
       let j = i - 1;
       
-      // Show element being inserted
+      // Show element being selected for insertion
       steps.push({
         type: 'bucket-operation',
         indices: [],
@@ -153,7 +153,7 @@ function bucketSortSteps(array: number[]): SortStep[] {
         metadata: {
           comparisons,
           swaps,
-          currentPhase: `Internal Sorting: Inserting ${key} in bucket ${bucketIdx}`,
+          currentPhase: `Internal Sorting: Selecting element ${key} at position ${i} in bucket ${bucketIdx}`,
           buckets: buckets.map(bucket => [...bucket]),
           bucketIndex: bucketIdx,
           elementValue: key,
@@ -173,7 +173,7 @@ function bucketSortSteps(array: number[]): SortStep[] {
           metadata: {
             comparisons,
             swaps,
-            currentPhase: `Internal Sorting: Moving ${bucket[j + 1]} in bucket ${bucketIdx}`,
+            currentPhase: `Internal Sorting: Moving ${bucket[j + 1]} to the right in bucket ${bucketIdx}`,
             buckets: buckets.map(bucket => [...bucket]),
             bucketIndex: bucketIdx,
             operationType: 'sort-internal'
