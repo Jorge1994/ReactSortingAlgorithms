@@ -154,13 +154,16 @@ export function BucketSortVisualizer({
       }
       
       // Update bucket elements based on current step metadata
-      setBucketElements(() => {
+      setBucketElements((prev) => {
         if (numBuckets <= 0) return [];
         
         const newBuckets = Array.from({ length: numBuckets }, () => [] as ElementPosition[]);
         
         buckets.forEach((bucket, idx) => {
           if (bucket && Array.isArray(bucket) && idx < numBuckets && newBuckets[idx]) {
+            // Check if this bucket was already sorted in previous steps
+            const wasPreviouslySorted = prev && prev[idx] && prev[idx].length > 0 && prev[idx].every(elem => elem.isSorted);
+            
             bucket.forEach((value, elementIdx) => {
               const elementId = `bucket-${idx}-${elementIdx}-${value}`;
               newBuckets[idx].push({
@@ -169,7 +172,7 @@ export function BucketSortVisualizer({
                 isInOriginalArray: false,
                 bucketIndex: idx,
                 isMoving: false,
-                isSorted: false,
+                isSorted: wasPreviouslySorted, // Preserve sorted state
                 isHighlighted: false,
                 elementId
               });
@@ -202,13 +205,16 @@ export function BucketSortVisualizer({
     // Handle different operation types
     if (operationType === 'distribute') {
       // Rebuild bucket elements from step metadata during distribution phase
-      setBucketElements(() => {
+      setBucketElements((prev) => {
         if (numBuckets <= 0) return [];
         
         const newBuckets = Array.from({ length: numBuckets }, () => [] as ElementPosition[]);
         
         buckets.forEach((bucket, idx) => {
           if (bucket && Array.isArray(bucket) && idx < numBuckets && newBuckets[idx]) {
+            // Check if this bucket was already sorted in previous steps
+            const wasPreviouslySorted = prev && prev[idx] && prev[idx].length > 0 && prev[idx].every((elem: ElementPosition) => elem.isSorted);
+            
             bucket.forEach((value, elementIdx) => {
               const elementId = `bucket-${idx}-${elementIdx}-${value}`;
               newBuckets[idx].push({
@@ -217,7 +223,7 @@ export function BucketSortVisualizer({
                 isInOriginalArray: false,
                 bucketIndex: idx,
                 isMoving: false,
-                isSorted: false,
+                isSorted: wasPreviouslySorted, // Preserve sorted state
                 isHighlighted: false,
                 elementId
               });
@@ -271,15 +277,19 @@ export function BucketSortVisualizer({
         
         buckets.forEach((bucket, idx) => {
           if (bucket && Array.isArray(bucket) && idx < numBuckets) {
+            // Check if this bucket was already sorted in previous steps
+            const wasPreviouslySorted = prev[idx] && prev[idx].length > 0 && prev[idx].every(elem => elem.isSorted);
+            
             // For sorting internal phase, create completely new elements with position-based IDs
             // This ensures no ID conflicts even with duplicate values
+            // Preserve sorted state for buckets that were already marked as sorted
             newBuckets[idx] = bucket.map((value, elementIdx) => ({
               value,
               originalIndex: -1,
               isInOriginalArray: false,
               bucketIndex: idx,
               isMoving: false,
-              isSorted: false,
+              isSorted: wasPreviouslySorted, // Preserve sorted state
               isHighlighted: false,
               elementId: `sort-internal-bucket-${idx}-pos-${elementIdx}-value-${value}-step-${currentStep}`
             }));
