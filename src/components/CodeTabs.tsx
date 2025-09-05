@@ -80,7 +80,7 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
     const mapFilename = (l: string) => {
       if (l === 'c++' || l === 'cpp') return 'cpp';
       if (l === 'c#' || l === 'csharp') return 'csharp';
-      if (l === 'js' || l === 'javascript') return 'javascript';
+      if (l === 'js' || l === 'javascript') return 'js';
       if (l === 'ts' || l === 'typescript') return 'typescript';
       // normalize spaces and non-alphanumeric to hyphen
       return l.replace(/[^a-z0-9]+/g, '-');

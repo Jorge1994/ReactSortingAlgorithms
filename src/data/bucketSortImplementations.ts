@@ -151,5 +151,83 @@ public class BucketSort {
     }
 }`,
     "java"
-  )
+  ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function calculateBuckets(size) {
+    // Calculate optimal number of buckets based on array size
+    if (size <= 10) {
+        return Math.max(2, Math.floor(size / 2));
+    } else if (size <= 25) {
+        return Math.floor(size / 3);
+    } else if (size <= 50) {
+        return Math.floor(Math.sqrt(size));
+    } else {
+        return Math.min(10, Math.floor(Math.sqrt(size)));
+    }
+}
+
+function insertionSort(arr) {
+    // Helper function to sort individual buckets
+    for (let i = 1; i < arr.length; i++) {
+        const key = arr[i];
+        let j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+function bucketSort(arr) {
+    if (arr.length <= 1) {
+        return [...arr];
+    }
+    
+    // Calculate number of buckets (adaptive formula)
+    const numBuckets = calculateBuckets(arr.length);
+    
+    // Find min and max for range calculation
+    const minVal = Math.min(...arr);
+    const maxVal = Math.max(...arr);
+    const range = maxVal - minVal;
+    
+    // Create empty buckets
+    const buckets = Array.from({ length: numBuckets }, () => []);
+    
+    // Distribute elements into buckets
+    for (const num of arr) {
+        let bucketIndex;
+        if (range === 0) {
+            bucketIndex = 0; // All elements are the same
+        } else {
+            bucketIndex = Math.floor((num - minVal) / range * (numBuckets - 1));
+            bucketIndex = Math.min(bucketIndex, numBuckets - 1);
+        }
+        buckets[bucketIndex].push(num);
+    }
+    
+    // Sort individual buckets using insertion sort
+    for (const bucket of buckets) {
+        insertionSort(bucket);
+    }
+    
+    // Concatenate sorted buckets
+    const sortedArray = [];
+    for (const bucket of buckets) {
+        sortedArray.push(...bucket);
+    }
+    
+    return sortedArray;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = bucketSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

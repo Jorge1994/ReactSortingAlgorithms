@@ -91,4 +91,33 @@ print(f"Sorted: {sorted_numbers}")`,
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function insertionSort(arr) {
+    // Start from the second element (index 1)
+    for (let i = 1; i < arr.length; i++) {
+        const key = arr[i];  // Current element to be inserted
+        let j = i - 1;       // Index of the last element in sorted portion
+        
+        // Move elements greater than key one position ahead
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        
+        // Insert the key at its correct position
+        arr[j + 1] = key;
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = insertionSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

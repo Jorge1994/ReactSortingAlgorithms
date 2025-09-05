@@ -82,4 +82,37 @@ print(f"Sorted: {sorted_numbers}")`,
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function selectionSort(arr) {
+    const n = arr.length;
+    
+    // Traverse through all array elements
+    for (let i = 0; i < n - 1; i++) {
+        // Find the minimum element in remaining unsorted array
+        let minIdx = i;
+        
+        for (let j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        
+        // Swap the found minimum element with the first element
+        if (minIdx !== i) {
+            [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+        }
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = selectionSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

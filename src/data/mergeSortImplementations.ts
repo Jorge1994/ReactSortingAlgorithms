@@ -149,4 +149,55 @@ public class MergeSort {
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function mergeSort(arr) {
+    if (arr.length <= 1) {
+        return [...arr];
+    }
+    
+    // Divide the array into two halves
+    const mid = Math.floor(arr.length / 2);
+    const leftHalf = arr.slice(0, mid);
+    const rightHalf = arr.slice(mid);
+    
+    // Recursively sort both halves
+    const leftSorted = mergeSort(leftHalf);
+    const rightSorted = mergeSort(rightHalf);
+    
+    // Merge the sorted halves
+    return merge(leftSorted, rightSorted);
+}
+
+function merge(left, right) {
+    const result = [];
+    let i = 0;
+    let j = 0;
+    
+    // Compare elements and merge in sorted order
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+    
+    // Add remaining elements
+    result.push(...left.slice(i));
+    result.push(...right.slice(j));
+    
+    return result;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = mergeSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

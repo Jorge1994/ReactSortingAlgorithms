@@ -78,4 +78,34 @@ print(f"Sorted: {sorted_numbers}")`,
 `,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function stoogeSort(arr, l = 0, r = arr.length - 1) {
+    if (l >= r) {
+        return arr;
+    }
+    
+    // Compare and swap
+    if (arr[l] > arr[r]) {
+        [arr[l], arr[r]] = [arr[r], arr[l]];
+    }
+    
+    if (r - l + 1 > 2) {
+        const t = Math.floor((r - l + 1) / 3);
+        stoogeSort(arr, l, r - t);
+        stoogeSort(arr, l + t, r);
+        stoogeSort(arr, l, r - t);
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = stoogeSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

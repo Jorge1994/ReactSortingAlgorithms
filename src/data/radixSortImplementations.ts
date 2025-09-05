@@ -116,10 +116,10 @@ function countingSortByDigit(arr, divisor, digitPos) {
 }
 
 // Example usage
-const testArray = [170, 45, 75, 90, 2, 802, 24, 66];
-console.log('Original array:', testArray);
-radixSort(testArray);
-console.log('Final sorted array:', testArray);`,
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = radixSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
     "js"
   ),
   

@@ -280,5 +280,137 @@ print(f"Sorted: {sorted_numbers}")`,
     }
 }`,
     "java"
-  )
+  ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function introsort(arr) {
+    // Introspective Sort - Hybrid algorithm combining quicksort, heapsort, and insertion sort
+    if (arr.length <= 1) {
+        return arr;
+    }
+    
+    // Calculate depth limit: 2 * floor(log2(n))
+    const depthLimit = 2 * Math.floor(Math.log2(arr.length));
+    introsortUtil(arr, 0, arr.length - 1, depthLimit);
+    return arr;
+}
+
+function introsortUtil(arr, begin, end, depthLimit) {
+    const size = end - begin + 1;
+    
+    // Use insertion sort for small arrays (< 16 elements)
+    if (size < 16) {
+        insertionSort(arr, begin, end);
+        return;
+    }
+    
+    // Use heapsort when depth limit is reached (prevent O(n²) worst case)
+    if (depthLimit === 0) {
+        heapsort(arr, begin, end);
+        return;
+    }
+    
+    // Use quicksort with median-of-three pivot selection
+    const pivotIndex = medianOfThree(arr, begin, begin + Math.floor(size / 2), end);
+    
+    // Move pivot to end for partitioning
+    [arr[pivotIndex], arr[end]] = [arr[end], arr[pivotIndex]];
+    
+    // Partition and recursively sort
+    const partitionPoint = partition(arr, begin, end);
+    
+    // Recursively sort left and right partitions
+    introsortUtil(arr, begin, partitionPoint - 1, depthLimit - 1);
+    introsortUtil(arr, partitionPoint + 1, end, depthLimit - 1);
+}
+
+function medianOfThree(arr, a, b, c) {
+    // Find median of three elements for better pivot selection
+    if ((arr[a] <= arr[b] && arr[b] <= arr[c]) || (arr[c] <= arr[b] && arr[b] <= arr[a])) {
+        return b;
+    } else if ((arr[b] <= arr[a] && arr[a] <= arr[c]) || (arr[c] <= arr[a] && arr[a] <= arr[b])) {
+        return a;
+    } else {
+        return c;
+    }
+}
+
+function partition(arr, low, high) {
+    // Standard quicksort partitioning
+    const pivot = arr[high];
+    let i = low - 1;
+    
+    for (let j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+    return i + 1;
+}
+
+function insertionSort(arr, begin, end) {
+    // Insertion sort for small subarrays
+    for (let i = begin + 1; i <= end; i++) {
+        const key = arr[i];
+        let j = i - 1;
+        
+        while (j >= begin && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        
+        arr[j + 1] = key;
+    }
+}
+
+function heapify(arr, n, i, offset) {
+    // Heapify a subtree rooted at index i
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+    
+    // Compare with left child
+    if (left < n && arr[offset + left] > arr[offset + largest]) {
+        largest = left;
+    }
+    
+    // Compare with right child
+    if (right < n && arr[offset + right] > arr[offset + largest]) {
+        largest = right;
+    }
+    
+    // If largest is not root, swap and continue heapifying
+    if (largest !== i) {
+        [arr[offset + i], arr[offset + largest]] = [arr[offset + largest], arr[offset + i]];
+        heapify(arr, n, largest, offset);
+    }
+}
+
+function heapsort(arr, begin, end) {
+    // Heapsort for when recursion depth limit is exceeded
+    const n = end - begin + 1;
+    
+    // Build heap (rearrange array)
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        heapify(arr, n, i, begin);
+    }
+    
+    // Extract elements from heap one by one
+    for (let i = n - 1; i > 0; i--) {
+        [arr[begin], arr[begin + i]] = [arr[begin + i], arr[begin]];
+        heapify(arr, i, 0, begin);
+    }
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = introsort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

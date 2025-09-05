@@ -93,4 +93,39 @@ print(f"Sorted: {sorted_numbers}")`,
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function bubbleSort(arr) {
+    const n = arr.length;
+    
+    for (let i = 0; i < n; i++) {
+        let swapped = false;
+        
+        // Last i elements are already in place
+        for (let j = 0; j < n - i - 1; j++) {
+            // Compare adjacent elements
+            if (arr[j] > arr[j + 1]) {
+                // Swap if they are in wrong order
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                swapped = true;
+            }
+        }
+        
+        // If no swapping occurred, array is sorted
+        if (!swapped) {
+            break;
+        }
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = bubbleSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

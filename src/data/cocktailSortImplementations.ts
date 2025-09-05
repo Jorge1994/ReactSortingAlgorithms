@@ -117,4 +117,52 @@ print(f"Sorted: {sorted_numbers}")`,
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function cocktailSort(arr) {
+    const n = arr.length;
+    if (n <= 1) return arr;
+    
+    let left = 0;
+    let right = n - 1;
+    
+    while (left < right) {
+        let swapped = false;
+        
+        // Forward pass
+        for (let i = left; i < right; i++) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                swapped = true;
+            }
+        }
+        right--;
+        
+        if (!swapped) break;
+        
+        swapped = false;
+        
+        // Backward pass
+        for (let i = right; i > left; i--) {
+            if (arr[i - 1] > arr[i]) {
+                [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+                swapped = true;
+            }
+        }
+        left++;
+        
+        if (!swapped) break;
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = cocktailSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

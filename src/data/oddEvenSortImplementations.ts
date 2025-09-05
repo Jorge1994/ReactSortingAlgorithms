@@ -90,4 +90,41 @@ print(f"Sorted: {sorted_numbers}")`,
 `,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function oddEvenSort(arr) {
+    const n = arr.length;
+    let isSorted = false;
+    
+    while (!isSorted) {
+        isSorted = true;
+        
+        // Even indexed passes
+        for (let i = 0; i < n - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                isSorted = false;
+            }
+        }
+        
+        // Odd indexed passes
+        for (let i = 1; i < n - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                isSorted = false;
+            }
+        }
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = oddEvenSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

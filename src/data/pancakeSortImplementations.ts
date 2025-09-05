@@ -93,4 +93,45 @@ print(f"Sorted: {sorted_numbers}")
 `,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function flip(arr, i) {
+    let start = 0;
+    while (start < i) {
+        [arr[start], arr[i]] = [arr[i], arr[start]];
+        start++;
+        i--;
+    }
+}
+
+function findMax(arr, n) {
+    let mi = 0;
+    for (let i = 0; i < n; i++) {
+        if (arr[i] > arr[mi]) {
+            mi = i;
+        }
+    }
+    return mi;
+}
+
+function pancakeSort(arr) {
+    const n = arr.length;
+    for (let currSize = n; currSize > 1; currSize--) {
+        const mi = findMax(arr, currSize);
+        if (mi !== currSize - 1) {
+            flip(arr, mi);
+            flip(arr, currSize - 1);
+        }
+    }
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = pancakeSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

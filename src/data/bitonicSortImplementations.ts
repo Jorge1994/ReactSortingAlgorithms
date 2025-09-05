@@ -79,4 +79,40 @@ print(f"Sorted: {sorted_numbers}")
 `,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function bitonicSort(arr) {
+    // Bitonic sort implementation (in-place)
+    // Note: input length must be a power of two
+    const n = arr.length;
+    let k = 2;
+    
+    while (k <= n) {
+        let j = Math.floor(k / 2);
+        while (j > 0) {
+            for (let i = 0; i < n; i++) {
+                const l = i ^ j;
+                if (l > i) {
+                    if (((i & k) === 0 && arr[i] > arr[l]) || 
+                        ((i & k) !== 0 && arr[i] < arr[l])) {
+                        [arr[i], arr[l]] = [arr[l], arr[i]];
+                    }
+                }
+            }
+            j = Math.floor(j / 2);
+        }
+        k *= 2;
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90, 0]; // 8 elements (power of 2)
+const sortedNumbers = bitonicSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

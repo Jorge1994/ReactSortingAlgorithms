@@ -125,4 +125,57 @@ public class HeapSort {
 }`,
     "java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function heapSort(arr) {
+    const n = arr.length;
+    
+    // Phase 1: Build max heap from the array
+    // Start from the last non-leaf node and heapify each node
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    
+    // Phase 2: Extract elements from heap one by one
+    for (let i = n - 1; i > 0; i--) {
+        // Move current root (maximum) to end
+        [arr[0], arr[i]] = [arr[i], arr[0]];
+        
+        // Call heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+    
+    return arr;
+}
+
+function heapify(arr, heapSize, rootIndex) {
+    let largest = rootIndex;
+    const leftChild = 2 * rootIndex + 1;
+    const rightChild = 2 * rootIndex + 2;
+    
+    // Check if left child exists and is greater than root
+    if (leftChild < heapSize && arr[leftChild] > arr[largest]) {
+        largest = leftChild;
+    }
+    
+    // Check if right child exists and is greater than current largest
+    if (rightChild < heapSize && arr[rightChild] > arr[largest]) {
+        largest = rightChild;
+    }
+    
+    // If largest is not root, swap and continue heapifying
+    if (largest !== rootIndex) {
+        [arr[rootIndex], arr[largest]] = [arr[largest], arr[rootIndex]];
+        heapify(arr, heapSize, largest);
+    }
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = heapSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

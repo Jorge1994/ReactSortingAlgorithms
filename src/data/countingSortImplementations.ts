@@ -108,4 +108,51 @@ public class CountingSort {
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function countingSort(arr) {
+    if (arr.length === 0) return arr;
+    
+    // Find the range of values
+    const maxVal = Math.max(...arr);
+    const minVal = Math.min(...arr);
+    const range = maxVal - minVal + 1;
+    
+    // Initialize count array
+    const count = new Array(range).fill(0);
+    const output = new Array(arr.length);
+    
+    // Count occurrences of each element
+    for (const num of arr) {
+        count[num - minVal]++;
+    }
+    
+    // Convert to cumulative count
+    for (let i = 1; i < range; i++) {
+        count[i] += count[i - 1];
+    }
+    
+    // Build output array (traverse from right to maintain stability)
+    for (let i = arr.length - 1; i >= 0; i--) {
+        const index = count[arr[i] - minVal] - 1;
+        output[index] = arr[i];
+        count[arr[i] - minVal]--;
+    }
+    
+    // Copy output array back to original
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = output[i];
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = countingSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

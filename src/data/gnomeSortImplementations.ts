@@ -74,4 +74,34 @@ print(f"Sorted: {sorted_numbers}")`,
 }`,
     ".java"
   ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function gnomeSort(arr) {
+    let i = 1;
+    const n = arr.length;
+    
+    while (i < n) {
+        if (arr[i - 1] <= arr[i]) {
+            i++;
+        } else {
+            [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+            if (i > 1) {
+                i--;
+            } else {
+                i++;
+            }
+        }
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = gnomeSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };

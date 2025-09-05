@@ -25,9 +25,9 @@ export type AlgorithmImplementations = {
 
 // Function to get active implementations (facilitates addition/removal)
 export function getActiveImplementations(implementations: AlgorithmImplementations): AlgorithmImplementation[] {
-  // For now, returns only Python and Java
+  // Returns Python, Java, and JavaScript implementations
   // To add more languages, just include the key here
-  const activeLanguages = ['python', 'java'];
+  const activeLanguages = ['python', 'java', 'javascript'];
   
   return activeLanguages
     .filter(lang => implementations[lang])

@@ -207,5 +207,103 @@ public class TimSort {
     }
 }`,
     "java"
-  )
+  ),
+
+  javascript: createAlgorithmImplementation(
+    "JavaScript",
+    `function minRunLength(n) {
+    // Compute a good value for minimum run length
+    // If n < 32, return n (no slicing)
+    // Otherwise, return an int k, 32 <= k <= 64
+    let r = 0;
+    while (n >= 32) {
+        r |= n & 1;
+        n >>= 1;
+    }
+    return n + r;
+}
+
+function insertionSort(arr, left, right) {
+    // Sort arr[left:right+1] using insertion sort
+    for (let i = left + 1; i <= right; i++) {
+        const key = arr[i];
+        let j = i - 1;
+        while (j >= left && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+function merge(arr, left, mid, right) {
+    // Merge sorted subarrays arr[left:mid+1] and arr[mid+1:right+1]
+    const leftArr = arr.slice(left, mid + 1);
+    const rightArr = arr.slice(mid + 1, right + 1);
+    
+    let i = 0, j = 0, k = left;
+    
+    while (i < leftArr.length && j < rightArr.length) {
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k] = leftArr[i];
+            i++;
+        } else {
+            arr[k] = rightArr[j];
+            j++;
+        }
+        k++;
+    }
+    
+    // Copy remaining elements
+    while (i < leftArr.length) {
+        arr[k] = leftArr[i];
+        k++;
+        i++;
+    }
+    
+    while (j < rightArr.length) {
+        arr[k] = rightArr[j];
+        k++;
+        j++;
+    }
+}
+
+function timSort(arr) {
+    // Simplified Tim Sort implementation
+    const n = arr.length;
+    const minRun = minRunLength(n);
+    
+    // Sort individual subarrays of size minRun
+    for (let start = 0; start < n; start += minRun) {
+        const end = Math.min(start + minRun - 1, n - 1);
+        insertionSort(arr, start, end);
+    }
+    
+    // Start merging from size minRun
+    let size = minRun;
+    while (size < n) {
+        // Pick starting point of left sub array
+        for (let start = 0; start < n; start += size * 2) {
+            // Calculate mid point and end point
+            const mid = start + size - 1;
+            const end = Math.min(start + size * 2 - 1, n - 1);
+            
+            // Merge subarrays if mid is smaller than end
+            if (mid < end) {
+                merge(arr, start, mid, end);
+            }
+        }
+        size *= 2;
+    }
+    
+    return arr;
+}
+
+// Example usage
+const numbers = [64, 34, 25, 12, 22, 11, 90];
+const sortedNumbers = timSort([...numbers]);
+console.log(\`Original: [\${numbers.join(', ')}]\`);
+console.log(\`Sorted: [\${sortedNumbers.join(', ')}]\`);`,
+    ".js"
+  ),
 };
