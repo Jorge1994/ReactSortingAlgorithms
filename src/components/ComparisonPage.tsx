@@ -128,7 +128,7 @@ export function ComparisonPage() {
 
       {/* Comparison Table */}
       <section className="py-16 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[95vw] mx-auto">
           <motion.div
             className="bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700"
             initial="initial"
@@ -149,16 +149,16 @@ export function ComparisonPage() {
                     <th colSpan={3} className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
                       Space Complexity
                     </th>
-                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                    <th rowSpan={2} className="px-3 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
                       In-Place
                     </th>
-                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                    <th rowSpan={2} className="px-3 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
                       Stable
                     </th>
-                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                    <th rowSpan={2} className="px-3 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
                       Adaptive
                     </th>
-                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                    <th rowSpan={2} className="px-3 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
                       Online
                     </th>
                   </tr>
@@ -235,23 +235,23 @@ export function ComparisonPage() {
                             {complexity.space.worst}
                           </span>
                         </td>
-                        <td className="px-4 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.inPlace || false, true)}`}>
+                        <td className="px-2 py-4 text-center">
+                          <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(info?.inPlace || false, true)}`}>
                             {info?.inPlace ? '✓ Yes' : '✗ No'}
                           </span>
                         </td>
-                        <td className="px-4 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.stable || false, true)}`}>
+                        <td className="px-2 py-4 text-center">
+                          <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(info?.stable || false, true)}`}>
                             {info?.stable ? '✓ Yes' : '✗ No'}
                           </span>
                         </td>
-                        <td className="px-4 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(isAdaptive(algorithmRegistry[algorithm].name), true)}`}>
+                        <td className="px-2 py-4 text-center">
+                          <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(isAdaptive(algorithmRegistry[algorithm].name), true)}`}>
                             {isAdaptive(algorithmRegistry[algorithm].name) ? '✓ Yes' : '✗ No'}
                           </span>
                         </td>
-                        <td className="px-4 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.online || false, true)}`}>
+                        <td className="px-2 py-4 text-center">
+                          <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(info?.online || false, true)}`}>
                             {info?.online ? '✓ Yes' : '✗ No'}
                           </span>
                         </td>
