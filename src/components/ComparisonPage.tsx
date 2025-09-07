@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { algorithmRegistry, type AlgorithmKey } from '../algorithms/registry';
 import { algorithmInfoRegistry } from '../algorithms/infoRegistry';
+import { getAlgorithmIcon } from '../utils/algorithmIcons';
 import { Footer } from './Footer';
 
 const fadeInUp = {
@@ -199,7 +200,7 @@ export function ComparisonPage() {
                       >
                         <td className="px-6 py-4 text-center">
                           <div className="flex items-center justify-center gap-3">
-                            <div className="w-3 h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
+                            <span className="text-2xl">{getAlgorithmIcon(algorithm)}</span>
                             <span className="font-semibold text-slate-200">
                               {algorithmRegistry[algorithm].name}
                             </span>
