@@ -317,9 +317,9 @@ export function ComparisonPage() {
         </div>
       </section>
 
-      {/* Complexity Legend */}
+      {/* Complexity and Notation Reference Guide */}
       <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             className="bg-slate-800 rounded-2xl p-8 border border-slate-700"
             initial="initial"
@@ -328,10 +328,10 @@ export function ComparisonPage() {
             variants={fadeInUp}
           >
             <h3 className="text-2xl font-bold mb-6 text-center text-slate-200">
-              Complexity Reference Guide
+              Complexity & Notation Reference Guide
             </h3>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               <div>
                 <h4 className="text-lg font-semibold mb-4 text-slate-300">Time Complexity</h4>
                 <div className="space-y-3">
@@ -395,42 +395,38 @@ export function ComparisonPage() {
                     </span>
                     <span className="text-slate-400">Can sort data as it arrives</span>
                   </div>
-                  <div className="mt-4 p-4 bg-slate-700 rounded-lg">
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      <strong className="text-slate-200">Note:</strong> The choice of sorting algorithm depends on 
-                      your specific requirements: data size, memory constraints, stability needs, and performance characteristics.
-                    </p>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-start gap-3 mb-4">
+                  <span className="text-2xl">ℹ️</span>
+                  <h4 className="font-semibold text-slate-300">Notation</h4>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-slate-400 text-sm">
+                    <p className="mb-3">Symbols used in complexity notation:</p>
+                    <ul className="space-y-2">
+                      <li>
+                        <span className="font-semibold text-slate-200">n</span>: Number of elements in the array
+                      </li>
+                      <li>
+                        <span className="font-semibold text-slate-200">d</span>: Number of digits in the maximum number (for Radix Sort). When d is small and constant, O(d×n) approaches linear time complexity
+                      </li>
+                      <li>
+                        <span className="font-semibold text-slate-200">k</span>: Range of distinct integer values (max - min + 1). For Counting Sort, k affects both time O(n + k) and space O(k). Example: values 2-5 have k = 4
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Notation Guide */}
-      <section className="py-8 px-6 bg-slate-800/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="bg-slate-800 rounded-xl p-6 border border-slate-700"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">ℹ️</span>
-              <div>
-                <h4 className="font-semibold text-slate-200 mb-2">Notation</h4>
-                <p className="text-slate-300 leading-relaxed text-sm mb-2">Short explanation of symbols used in the table:</p>
-                <ul className="list-disc list-inside text-slate-300 text-sm space-y-1">
-                  <li><span className="font-semibold text-slate-200">n</span>: Number of elements in the array.</li>
-                  <li><span className="font-semibold text-slate-200">d</span>: Number of digits in the maximum number (for Radix Sort). When d is small and constant, O(d×n) approaches linear time complexity.</li>
-                  <li>
-                    <span className="font-semibold text-slate-200">k</span>: Range of distinct integer values (computed as max - min + 1). In the context of Counting Sort, k is the number of "buckets" required to count occurrences; it directly affects both time and extra space since the algorithm runs in O(n + k) time and requires O(k) additional space for the count array. Example: for values between 2 and 5, k = 5 - 2 + 1 = 4.
-                  </li>
-                </ul>
-              </div>
+            <div className="mt-8 p-4 bg-slate-700 rounded-lg">
+              <p className="text-sm text-slate-300 leading-relaxed">
+                <strong className="text-slate-200">Note:</strong> The choice of sorting algorithm depends on 
+                your specific requirements: data size, memory constraints, stability needs, and performance characteristics.
+              </p>
             </div>
           </motion.div>
         </div>
