@@ -24,7 +24,7 @@ export function LandingPage() {
   
   // Parallax effects
   const heroY = useTransform(scrollY, [0, 500], [0, -150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // Removed heroOpacity to prevent background color changing effect
 
   // Function to scroll to top when navigating
   const handleNavigation = () => {
@@ -96,7 +96,7 @@ export function LandingPage() {
       {/* Hero Section */}
       <motion.section 
         className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900"
-        style={{ y: heroY, opacity: heroOpacity }}
+        style={{ y: heroY }}
         data-section="0"
       >
         {/* Animated background */}
@@ -163,7 +163,7 @@ export function LandingPage() {
       </motion.section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6" data-section="1">
+      <section id="about" className="py-24 px-6 bg-slate-900" data-section="1">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -284,7 +284,7 @@ export function LandingPage() {
       </section>
 
       {/* All Algorithms Section */}
-      <section className="py-24 px-6 bg-slate-800/50" data-section="2">
+      <section className="py-24 px-6 bg-slate-900" data-section="2">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -361,7 +361,7 @@ export function LandingPage() {
       </section>
 
       {/* Learning Resources Section */}
-      <section className="py-20 bg-slate-800" data-section="3">
+      <section className="py-20 bg-slate-900" data-section="3">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             className="text-center mb-16"
