@@ -319,36 +319,6 @@ export function LandingPage() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Call to Action */}
-          <motion.div 
-            className="text-center mt-16 p-8 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-2xl border border-orange-500/30"
-            variants={fadeInUp}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            <h4 className="text-2xl font-bold text-amber-100 mb-4">Ready to Start Learning?</h4>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Choose any algorithm above to begin your interactive learning journey. Each visualization includes step-by-step execution, complexity analysis, and implementation examples.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link 
-                to="/comparison"
-                onClick={handleNavigation}
-                className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
-              >
-                Compare All Algorithms
-              </Link>
-              <Link 
-                to="/glossary"
-                onClick={handleNavigation}
-                className="px-6 py-3 bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-lg transition-colors"
-              >
-                Browse Technical Glossary
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
 
