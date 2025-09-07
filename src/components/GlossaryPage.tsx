@@ -164,14 +164,14 @@ export function GlossaryPage() {
             <Link
               to="/"
               onClick={handleNavigation}
-              className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-200 mb-8"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-slate-800/80 backdrop-blur-sm border border-slate-600 hover:border-slate-500 rounded-xl text-slate-300 hover:text-white transition-all duration-300 hover:scale-105 hover:bg-slate-700/80 shadow-lg hover:shadow-xl mb-8"
             >
               <img 
                 src="/icons/logo.png" 
                 alt="SortViz Logo" 
-                className="w-6 h-6 object-contain"
+                className="w-8 h-8 object-contain"
               />
-              ← Back to Home
+              <span className="font-medium">← Back to Home</span>
             </Link>
             
             <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-relaxed py-4">
