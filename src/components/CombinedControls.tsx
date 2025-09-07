@@ -63,24 +63,24 @@ export function CombinedControls({
   const speedProgress = ((animationSpeed - 50) / (2000 - 50)) * 100;
 
   return (
-    <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-2xl p-6 border border-slate-200">
+    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-lg">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Array Controls Section */}
         <div className="space-y-6">
-          <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-            <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+            <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
             Array Configuration
           </h3>
           
           {/* Array Size Control */}
-          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
             <div className="flex items-center justify-between mb-2">
-              <label htmlFor="array-size" className="text-sm font-medium text-slate-700 flex items-center gap-2">
+              <label htmlFor="array-size" className="text-sm font-medium text-white flex items-center gap-2">
                 <span className="text-base">📏</span>
                 Array Size
               </label>
-              <div className="flex items-center gap-2 bg-slate-100 px-2 py-1 rounded-lg border border-slate-300">
-                <span className="text-sm font-mono text-slate-600">{arraySize} elements</span>
+              <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-lg">
+                <span className="text-sm font-mono text-slate-200">{arraySize} elements</span>
               </div>
             </div>
             <div className="relative pb-2">
@@ -91,12 +91,12 @@ export function CombinedControls({
                 max={maxSize}
                 value={arraySize}
                 onChange={(e) => handleSizeChange(parseInt(e.target.value))}
-                className="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
                 style={{
                   background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${arraySizeProgress}%, #e2e8f0 ${arraySizeProgress}%, #e2e8f0 100%)`
                 }}
               />
-              <div className="relative flex text-xs text-slate-500 mt-1">
+              <div className="relative flex text-xs text-slate-300 mt-1">
                 <span style={{ position: 'absolute', left: '0%', transform: 'translateX(0%)' }}>5</span>
                 <span style={{ position: 'absolute', left: '47.37%', transform: 'translateX(-50%)' }}>{Math.floor(maxSize / 2)}</span>
                 <span style={{ position: 'absolute', left: '100%', transform: 'translateX(-100%)' }}>{maxSize}</span>
@@ -145,7 +145,7 @@ export function CombinedControls({
 
           {/* Bitonic Sort Info */}
           {isBitonic && (
-            <div className="mt-3 text-sm text-slate-600 bg-blue-50 p-3 rounded-lg border border-blue-200">
+            <div className="mt-3 text-sm text-slate-200 bg-blue-500/20 backdrop-blur-sm p-3 rounded-lg border border-blue-400/30">
               <span className="font-medium">⚠️ Bitonic Sort:</span> Requires array sizes: {bitonicAllowed.join(', ')}. The slider will snap to the nearest allowed size.
             </div>
           )}
@@ -153,22 +153,22 @@ export function CombinedControls({
 
         {/* Animation Controls Section */}
         <div className="space-y-6">
-          <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+            <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
             Animation Controls
           </h3>
           {/* Speed Control */}
-          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm font-medium text-white flex items-center gap-2">
                 <span className="text-base">⚡</span>
                 Animation Speed
               </label>
-              <div className="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-lg">
-                <span className="text-sm font-mono text-slate-600">{animationSpeed} ms</span>
+              <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-lg">
+                <span className="text-sm font-mono text-slate-200">{animationSpeed} ms</span>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative pb-2">
               <input
                 type="range"
                 min="50"
@@ -181,21 +181,21 @@ export function CombinedControls({
                   background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${speedProgress}%, #e2e8f0 ${speedProgress}%, #e2e8f0 100%)`
                 }}
               />
-              <div className="flex justify-between text-xs text-slate-500 mt-2">
-                <span>Fast</span>
-                <span>Medium</span>
-                <span>Slow</span>
+              <div className="relative flex text-xs text-slate-300 mt-1">
+                <span style={{ position: 'absolute', left: '0%', transform: 'translateX(0%)' }}>Fast</span>
+                <span style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>Medium</span>
+                <span style={{ position: 'absolute', left: '100%', transform: 'translateX(-100%)' }}>Slow</span>
               </div>
             </div>
           </div>
 
           {/* Main Controls */}
-          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div className="flex items-center justify-center gap-3">
               <button
                 onClick={onPrev}
                 disabled={!canPlayPrev}
-                className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-800 hover:border-slate-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+                className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-slate-300 hover:text-white hover:border-white/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 hover:bg-white/15"
               >
                 <span className="text-xl">⏮️</span>
               </button>
@@ -210,16 +210,16 @@ export function CombinedControls({
               <button
                 onClick={onNext}
                 disabled={!canPlayNext}
-                className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-800 hover:border-slate-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+                className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-slate-300 hover:text-white hover:border-white/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 hover:bg-white/15"
               >
                 <span className="text-xl">⏭️</span>
               </button>
               
-              <div className="w-px h-8 bg-slate-300 mx-2"></div>
+              <div className="w-px h-8 bg-white/20 mx-2"></div>
               
               <button
                 onClick={onReset}
-                className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 text-orange-600 hover:text-orange-700 hover:border-orange-200 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-orange-400 hover:text-orange-300 hover:border-orange-400/30 transition-all duration-200 hover:bg-white/15"
               >
                 <span className="text-xl">🔄</span>
               </button>
