@@ -10,25 +10,27 @@ export function ColorLegend() {
   ];
 
   return (
-    <div className="bg-white rounded-lg p-4 border border-slate-200 shadow-sm">
-      <h3 className="text-sm font-medium text-slate-700 mb-3 text-center flex items-center justify-center gap-2">
-        <span className="text-base">🎨</span>
-        Color Legend
-      </h3>
-      
-      <div className="flex flex-wrap justify-center gap-2">
-        {legendItems.map((item) => (
-          <div 
-            key={item.label}
-            className="flex flex-col items-center gap-1 bg-slate-50 rounded-lg px-3 py-2 hover:bg-slate-100 transition-colors duration-200"
-          >
-            <div className="flex items-center gap-2">
-              <div className={`w-3 h-3 ${item.color} rounded-sm`}></div>
-              <span className="text-xs font-medium text-slate-700">{item.label}</span>
+    <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+      <div className="p-4">
+        <h3 className="text-sm font-medium text-white mb-3 text-center flex items-center justify-center gap-2">
+          <span className="text-base">🎨</span>
+          Color Legend
+        </h3>
+        
+        <div className="flex flex-wrap justify-center gap-2">
+          {legendItems.map((item) => (
+            <div 
+              key={item.label}
+              className="flex flex-col items-center gap-1 px-3 py-2 hover:bg-white/10 transition-colors duration-200 rounded-lg"
+            >
+              <div className="flex items-center gap-2">
+                <div className={`w-3 h-3 ${item.color} rounded-sm`}></div>
+                <span className="text-xs font-medium text-white">{item.label}</span>
+              </div>
+              <span className="text-xs text-slate-300 text-center leading-tight">{item.description}</span>
             </div>
-            <span className="text-xs text-slate-500 text-center leading-tight">{item.description}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
