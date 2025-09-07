@@ -339,31 +339,31 @@ export function ComparisonPage() {
                     <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor('O(1)')}`}>
                       O(1)
                     </span>
-                    <span className="text-slate-400">Constant time - Best possible</span>
+                    <span className="text-slate-400 text-sm">Constant time - Best possible</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor('O(n)')}`}>
                       O(n)
                     </span>
-                    <span className="text-slate-400">Linear time - Excellent</span>
+                    <span className="text-slate-400 text-sm">Linear time - Excellent</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor('O(n log n)')}`}>
                       O(n log n)
                     </span>
-                    <span className="text-slate-400">Log-linear time - Good</span>
+                    <span className="text-slate-400 text-sm">Log-linear time - Good</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor('O(n²)')}`}>
                       O(n²)
                     </span>
-                    <span className="text-slate-400">Quadratic time - Fair</span>
+                    <span className="text-slate-400 text-sm">Quadratic time - Fair</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor('O(2^n)')}`}>
                       O(2^n)
                     </span>
-                    <span className="text-slate-400">Exponential time - Poor</span>
+                    <span className="text-slate-400 text-sm">Exponential time - Poor</span>
                   </div>
                 </div>
               </div>
@@ -375,45 +375,42 @@ export function ComparisonPage() {
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
                       ✓ In-Place
                     </span>
-                    <span className="text-slate-400">Uses O(1) extra memory</span>
+                    <span className="text-slate-400 text-sm">Uses O(1) extra memory</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
                       ✓ Stable
                     </span>
-                    <span className="text-slate-400">Preserves relative order of equal elements</span>
+                    <span className="text-slate-400 text-sm">Preserves relative order of equal elements</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
                       ✓ Adaptive
                     </span>
-                    <span className="text-slate-400">Performs better on partially sorted data</span>
+                    <span className="text-slate-400 text-sm">Performs better on partially sorted data</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
                       ✓ Online
                     </span>
-                    <span className="text-slate-400">Can sort data as it arrives</span>
+                    <span className="text-slate-400 text-sm">Can sort data as it arrives</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <div className="flex items-start gap-3 mb-4">
-                  <span className="text-2xl">ℹ️</span>
-                  <h4 className="font-semibold text-slate-300">Notation</h4>
-                </div>
+                <h4 className="text-lg font-semibold mb-4 text-slate-300">Notation</h4>
                 <div className="space-y-3">
                   <div className="text-slate-400 text-sm">
-                    <p className="mb-3">Symbols used in complexity notation:</p>
+                    <p className="mb-3 text-slate-400 text-sm">Symbols used in complexity notation:</p>
                     <ul className="space-y-2">
-                      <li>
+                      <li className="text-slate-400 text-sm">
                         <span className="font-semibold text-slate-200">n</span>: Number of elements in the array
                       </li>
-                      <li>
+                      <li className="text-slate-400 text-sm">
                         <span className="font-semibold text-slate-200">d</span>: Number of digits in the maximum number (for Radix Sort). When d is small and constant, O(d×n) approaches linear time complexity
                       </li>
-                      <li>
+                      <li className="text-slate-400 text-sm">
                         <span className="font-semibold text-slate-200">k</span>: Range of distinct integer values (max - min + 1). For Counting Sort, k affects both time O(n + k) and space O(k). Example: values 2-5 have k = 4
                       </li>
                     </ul>
