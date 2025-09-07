@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { type AlgorithmKey, algorithmRegistry } from './algorithms/registry';
 import { useSortingAnimation } from './hooks/useSortingAnimation';
 import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
@@ -180,15 +180,43 @@ function VisualizerPage() {
   );
 }
 
+// Component to scroll to top on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Temporarily disable smooth scrolling
+    const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    
+    // Immediate scroll to top
+    window.scrollTo(0, 0);
+    
+    // Use multiple methods to ensure it works
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Restore original scroll behavior after a short delay
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = originalScrollBehavior;
+    }, 100);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/visualize/:algorithm" element={<VisualizerPage />} />
-      <Route path="/algorithm/:algorithm" element={<AlgorithmDetailsPage />} />
-      <Route path="/comparison" element={<ComparisonPage />} />
-      <Route path="/glossary" element={<GlossaryPage />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/visualize/:algorithm" element={<VisualizerPage />} />
+        <Route path="/algorithm/:algorithm" element={<AlgorithmDetailsPage />} />
+        <Route path="/comparison" element={<ComparisonPage />} />
+        <Route path="/glossary" element={<GlossaryPage />} />
+      </Routes>
+    </>
   );
 }
 

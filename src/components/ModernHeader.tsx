@@ -10,6 +10,18 @@ interface ModernHeaderProps {
 }
 
 export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHeaderProps) {
+  // Function to scroll to top when navigating
+  const handleNavigation = () => {
+    const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = originalScrollBehavior;
+    }, 100);
+  };
+
   return (
     <header className="relative bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800 text-white border-b border-slate-700">
       {/* Animated background pattern */}
@@ -24,6 +36,7 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
           {/* Logo and Home Link */}
           <Link 
             to="/"
+            onClick={handleNavigation}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200"
           >
             <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center font-bold text-xl">
@@ -39,18 +52,21 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
           <nav className="hidden md:flex items-center gap-6">
             <Link
               to="/comparison"
+              onClick={handleNavigation}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium"
             >
               Comparison
             </Link>
             <Link
               to="/glossary"
+              onClick={handleNavigation}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium"
             >
               Glossary
             </Link>
             <Link
               to={`/algorithm/${currentAlgorithm}`}
+              onClick={handleNavigation}
               className="px-4 py-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
             >
               Learn More

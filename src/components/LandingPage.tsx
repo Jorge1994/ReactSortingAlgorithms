@@ -26,6 +26,23 @@ export function LandingPage() {
   const heroY = useTransform(scrollY, [0, 500], [0, -150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
+  // Function to scroll to top when navigating
+  const handleNavigation = () => {
+    // Temporarily disable smooth scrolling for immediate effect
+    const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    
+    // Multiple scroll methods to ensure it works
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Restore smooth scrolling after navigation
+    setTimeout(() => {
+      document.documentElement.style.scrollBehavior = originalScrollBehavior;
+    }, 100);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       // Optional: Add scroll-based interactions here
@@ -276,6 +293,7 @@ export function LandingPage() {
                     <Link
                       key={algorithmKey}
                       to={`/visualize/${algorithmKey}`}
+                      onClick={handleNavigation}
                       className="group relative overflow-hidden bg-gradient-to-br from-slate-700/60 to-slate-800/60 backdrop-blur-sm border border-slate-600/50 rounded-2xl p-6 hover:border-orange-500/60 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
                     >
                       {/* Background gradient animation */}
@@ -317,12 +335,14 @@ export function LandingPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link 
                 to="/comparison"
+                onClick={handleNavigation}
                 className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
               >
                 Compare All Algorithms
               </Link>
               <Link 
                 to="/glossary"
+                onClick={handleNavigation}
                 className="px-6 py-3 bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-lg transition-colors"
               >
                 Browse Technical Glossary
@@ -373,6 +393,7 @@ export function LandingPage() {
               </p>
               <Link
                 to="/comparison"
+                onClick={handleNavigation}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
               >
                 View Comparison
@@ -396,6 +417,7 @@ export function LandingPage() {
               </p>
               <Link
                 to="/glossary"
+                onClick={handleNavigation}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-500 hover:to-teal-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
               >
                 Browse Glossary
