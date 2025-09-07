@@ -454,3 +454,12 @@ The answers to the user in the chat must be in Portuguese from Portugal.
 All the text in UI must be in English.
 Whenever possible, maintain a modular code structure by splitting functionality into smaller, well-organized components, and avoid large monolithic files.
 Do not change the UI, unless as a last resort to fix a critical issue or asked explicitly.
+
+# Coding Instructions
+When generating code, follow these instructions:
+- Write clean, maintainable code with proper indentation and formatting.
+- Use meaningful variable and function names to enhance readability.
+- Include comments to explain complex logic or important decisions.
+- Follow established design patterns and best practices.
+- Ensure compatibility with existing code and adherence to project structure.
+- When an error occurs during code generation on a file, do not replace all the code in the file or create a new file, just fix the error.
