@@ -63,7 +63,7 @@ export function CombinedControls({
   const speedProgress = ((animationSpeed - 50) / (2000 - 50)) * 100;
 
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-lg">
+    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20 shadow-lg">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Array Controls Section */}
         <div className="space-y-6">
