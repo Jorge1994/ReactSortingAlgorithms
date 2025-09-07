@@ -133,7 +133,7 @@ export function RadixSortVisualizer({
         <h4 className="text-lg font-semibold mb-2 text-gray-800">
           Count Array {digitPosition !== undefined && `(${getDigitName(digitPosition)} Digit)`}
         </h4>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex justify-center">
+        <div className="flex justify-center">
           <div className="inline-block">
             <table className="border-collapse">
               <tbody>
@@ -205,9 +205,6 @@ export function RadixSortVisualizer({
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">{title}</h4>
         <div className="relative">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
-          
           {/* Array container */}
           <div 
             className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-2"

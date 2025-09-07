@@ -81,7 +81,7 @@ function VisualizerPage() {
         onAlgorithmChange={handleAlgorithmChange}
       />
       
-      <main className="w-full px-4 py-6 space-y-6">
+      <main className="w-full px-2 py-4 space-y-4">
         {/* Combined Controls - Array and Animation */}
         <section className="bg-slate-800 rounded-lg border border-slate-700 shadow-lg">
             <CombinedControls
@@ -104,7 +104,7 @@ function VisualizerPage() {
         </section>
 
         {/* Array Visualization */}
-        <section className="bg-slate-800 rounded-lg border border-slate-700 shadow-lg">
+        <section className="w-full">
           {currentAlgorithm === 'counting-sort' ? (
             <CountingSortVisualizer 
               displayArray={displayArray}

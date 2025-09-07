@@ -109,7 +109,7 @@ export function CountingSortVisualizer({
     return (
       <div className="mb-2">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">Count Array</h4>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+        <div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <tbody>
@@ -168,9 +168,6 @@ export function CountingSortVisualizer({
       <div className="mb-2">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">{title}</h4>
         <div className="relative overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
-          
           {/* Array container */}
           <div 
             className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-2"

@@ -66,48 +66,56 @@ export function VisualizerTemplate({
   };
 
   return (
-    <div className="w-full px-4 py-6 space-y-6">
+    <div className="w-full">
       {/* Main Visualization Content */}
-      <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-8 pb-4">
+      <section className="w-full overflow-hidden">
+        <div className="w-full">
           {children}
         </div>
       </section>
 
       {/* Custom Controls (if any) */}
       {customControls && (
-        <section>
+        <section className="px-4 mt-6">
           {customControls}
         </section>
       )}
 
       {/* Animation Controls */}
       {showAnimationControls && (
-        <AnimationControls
-          isPlaying={isPlaying}
-          onPlay={togglePlay}
-          onPause={onPause}
-          onNext={stepForward}
-          onPrev={stepBackward}
-          onReset={onReset}
-          canPlayNext={canPlayNext}
-          canPlayPrev={canPlayPrev}
-          animationSpeed={speed}
-          onSpeedChange={onSpeedChange}
-        />
+        <div className="px-4 mt-6">
+          <AnimationControls
+            isPlaying={isPlaying}
+            onPlay={togglePlay}
+            onPause={onPause}
+            onNext={stepForward}
+            onPrev={stepBackward}
+            onReset={onReset}
+            canPlayNext={canPlayNext}
+            canPlayPrev={canPlayPrev}
+            animationSpeed={speed}
+            onSpeedChange={onSpeedChange}
+          />
+        </div>
       )}
 
       {/* Statistics Panel */}
       {showStatistics && currentStepData && (
-        <StatisticsPanel
-          currentStepData={currentStepData}
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-        />
+        <div className="px-4 mt-6">
+          <StatisticsPanel
+            currentStepData={currentStepData}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
+        </div>
       )}
 
       {/* Color Legend */}
-      {showColorLegend && <ColorLegend />}
+      {showColorLegend && (
+        <div className="px-4 mt-6">
+          <ColorLegend />
+        </div>
+      )}
     </div>
   );
 }

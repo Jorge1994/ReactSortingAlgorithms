@@ -147,9 +147,6 @@ export function ArrayVisualizer({
       showAnimationControls={false}
     >
       <div className="relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white rounded-2xl"></div>
-        
         {/* Array container with proper spacing for labels */}
         <div 
           className="array-container relative w-full flex items-end justify-center px-4 sm:px-6 md:px-8 py-4 pt-8 sm:pt-12 md:pt-16"
