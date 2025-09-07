@@ -372,25 +372,25 @@ export function ComparisonPage() {
                 <h4 className="text-lg font-semibold mb-4 text-slate-300">Algorithm Properties</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                    <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(true, true)}`}>
                       ✓ In-Place
                     </span>
                     <span className="text-slate-400 text-sm">Uses O(1) extra memory</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                    <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(true, true)}`}>
                       ✓ Stable
                     </span>
                     <span className="text-slate-400 text-sm">Preserves relative order of equal elements</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                    <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(true, true)}`}>
                       ✓ Adaptive
                     </span>
                     <span className="text-slate-400 text-sm">Performs better on partially sorted data</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                    <span className={`px-2 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${getBooleanColor(true, true)}`}>
                       ✓ Online
                     </span>
                     <span className="text-slate-400 text-sm">Can sort data as it arrives</span>
