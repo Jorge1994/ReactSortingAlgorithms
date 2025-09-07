@@ -10,16 +10,11 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left side - Author info */}
           <div className="flex items-center gap-4">
-            <div className="relative">
-              <img 
-                src="/icons/logo.png" 
-                alt="SortViz Logo" 
-                className="w-16 h-16 object-contain drop-shadow-lg"
-              />
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
-                <span className="text-xs">✨</span>
-              </div>
-            </div>
+            <img 
+              src="/icons/logo.png" 
+              alt="SortViz Logo" 
+              className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-lg"
+            />
             <div>
               <h3 className="text-xl text-orange-200">SortViz</h3>
               <p className="text-xl font-bold text-white">Interactive Sorting Algorithm Visualizer</p>
