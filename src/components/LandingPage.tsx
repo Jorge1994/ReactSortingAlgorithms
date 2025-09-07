@@ -111,7 +111,17 @@ export function LandingPage() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center"
           >
+            {/* Logo */}
+            <div className="mb-8">
+              <img 
+                src="/icons/logo.png" 
+                alt="SortViz Logo" 
+                className="w-24 h-24 md:w-32 md:h-32 mx-auto object-contain drop-shadow-2xl"
+              />
+            </div>
+            
             <h1 className="text-7xl md:text-9xl font-bold mb-6 text-white">
               SortViz
             </h1>

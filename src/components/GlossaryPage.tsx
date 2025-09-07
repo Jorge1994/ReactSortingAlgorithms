@@ -166,6 +166,11 @@ export function GlossaryPage() {
               onClick={handleNavigation}
               className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-200 mb-8"
             >
+              <img 
+                src="/icons/logo.png" 
+                alt="SortViz Logo" 
+                className="w-6 h-6 object-contain"
+              />
               ← Back to Home
             </Link>
             

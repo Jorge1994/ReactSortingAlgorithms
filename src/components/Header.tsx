@@ -21,8 +21,13 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       
       <div className="relative w-full px-6 py-12">
         <div className="text-center">
-          {/* App Name */}
-          <div className="mb-8">
+          {/* App Name with Logo */}
+          <div className="mb-8 flex flex-col items-center">
+            <img 
+              src="/icons/logo.png" 
+              alt="SortViz Logo" 
+              className="w-16 h-16 mb-4 object-contain drop-shadow-lg"
+            />
             <h2 className="text-2xl md:text-3xl font-light text-purple-200 mb-2">
               Sorting Algorithm Visualizer
             </h2>

@@ -39,9 +39,11 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
             onClick={handleNavigation}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200"
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center font-bold text-xl">
-              S
-            </div>
+            <img 
+              src="/icons/logo.png" 
+              alt="SortViz Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <div>
               <h1 className="text-xl font-bold">SortViz</h1>
               <p className="text-xs text-slate-400">Algorithm Visualizer</p>

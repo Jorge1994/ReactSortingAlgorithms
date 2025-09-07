@@ -11,9 +11,11 @@ export function Footer() {
           {/* Left side - Author info */}
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-2xl">
-                <span className="text-white font-bold text-2xl">S</span>
-              </div>
+              <img 
+                src="/icons/logo.png" 
+                alt="SortViz Logo" 
+                className="w-16 h-16 object-contain drop-shadow-lg"
+              />
               <div className="absolute -top-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
                 <span className="text-xs">✨</span>
               </div>
