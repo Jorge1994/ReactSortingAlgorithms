@@ -168,6 +168,7 @@ function VisualizerPage() {
               canPlayNext={canPlayNext}
               canPlayPrev={canPlayPrev}
               onSpeedChange={setAnimationSpeed}
+              algorithm={currentAlgorithm}
             />
           )}
         </section>

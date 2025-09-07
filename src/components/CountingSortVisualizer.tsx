@@ -283,6 +283,7 @@ export function CountingSortVisualizer({
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
       showStatistics={false}
+      showColorLegend={false}
       showAnimationControls={false}
       customControls={customStatistics}
     >

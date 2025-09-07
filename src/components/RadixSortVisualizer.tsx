@@ -314,29 +314,6 @@ export function RadixSortVisualizer({
           </div>
         </div>
       )}
-
-      {/* Custom Color Legend for Radix Sort */}
-      <div>
-        <h4 className="text-sm font-semibold text-slate-700 mb-3">Color Legend:</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#3B82F6' }}></div>
-            <span className="text-slate-600">Processing/Analyzing</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#EF4444' }}></div>
-            <span className="text-slate-600">Count Array Active</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#10B981' }}></div>
-            <span className="text-slate-600">Auxiliary Array</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 rounded" style={{ backgroundColor: '#6B7280' }}></div>
-            <span className="text-slate-600">Unprocessed</span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 

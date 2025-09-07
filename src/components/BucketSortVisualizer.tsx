@@ -490,6 +490,7 @@ export function BucketSortVisualizer({
       canPlayNext={canPlayNext}
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
+      showColorLegend={false}
       showAnimationControls={false}
     >
       <div className="space-y-6">

@@ -1,4 +1,14 @@
-export function ColorLegend() {
+interface ColorLegendProps {
+  hideForAlgorithms?: string[];
+  currentAlgorithm?: string;
+}
+
+export function ColorLegend({ hideForAlgorithms = ['counting-sort', 'radix-sort', 'bucket-sort'], currentAlgorithm }: ColorLegendProps) {
+  // Don't render if current algorithm is in the hide list
+  if (currentAlgorithm && hideForAlgorithms.includes(currentAlgorithm)) {
+    return null;
+  }
+
   const legendItems = [
     { color: 'bg-blue-500', label: 'Comparing', description: 'Elements being compared' },
     { color: 'bg-red-500', label: 'Swapping', description: 'Elements being swapped' },

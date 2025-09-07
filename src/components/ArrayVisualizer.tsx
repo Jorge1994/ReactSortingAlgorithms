@@ -16,6 +16,7 @@ interface ArrayVisualizerProps {
   canPlayNext: boolean;
   canPlayPrev: boolean;
   onSpeedChange: (speed: number) => void;
+  algorithm?: string;
 }
 
 export function ArrayVisualizer({ 
@@ -31,7 +32,8 @@ export function ArrayVisualizer({
   onReset,
   canPlayNext,
   canPlayPrev,
-  onSpeedChange
+  onSpeedChange,
+  algorithm
 }: ArrayVisualizerProps) {
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
@@ -145,6 +147,7 @@ export function ArrayVisualizer({
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
       showAnimationControls={false}
+      algorithm={algorithm}
     >
       <div className="relative overflow-hidden">
         {/* Array container with proper spacing for labels */}

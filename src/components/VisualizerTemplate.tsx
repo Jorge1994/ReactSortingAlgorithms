@@ -23,6 +23,7 @@ interface VisualizerTemplateProps {
   showColorLegend?: boolean;
   showAnimationControls?: boolean;
   customControls?: ReactNode;
+  algorithm?: string;
 }
 
 export function VisualizerTemplate({
@@ -43,7 +44,8 @@ export function VisualizerTemplate({
   showStatistics = true,
   showColorLegend = true,
   showAnimationControls = true,
-  customControls
+  customControls,
+  algorithm
 }: VisualizerTemplateProps) {
   const togglePlay = () => {
     if (isPlaying) {
@@ -113,7 +115,7 @@ export function VisualizerTemplate({
       {/* Color Legend */}
       {showColorLegend && (
         <div className="px-4 mt-6">
-          <ColorLegend />
+          <ColorLegend currentAlgorithm={algorithm} />
         </div>
       )}
     </div>
