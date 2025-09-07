@@ -157,6 +157,37 @@ export function CombinedControls({
             <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
             Animation Controls
           </h3>
+          {/* Speed Control */}
+          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+                <span className="text-base">⚡</span>
+                Animation Speed
+              </label>
+              <div className="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-lg">
+                <span className="text-sm font-mono text-slate-600">{animationSpeed} ms</span>
+              </div>
+            </div>
+            <div className="relative">
+              <input
+                type="range"
+                min="50"
+                max="2000"
+                step="50"
+                value={animationSpeed}
+                onChange={(e) => onSpeedChange(Number(e.target.value))}
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                style={{
+                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${speedProgress}%, #e2e8f0 ${speedProgress}%, #e2e8f0 100%)`
+                }}
+              />
+              <div className="flex justify-between text-xs text-slate-500 mt-2">
+                <span>Fast</span>
+                <span>Medium</span>
+                <span>Slow</span>
+              </div>
+            </div>
+          </div>
 
           {/* Main Controls */}
           <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
@@ -192,38 +223,6 @@ export function CombinedControls({
               >
                 <span className="text-xl">🔄</span>
               </button>
-            </div>
-          </div>
-
-          {/* Speed Control */}
-          <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                <span className="text-base">⚡</span>
-                Animation Speed
-              </label>
-              <div className="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-lg">
-                <span className="text-sm font-mono text-slate-600">{animationSpeed} ms</span>
-              </div>
-            </div>
-            <div className="relative">
-              <input
-                type="range"
-                min="50"
-                max="2000"
-                step="50"
-                value={animationSpeed}
-                onChange={(e) => onSpeedChange(Number(e.target.value))}
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
-                style={{
-                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${speedProgress}%, #e2e8f0 ${speedProgress}%, #e2e8f0 100%)`
-                }}
-              />
-              <div className="flex justify-between text-xs text-slate-500 mt-2">
-                <span>Fast</span>
-                <span>Medium</span>
-                <span>Slow</span>
-              </div>
             </div>
           </div>
         </div>
