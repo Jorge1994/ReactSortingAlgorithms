@@ -38,6 +38,7 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
     const minValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 5 : 1;
     return generateRandomArray(15, minValue, maxValue);
   });
+  const [previousAlgorithm, setPreviousAlgorithm] = useState<AlgorithmKey>(currentAlgorithm);
   const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -56,6 +57,30 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
       setIsPlaying(false);
     }
   }, [isPlaying, currentStep, steps.length, animationSpeed]);
+
+  // Regenerate array when algorithm changes and has different value constraints
+  useEffect(() => {
+    // Only regenerate if the algorithm actually changed
+    if (currentAlgorithm !== previousAlgorithm) {
+      const needsSpecialLimits = currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort';
+      const previousNeedsSpecialLimits = previousAlgorithm === 'counting-sort' || previousAlgorithm === 'bucket-sort';
+      
+      // Regenerate array if switching between algorithms with different constraints
+      if (needsSpecialLimits !== previousNeedsSpecialLimits) {
+        const maxValue = needsSpecialLimits ? 50 : 100;
+        const minValue = needsSpecialLimits ? 5 : 1;
+        const newArray = generateRandomArray(arraySize, minValue, maxValue);
+        setArray(newArray);
+        setSteps([]);
+        setCurrentStep(0);
+        setIsAnimating(false);
+        setIsPlaying(false);
+      }
+      
+      // Update the previous algorithm reference
+      setPreviousAlgorithm(currentAlgorithm);
+    }
+  }, [currentAlgorithm, previousAlgorithm, arraySize]);
 
   const generateNewArray = (type: 'random' | 'nearly-sorted' | 'reverse' = 'random') => {
     let newArray: number[];
