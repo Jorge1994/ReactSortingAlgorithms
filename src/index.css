@@ -1,31 +1,187 @@
 @import "tailwindcss";
 
+/* Modern dark theme with warm colors */
+:root {
+  --primary-orange: #f97316;
+  --primary-red: #dc2626;
+  --primary-amber: #f59e0b;
+  --primary-yellow: #eab308;
+  --accent-purple: #8b5cf6;
+  --accent-blue: #3b82f6;
+  --dark-slate: #0f172a;
+  --medium-slate: #1e293b;
+  --light-slate: #334155;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-slate);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, var(--primary-orange), var(--primary-red));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, var(--primary-red), var(--primary-amber));
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Custom styles for better UI */
 .slider::-webkit-slider-thumb {
   appearance: none;
   height: 20px;
   width: 20px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(45deg, var(--primary-orange), var(--primary-red));
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transition: all 0.3s ease;
 }
 
 .slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
 }
 
 .slider::-moz-range-thumb {
   height: 20px;
   width: 20px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(45deg, var(--primary-orange), var(--primary-red));
   border-radius: 50%;
   cursor: pointer;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transition: all 0.3s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* Animation delays for staggered effects */
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+/* Gradient text animations */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Professional hover effects */
+.btn-primary {
+  @apply bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500;
+  @apply transform hover:scale-105 active:scale-95;
+  @apply transition-all duration-200 ease-in-out;
+  @apply shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500;
+  @apply transform hover:scale-105 active:scale-95;
+  @apply transition-all duration-200 ease-in-out;
+  @apply shadow-lg hover:shadow-xl;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transform hover:-translate-y-1;
+  @apply transition-all duration-300 ease-in-out;
+  @apply hover:shadow-2xl;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-900;
+}
+
+/* Typography improvements */
+.text-gradient-primary {
+  @apply bg-gradient-to-r from-orange-400 via-red-400 to-amber-400 bg-clip-text text-transparent;
+}
+
+.text-gradient-secondary {
+  @apply bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent;
+}
+
+/* Loading animations */
+@keyframes pulse-warm {
+  0%, 100% {
+    opacity: 1;
+    background: linear-gradient(45deg, #f97316, #dc2626);
+  }
+  50% {
+    opacity: .7;
+    background: linear-gradient(45deg, #dc2626, #f59e0b);
+  }
+}
+
+.animate-pulse-warm {
+  animation: pulse-warm 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Professional selection styles */
+::selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: white;
+}
+
+/* Modern button focus states */
+button:focus-visible {
+  @apply outline-none ring-2 ring-orange-500 ring-offset-2 ring-offset-slate-900;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Array size slider specific styles - background handled dynamically */

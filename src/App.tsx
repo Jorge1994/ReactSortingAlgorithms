@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { type AlgorithmKey, algorithmRegistry } from './algorithms/registry';
 import { useSortingAnimation } from './hooks/useSortingAnimation';
 import type { UseSortingAnimationReturn } from './hooks/useSortingAnimation';
-import { Header } from './components/Header';
+import { ModernHeader } from './components/ModernHeader';
 import { ArrayVisualizer } from './components/ArrayVisualizer';
 import { CountingSortVisualizer } from './components/CountingSortVisualizer';
 import { RadixSortVisualizer } from './components/RadixSortVisualizer';
@@ -11,6 +11,10 @@ import { BucketSortVisualizer } from './components/BucketSortVisualizer';
 import { CombinedControls } from './components/CombinedControls';
 import { ImplementationSection } from './components/ImplementationSection';
 import { Footer } from './components/Footer';
+import { LandingPage } from './components/LandingPage';
+import { ComparisonPage } from './components/ComparisonPage';
+import { GlossaryPage } from './components/GlossaryPage';
+import { AlgorithmDetailsPage } from './components/AlgorithmDetailsPage';
 
 function VisualizerPage() {
   const { algorithm } = useParams<{ algorithm?: string }>();
@@ -71,15 +75,15 @@ function VisualizerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <Header 
+    <div className="min-h-screen bg-slate-900">
+      <ModernHeader 
         currentAlgorithm={currentAlgorithm} 
         onAlgorithmChange={handleAlgorithmChange}
       />
       
       <main className="w-full px-4 py-6 space-y-6">
         {/* Combined Controls - Array and Animation */}
-        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+        <section className="bg-slate-800 rounded-lg border border-slate-700 shadow-lg">
             <CombinedControls
               onGenerateArray={generateNewArray}
               arraySize={arraySize}
@@ -100,7 +104,7 @@ function VisualizerPage() {
         </section>
 
         {/* Array Visualization */}
-        <section className="bg-white rounded-lg border border-slate-200 shadow-sm">
+        <section className="bg-slate-800 rounded-lg border border-slate-700 shadow-lg">
           {currentAlgorithm === 'counting-sort' ? (
             <CountingSortVisualizer 
               displayArray={displayArray}
@@ -179,8 +183,11 @@ function VisualizerPage() {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<VisualizerPage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/visualize/:algorithm" element={<VisualizerPage />} />
+      <Route path="/algorithm/:algorithm" element={<AlgorithmDetailsPage />} />
+      <Route path="/comparison" element={<ComparisonPage />} />
+      <Route path="/glossary" element={<GlossaryPage />} />
     </Routes>
   );
 }
