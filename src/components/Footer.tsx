@@ -9,14 +9,13 @@ export function Footer() {
         {/* Main footer content */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left side - Author info */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <img 
               src="/icons/logo.png" 
               alt="SortViz Logo" 
               className="w-24 h-24 md:w-28 md:h-28 object-contain drop-shadow-lg"
             />
-            <div>
-              <h3 className="text-xl text-orange-200">SortViz</h3>
+            <div className="-mt-8">
               <p className="text-xl font-bold text-white">Interactive Sorting Algorithm Visualizer</p>
               <p className="text-sm text-slate-400 mt-1">Educational Platform</p>
             </div>
