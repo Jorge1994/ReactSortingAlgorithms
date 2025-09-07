@@ -1,14 +1,11 @@
 export function Footer() {
   return (
-    <footer className="relative mt-16 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900"></div>
-      
-      {/* Decorative elements */}
+    <footer className="relative overflow-hidden bg-slate-900">
+      {/* Decorative elements only - no background gradient */}
       <div className="absolute top-0 left-1/4 w-48 h-48 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
       <div className="absolute top-0 right-1/4 w-32 h-32 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
       
-      <div className="relative w-full px-6 py-12 text-white">
+      <div className="relative w-full px-6 py-16 text-white">
         {/* Main footer content */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left side - Author info */}
@@ -71,9 +68,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-      
-      {/* Top fade transition */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-slate-50 to-transparent"></div>
     </footer>
   );
 }
