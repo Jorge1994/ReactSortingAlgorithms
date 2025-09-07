@@ -12,11 +12,10 @@ interface CodeTabsProps {
   examples: AlgorithmImplementation[];
   isExpanded?: boolean;
   title?: string;
-  description?: string;
   headerless?: boolean;
 }
 
-export function CodeTabs({ examples, isExpanded = false, title = "Implementation Examples", description, headerless = false }: CodeTabsProps) {
+export function CodeTabs({ examples, isExpanded = false, title = "Implementation Examples", headerless = false }: CodeTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [copiedStates, setCopiedStates] = useState<{ [key: number]: boolean }>({});
   const [internalExpanded, setInternalExpanded] = useState(isExpanded);
@@ -178,21 +177,6 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
       {/* Content - show if expanded (internal or external control) */}
       {(headerless ? isExpanded : internalExpanded) && (
         <div className="p-8 space-y-6">
-          {/* Description Card */}
-          {description && (
-            <div className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-2xl">🚀</span>
-                <h4 className="font-semibold text-slate-800">
-                  Algorithm Implementation
-                </h4>
-              </div>
-              <p className="text-slate-700 leading-relaxed">
-                {description}
-              </p>
-            </div>
-          )}
-          
           {/* Tab Headers */}
           <div className="flex flex-wrap gap-2 mb-6">
             {examples.map((example, index) => (

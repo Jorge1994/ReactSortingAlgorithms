@@ -3,7 +3,6 @@ import { CodeTabs } from './CodeTabs';
 import { getImplementations } from '../data/implementationsRegistry';
 import { getActiveImplementations } from '../types/implementations';
 import type { AlgorithmKey } from '../algorithms/registry';
-import { getAlgorithm } from '../algorithms/registry';
 
 interface ImplementationSectionProps {
   currentAlgorithm: AlgorithmKey;
@@ -47,7 +46,6 @@ export function ImplementationSection({ currentAlgorithm }: ImplementationSectio
           examples={getActiveImplementations(getImplementations(currentAlgorithm))} 
           isExpanded={isImplementationExamplesExpanded}
           headerless={true}
-          description={`Explore production-ready implementations of the ${getAlgorithm(currentAlgorithm).name} algorithm in multiple programming languages. Each implementation includes detailed comments, optimization notes, and complexity analysis.`}
         />
       </div>
     </section>
