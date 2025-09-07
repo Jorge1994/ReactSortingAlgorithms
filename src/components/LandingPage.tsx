@@ -227,13 +227,7 @@ export function LandingPage() {
             >
               <div className="bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl p-8 shadow-2xl">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                    <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-                    <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                  </div>
                   <div className="space-y-2">
-                    <div className="text-sm text-slate-400 font-mono">SortViz Demo</div>
                     <div className="relative h-32 px-2 py-4 bg-slate-900 rounded-lg overflow-hidden">
                       <div className="flex items-end justify-center h-full">
                         <div className="flex items-end gap-4 w-full justify-evenly px-1">
