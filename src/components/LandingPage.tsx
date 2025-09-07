@@ -232,11 +232,56 @@ export function LandingPage() {
                     <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
                     <div className="w-4 h-4 bg-green-500 rounded-full"></div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="h-4 bg-slate-600 rounded animate-pulse"></div>
-                    <div className="h-4 bg-slate-600 rounded animate-pulse delay-100"></div>
-                    <div className="h-4 bg-slate-600 rounded animate-pulse delay-200"></div>
-                    <div className="h-6 bg-gradient-to-r from-orange-500 to-red-500 rounded animate-pulse delay-300"></div>
+                  <div className="space-y-2">
+                    <div className="text-sm text-slate-400 font-mono">SortViz Demo</div>
+                    <div className="relative h-32 p-4 bg-slate-900 rounded-lg overflow-hidden">
+                      <div className="flex items-end justify-center h-full">
+                        <div className="flex items-end gap-2">
+                          {/* 10 barras animadas com sorting final e pausa */}
+                          <motion.div className="bg-gradient-to-t from-orange-500 to-red-500 rounded-t w-3"
+                            animate={{ height: [30, 70, 40, 50, 25, 25] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-blue-500 to-purple-500 rounded-t w-3"
+                            animate={{ height: [70, 30, 60, 70, 35, 35] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.2, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-green-500 to-teal-500 rounded-t w-3"
+                            animate={{ height: [40, 50, 30, 40, 45, 45] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.4, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-yellow-500 to-amber-500 rounded-t w-3"
+                            animate={{ height: [50, 40, 70, 30, 50, 50] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.6, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-pink-500 to-rose-500 rounded-t w-3"
+                            animate={{ height: [60, 60, 50, 60, 55, 55] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.8, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-purple-500 to-indigo-500 rounded-t w-3"
+                            animate={{ height: [35, 65, 35, 55, 60, 60] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.0, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-cyan-500 to-blue-500 rounded-t w-3"
+                            animate={{ height: [55, 35, 65, 45, 65, 65] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.2, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-red-500 to-pink-500 rounded-t w-3"
+                            animate={{ height: [45, 55, 45, 35, 70, 70] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.4, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-emerald-500 to-green-500 rounded-t w-3"
+                            animate={{ height: [25, 75, 45, 55, 75, 75] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.6, repeatDelay: 2 }}
+                          />
+                          <motion.div className="bg-gradient-to-t from-amber-500 to-orange-500 rounded-t w-3"
+                            animate={{ height: [65, 25, 55, 45, 80, 80] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.8, repeatDelay: 2 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-500 text-center">Interactive sorting visualization</div>
                   </div>
                 </div>
               </div>
