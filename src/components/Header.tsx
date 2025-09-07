@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { AlgorithmKey } from '../algorithms/registry';
 import { getAlgorithm } from '../algorithms/registry';
 import { AlgorithmSelector } from './AlgorithmSelector';
@@ -21,16 +22,18 @@ export function Header({ currentAlgorithm, onAlgorithmChange }: HeaderProps) {
       
       <div className="relative w-full px-6 py-12">
         <div className="text-center">
-          {/* App Name with Logo */}
+          {/* App Logo with Link to Home */}
           <div className="mb-8 flex flex-col items-center">
-            <img 
-              src="/icons/logo.png" 
-              alt="SortViz Logo" 
-              className="w-16 h-16 mb-4 object-contain drop-shadow-lg"
-            />
-            <h2 className="text-2xl md:text-3xl font-light text-purple-200 mb-2">
-              Sorting Algorithm Visualizer
-            </h2>
+            <Link 
+              to="/"
+              className="block mb-4 hover:scale-105 transition-transform duration-300"
+            >
+              <img 
+                src="/icons/logo.png" 
+                alt="SortViz - Interactive Sorting Algorithm Visualizer" 
+                className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-300"
+              />
+            </Link>
             <div className="w-24 h-px bg-gradient-to-r from-purple-400 to-blue-400 mx-auto"></div>
           </div>
           

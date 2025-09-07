@@ -32,7 +32,7 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
       
       <div className="relative">
         {/* Top Navigation Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700/50">
+        <div className="flex items-center justify-between px-6 py-4 h-20 border-b border-slate-700/50">
           {/* Logo and Home Link */}
           <Link 
             to="/"
@@ -41,13 +41,9 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
           >
             <img 
               src="/icons/logo.png" 
-              alt="SortViz Logo" 
-              className="w-10 h-10 object-contain"
+              alt="SortViz - Interactive Sorting Algorithm Visualizer" 
+              className="w-20 h-20 md:w-24 md:h-24 object-contain hover:scale-105 transition-transform duration-200"
             />
-            <div>
-              <h1 className="text-xl font-bold">SortViz</h1>
-              <p className="text-xs text-slate-400">Algorithm Visualizer</p>
-            </div>
           </Link>
 
           {/* Navigation Links */}
@@ -69,7 +65,7 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
             <Link
               to={`/algorithm/${currentAlgorithm}`}
               onClick={handleNavigation}
-              className="px-4 py-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
+              className="px-4 py-2 bg-white text-slate-900 hover:bg-slate-100 rounded-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
             >
               Learn More
             </Link>

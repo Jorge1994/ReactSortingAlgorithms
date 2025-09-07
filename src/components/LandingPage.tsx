@@ -113,18 +113,14 @@ export function LandingPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            {/* Logo */}
+            {/* Logo - Now replaces the title */}
             <div className="mb-8">
               <img 
                 src="/icons/logo.png" 
-                alt="SortViz Logo" 
-                className="w-24 h-24 md:w-32 md:h-32 mx-auto object-contain drop-shadow-2xl"
+                alt="SortViz - Interactive Sorting Algorithm Visualizer" 
+                className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 mx-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
               />
             </div>
-            
-            <h1 className="text-7xl md:text-9xl font-bold mb-6 text-white">
-              SortViz
-            </h1>
           </motion.div>
           
           <motion.h2
