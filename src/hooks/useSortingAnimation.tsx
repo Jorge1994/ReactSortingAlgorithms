@@ -35,7 +35,7 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const [arraySize, setArraySize] = useState(15);
   const [array, setArray] = useState<number[]>(() => {
     const maxValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 50 : 100;
-    const minValue = 1;
+    const minValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 5 : 1;
     return generateRandomArray(15, minValue, maxValue);
   });
   const [steps, setSteps] = useState<SortStep[]>([]);
@@ -60,9 +60,9 @@ export function useSortingAnimation(currentAlgorithm: AlgorithmKey): UseSortingA
   const generateNewArray = (type: 'random' | 'nearly-sorted' | 'reverse' = 'random') => {
     let newArray: number[];
     
-    // For counting sort and bucket sort, limit max value to 50
+    // For counting sort and bucket sort, limit max value to 50 and set minimum to 5
     const maxValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 50 : 100;
-    const minValue = 1;
+    const minValue = (currentAlgorithm === 'counting-sort' || currentAlgorithm === 'bucket-sort') ? 5 : 1;
     
     switch (type) {
       case 'nearly-sorted':
