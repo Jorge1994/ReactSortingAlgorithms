@@ -88,7 +88,7 @@ export function ModernHeader({ currentAlgorithm, onAlgorithmChange }: ModernHead
             </div>
             
             {/* Main title */}
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-orange-200 to-red-200 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-orange-200 to-red-200 bg-clip-text text-transparent leading-relaxed pb-2">
               {getAlgorithm(currentAlgorithm).name}
             </h2>
             
