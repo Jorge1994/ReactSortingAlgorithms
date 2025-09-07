@@ -112,12 +112,8 @@ export function ComparisonPage() {
               to="/"
               className="inline-flex items-center gap-3 px-6 py-3 bg-slate-800/80 backdrop-blur-sm border border-slate-600 hover:border-slate-500 rounded-xl text-slate-300 hover:text-white transition-all duration-300 hover:scale-105 hover:bg-slate-700/80 shadow-lg hover:shadow-xl mb-8"
             >
-              <img 
-                src="/icons/logo.png" 
-                alt="SortViz Logo" 
-                className="w-8 h-8 object-contain"
-              />
-              <span className="font-medium">← Back to Home</span>
+              <span className="text-2xl font-bold">←</span>
+              <span className="font-medium">Back to Home</span>
             </Link>
             
             <h1 className="text-6xl md:text-7xl font-bold mb-8 py-2 bg-gradient-to-r from-purple-400 via-blue-400 to-teal-400 bg-clip-text text-transparent leading-tight">
