@@ -98,7 +98,7 @@ export function AlgorithmSelector({ currentAlgorithm, onAlgorithmChange }: Algor
                   >
                     <AlgorithmIcon algorithmKey={algorithmKey} />
                     <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-lg truncate text-slate-800">
+                      <div className="font-semibold text-lg truncate text-white">
                         {algorithm.name}
                       </div>
                     </div>
