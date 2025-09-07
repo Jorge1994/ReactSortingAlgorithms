@@ -322,9 +322,9 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Additional Resources Section */}
-      <section className="py-24 px-6" data-section="3">
-        <div className="max-w-6xl mx-auto">
+      {/* Learning Resources Section */}
+      <section className="py-20 bg-slate-800" data-section="3">
+        <div className="max-w-6xl mx-auto px-4">
           <motion.div
             className="text-center mb-16"
             initial="initial"
@@ -332,10 +332,10 @@ export function LandingPage() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               Learning Resources
             </h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
               Comprehensive tools and references to deepen your understanding
             </p>
           </motion.div>
@@ -349,50 +349,60 @@ export function LandingPage() {
           >
             <motion.div
               variants={fadeInUp}
-              className="group bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-2xl p-8 border border-purple-700/50 hover:border-purple-600 transition-all duration-300"
+              className="group relative overflow-hidden bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-sm border border-orange-500/30 rounded-2xl p-8 hover:border-orange-400/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/10"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center mb-6">
-                <span className="text-2xl">📊</span>
+              {/* Background gradient animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-red-500/0 group-hover:from-orange-500/5 group-hover:to-red-500/5 transition-all duration-500 rounded-2xl"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">📊</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-orange-100 transition-colors duration-300">
+                  Algorithm Comparison
+                </h3>
+                <p className="text-slate-300 mb-6 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+                  Compare performance characteristics, time and space complexity, and real-world applications 
+                  across all sorting algorithms in our comprehensive comparison table.
+                </p>
+                <Link
+                  to="/comparison"
+                  onClick={handleNavigation}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white border border-orange-500/50 hover:border-orange-400 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  View Comparison
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-200">
-                Algorithm Comparison
-              </h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Compare performance characteristics, time and space complexity, and real-world applications 
-                across all sorting algorithms in our comprehensive comparison table.
-              </p>
-              <Link
-                to="/comparison"
-                onClick={handleNavigation}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
-              >
-                View Comparison
-                <span>→</span>
-              </Link>
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="group bg-gradient-to-br from-green-900/50 to-teal-900/50 rounded-2xl p-8 border border-green-700/50 hover:border-green-600 transition-all duration-300"
+              className="group relative overflow-hidden bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8 hover:border-blue-400/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/10"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mb-6">
-                <span className="text-2xl">📚</span>
+              {/* Background gradient animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500 rounded-2xl"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">📚</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-100 transition-colors duration-300">
+                  Technical Glossary
+                </h3>
+                <p className="text-slate-300 mb-6 leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+                  Master the terminology with our comprehensive glossary of computer science and 
+                  algorithm-specific terms, complete with clear definitions and examples.
+                </p>
+                <Link
+                  to="/glossary"
+                  onClick={handleNavigation}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white border border-blue-500/50 hover:border-blue-400 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  Browse Glossary
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-200">
-                Technical Glossary
-              </h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Master the terminology with our comprehensive glossary of computer science and 
-                algorithm-specific terms, complete with clear definitions and examples.
-              </p>
-              <Link
-                to="/glossary"
-                onClick={handleNavigation}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-500 hover:to-teal-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
-              >
-                Browse Glossary
-                <span>→</span>
-              </Link>
             </motion.div>
           </motion.div>
         </div>
