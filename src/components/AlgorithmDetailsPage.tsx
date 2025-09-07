@@ -351,19 +351,15 @@ export function AlgorithmDetailsPage() {
             <div className="flex items-center justify-between mb-8">
               <Link
                 to="/"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-3 px-6 py-3 bg-slate-800/80 backdrop-blur-sm border border-slate-600 hover:border-slate-500 rounded-xl text-slate-300 hover:text-white transition-all duration-300 hover:scale-105 hover:bg-slate-700/80 shadow-lg hover:shadow-xl"
               >
-                <img 
-                  src="/icons/logo.png" 
-                  alt="SortViz Logo" 
-                  className="w-6 h-6 object-contain"
-                />
-                ← Back to Home
+                <span className="text-2xl font-bold">←</span>
+                <span className="font-medium">Back to Home</span>
               </Link>
               
               <Link
                 to={`/visualize/${algorithmKey}`}
-                className="px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
+                className="px-6 py-3 bg-white text-slate-900 hover:bg-slate-100 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl border border-slate-300"
               >
                 Visualize Algorithm
               </Link>
