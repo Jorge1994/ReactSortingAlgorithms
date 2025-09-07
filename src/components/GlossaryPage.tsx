@@ -169,8 +169,10 @@ export function GlossaryPage() {
               ← Back to Home
             </Link>
             
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-teal-400 to-purple-400 bg-clip-text text-transparent">
-              Technical Glossary
+            <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-relaxed py-4">
+              <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-purple-400 bg-clip-text text-transparent">
+                Technical Glossary
+              </span>
             </h1>
             
             <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
