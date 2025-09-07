@@ -22,38 +22,67 @@ export function ComparisonPage() {
   const algorithms = Object.keys(algorithmRegistry) as AlgorithmKey[];
 
   const getComplexityColor = (complexity: string) => {
-    switch (complexity.toLowerCase()) {
-      case 'o(n)':
-        return 'text-green-400 bg-green-900/20';
-      case 'o(n log n)':
-        return 'text-blue-400 bg-blue-900/20';
-      case 'o(n²)':
-      case 'o(n^2)':
-        return 'text-yellow-400 bg-yellow-900/20';
-      case 'o(n³)':
-      case 'o(n^3)':
-        return 'text-orange-400 bg-orange-900/20';
-      case 'o(2^n)':
-        return 'text-red-400 bg-red-900/20';
-      case 'o(1)':
-        return 'text-emerald-400 bg-emerald-900/20';
-      case 'o(k)':
-        return 'text-teal-400 bg-teal-900/20';
-      default:
-        return 'text-slate-400 bg-slate-900/20';
+    // Normalize and quick checks for special notations (factorial, unbounded)
+    const normalized = (complexity || '').trim();
+    
+    // Handle factorial or unbounded notations
+    if (normalized.includes('!') || /factorial/i.test(normalized) || /unbound/i.test(normalized)) {
+      return 'text-red-400 bg-red-900/20'; // Very Poor
+    }
+
+    // Handle underscript log notation like log_{3/2} n -> treat as logarithmic
+    if (/log_\{.*\}/i.test(normalized) || /log\s*\(/i.test(normalized)) {
+      return 'text-emerald-400 bg-emerald-900/20'; // Excellent (logarithmic)
+    }
+
+    // Handle unicode superscript or decimal exponents like n²·⁷ or numeric exponents 2.7
+    const supExpMatch = normalized.match(/n[^\d]*([\d²³⁴⁵⁶⁷⁸⁹⁰·,.]+)/i);
+    if (supExpMatch) {
+      const expRaw = supExpMatch[1];
+      // Normalize common superscript digits to ascii
+      const supMap: Record<string,string> = { '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','·':'.' };
+      let expNormalized = '';
+      for (const ch of expRaw) {
+        expNormalized += supMap[ch] ?? ch;
+      }
+      // replace comma with dot
+      expNormalized = expNormalized.replace(',', '.');
+      const num = parseFloat(expNormalized);
+      if (!isNaN(num)) {
+        if (num >= 3) return 'text-red-400 bg-red-900/20';
+        if (num > 2) return 'text-red-400 bg-red-900/20';
+        if (num === 2) return 'text-yellow-400 bg-yellow-900/20';
+        if (num > 1) return 'text-blue-400 bg-blue-900/20';
+      }
+    }
+
+    switch (normalized) {
+      case 'O(1)': return 'text-emerald-400 bg-emerald-900/20'; // Excellent
+      case 'O(log n)': return 'text-emerald-400 bg-emerald-900/20'; // Excellent
+      case 'O(log_{3/2} n)': return 'text-emerald-400 bg-emerald-900/20';
+      case 'O(n)': return 'text-green-400 bg-green-900/20'; // Good
+      case 'O(d×n)': return 'text-green-400 bg-green-900/20'; // Good (linear when d is small)
+      case 'O(n + k)': return 'text-green-400 bg-green-900/20'; // Good (linear-ish when k small)
+      case 'O(n+k)': return 'text-green-400 bg-green-900/20'; // accept variant without spaces
+      case 'O(k)': return 'text-teal-400 bg-teal-900/20'; // For space complexity
+      case 'O(n log n)': return 'text-blue-400 bg-blue-900/20'; // Good
+      case 'O(n²)': return 'text-yellow-400 bg-yellow-900/20'; // Poor
+      case 'O(n³)': return 'text-orange-400 bg-orange-900/20'; // Very Poor
+      case 'O(2^n)': return 'text-red-400 bg-red-900/20'; // Very Poor
+      default: return 'text-slate-400 bg-slate-900/20';
     }
   };
 
-  const getStabilityColor = (algorithm: AlgorithmKey) => {
-    const stableAlgorithms = ['bubble-sort', 'insertion-sort', 'merge-sort', 'counting-sort', 'radix-sort', 'tim-sort'];
-    return stableAlgorithms.includes(algorithm) 
-      ? 'text-green-400 bg-green-900/20' 
-      : 'text-red-400 bg-red-900/20';
+  const getBooleanColor = (value: boolean, isGoodWhenTrue: boolean = true) => {
+    if ((value && isGoodWhenTrue) || (!value && !isGoodWhenTrue)) {
+      return 'text-green-400 bg-green-900/20';
+    }
+    return 'text-red-400 bg-red-900/20';
   };
 
-  const getStabilityText = (algorithm: AlgorithmKey) => {
-    const stableAlgorithms = ['bubble-sort', 'insertion-sort', 'merge-sort', 'counting-sort', 'radix-sort', 'tim-sort'];
-    return stableAlgorithms.includes(algorithm) ? 'Stable' : 'Unstable';
+  const isAdaptive = (algorithmName: string): boolean => {
+    const adaptiveAlgorithms = ['Bubble Sort', 'Insertion Sort', 'Gnome Sort', 'Cocktail Shaker Sort'];
+    return adaptiveAlgorithms.includes(algorithmName);
   };
 
   const algorithmCategories = {
@@ -111,13 +140,47 @@ export function ComparisonPage() {
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-slate-700 to-slate-600">
                   <tr>
-                    <th className="px-6 py-4 text-left text-lg font-semibold text-slate-200">Algorithm</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Best Case</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Average Case</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Worst Case</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Space</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Stability</th>
-                    <th className="px-6 py-4 text-center text-lg font-semibold text-slate-200">Action</th>
+                    <th rowSpan={2} className="px-6 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                      Algorithm
+                    </th>
+                    <th colSpan={3} className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      Time Complexity
+                    </th>
+                    <th colSpan={3} className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      Space Complexity
+                    </th>
+                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                      In-Place
+                    </th>
+                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                      Stable
+                    </th>
+                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                      Adaptive
+                    </th>
+                    <th rowSpan={2} className="px-4 py-4 text-center font-bold text-slate-200 border-b border-slate-600 align-middle">
+                      Online
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Best</span>
+                    </th>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Average</span>
+                    </th>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Worst</span>
+                    </th>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Best</span>
+                    </th>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Average</span>
+                    </th>
+                    <th className="px-4 py-2 text-center font-bold text-slate-200 border-b border-slate-600">
+                      <span className="text-xs text-slate-300 font-normal">Worst</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -134,48 +197,63 @@ export function ComparisonPage() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                       >
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
+                        <td className="px-6 py-4 text-center">
+                          <div className="flex items-center justify-center gap-3">
                             <div className="w-3 h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
                             <span className="font-semibold text-slate-200">
                               {algorithmRegistry[algorithm].name}
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="px-4 py-4 text-center">
                           <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.time.best)}`}>
                             {complexity.time.best}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="px-4 py-4 text-center">
                           <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.time.average)}`}>
                             {complexity.time.average}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="px-4 py-4 text-center">
                           <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.time.worst)}`}>
                             {complexity.time.worst}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(
-                            typeof complexity.space === 'string' ? complexity.space : complexity.space.worst
-                          )}`}>
-                            {typeof complexity.space === 'string' ? complexity.space : complexity.space.worst}
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.space.best)}`}>
+                            {complexity.space.best}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
-                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStabilityColor(algorithm)}`}>
-                            {getStabilityText(algorithm)}
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.space.average)}`}>
+                            {complexity.space.average}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-center">
-                          <Link
-                            to={`/visualize/${algorithm}`}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-lg text-sm font-semibold transition-all duration-200 hover:scale-105"
-                          >
-                            Visualize
-                          </Link>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-mono ${getComplexityColor(complexity.space.worst)}`}>
+                            {complexity.space.worst}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.inPlace || false, true)}`}>
+                            {info?.inPlace ? '✓ Yes' : '✗ No'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.stable || false, true)}`}>
+                            {info?.stable ? '✓ Yes' : '✗ No'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(isAdaptive(algorithmRegistry[algorithm].name), true)}`}>
+                            {isAdaptive(algorithmRegistry[algorithm].name) ? '✓ Yes' : '✗ No'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 text-center">
+                          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(info?.online || false, true)}`}>
+                            {info?.online ? '✓ Yes' : '✗ No'}
+                          </span>
                         </td>
                       </motion.tr>
                     );
@@ -294,16 +372,28 @@ export function ComparisonPage() {
                 <h4 className="text-lg font-semibold mb-4 text-slate-300">Algorithm Properties</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-green-400 bg-green-900/20 px-3 py-1 rounded-full text-sm font-semibold">
-                      Stable
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                      ✓ In-Place
+                    </span>
+                    <span className="text-slate-400">Uses O(1) extra memory</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                      ✓ Stable
                     </span>
                     <span className="text-slate-400">Preserves relative order of equal elements</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-red-400 bg-red-900/20 px-3 py-1 rounded-full text-sm font-semibold">
-                      Unstable
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                      ✓ Adaptive
                     </span>
-                    <span className="text-slate-400">May change relative order of equal elements</span>
+                    <span className="text-slate-400">Performs better on partially sorted data</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getBooleanColor(true, true)}`}>
+                      ✓ Online
+                    </span>
+                    <span className="text-slate-400">Can sort data as it arrives</span>
                   </div>
                   <div className="mt-4 p-4 bg-slate-700 rounded-lg">
                     <p className="text-sm text-slate-300 leading-relaxed">
@@ -312,6 +402,34 @@ export function ComparisonPage() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Notation Guide */}
+      <section className="py-8 px-6 bg-slate-800/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            className="bg-slate-800 rounded-xl p-6 border border-slate-700"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">ℹ️</span>
+              <div>
+                <h4 className="font-semibold text-slate-200 mb-2">Notation</h4>
+                <p className="text-slate-300 leading-relaxed text-sm mb-2">Short explanation of symbols used in the table:</p>
+                <ul className="list-disc list-inside text-slate-300 text-sm space-y-1">
+                  <li><span className="font-semibold text-slate-200">n</span>: Number of elements in the array.</li>
+                  <li><span className="font-semibold text-slate-200">d</span>: Number of digits in the maximum number (for Radix Sort). When d is small and constant, O(d×n) approaches linear time complexity.</li>
+                  <li>
+                    <span className="font-semibold text-slate-200">k</span>: Range of distinct integer values (computed as max - min + 1). In the context of Counting Sort, k is the number of "buckets" required to count occurrences; it directly affects both time and extra space since the algorithm runs in O(n + k) time and requires O(k) additional space for the count array. Example: for values between 2 and 5, k = 5 - 2 + 1 = 4.
+                  </li>
+                </ul>
               </div>
             </div>
           </motion.div>
