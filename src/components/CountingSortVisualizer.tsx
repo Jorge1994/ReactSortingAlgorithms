@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
 import { VisualizerTemplate } from './VisualizerTemplate';
-import { StatisticsPanel } from './StatisticsPanel';
 
 interface CountingSortVisualizerProps {
   displayArray: number[];
@@ -245,17 +244,7 @@ export function CountingSortVisualizer({
     );
   };
 
-  // Custom statistics component for Counting Sort
-  const customStatistics = (
-    <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6">
-      <StatisticsPanel 
-        currentStepData={steps[currentStep]}
-        currentStep={currentStep}
-        totalSteps={steps.length}
-        showComparisonsAndSwaps={false}
-      />
-    </div>
-  );
+  // Use VisualizerTemplate's built-in StatisticsPanel (configured below)
 
   return (
     <VisualizerTemplate
@@ -272,10 +261,10 @@ export function CountingSortVisualizer({
       canPlayNext={canPlayNext}
       canPlayPrev={canPlayPrev}
       onSpeedChange={onSpeedChange}
-      showStatistics={false}
+      showStatistics={true}
       showColorLegend={false}
       showAnimationControls={false}
-      customControls={customStatistics}
+      showComparisonsAndSwaps={false}
     >
       <div className="space-y-6">
         {/* Current phase indicator */}
