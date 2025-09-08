@@ -107,50 +107,39 @@ export function CountingSortVisualizer({
     const minValue = Math.min(...displayArray);
 
     return (
-      <div className="mb-2">
+      <div className="mb-4">
         <h4 className="text-lg font-semibold mb-2 text-gray-800">Count Array</h4>
-        <div>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <tbody>
-                {/* Row for counts */}
-                <tr>
-                  {countArray.map((count, index) => (
-                    <td
-                      key={`count-${index}`}
-                      className={`border border-gray-300 p-1 text-center font-bold text-sm transition-all duration-300 ${
-                        countIndex === index
-                          ? 'bg-red-100 border-red-400 text-red-800'
-                          : 'bg-white text-gray-800'
-                      }`}
-                      style={{
-                        minWidth: '28px',
-                        minHeight: '32px',
-                        boxShadow: countIndex === index ? '0 0 10px rgba(239, 68, 68, 0.3)' : 'none'
-                      }}
-                    >
-                      {count}
-                    </td>
-                  ))}
-                </tr>
-                {/* Row for value labels - always show since we limit to 50 elements max */}
-                <tr>
-                  {countArray.map((_, index) => (
-                    <td
-                      key={`value-${index}`}
-                      className="border border-gray-300 p-1 text-center text-xs font-semibold text-blue-700 bg-blue-50"
-                      style={{
-                        minWidth: '28px',
-                        minHeight: '28px'
-                      }}
-                    >
-                      {index + minValue}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>          
+        <div className="bg-white/5 border border-white/10 rounded-lg p-3 shadow-sm w-full">
+          <div className="flex items-center gap-3 text-sm text-slate-400 mb-2">
+            <span className="uppercase tracking-wide">Values →</span>
+            <span className="ml-2 text-xs text-slate-300">(min value offset applied)</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {countArray.map((count, index) => {
+              const isActive = countIndex === index;
+              const base = 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
+              const state = isActive ? 'bg-rose-200 text-slate-900 shadow-sm' : 'bg-white/10 text-white';
+
+              return (
+                <div key={`count-${index}`} className={`${base} ${state}`} style={{ minWidth: '52px' }}>
+                  {/* Top label (value) */}
+                  <div className="w-full flex items-center justify-center">
+                    <div className="text-xs font-semibold leading-none text-center select-none">{index + minValue}</div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="w-full my-2">
+                    <div className="h-px bg-white/20 mx-2 rounded"></div>
+                  </div>
+
+                  {/* Count value */}
+                  <div className="w-full flex items-center justify-center">
+                    <div className="text-lg font-bold leading-tight text-center">{count}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );

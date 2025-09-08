@@ -133,60 +133,51 @@ export function RadixSortVisualizer({
         <h4 className="text-lg font-semibold mb-2 text-gray-800">
           Count Array {digitPosition !== undefined && `(${getDigitName(digitPosition)} Digit)`}
         </h4>
-        <div className="flex justify-center">
-          <div className="inline-block">
-            <table className="border-collapse">
-              <tbody>
-                {/* Row for counts */}
-                <tr>
-                  {countArray.map((count, index) => (
-                    <td
-                      key={`count-${index}`}
-                      className={`border border-gray-300 text-center font-bold transition-all duration-300 ${
-                        countIndex === index
-                          ? 'bg-red-100 border-red-400 text-red-800'
-                          : currentDigit === index
-                          ? 'bg-blue-100 border-blue-400 text-blue-800'
-                          : 'bg-white text-gray-800'
-                      }`}
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        fontSize: '18px',
-                        boxShadow: countIndex === index 
-                          ? '0 0 10px rgba(239, 68, 68, 0.3)' 
-                          : currentDigit === index 
-                          ? '0 0 10px rgba(59, 130, 246, 0.3)'
-                          : 'none'
-                      }}
-                    >
-                      {count}
-                    </td>
-                  ))}
-                </tr>
-                {/* Row for digit labels */}
-                <tr>
-                  {countArray.map((_, index) => (
-                    <td
-                      key={`digit-${index}`}
-                      className={`border border-gray-300 text-center font-semibold transition-all duration-300 ${
-                        currentDigit === index 
-                          ? 'text-blue-700 bg-blue-50' 
-                          : 'text-gray-700 bg-gray-50'
-                      }`}
-                      style={{
-                        width: '50px',
-                        height: '40px',
-                        fontSize: '16px'
-                      }}
-                    >
-                      {index}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>          
+
+        <div className="bg-white/5 border border-white/10 rounded-lg p-3 shadow-sm overflow-x-auto">
+          <div className="flex items-center gap-3 text-sm text-slate-400 mb-2">
+            <span className="uppercase tracking-wide">Buckets →</span>
+            <span className="ml-2 text-xs text-slate-300">(active bucket highlighted)</span>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="grid grid-flow-col auto-cols-max gap-3 items-stretch">
+              {countArray.map((count, index) => {
+              const isCountActive = countIndex === index;
+              const isDigitActive = currentDigit === index;
+              // subtle styles: active bucket has a soft tint and stronger text; digit highlight is slightly different tint
+              const baseClasses = 'min-w-[64px] flex flex-col items-center justify-center gap-1 p-3 rounded-lg transition-shadow duration-200';
+              const stateClasses = isCountActive
+                ? 'bg-rose-200 text-slate-900 shadow-sm'
+                : isDigitActive
+                ? 'bg-blue-100 text-slate-900 shadow-sm'
+                : 'bg-white/10 text-slate-100';
+
+              return (
+                <div
+                  key={`count-${index}`}
+                  className={`${baseClasses} ${stateClasses} flex-col`}
+                  style={{ minWidth: '64px' }}
+                >
+                  {/* Top label (bucket index) */}
+                  <div className="w-full flex items-center justify-center">
+                    <div className="text-sm font-medium leading-none text-center select-none text-slate-600">{index}</div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="w-full my-2">
+                    <div className="h-px bg-white/20 mx-2 rounded"></div>
+                  </div>
+
+                  {/* Count value */}
+                  <div className="w-full flex items-center justify-center">
+                    <div className="text-lg font-semibold leading-tight text-center text-slate-900 dark:text-white">{count}</div>
+                  </div>
+                </div>
+              );
+            })}
+            </div>
+          </div>
         </div>
       </div>
     );
