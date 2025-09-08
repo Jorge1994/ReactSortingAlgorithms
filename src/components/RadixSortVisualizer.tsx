@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
 import { VisualizerTemplate } from './VisualizerTemplate';
+import CountCard from './CountCard';
+import type { CountCardState } from './CountCard';
 
 interface RadixSortStep extends SortStep {
   countArray?: number[];
@@ -144,26 +146,16 @@ export function RadixSortVisualizer({
             {countArray.map((count, index) => {
               const isCountActive = countIndex === index;
               const isDigitActive = currentDigit === index;
-              const base = 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
-              const state = isCountActive ? 'bg-rose-200 text-slate-900 shadow-sm' : isDigitActive ? 'bg-blue-100 text-slate-900 shadow-sm' : 'bg-white/10 text-white';
+              const activeState = isCountActive ? 'primary' : isDigitActive ? 'secondary' : undefined;
 
               return (
-                <div key={`count-${index}`} className={`${base} ${state}`} style={{ minWidth: '52px' }}>
-                  {/* Top label (bucket index) */}
-                  <div className="w-full flex items-center justify-center">
-                    <div className="text-xs font-semibold leading-none text-center select-none">{index}</div>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="w-full my-2">
-                    <div className="h-px bg-white/20 mx-2 rounded"></div>
-                  </div>
-
-                  {/* Count value */}
-                  <div className="w-full flex items-center justify-center">
-                    <div className="text-lg font-semibold leading-tight text-center">{count}</div>
-                  </div>
-                </div>
+                <CountCard
+                  key={`count-${index}`}
+                  topLabel={index}
+                  bottomValue={count}
+                  activeState={activeState as CountCardState}
+                  minWidth="52px"
+                />
               );
             })}
           </div>

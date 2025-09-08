@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
 import { VisualizerTemplate } from './VisualizerTemplate';
+import CountCard from './CountCard';
 
 interface CountingSortVisualizerProps {
   displayArray: number[];
@@ -117,26 +118,14 @@ export function CountingSortVisualizer({
           <div className="flex flex-wrap justify-center gap-3">
             {countArray.map((count, index) => {
               const isActive = countIndex === index;
-              const base = 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
-              const state = isActive ? 'bg-rose-200 text-slate-900 shadow-sm' : 'bg-white/10 text-white';
-
               return (
-                <div key={`count-${index}`} className={`${base} ${state}`} style={{ minWidth: '52px' }}>
-                  {/* Top label (value) */}
-                  <div className="w-full flex items-center justify-center">
-                    <div className="text-xs font-semibold leading-none text-center select-none">{index + minValue}</div>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="w-full my-2">
-                    <div className="h-px bg-white/20 mx-2 rounded"></div>
-                  </div>
-
-                  {/* Count value */}
-                  <div className="w-full flex items-center justify-center">
-                    <div className="text-lg font-bold leading-tight text-center">{count}</div>
-                  </div>
-                </div>
+                <CountCard
+                  key={`count-${index}`}
+                  topLabel={index + minValue}
+                  bottomValue={count}
+                  activeState={isActive ? 'primary' : undefined}
+                  minWidth="52px"
+                />
               );
             })}
           </div>
