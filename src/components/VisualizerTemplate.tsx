@@ -22,6 +22,7 @@ interface VisualizerTemplateProps {
   showStatistics?: boolean;
   showColorLegend?: boolean;
   showAnimationControls?: boolean;
+  showComparisonsAndSwaps?: boolean;
   customControls?: ReactNode;
   algorithm?: string;
 }
@@ -44,6 +45,7 @@ export function VisualizerTemplate({
   showStatistics = true,
   showColorLegend = true,
   showAnimationControls = true,
+  showComparisonsAndSwaps = true,
   customControls,
   algorithm
 }: VisualizerTemplateProps) {
@@ -108,6 +110,7 @@ export function VisualizerTemplate({
             currentStepData={currentStepData}
             currentStep={currentStep}
             totalSteps={totalSteps}
+            showComparisonsAndSwaps={showComparisonsAndSwaps}
           />
         </div>
       )}

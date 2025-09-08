@@ -492,6 +492,7 @@ export function BucketSortVisualizer({
       onSpeedChange={onSpeedChange}
       showColorLegend={false}
       showAnimationControls={false}
+      showComparisonsAndSwaps={false}
     >
       <div className="space-y-6">
         {/* Current Phase Display */}

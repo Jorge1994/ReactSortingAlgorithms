@@ -252,6 +252,7 @@ export function CountingSortVisualizer({
         currentStepData={steps[currentStep]}
         currentStep={currentStep}
         totalSteps={steps.length}
+        showComparisonsAndSwaps={false}
       />
     </div>
   );

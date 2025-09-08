@@ -302,6 +302,7 @@ export function RadixSortVisualizer({
         currentStepData={steps[currentStep]}
         currentStep={currentStep}
         totalSteps={steps.length}
+        showComparisonsAndSwaps={false}
       />
     </div>
   );
