@@ -16,6 +16,8 @@ export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px
     : activeState === 'secondary'
     ? 'bg-blue-100 text-slate-900 shadow-sm'
     : 'bg-white/10 text-white';
+  // Match divider color to the number text color when active
+  const dividerClass = activeState ? 'h-px bg-slate-900 mx-2 rounded' : 'h-px bg-white/20 mx-2 rounded';
 
   return (
     <div className={`${base} ${state}`} style={{ minWidth }}>
@@ -24,7 +26,7 @@ export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px
       </div>
 
       <div className="w-full my-2">
-        <div className="h-px bg-white/20 mx-2 rounded" />
+        <div className={dividerClass} />
       </div>
 
       <div className="w-full flex items-center justify-center">
