@@ -132,12 +132,12 @@ export function RadixSortVisualizer({
 
     return (
       <div className="mb-4">
-        <h4 className="text-lg font-semibold mb-2 text-gray-800">
+  <h4 className="text-lg font-semibold mb-2 text-slate-100">
           Count Array {digitPosition !== undefined && `(${getDigitName(digitPosition)} Digit)`}
         </h4>
 
         <div className="bg-white/5 border border-white/10 rounded-lg p-3 shadow-sm w-full">
-          <div className="flex items-center gap-3 text-sm text-slate-400 mb-2">
+          <div className="flex items-center gap-3 text-sm text-slate-300 mb-2">
             <span className="uppercase tracking-wide">Buckets →</span>
             <span className="ml-2 text-xs text-slate-300">{digitPosition !== undefined ? `(${getDigitName(digitPosition)} Digit)` : '(active bucket highlighted)'}</span>
           </div>
@@ -175,7 +175,7 @@ export function RadixSortVisualizer({
     
     return (
       <div className="mb-4">
-        <h4 className="text-lg font-semibold mb-2 text-gray-800">{title}</h4>
+  <h4 className="text-lg font-semibold mb-2 text-slate-100">{title}</h4>
         <div className="relative">
           {/* Array container */}
           <div 
