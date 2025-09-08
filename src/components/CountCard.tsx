@@ -20,7 +20,7 @@ export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px
   return (
     <div className={`${base} ${state}`} style={{ minWidth }}>
       <div className="w-full flex items-center justify-center">
-        <div className="text-xs font-semibold leading-none text-center select-none">{topLabel}</div>
+        <div className="text-lg font-semibold leading-none text-center select-none">{topLabel}</div>
       </div>
 
       <div className="w-full my-2">
