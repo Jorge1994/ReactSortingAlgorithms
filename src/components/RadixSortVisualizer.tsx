@@ -134,34 +134,24 @@ export function RadixSortVisualizer({
           Count Array {digitPosition !== undefined && `(${getDigitName(digitPosition)} Digit)`}
         </h4>
 
-        <div className="bg-white/5 border border-white/10 rounded-lg p-3 shadow-sm overflow-x-auto">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-3 shadow-sm w-full">
           <div className="flex items-center gap-3 text-sm text-slate-400 mb-2">
             <span className="uppercase tracking-wide">Buckets →</span>
-            <span className="ml-2 text-xs text-slate-300">(active bucket highlighted)</span>
+            <span className="ml-2 text-xs text-slate-300">{digitPosition !== undefined ? `(${getDigitName(digitPosition)} Digit)` : '(active bucket highlighted)'}</span>
           </div>
 
-          <div className="flex justify-center">
-            <div className="grid grid-flow-col auto-cols-max gap-3 items-stretch">
-              {countArray.map((count, index) => {
+          <div className="flex flex-wrap justify-center gap-3">
+            {countArray.map((count, index) => {
               const isCountActive = countIndex === index;
               const isDigitActive = currentDigit === index;
-              // subtle styles: active bucket has a soft tint and stronger text; digit highlight is slightly different tint
-              const baseClasses = 'min-w-[64px] flex flex-col items-center justify-center gap-1 p-3 rounded-lg transition-shadow duration-200';
-              const stateClasses = isCountActive
-                ? 'bg-rose-200 text-slate-900 shadow-sm'
-                : isDigitActive
-                ? 'bg-blue-100 text-slate-900 shadow-sm'
-                : 'bg-white/10 text-slate-100';
+              const base = 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
+              const state = isCountActive ? 'bg-rose-200 text-slate-900 shadow-sm' : isDigitActive ? 'bg-blue-100 text-slate-900 shadow-sm' : 'bg-white/10 text-white';
 
               return (
-                <div
-                  key={`count-${index}`}
-                  className={`${baseClasses} ${stateClasses} flex-col`}
-                  style={{ minWidth: '64px' }}
-                >
+                <div key={`count-${index}`} className={`${base} ${state}`} style={{ minWidth: '52px' }}>
                   {/* Top label (bucket index) */}
                   <div className="w-full flex items-center justify-center">
-                    <div className="text-sm font-medium leading-none text-center select-none text-slate-600">{index}</div>
+                    <div className="text-xs font-semibold leading-none text-center select-none">{index}</div>
                   </div>
 
                   {/* Divider */}
@@ -171,12 +161,11 @@ export function RadixSortVisualizer({
 
                   {/* Count value */}
                   <div className="w-full flex items-center justify-center">
-                    <div className="text-lg font-semibold leading-tight text-center text-slate-900 dark:text-white">{count}</div>
+                    <div className="text-lg font-semibold leading-tight text-center">{count}</div>
                   </div>
                 </div>
               );
             })}
-            </div>
           </div>
         </div>
       </div>
