@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { SortStep } from '../types';
 import { VisualizerTemplate } from './VisualizerTemplate';
+import { StatisticsPanel } from './StatisticsPanel';
 
 interface RadixSortStep extends SortStep {
   countArray?: number[];
@@ -297,23 +298,11 @@ export function RadixSortVisualizer({
   // Custom statistics and legend component for Radix Sort
   const customStatistics = (
     <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6">
-      {steps.length > 0 && (
-        <div className="flex flex-col items-center space-y-4 mb-6">
-          {/* Progress indicator */}
-          <div className="w-full max-w-md">
-            <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
-              <span>Progress</span>
-              <span>{currentStep + 1} / {steps.length}</span>
-            </div>
-            <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-              <div 
-                className="h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
-                style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
-      )}
+      <StatisticsPanel 
+        currentStepData={steps[currentStep]}
+        currentStep={currentStep}
+        totalSteps={steps.length}
+      />
     </div>
   );
 
