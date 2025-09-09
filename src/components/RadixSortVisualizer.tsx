@@ -143,6 +143,8 @@ export function RadixSortVisualizer({
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
+            {/* Legend card at start: explains the two rows (Value / Count) */}
+            <CountCard key="legend-value-count" topLabel="Value" bottomValue="Count" compact minWidth="52px" />
             {countArray.map((count, index) => {
               const isCountActive = countIndex === index;
               const isDigitActive = currentDigit === index;
