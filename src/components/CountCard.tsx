@@ -7,10 +7,13 @@ interface CountCardProps {
   bottomValue: React.ReactNode;
   activeState?: CountCardState;
   minWidth?: string;
+  compact?: boolean;
 }
 
-export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px' }: CountCardProps) {
-  const base = 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
+export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px', compact = false }: CountCardProps) {
+  const base = compact
+    ? 'min-w-[52px] flex flex-col items-center justify-center p-1 rounded-md transition-shadow duration-200'
+    : 'min-w-[52px] flex flex-col items-center justify-center p-2 rounded-lg transition-shadow duration-200';
   const state = activeState === 'primary'
     ? 'bg-rose-200 text-slate-900 shadow-sm'
     : activeState === 'secondary'
@@ -22,7 +25,7 @@ export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px
   return (
     <div className={`${base} ${state}`} style={{ minWidth }}>
       <div className="w-full flex items-center justify-center">
-        <div className="text-lg font-semibold leading-none text-center select-none">{topLabel}</div>
+  <div className={`${compact ? 'text-sm' : 'text-lg'} font-semibold leading-none text-center select-none`}>{topLabel}</div>
       </div>
 
       <div className="w-full my-2">
@@ -30,7 +33,7 @@ export function CountCard({ topLabel, bottomValue, activeState, minWidth = '52px
       </div>
 
       <div className="w-full flex items-center justify-center">
-        <div className="text-lg font-semibold leading-tight text-center">{bottomValue}</div>
+  <div className={`${compact ? 'text-sm' : 'text-lg'} font-semibold leading-tight text-center`}>{bottomValue}</div>
       </div>
     </div>
   );
