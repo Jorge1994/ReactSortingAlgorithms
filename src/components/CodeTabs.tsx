@@ -139,86 +139,70 @@ export function CodeTabs({ examples }: CodeTabsProps) {
   }, [activeTab]);
 
   return (
-    <div className="w-full overflow-hidden">
-      {/* Modern Tab Headers */}
-      <div className="bg-slate-800/80 border-b border-slate-600/50">
-        <div className="flex overflow-x-auto scrollbar-hide">
-          {examples.map((example, index) => (
+    <div className="w-full">
+      {/* Tab Headers */}
+      <div className="bg-slate-800 border-b border-slate-700">
+        <div className="flex justify-between items-center">
+          <div className="flex overflow-x-auto scrollbar-hide">
+            {examples.map((example, index) => (
+              <button
+                key={example.language}
+                onClick={() => setActiveTab(index)}
+                className={`relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                  activeTab === index
+                    ? 'text-orange-400 bg-slate-700 border-b-2 border-orange-400'
+                    : 'text-slate-300 hover:text-slate-200 hover:bg-slate-700/50 border-b-2 border-transparent'
+                }`}
+              >
+                {getLanguageIcon(example.language)}
+                <span>{formatLanguageDisplay(example.language)}</span>
+              </button>
+            ))}
+          </div>
+          
+          {/* Copy Button - moved to tab header area */}
+          <div className="px-4">
             <button
-              key={example.language}
-              onClick={() => setActiveTab(index)}
-              className={`relative flex items-center gap-3 px-6 py-4 text-sm font-semibold transition-all duration-300 whitespace-nowrap border-b-2 ${
-                activeTab === index
-                  ? 'text-orange-400 border-orange-500 bg-slate-700/80'
-                  : 'text-slate-300 border-transparent hover:text-orange-300 hover:bg-slate-700/40'
+              onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
+              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded transition-all duration-200 ${
+                copiedStates[activeTab] 
+                  ? 'text-green-400 bg-green-500/10 border border-green-500/20' 
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700 border border-slate-600'
               }`}
             >
-              {getLanguageIcon(example.language)}
-              <span>{formatLanguageDisplay(example.language)}</span>
-              {activeTab === index && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 via-red-500 to-amber-500"></div>
+              {copiedStates[activeTab] ? (
+                <>
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Copied
+                </>
+              ) : (
+                <>
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  Copy
+                </>
               )}
             </button>
-          ))}
+          </div>
         </div>
       </div>
 
-      {/* Code Content */}
-      <div className="relative">
-        {/* Header Bar with terminal-style design */}
-        <div className="flex items-center justify-between bg-slate-900 px-6 py-4 border-b border-slate-700/50">
-          <div className="flex items-center gap-3">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            </div>
-            <span className="text-slate-300 text-sm font-medium">
-              {formatLanguageDisplay(examples[activeTab]?.language)} Implementation
-            </span>
-          </div>
-          
-          {/* Copy Button */}
-          <button
-            onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
-            className={`flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg transition-all duration-300 transform ${
-              copiedStates[activeTab] 
-                ? 'text-green-400 bg-green-500/20 border border-green-500/40 scale-105' 
-                : 'text-slate-300 hover:text-white bg-slate-800/50 hover:bg-orange-500/20 hover:border-orange-500/40 border border-transparent hover:scale-105'
-            }`}
-          >
-            {copiedStates[activeTab] ? (
-              <>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                Copied!
-              </>
-            ) : (
-              <>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                Copy
-              </>
-            )}
-          </button>
-        </div>
-
-        {/* Code Display */}
-        <div className="bg-slate-950 overflow-hidden">
-          <pre className={`language-${getPrismLanguage(examples[activeTab]?.language || '')} m-0 p-6 overflow-x-auto text-sm leading-relaxed`}>
-            <code 
-              className={`language-${getPrismLanguage(examples[activeTab]?.language || '')}`}
-              dangerouslySetInnerHTML={{
-                __html: highlightCode(
-                  examples[activeTab]?.code || '', 
-                  examples[activeTab]?.language || ''
-                )
-              }}
-            />
-          </pre>
-        </div>
+      {/* Code Content - direct display without header */}
+      <div className="bg-slate-900">
+        <pre className={`language-${getPrismLanguage(examples[activeTab]?.language || '')} m-0 p-4 overflow-x-auto text-sm leading-relaxed`}>
+          <code 
+            className={`language-${getPrismLanguage(examples[activeTab]?.language || '')}`}
+            dangerouslySetInnerHTML={{
+              __html: highlightCode(
+                examples[activeTab]?.code || '', 
+                examples[activeTab]?.language || ''
+              )
+            }}
+          />
+        </pre>
       </div>
     </div>
   );

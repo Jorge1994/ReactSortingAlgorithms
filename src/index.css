@@ -40,6 +40,14 @@
   display: none;  /* Safari and Chrome */
 }
 
+/* Custom slate variations for CodeTabs */
+.bg-slate-750 {
+  background-color: rgb(51 65 85 / 0.8);
+}
+.bg-slate-850 {
+  background-color: rgb(30 41 59 / 0.9);
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
