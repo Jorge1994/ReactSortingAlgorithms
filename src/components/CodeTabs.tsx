@@ -141,9 +141,9 @@ export function CodeTabs({ examples }: CodeTabsProps) {
   return (
     <div className="w-full">
       {/* Tab Headers */}
-      <div className="bg-slate-800 border-b border-slate-700">
-        <div className="flex justify-between items-center">
-          <div className="flex overflow-x-auto scrollbar-hide">
+      <div className="bg-slate-800 border-b border-slate-700 relative">
+        <div className="flex items-center">
+          <div className="flex overflow-x-auto scrollbar-hide flex-1">
             {examples.map((example, index) => (
               <button
                 key={example.language}
@@ -160,15 +160,14 @@ export function CodeTabs({ examples }: CodeTabsProps) {
             ))}
           </div>
           
-          {/* Copy Button - moved to tab header area */}
-          <div className="px-4">
-            <button
-              onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
-              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded transition-all duration-200 ${
-                copiedStates[activeTab] 
-                  ? 'text-green-400 bg-green-500/10 border border-green-500/20' 
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700 border border-slate-600'
-              }`}
+          {/* Copy Button - positioned absolutely to right edge */}
+          <button
+            onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
+            className={`absolute right-0 top-1/2 transform -translate-y-1/2 flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded transition-all duration-200 ${
+              copiedStates[activeTab] 
+                ? 'text-green-400 bg-green-500/10 border border-green-500/20' 
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700 border border-slate-600'
+            }`}
             >
               {copiedStates[activeTab] ? (
                 <>
@@ -186,7 +185,6 @@ export function CodeTabs({ examples }: CodeTabsProps) {
                 </>
               )}
             </button>
-          </div>
         </div>
       </div>
 

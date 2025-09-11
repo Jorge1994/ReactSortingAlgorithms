@@ -19,9 +19,11 @@ export function ImplementationSection({ currentAlgorithm }: ImplementationSectio
             </h3>
           </div>
           
-          <CodeTabs 
-            examples={getActiveImplementations(getImplementations(currentAlgorithm))} 
-          />
+          <div className="relative">
+            <CodeTabs 
+              examples={getActiveImplementations(getImplementations(currentAlgorithm))} 
+            />
+          </div>
         </div>
       </div>
     </section>
