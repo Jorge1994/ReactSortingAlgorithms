@@ -31,6 +31,15 @@
   background: linear-gradient(45deg, var(--primary-red), var(--primary-amber));
 }
 
+/* Hide scrollbar for horizontal tabs */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

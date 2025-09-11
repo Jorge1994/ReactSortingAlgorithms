@@ -10,15 +10,11 @@ import type { AlgorithmImplementation } from '../types/implementations';
 
 interface CodeTabsProps {
   examples: AlgorithmImplementation[];
-  isExpanded?: boolean;
-  title?: string;
-  headerless?: boolean;
 }
 
-export function CodeTabs({ examples, isExpanded = false, title = "Implementation Examples", headerless = false }: CodeTabsProps) {
+export function CodeTabs({ examples }: CodeTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [copiedStates, setCopiedStates] = useState<{ [key: number]: boolean }>({});
-  const [internalExpanded, setInternalExpanded] = useState(isExpanded);
 
   // Get the language key for Prism.js
   const getPrismLanguage = (language: string): string => {
@@ -143,122 +139,87 @@ export function CodeTabs({ examples, isExpanded = false, title = "Implementation
   }, [activeTab]);
 
   return (
-    <div className="w-full">
-      {/* Header with toggle button - only show if not headerless */}
-      {!headerless && (
-        <div className="p-6 border-b border-slate-100">
-          <div className="flex items-center justify-between">
-            <div style={{ display: 'grid', gridTemplateColumns: '48px 1fr', gap: '16px', alignItems: 'center' }}>
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white text-2xl">💻</span>
-              </div>
-              <div style={{ textAlign: 'left' }}>
-                <h3 className="text-2xl font-bold text-slate-800 mb-1" style={{ lineHeight: '1.2', margin: '0', padding: '0', textAlign: 'left' }}>
-                  {title}
-                </h3>
-                <p className="text-slate-600">
-                  Complete code implementations in different languages
-                </p>
-              </div>
-            </div>
+    <div className="w-full overflow-hidden">
+      {/* Modern Tab Headers */}
+      <div className="bg-slate-800/80 border-b border-slate-600/50">
+        <div className="flex overflow-x-auto scrollbar-hide">
+          {examples.map((example, index) => (
             <button
-              onClick={() => setInternalExpanded(!internalExpanded)}
-              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
+              key={example.language}
+              onClick={() => setActiveTab(index)}
+              className={`relative flex items-center gap-3 px-6 py-4 text-sm font-semibold transition-all duration-300 whitespace-nowrap border-b-2 ${
+                activeTab === index
+                  ? 'text-orange-400 border-orange-500 bg-slate-700/80'
+                  : 'text-slate-300 border-transparent hover:text-orange-300 hover:bg-slate-700/40'
+              }`}
             >
-              <span className="text-lg">
-                {internalExpanded ? '🔼' : '🔽'}
-              </span>
-              {internalExpanded ? 'Hide Code' : 'Show Code'}
+              {getLanguageIcon(example.language)}
+              <span>{formatLanguageDisplay(example.language)}</span>
+              {activeTab === index && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 via-red-500 to-amber-500"></div>
+              )}
             </button>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
 
-      {/* Content - show if expanded (internal or external control) */}
-      {(headerless ? isExpanded : internalExpanded) && (
-        <div className="p-8 space-y-6">
-          {/* Tab Headers */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {examples.map((example, index) => (
-              <button
-                key={example.language}
-                onClick={() => setActiveTab(index)}
-                className={`group relative px-6 py-3 text-sm font-semibold transition-all duration-300 rounded-xl border-2 ${
-                  activeTab === index
-                    ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 border-blue-500 shadow-lg shadow-blue-500/25 scale-105'
-                    : 'text-slate-700 bg-white border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:shadow-md hover:-translate-y-0.5'
-                }`}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  {getLanguageIcon(example.language)}
-                  {formatLanguageDisplay(example.language)}
-                </span>
-                {activeTab === index && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-sm opacity-50"></div>
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/* Code Display */}
-          <div className="group relative">
-            {/* Header Bar */}
-            <div className="flex items-center justify-between bg-slate-800 px-6 py-4 rounded-t-xl border-b border-slate-700">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <span className="text-slate-300 text-sm font-medium">
-                  {formatLanguageDisplay(examples[activeTab]?.language)} Implementation
-                </span>
-              </div>
-              
-              {/* Copy Button */}
-              <button
-                onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
-                className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-300 transform ${
-                  copiedStates[activeTab] 
-                    ? 'text-green-400 bg-green-900/50 border border-green-500/30 scale-105 animate-pulse' 
-                    : 'text-slate-300 hover:text-white bg-slate-700 hover:bg-slate-600 hover:scale-105'
-                }`}
-              >
-                {copiedStates[activeTab] ? (
-                  <>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    Copy
-                  </>
-                )}
-              </button>
+      {/* Code Content */}
+      <div className="relative">
+        {/* Header Bar with terminal-style design */}
+        <div className="flex items-center justify-between bg-slate-900 px-6 py-4 border-b border-slate-700/50">
+          <div className="flex items-center gap-3">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-
-            {/* Code Content */}
-            <div className="bg-slate-900 rounded-b-xl overflow-hidden shadow-2xl">
-              <pre className={`language-${getPrismLanguage(examples[activeTab]?.language || '')} m-0 p-6 overflow-x-auto text-sm leading-relaxed`}>
-                <code 
-                  className={`language-${getPrismLanguage(examples[activeTab]?.language || '')}`}
-                  dangerouslySetInnerHTML={{
-                    __html: highlightCode(
-                      examples[activeTab]?.code || '', 
-                      examples[activeTab]?.language || ''
-                    )
-                  }}
-                />
-              </pre>
-            </div>
+            <span className="text-slate-300 text-sm font-medium">
+              {formatLanguageDisplay(examples[activeTab]?.language)} Implementation
+            </span>
           </div>
+          
+          {/* Copy Button */}
+          <button
+            onClick={() => copyToClipboard(examples[activeTab]?.code || '', activeTab)}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-lg transition-all duration-300 transform ${
+              copiedStates[activeTab] 
+                ? 'text-green-400 bg-green-500/20 border border-green-500/40 scale-105' 
+                : 'text-slate-300 hover:text-white bg-slate-800/50 hover:bg-orange-500/20 hover:border-orange-500/40 border border-transparent hover:scale-105'
+            }`}
+          >
+            {copiedStates[activeTab] ? (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Copied!
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
         </div>
-      )}
+
+        {/* Code Display */}
+        <div className="bg-slate-950 overflow-hidden">
+          <pre className={`language-${getPrismLanguage(examples[activeTab]?.language || '')} m-0 p-6 overflow-x-auto text-sm leading-relaxed`}>
+            <code 
+              className={`language-${getPrismLanguage(examples[activeTab]?.language || '')}`}
+              dangerouslySetInnerHTML={{
+                __html: highlightCode(
+                  examples[activeTab]?.code || '', 
+                  examples[activeTab]?.language || ''
+                )
+              }}
+            />
+          </pre>
+        </div>
+      </div>
     </div>
   );
 }
