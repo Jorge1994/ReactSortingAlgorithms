@@ -69,10 +69,10 @@ export const bubbleSortInfo: AlgorithmInfo = {
 
   visualizationNotes: {
     colors: {
-      comparing: "Blue bars indicate elements being compared",
-      swapping: "Red bars show elements being swapped",
-      sorted: "Green bars represent elements in final position",
-      unsorted: "Gray bars are unprocessed elements"
+      comparing: '#3B82F6',
+      swapping: '#EF4444',
+      sorted: '#10B981',
+      unsorted: '#6B7280'
     },
     
     phases: [

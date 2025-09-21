@@ -8,21 +8,20 @@ export const cycleSortInfo: AlgorithmInfo = {
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     justifications: {
       timeComplexity: {
-        best: 'Even in best case the algorithm must count positions for each element leading to O(n^2) comparisons.',
-        average: 'Each element may need to be compared with many others to find its final position, resulting in O(n^2).',
-        worst: 'Worst-case behavior still performs O(n^2) comparisons and rotations.'
+        best: 'Even when the array is already sorted, the algorithm must still count how many elements are smaller than each element to determine final positions, requiring O(n²) comparisons.',
+        average: 'For each element, the algorithm counts how many elements to its right are smaller to determine the final position, resulting in approximately n²/2 comparisons on average.',
+        worst: 'The worst case requires the maximum number of position calculations and cycle rotations, but still maintains O(n²) time complexity due to the systematic approach.'
       },
       spaceComplexity: {
-        best: 'Uses constant extra space for temporary variables.',
-        average: 'Uses constant extra space for temporary variables.',
-        worst: 'Uses constant extra space for temporary variables.'
+        best: 'The algorithm operates in-place, using only constant extra memory for temporary variables like position counters and the current element being cycled.',
+        average: 'Consistently uses O(1) space as no additional data structures are needed regardless of input distribution.',
+        worst: 'Even with maximum cycle lengths, space remains O(1) as the algorithm maintains its in-place approach using only temporary variables.'
       }
     }
   },
   stable: false,
   inPlace: true,
   online: false,
-  memoryUsage: 'Very low: only a few temporary variables',
   advantages: ['Minimizes the number of writes (useful when write operations are expensive)'],
   disadvantages: ['High number of comparisons, O(n^2) time complexity', 'Not stable'],
   useCases: ['When memory writes are significantly more expensive than reads'],

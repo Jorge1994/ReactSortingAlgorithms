@@ -66,10 +66,10 @@ export const selectionSortInfo: AlgorithmInfo = {
   
   visualizationNotes: {
     colors: {
-      comparing: 'Blue bars indicate elements being compared',
-      swapping: 'Red bars show elements being swapped',
-      sorted: 'Green bars represent elements in their final sorted position',
-      unsorted: 'Gray bars show elements not yet processed'
+      comparing: '#3B82F6',
+      swapping: '#EF4444',
+      sorted: '#10B981',
+      unsorted: '#6B7280'
     },
     phases: [
       "Initialize: Start with the entire array as unsorted, position pointer at the first element (index 0)",

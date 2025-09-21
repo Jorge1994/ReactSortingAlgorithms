@@ -2,7 +2,7 @@ import type { AlgorithmInfo } from '../../types';
 
 export const timSortInfo: AlgorithmInfo = {
   name: 'Tim Sort',
-  description: '**Tim Sort** is a highly sophisticated hybrid sorting algorithm that represents the pinnacle of practical sorting algorithm design, combining and improving upon **Merge Sort** and **Insertion Sort** strategies. Created by Tim Peters for Python, it has become the standard sorting algorithm for Python, Java, and many other major programming languages. **Tim Sort** excels by recognizing and exploiting existing order in real-world data through its innovative approach of identifying natural runs (consecutive ordered elements) and merging them intelligently using advanced **Merge Sort** techniques. The algorithm goes far beyond simple hybridization by employing advanced techniques like binary insertion sort for small runs, galloping mode for uneven merge operations, and a sophisticated merging strategy that minimizes temporary memory usage. This makes **Tim Sort** exceptionally fast on partially sorted data while maintaining excellent worst-case guarantees, representing a significant evolution beyond traditional **Merge Sort**.',
+  description: '**Tim Sort** is the "ultimate" sorting algorithm used by Python and Java - it\'s what runs when you call `sort()` in these languages. Created by Tim Peters, **Tim Sort** is incredibly smart because it looks for patterns in your data before deciding how to sort it. If parts of your array are already in order (called "runs"), it finds these organized sections and merges them together efficiently using an improved version of **Merge Sort**. For small sections (less than 32 elements), it switches to **Insertion Sort** which works better on tiny arrays. **Tim Sort** is like having a sorting expert that examines your data and chooses the best strategy: it can be as fast as O(n) when data is mostly sorted, but guarantees it will never be slower than O(n log n) even in the worst case. This combination of intelligence and reliability is why it became the standard for major programming languages.',
   complexity: {
     time: { 
       best: 'O(n)', 
@@ -30,7 +30,6 @@ export const timSortInfo: AlgorithmInfo = {
   stable: true,
   inPlace: false,
   online: false,
-  memoryUsage: "O(n) auxiliary space for temporary arrays during merge operations",
   advantages: [
     "Excellent performance on real-world data with existing patterns",
     "Stable sorting algorithm (preserves relative order of equal elements)",

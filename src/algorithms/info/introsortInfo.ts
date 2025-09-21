@@ -30,7 +30,6 @@ export const introsortInfo: AlgorithmInfo = {
   stable: false,
   inPlace: true,
   online: false,
-  memoryUsage: "Uses logarithmic space for recursion stack with depth limit guarantees",
   advantages: [
     "Guaranteed O(n log n) worst-case performance while maintaining excellent average-case speed",
     "Adaptive algorithm that chooses the best sorting strategy based on input characteristics",

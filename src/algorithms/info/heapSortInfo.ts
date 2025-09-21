@@ -6,7 +6,6 @@ export const heapSortInfo: AlgorithmInfo = {
   stable: false,
   inPlace: true,
   online: false,
-  memoryUsage: 'O(log n) due to recursive call stack. However, auxiliary space can be O(1) for iterative implementation',
   complexity: {
     time: { 
       best: 'O(n log n)', 

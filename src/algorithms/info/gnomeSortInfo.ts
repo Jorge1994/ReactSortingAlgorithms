@@ -6,7 +6,6 @@ export const gnomeSortInfo: AlgorithmInfo = {
   stable: true,
   inPlace: true,
   online: false,
-  memoryUsage: "This is an in-place algorithm. So O(1) auxiliary space is needed.",
   complexity: {
     time: {
       best: "O(n)",

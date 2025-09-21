@@ -2,20 +2,20 @@ import type { AlgorithmInfo } from '../../types/algorithmInfo';
 
 export const bitonicSortInfo: AlgorithmInfo = {
   name: 'Bitonic Sort',
-  description: '**Bitonic Sort** is a sophisticated parallel sorting algorithm designed specifically for massively parallel architectures and requires the input size to be a power of two. The algorithm is based on the concept of a bitonic sequence - a sequence that first increases then decreases (or vice versa). **Bitonic Sort** works by recursively constructing bitonic sequences and then sorting them into monotonic sequences using compare-and-exchange operations. What makes this algorithm particularly valuable is that it\'s a data-oblivious sorting network, meaning the sequence of comparisons is predetermined and doesn\'t depend on the actual data values. This property makes it ideal for parallel processors, GPUs, and hardware implementations where all processing units can execute the same operations simultaneously. While its O(n log² n) complexity is higher than optimal sequential algorithms, its exceptional parallelizability can lead to significant performance gains on appropriate hardware.',
+  description: '**Bitonic Sort** is a fascinating sorting algorithm designed specifically for parallel processing and requires the input size to be a power of two (like 16, 32, or 64 elements). The name comes from "bitonic sequences" - arrays that first increase then decrease, or vice versa (like a mountain or valley shape). **Bitonic Sort** works by repeatedly creating and merging these bitonic sequences using a network of compare-and-swap operations. What makes this algorithm special is that it always performs the same pattern of comparisons regardless of the actual data values - this predictable behavior makes it perfect for parallel computers and hardware implementations. While its O(n log² n) complexity is slower than algorithms like **Quick Sort** for single processors, its ability to run many operations simultaneously can make it very fast on parallel systems like graphics cards (GPUs).',
   complexity: {
-    time: { best: 'O(n log^2 n)', average: 'O(n log^2 n)', worst: 'O(n log^2 n)' },
+    time: { best: 'O(n log² n)', average: 'O(n log² n)', worst: 'O(n log² n)' },
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     justifications: {
       timeComplexity: {
-        best: 'Bitonic sort runs through log n stages, each performing O(n log n) comparisons in this network implementation, giving O(n log^2 n).',
-        average: 'Same as best for data-oblivious networks.',
-        worst: 'Same as best.'
+        best: 'Bitonic sort executes log n stages, with each stage performing O(n log n) comparisons across the sorting network, resulting in O(n log² n) total complexity.',
+        average: 'The algorithm follows a predetermined comparison pattern regardless of input data, maintaining O(n log² n) complexity in all cases.',
+        worst: 'Same as average and best cases due to the data-oblivious nature of the sorting network - performance is independent of input distribution.'
       },
       spaceComplexity: {
-        best: 'In-place compare-exchange operations use constant extra memory.',
-        average: 'In-place compare-exchange operations use constant extra memory.',
-        worst: 'In-place compare-exchange operations use constant extra memory.'
+        best: 'Uses only constant extra space for temporary variables during in-place compare-and-exchange operations.',
+        average: 'Maintains O(1) space complexity as all operations are performed in-place without additional data structures.',
+        worst: 'Even in worst case, space remains O(1) due to the in-place nature of the sorting network implementation.'
       }
     }
   },
@@ -28,10 +28,10 @@ export const bitonicSortInfo: AlgorithmInfo = {
   keyCharacteristics: ['Data-oblivious', 'Compare-exchange network', 'Requires power-of-two length'],
   visualizationNotes: {
     colors: {
-      comparing: "Blue bars indicate elements currently being compared",
-      swapping: "Red bars show elements that are being swapped",
-      sorted: "Green bars mark elements that have reached final position",
-      unsorted: "Gray bars represent unprocessed or idle elements"
+      comparing: '#3B82F6',
+      swapping: '#EF4444',
+      sorted: '#10B981',
+      unsorted: '#6B7280'
     },
     phases: [
       "Initial setup: Ensure array length is a power of two (this visualizer allows 16, 32, 64).",

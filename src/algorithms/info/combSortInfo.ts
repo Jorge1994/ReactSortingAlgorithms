@@ -4,18 +4,18 @@ export const combSortInfo: AlgorithmInfo = {
   name: 'Comb Sort',
   description: '**Comb Sort** is an ingenious improvement over **Bubble Sort** that addresses one of its major performance bottlenecks: the slow movement of small elements from the end of the array (known as "turtles"). While **Bubble Sort** only compares adjacent elements, **Comb Sort** introduces a gap between compared elements, starting with a large gap that gradually shrinks. The gap is typically reduced by a factor of 1.3 each iteration until it reaches 1, at which point the algorithm performs a final **Bubble Sort** pass. This approach allows small elements to move quickly toward the beginning of the array and large elements to settle toward the end much faster than traditional **Bubble Sort**. The magic number 1.3 was empirically determined to provide optimal performance across various datasets. **Comb Sort** demonstrates how a simple modification to **Bubble Sort** can yield significant performance improvements while maintaining algorithmic simplicity.',
   complexity: {
-    time: { best: 'O(n log n)', average: 'O(n²)', worst: 'O(n²)' },
+    time: { best: 'O(n)', average: 'O(n²)', worst: 'O(n²)' },
     space: { best: 'O(1)', average: 'O(1)', worst: 'O(1)' },
     justifications: {
       timeComplexity: {
-        best: 'When input is nearly sorted and the gap quickly reduces, comparisons are near linearithmic.',
-        average: 'Depends on shrink factor; generally better than bubble sort but can approach quadratic behavior.',
-        worst: 'In worst case the algorithm behaves similar to bubble sort with O(n^2) comparisons and swaps.'
+        best: 'When the array is already sorted, the algorithm can detect this with a single pass and terminate early, achieving O(n) time complexity.',
+        average: 'The gap sequence generally provides better performance than Bubble Sort but still requires multiple passes, typically resulting in O(n²) behavior.',
+        worst: 'In worst case scenarios the algorithm behaves similarly to Bubble Sort, requiring O(n²) comparisons and swaps across multiple passes.'
       },
       spaceComplexity: {
-        best: 'Comb Sort only uses a few counters and indices.',
-        average: 'O(1) auxiliary space.',
-        worst: 'O(1) auxiliary space.'
+        best: 'Comb Sort operates in-place, using only a constant number of variables for gap calculation and temporary storage.',
+        average: 'Maintains O(1) auxiliary space regardless of input characteristics.',
+        worst: 'Space complexity remains O(1) even in worst case scenarios as no additional data structures are required.'
       }
     }
   },
@@ -30,10 +30,10 @@ export const combSortInfo: AlgorithmInfo = {
   keyCharacteristics: ['Gap-based comparisons', 'Shrinking gap factor (commonly 1.3)'],
   visualizationNotes: {
     colors: {
-      comparing: 'Blue bars indicate elements being compared',
-      swapping: 'Red bars show elements being swapped',
-      sorted: 'Green bars represent elements in final position',
-      unsorted: 'Gray bars are unprocessed elements'
+      comparing: '#3B82F6',
+      swapping: '#EF4444',
+      sorted: '#10B981',
+      unsorted: '#6B7280'
     },
     phases: [
       'Initial Setup: Display the unsorted array and set the initial gap to the length of the array. Explain the purpose of the gap — to compare non-adjacent elements and move distant "turtles" quickly.',

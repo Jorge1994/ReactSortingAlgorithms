@@ -52,10 +52,10 @@ export const bucketSortInfo: AlgorithmInfo = {
   ],
   visualizationNotes: {
     colors: {
-      comparing: 'Blue highlights elements being analyzed for bucket placement',
-      swapping: 'Red shows elements being moved during internal bucket sorting',
-      sorted: 'Green marks elements that have reached their final sorted position',
-      unsorted: 'Gray represents elements not yet processed or in transit between buckets'
+      comparing: '#3B82F6',
+      swapping: '#EF4444',
+      sorted: '#10B981',
+      unsorted: '#6B7280'
     },
     phases: [
       'Initialization: Create empty buckets based on array size using adaptive formula (√n for optimal distribution)',

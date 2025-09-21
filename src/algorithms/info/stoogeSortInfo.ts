@@ -8,14 +8,14 @@ export const stoogeSortInfo: AlgorithmInfo = {
     space: { best: 'O(n)', average: 'O(n)', worst: 'O(n)' },
     justifications: {
       timeComplexity: {
-  best: 'Recurrence T(n) = 3T(2n/3) + O(1) leads to n raised to the power (log 3 / log 1.5), which is approximately n²·⁷.',
-  average: 'The same recurrence applies in general due to the recursive structure.',
-  worst: 'Same as best/average due to the deterministic recursive pattern.'
+        best: 'The recurrence relation T(n) = 3T(2n/3) + O(1) applies in all cases. Using the Master Theorem with a=3, b=3/2, and f(n)=O(1), we get T(n) = O(n^log₃/₂(3)) = O(n^2.7095...).',
+        average: 'The recursive structure creates the same number of function calls regardless of input order, maintaining the O(n^2.7) complexity derived from the recurrence relation.',
+        worst: 'Even in worst case, the algorithm follows the same recursive pattern: sort first 2/3, sort last 2/3, sort first 2/3 again, resulting in the same O(n^2.7) complexity.'
       },
       spaceComplexity: {
-        best: 'Uses recursion depth proportional to O(log_{3/2} n) — working array copy is O(n) when recording steps for visualization.',
-        average: 'Same as best.',
-        worst: 'Same as best.'
+        best: 'The recursion depth follows log₃/₂(n) = O(log n) due to the 2/3 reduction factor, requiring logarithmic space for the call stack.',
+        average: 'Maintains O(log n) space complexity for recursion stack regardless of input characteristics.',
+        worst: 'Space complexity remains O(log n) as the maximum recursion depth is determined by the 2/3 division pattern, not input data distribution.'
       }
     }
   },
