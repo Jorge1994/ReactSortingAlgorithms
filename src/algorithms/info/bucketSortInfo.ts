@@ -50,17 +50,15 @@ export const bucketSortInfo: AlgorithmInfo = {
     'Three distinct phases: distribution, internal sorting, concatenation',
     'Performance highly dependent on input data distribution'
   ],
-  visualizationNotes: {
-    phases: [
-      'Initialization: Create empty buckets based on array size using adaptive formula (√n for optimal distribution)',
-      'Range Calculation: Determine min/max values to establish bucket ranges for uniform distribution',
-      'Distribution Phase: Analyze each element and move it to appropriate bucket based on value range',
-      'Bucket Highlighting: Highlight target bucket and element being moved during distribution',
-      'Internal Sorting Phase: Apply insertion sort within each non-empty bucket independently',
-      'Insertion Sort Steps: Show detailed insertion sort operations within individual buckets',
-      'Concatenation Phase: Merge sorted buckets sequentially into final array',
-      'Element Migration: Animate elements moving from buckets back to their final sorted positions',
-      'Completion: All elements sorted and placed in final array with green highlighting'
-    ]
-  }
+  phases: [
+    'Initialization: Create empty buckets based on array size using adaptive formula (√n for optimal distribution)',
+    'Range Calculation: Determine min/max values to establish bucket ranges for uniform distribution',
+    'Distribution Phase: Analyze each element and move it to appropriate bucket based on value range',
+    'Bucket Highlighting: Highlight target bucket and element being moved during distribution',
+    'Internal Sorting Phase: Apply insertion sort within each non-empty bucket independently',
+    'Insertion Sort Steps: Show detailed insertion sort operations within individual buckets',
+    'Concatenation Phase: Merge sorted buckets sequentially into final array',
+    'Element Migration: Animate elements moving from buckets back to their final sorted positions',
+    'Completion: All elements sorted and placed in final array with green highlighting'
+  ]
 };

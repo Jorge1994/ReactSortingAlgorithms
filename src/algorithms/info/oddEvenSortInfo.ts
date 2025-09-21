@@ -49,8 +49,7 @@ export const oddEvenSortInfo: AlgorithmInfo = {
     'Simple synchronization-friendly structure',
     'In-place and stable'
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       'Initialization: Prepare for alternating even-odd comparison pattern that enables parallel processing',
       
       'Even Pass: Compare adjacent pairs (0,1), (2,3), (4,5)... and swap if out of order. All comparisons can run simultaneously',
@@ -62,6 +61,5 @@ export const oddEvenSortInfo: AlgorithmInfo = {
       'Cycle Evaluation: Check if both even and odd passes completed without swaps, indicating the array is sorted',
       
       'Continue or Terminate: Repeat even-odd cycles until no swaps occur, achieving early termination on sorted data'
-    ]
-  }
+  ]
 };

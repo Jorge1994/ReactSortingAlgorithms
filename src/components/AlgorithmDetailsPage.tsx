@@ -223,7 +223,7 @@ function AlgorithmDetails({ algorithmInfo, isExpanded = false }: { algorithmInfo
             </h3>
             <div className="bg-slate-700 rounded-xl p-6 border border-slate-600 shadow-sm">
               <div className="space-y-4">
-                {algorithmInfo.visualizationNotes.phases.map((phase, index) => (
+                {algorithmInfo.phases.map((phase, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg border border-slate-500 hover:shadow-md transition-shadow duration-200">
                     <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm font-bold shadow-sm">
                       {index + 1}

@@ -70,20 +70,18 @@ export const insertionSortInfo: AlgorithmInfo = {
     'Mirrors the intuitive process humans use when organizing physical objects like playing cards'
   ],
 
-  visualizationNotes: {
-    phases: [
-      'Foundation Building: Begin by considering the first element as an already sorted section, since any single element is naturally in order',
-      'Element Selection: Choose the next unsorted element to be placed into its correct position within the sorted section',
-      'Value Preservation: Remember the chosen element temporarily while making space for it in the sorted portion',
-      'Backward Exploration: Start examining the sorted section from right to left to find where the new element belongs',
-      'Comparison Process: Compare the chosen element with each element in the sorted section, moving from right to left',
-      'Space Creation: When encountering elements larger than our chosen element, shift them one position to the right to create insertion space',
-      'Continued Searching: Keep moving leftward through the sorted section, shifting larger elements as needed',
-      'Position Discovery: Identify the exact location where our chosen element should be inserted to maintain sorted order',
-      'Element Placement: Insert the chosen element into its determined correct position within the sorted section',
-      'Section Expansion: The sorted portion now grows by one element, extending the organized area of the array',
-      'Progress Verification: Confirm that all elements in the expanded sorted section are properly arranged in ascending order',
-      'Process Continuation: Repeat the insertion process for each remaining unsorted element until the entire array is sorted'
-    ]
-  }
+  phases: [
+    'Foundation Building: Begin by considering the first element as an already sorted section, since any single element is naturally in order',
+    'Element Selection: Choose the next unsorted element to be placed into its correct position within the sorted section',
+    'Value Preservation: Remember the chosen element temporarily while making space for it in the sorted portion',
+    'Backward Exploration: Start examining the sorted section from right to left to find where the new element belongs',
+    'Comparison Process: Compare the chosen element with each element in the sorted section, moving from right to left',
+    'Space Creation: When encountering elements larger than our chosen element, shift them one position to the right to create insertion space',
+    'Continued Searching: Keep moving leftward through the sorted section, shifting larger elements as needed',
+    'Position Discovery: Identify the exact location where our chosen element should be inserted to maintain sorted order',
+    'Element Placement: Insert the chosen element into its determined correct position within the sorted section',
+    'Section Expansion: The sorted portion now grows by one element, extending the organized area of the array',
+    'Progress Verification: Confirm that all elements in the expanded sorted section are properly arranged in ascending order',
+    'Process Continuation: Repeat the insertion process for each remaining unsorted element until the entire array is sorted'
+  ]
 };

@@ -67,18 +67,16 @@ export const bubbleSortInfo: AlgorithmInfo = {
     "Each pass places one element in final position"
   ],
 
-  visualizationNotes: {
-    phases: [
-      "Initial Setup: Start with the unsorted array and begin the first pass from the leftmost position",
-      "Pass Initialization: Begin a new pass through the array, starting from the first element",
-      "Adjacent Comparison: Compare each pair of adjacent elements moving from left to right",
-      "Swap Decision: If the left element is greater than the right element, swap them to maintain ascending order",
-      "Position Advancement: Move to the next pair of adjacent elements and repeat the comparison",
-      "Bubbling Effect: Larger elements gradually 'bubble up' towards the end of the array with each comparison",
-      "Pass Completion: After each complete pass, the largest unsorted element reaches its final sorted position",
-      "Boundary Reduction: In subsequent passes, ignore the already sorted elements at the end to improve efficiency",
-      "Optimization Check: If no swaps occurred during a pass, the array is sorted and the algorithm terminates early",
-      "Final Verification: Continue until all elements are in their correct sorted positions"
-    ]
-  }
+  phases: [
+    "Initial Setup: Start with the unsorted array and begin the first pass from the leftmost position",
+    "Pass Initialization: Begin a new pass through the array, starting from the first element",
+    "Adjacent Comparison: Compare each pair of adjacent elements moving from left to right",
+    "Swap Decision: If the left element is greater than the right element, swap them to maintain ascending order",
+    "Position Advancement: Move to the next pair of adjacent elements and repeat the comparison",
+    "Bubbling Effect: Larger elements gradually 'bubble up' towards the end of the array with each comparison",
+    "Pass Completion: After each complete pass, the largest unsorted element reaches its final sorted position",
+    "Boundary Reduction: In subsequent passes, ignore the already sorted elements at the end to improve efficiency",
+    "Optimization Check: If no swaps occurred during a pass, the array is sorted and the algorithm terminates early",
+    "Final Verification: Continue until all elements are in their correct sorted positions"
+  ]
 };

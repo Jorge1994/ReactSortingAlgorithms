@@ -63,8 +63,7 @@ export const timSortInfo: AlgorithmInfo = {
     "Adaptive performance based on input data patterns",
     "Optimized for real-world data distributions"
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Run Detection: Identify existing ordered sequences in the input",
       "Minimum Run Length: Calculate optimal run size (typically 32-64 elements)",
       "Insertion Sort: Sort individual runs using insertion sort for efficiency",
@@ -75,6 +74,5 @@ export const timSortInfo: AlgorithmInfo = {
       "Stack Management: Maintain invariants to ensure balanced merging",
       "Final Merge: Complete remaining merge operations",
       "Verification: Ensure final array is completely sorted and stable"
-    ]
-  }
+  ]
 };

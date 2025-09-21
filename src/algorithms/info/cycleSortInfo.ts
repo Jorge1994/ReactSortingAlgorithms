@@ -26,12 +26,10 @@ export const cycleSortInfo: AlgorithmInfo = {
   disadvantages: ['High number of comparisons, O(n^2) time complexity', 'Not stable'],
   useCases: ['When memory writes are significantly more expensive than reads'],
   keyCharacteristics: ['In-place', 'Minimizes writes', 'Unstable', 'Quadratic time'],
-  visualizationNotes: {
-    phases: [
-      'Counting phase: determine final position for the current element by counting smaller elements to the right.',
-      'Placement phase: put the item in its correct position (this is one memory write).',
-      'Rotation phase: rotate the rest of the cycle until cycle_start is reached again.',
-      'Mark final positions as sorted.'
-    ]
-  }
+  phases: [
+    'Counting phase: determine final position for the current element by counting smaller elements to the right.',
+    'Placement phase: put the item in its correct position (this is one memory write).',
+    'Rotation phase: rotate the rest of the cycle until cycle_start is reached again.',
+    'Mark final positions as sorted.'
+  ]
 };

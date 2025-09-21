@@ -54,8 +54,7 @@ export const radixSortInfo: AlgorithmInfo = {
     'Linear in optimal conditions: O(d×n) where d is typically small',
     'Space complexity: Requires O(n+k) additional space'
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Phase 1 - Digit Analysis: Each element is examined to extract the current digit (units, tens, hundreds, etc.). The digit determines which 'bucket' the element belongs to.",
       
       "Phase 2 - Counting: Count how many elements have each digit value (0-9). This creates a frequency distribution showing how many elements will go into each bucket.",
@@ -77,6 +76,5 @@ export const radixSortInfo: AlgorithmInfo = {
       "Memory Usage Pattern: The auxiliary array and count array represent the O(n+k) space complexity, where n is the array size and k=10 for decimal digits.",
       
       "Performance Insight: Each pass takes O(n) time, and with d digits total, the algorithm achieves O(d×n) complexity. When d is small (constant), this approaches linear time."
-    ]
-  }
+  ]
 };

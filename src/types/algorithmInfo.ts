@@ -17,7 +17,5 @@ export interface AlgorithmInfo {
   disadvantages: string[];
   useCases: string[];
   keyCharacteristics: string[];
-  visualizationNotes: {
-    phases: string[];
-  };
+  phases: string[];
 }

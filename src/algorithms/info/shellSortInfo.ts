@@ -58,8 +58,7 @@ export const shellSortInfo: AlgorithmInfo = {
     'Performance strongly influenced by gap choice'
   ],
 
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Gap Sequence Initialization: Start with a large gap (typically n/2) to allow elements to move across long distances",
 
       "Large Gap Sorting: Perform insertion sort on elements that are 'gap' positions apart, creating multiple sorted subsequences",
@@ -75,6 +74,5 @@ export const shellSortInfo: AlgorithmInfo = {
       "Final Pass (Gap = 1): Perform standard insertion sort pass, which is highly efficient on the substantially pre-sorted array",
 
       "Local Adjustments: Final pass makes minor local adjustments, moving elements short distances to complete the sorting process"
-    ]
-  }
+  ]
 };

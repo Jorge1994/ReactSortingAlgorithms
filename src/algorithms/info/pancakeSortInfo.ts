@@ -63,8 +63,7 @@ export const pancakeSortInfo: AlgorithmInfo = {
     "Demonstrates creative problem-solving within constraints"
   ],
 
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Initial Setup: Display the unsorted array and identify the largest unsorted element that needs to be moved to its correct position",
       "Find Maximum: Scan through the unsorted portion to locate the largest element that hasn't been placed in its final position yet",
       "Position Analysis: Determine if the maximum element is already at the front of the unsorted portion or needs to be moved there first",
@@ -74,6 +73,5 @@ export const pancakeSortInfo: AlgorithmInfo = {
       "Progress Verification: Show how the sorted region grows from right to left with each pancake flip operation",
       "Optimization Check: Continue the process for the remaining unsorted elements until the entire array is sorted",
       "Final State: Display the completely sorted array with all elements in their correct ascending order positions"
-    ]
-  }
+  ]
 };

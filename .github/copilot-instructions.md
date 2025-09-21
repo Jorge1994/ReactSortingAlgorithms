@@ -205,13 +205,11 @@ export const algorithmNameInfo: AlgorithmInfo = {
   disadvantages: ["List of disadvantages"],
   useCases: ["When to use this algorithm"],
   keyCharacteristics: ["Important properties"],
-  visualizationNotes: {
-    phases: [
-      "Phase 1: Detailed explanation",
-      "Phase 2: Detailed explanation",
-      // Add as many phases as needed for complete understanding
-    ]
-  }
+  phases: [
+    "Phase 1: Detailed explanation",
+    "Phase 2: Detailed explanation",
+    // Add as many phases as needed for complete understanding
+  ]
 };
 ```
 

@@ -50,13 +50,11 @@ export const gnomeSortInfo: AlgorithmInfo = {
     "Stable and in-place",
     "Similar behaviour to insertion sort but implemented with swaps and index movement",
   ],
-  visualizationNotes: {
-    phases: [
-      "Start: Begin at index 0 (the algorithm advances to index 1 immediately) and compare with the previous element as needed",
-      "Advance: If the pair is in order, move one step to the right",
-      "Swap & Retreat: If the pair is out of order, swap them and move one step left to re-check",
-      "Repeat: Continue until the end is reached and all elements are in place",
-      "Finalize: Mark elements as sorted",
-    ],
-  },
+  phases: [
+    "Start: Begin at index 0 (the algorithm advances to index 1 immediately) and compare with the previous element as needed",
+    "Advance: If the pair is in order, move one step to the right",
+    "Swap & Retreat: If the pair is out of order, swap them and move one step left to re-check",
+    "Repeat: Continue until the end is reached and all elements are in place",
+    "Finalize: Mark elements as sorted",
+  ],
 };

@@ -59,13 +59,11 @@ export const quickSortInfo: AlgorithmInfo = {
   'Choice of Pivot affects partition balance and performance. Common strategies: first/last (simple, can trigger worst-case on sorted inputs), random (good practical choice), median-of-three/median (best balance but more overhead)',
   'Partition algorithms include Naive (uses extra O(n) space), Lomuto (simple, used here), and Hoare (more efficient in swaps). All run in O(n) time'
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       'Select Pivot: Highlight the pivot element used for partitioning.',
       'Compare: Compare elements against pivot and highlight comparisons.',
       'Swap: Swap elements that belong to the left partition.',
       'Place Pivot: Move pivot to its final sorted position and mark it sorted.',
       'Recurse: Apply the same steps to left and right partitions.'
-    ]
-  }
+  ]
 };

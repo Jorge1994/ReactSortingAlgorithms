@@ -62,35 +62,33 @@ export const heapSortInfo: AlgorithmInfo = {
     "The heap shrinks with each extraction until only one element remains",
     "Heapify operation has O(log n) complexity due to tree height"
   ],
-  visualizationNotes: {
-    phases: [
-      "Initial Array: The unsorted input array is displayed with all elements in gray, ready to be transformed into a heap structure",
-      
-      "Understanding Heap Structure: Visualize how the array represents a binary heap where for index i, left child is at 2i+1 and right child is at 2i+2",
-      
-      "Building Max Heap: Starting from the last non-leaf node (index n/2-1), perform heapify operations going backwards to index 0",
+  phases: [
+    "Initial Array: The unsorted input array is displayed with all elements in gray, ready to be transformed into a heap structure",
+    
+    "Understanding Heap Structure: Visualize how the array represents a binary heap where for index i, left child is at 2i+1 and right child is at 2i+2",
+    
+    "Building Max Heap: Starting from the last non-leaf node (index n/2-1), perform heapify operations going backwards to index 0",
 
-      "Heapify Process: For each node, compare with its children and swap with the larger child if heap property is violated, then recursively heapify affected subtree",
+    "Heapify Process: For each node, compare with its children and swap with the larger child if heap property is violated, then recursively heapify affected subtree",
 
-      "Heap Property Verification: Ensure every parent node is greater than or equal to its children, creating a complete max heap structure",
+    "Heap Property Verification: Ensure every parent node is greater than or equal to its children, creating a complete max heap structure",
 
-      "Heap Construction Complete: The array now represents a valid max heap with the largest element at the root (index 0)",
+    "Heap Construction Complete: The array now represents a valid max heap with the largest element at the root (index 0)",
 
-      "Extract Maximum: Move the root element (maximum) to the end of the array, effectively placing it in its final sorted position",
+    "Extract Maximum: Move the root element (maximum) to the end of the array, effectively placing it in its final sorted position",
 
-      "Reduce Heap Size: Decrease the heap size by 1, excluding the newly sorted element from further heap operations",
+    "Reduce Heap Size: Decrease the heap size by 1, excluding the newly sorted element from further heap operations",
 
-      "Restore Heap Property: Place the last heap element at the root and heapify downward to restore the max heap property",
+    "Restore Heap Property: Place the last heap element at the root and heapify downward to restore the max heap property",
 
-      "Heapify Downward: Compare the new root with its children and swap with the larger child, continuing until heap property is restored",
+    "Heapify Downward: Compare the new root with its children and swap with the larger child, continuing until heap property is restored",
 
-      "Iteration Continue: Repeat the extract-maximum process for the remaining heap elements, gradually building the sorted region",
+    "Iteration Continue: Repeat the extract-maximum process for the remaining heap elements, gradually building the sorted region",
 
-      "Heap Shrinkage: With each extraction, the heap gets smaller while the sorted region at the end grows larger",
+    "Heap Shrinkage: With each extraction, the heap gets smaller while the sorted region at the end grows larger",
 
-      "Final Extractions: Continue until only one element remains in the heap, which is automatically in its correct position",
-      
-      "Sorting Complete: All elements are now in their final sorted positions, displayed in green to indicate the successful completion of heap sort"
-    ]
-  }
+    "Final Extractions: Continue until only one element remains in the heap, which is automatically in its correct position",
+    
+    "Sorting Complete: All elements are now in their final sorted positions, displayed in green to indicate the successful completion of heap sort"
+  ]
 };

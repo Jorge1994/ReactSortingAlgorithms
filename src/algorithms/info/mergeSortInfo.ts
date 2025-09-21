@@ -62,8 +62,7 @@ export const mergeSortInfo: AlgorithmInfo = {
     'Consistent O(n log n) performance',
     'Bottom-up merge approach available'
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       'Initial State: Display the unsorted array that needs to be sorted using divide-and-conquer approach',
       
       'Division Phase: Recursively divide the array into smaller subarrays until each subarray contains only one element',
@@ -99,6 +98,5 @@ export const mergeSortInfo: AlgorithmInfo = {
       'Performance Analysis: Count total comparisons (≈ n log n) and space usage (O(n) auxiliary arrays)',
       
       'Stability Demonstration: Show how equal elements maintain their relative order throughout the process'
-    ]
-  }
+  ]
 };

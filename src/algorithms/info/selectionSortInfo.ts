@@ -64,8 +64,7 @@ export const selectionSortInfo: AlgorithmInfo = {
     'Selection-based: Repeatedly selects minimum element'
   ],
   
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Initialize: Start with the entire array as unsorted, position pointer at the first element (index 0)",
       "Search for Minimum: Scan through all remaining unsorted elements to find the smallest value",
       "Track Minimum Index: Keep track of the index where the minimum element is located during the search",
@@ -74,6 +73,5 @@ export const selectionSortInfo: AlgorithmInfo = {
       "Advance Position: Move the position pointer one step to the right, reducing the unsorted portion by one element",
       "Repeat Process: Continue the process for the remaining unsorted elements until the entire array is sorted",
       "Final State: When only one element remains unsorted, it's automatically in the correct position"
-    ]
-  }
+  ]
 };

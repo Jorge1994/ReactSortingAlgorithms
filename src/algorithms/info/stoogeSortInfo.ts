@@ -26,12 +26,10 @@ export const stoogeSortInfo: AlgorithmInfo = {
   disadvantages: ['Extremely inefficient', 'Not suitable for practical use'],
   useCases: ['Educational demonstration of recursion and algorithm analysis'],
   keyCharacteristics: ['Recursive', 'Divide into overlapping sections (2/3)', 'Poor time complexity ~ O(n²·⁷)'],
-  visualizationNotes: {
-    phases: [
-      'Compare and swap the first and last elements of the current segment',
-      'Recursively sort the first 2/3 of the segment',
-      'Recursively sort the last 2/3 of the segment',
-      'Recursively sort the first 2/3 again to finish'
-    ]
-  }
+  phases: [
+    'Compare and swap the first and last elements of the current segment',
+    'Recursively sort the first 2/3 of the segment',
+    'Recursively sort the last 2/3 of the segment',
+    'Recursively sort the first 2/3 again to finish'
+  ]
 };

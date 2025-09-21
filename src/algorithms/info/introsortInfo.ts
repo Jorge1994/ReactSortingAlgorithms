@@ -63,8 +63,7 @@ export const introsortInfo: AlgorithmInfo = {
     "Seamless transitions between algorithms without losing sorted progress",
     "Industry-standard algorithm used in major programming language libraries"
   ],
-  visualizationNotes: {
-    phases: [
+  phases: [
       "Initialization: Calculate depth limit (2 × log₂(n)) to prevent worst-case quicksort behavior",
       "Algorithm Selection: Choose sorting method based on subarray size and recursion depth",
       "Quicksort Phase: Use median-of-three pivot selection for efficient partitioning",
@@ -81,6 +80,5 @@ export const introsortInfo: AlgorithmInfo = {
       "Cache Optimization: Leverage quicksort's excellent memory locality for performance",
       "Adaptive Behavior: Algorithm automatically adjusts strategy based on runtime conditions",
       "Final Verification: Ensure all elements are properly positioned in sorted order"
-    ]
-  }
+  ]
 };

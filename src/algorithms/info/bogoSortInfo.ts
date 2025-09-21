@@ -38,12 +38,10 @@ export const bogoSortInfo: AlgorithmInfo = {
     "Relies on permutations/shuffles",
     "Factorial expected time",
   ],
-  visualizationNotes: {
-    phases: [
-      "Initial check: compare adjacent elements to detect if already sorted",
-      "Shuffle phase: perform a random permutation of the array",
-      "Check phase: compare adjacent elements after each shuffle",
-      "Repeat until sorted or a safety cap is reached",
-    ],
-  },
+  phases: [
+    "Initial check: compare adjacent elements to detect if already sorted",
+    "Shuffle phase: perform a random permutation of the array",
+    "Check phase: compare adjacent elements after each shuffle",
+    "Repeat until sorted or a safety cap is reached",
+  ],
 };

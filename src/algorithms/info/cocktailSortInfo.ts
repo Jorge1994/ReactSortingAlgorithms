@@ -41,15 +41,13 @@ export const cocktailSortInfo: AlgorithmInfo = {
     'Adaptive with early termination when no swaps occur',
     'In-place and stable'
   ],
-  visualizationNotes: {
-    phases: [
-      'Initial Setup: Start with the unsorted array and initialize left and right boundaries',
-      'Forward Pass: Move from left to right, comparing adjacent elements and swapping when needed to push larger elements to the right boundary',
-      'Right Boundary Update: After forward pass, the largest element is at the right boundary and can be marked as sorted',
-      'Backward Pass: Move from right to left, comparing adjacent elements and swapping to push smaller elements to the left boundary',
-      'Left Boundary Update: After backward pass, the smallest element is at the left boundary and can be marked as sorted',
-      'Boundary Narrowing: Shrink the left and right boundaries inward and repeat passes until boundaries meet or no swaps occur',
-      'Early Termination: If a pass completes without swaps, the array is sorted and algorithm can finish early'
-    ]
-  }
+  phases: [
+    'Initial Setup: Start with the unsorted array and initialize left and right boundaries',
+    'Forward Pass: Move from left to right, comparing adjacent elements and swapping when needed to push larger elements to the right boundary',
+    'Right Boundary Update: After forward pass, the largest element is at the right boundary and can be marked as sorted',
+    'Backward Pass: Move from right to left, comparing adjacent elements and swapping to push smaller elements to the left boundary',
+    'Left Boundary Update: After backward pass, the smallest element is at the left boundary and can be marked as sorted',
+    'Boundary Narrowing: Shrink the left and right boundaries inward and repeat passes until boundaries meet or no swaps occur',
+    'Early Termination: If a pass completes without swaps, the array is sorted and algorithm can finish early'
+  ]
 };

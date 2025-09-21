@@ -58,15 +58,13 @@ export const countingSortInfo: AlgorithmInfo = {
     "Requires additional space proportional to the range of values",
     "Works by counting occurrences and calculating positions"
   ],
-  visualizationNotes: {
-    phases: [
-      "Phase 1 - Discover Range: Find the smallest (min) and largest (max) values in the array. This tells us how many 'buckets' we need for counting.",
-      "Phase 2 - Create Count Array: Create a counting array with (max - min + 1) positions, all starting at 0. Each position represents a possible value.",
-      "Phase 3 - Count Elements: Go through the original array. For each element, increment the counter in the corresponding 'bucket'. At the end, we know how many times each value appears.",
-      "Phase 4 - Calculate Cumulative Positions: Transform simple counters into cumulative counters by adding each count to all previous counts. This creates a position map where each value tells us how many positions in the sorted array belong to elements with smaller or equal values.",
-      "Phase 5 - Build Sorted Array: Process elements from right to left. For each element, use the cumulative counter to know where to place it in the final result.",
-      "Phase 6 - Maintain Stability: By processing from right to left and decrementing counters, we ensure equal elements keep their original order.",
-      "Phase 7 - Final Result: The output array contains all elements sorted, without ever comparing elements against each other!"
-    ]
-  }
+  phases: [
+    "Phase 1 - Discover Range: Find the smallest (min) and largest (max) values in the array. This tells us how many 'buckets' we need for counting.",
+    "Phase 2 - Create Count Array: Create a counting array with (max - min + 1) positions, all starting at 0. Each position represents a possible value.",
+    "Phase 3 - Count Elements: Go through the original array. For each element, increment the counter in the corresponding 'bucket'. At the end, we know how many times each value appears.",
+    "Phase 4 - Calculate Cumulative Positions: Transform simple counters into cumulative counters by adding each count to all previous counts. This creates a position map where each value tells us how many positions in the sorted array belong to elements with smaller or equal values.",
+    "Phase 5 - Build Sorted Array: Process elements from right to left. For each element, use the cumulative counter to know where to place it in the final result.",
+    "Phase 6 - Maintain Stability: By processing from right to left and decrementing counters, we ensure equal elements keep their original order.",
+    "Phase 7 - Final Result: The output array contains all elements sorted, without ever comparing elements against each other!"
+  ]
 };
