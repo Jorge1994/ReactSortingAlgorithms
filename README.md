@@ -17,11 +17,12 @@ A React-based interactive web application that visualizes sorting algorithms thr
   - 🟢 **Green**: Elements in final sorted position
   - ⚪ **Gray**: Unprocessed elements
 
-### Supported Algorithms
-- **Simple Algorithms**: Bubble Sort, Selection Sort, Insertion Sort
-- **Advanced Algorithms**: Merge Sort, Quick Sort, Heap Sort
+### Supported Algorithms (21 Total)
+- **Simple Algorithms**: Bubble Sort, Selection Sort, Insertion Sort, Gnome Sort
+- **Advanced Algorithms**: Merge Sort, Quick Sort, Heap Sort, Shell Sort, Tim Sort, Introsort
 - **Specialized Algorithms**: Bucket Sort, Counting Sort, Radix Sort
-- **Exotic Algorithms**: Bogo Sort, Bitonic Sort, Shell Sort, and more
+- **Cocktail Variants**: Cocktail Sort, Odd-Even Sort, Comb Sort
+- **Exotic Algorithms**: Bogo Sort, Bitonic Sort, Stooge Sort, Pancake Sort, Cycle Sort
 
 ### Interactive Controls
 - Play/Pause/Reset controls
@@ -133,19 +134,31 @@ We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.
 - **Build Tool**: Vite
 - **Code Quality**: ESLint, Prettier
 
-## 📊 Supported Algorithms
+## 📊 Supported Algorithms (21 Total)
 
-| Algorithm | Time Complexity | Space | Stable | Visualizer |
-|-----------|----------------|-------|--------|------------|
-| Bubble Sort | O(n²) | O(1) | ✅ | Standard |
-| Selection Sort | O(n²) | O(1) | ❌ | Standard |
-| Insertion Sort | O(n²) | O(1) | ✅ | Standard |
-| Merge Sort | O(n log n) | O(n) | ✅ | Standard |
-| Quick Sort | O(n log n) | O(log n) | ❌ | Standard |
-| Heap Sort | O(n log n) | O(1) | ❌ | Standard |
-| Counting Sort | O(n + k) | O(k) | ✅ | Specialized |
-| Radix Sort | O(nk) | O(n + k) | ✅ | Specialized |
-| Bucket Sort | O(n + k) | O(n) | ✅ | Specialized |
+| Algorithm | Time Complexity | Space | Stable | Visualizer | Type |
+|-----------|----------------|-------|--------|------------|------|
+| Bubble Sort | O(n²) | O(1) | ✅ | Standard | Simple |
+| Selection Sort | O(n²) | O(1) | ❌ | Standard | Simple |
+| Insertion Sort | O(n²) | O(1) | ✅ | Standard | Simple |
+| Gnome Sort | O(n²) | O(1) | ✅ | Standard | Simple |
+| Merge Sort | O(n log n) | O(n) | ✅ | Standard | Advanced |
+| Quick Sort | O(n log n) | O(log n) | ❌ | Standard | Advanced |
+| Heap Sort | O(n log n) | O(1) | ❌ | Standard | Advanced |
+| Shell Sort | O(n log n) | O(1) | ❌ | Standard | Advanced |
+| Tim Sort | O(n log n) | O(n) | ✅ | Standard | Advanced |
+| Introsort | O(n log n) | O(log n) | ❌ | Standard | Hybrid |
+| Counting Sort | O(n + k) | O(k) | ✅ | Specialized | Non-comparison |
+| Radix Sort | O(nk) | O(n + k) | ✅ | Specialized | Non-comparison |
+| Bucket Sort | O(n + k) | O(n) | ✅ | Specialized | Distribution |
+| Cocktail Sort | O(n²) | O(1) | ✅ | Standard | Variant |
+| Odd-Even Sort | O(n²) | O(1) | ✅ | Standard | Parallel |
+| Comb Sort | O(n²) | O(1) | ❌ | Standard | Variant |
+| Bogo Sort | O((n+1)!) | O(1) | ❌ | Standard | Probabilistic |
+| Bitonic Sort | O(n log²n) | O(log²n) | ❌ | Standard | Network |
+| Stooge Sort | O(n^2.7) | O(n) | ❌ | Standard | Recursive |
+| Pancake Sort | O(n²) | O(1) | ❌ | Standard | Restricted |
+| Cycle Sort | O(n²) | O(1) | ❌ | Standard | In-place |
 
 ## 📖 Educational Use
 

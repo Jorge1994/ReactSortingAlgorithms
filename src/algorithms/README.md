@@ -29,6 +29,39 @@ algorithms/
 
 The registry pattern provides type-safe, centralized algorithm management:
 
+### Currently Supported Algorithms (21 Total)
+
+**Simple Algorithms:**
+- `bubble-sort` - Bubble Sort
+- `selection-sort` - Selection Sort  
+- `insertion-sort` - Insertion Sort
+- `gnome-sort` - Gnome Sort
+
+**Advanced Algorithms:**
+- `merge-sort` - Merge Sort
+- `quick-sort` - Quick Sort
+- `heap-sort` - Heap Sort
+- `shell-sort` - Shell Sort
+- `tim-sort` - Tim Sort
+- `introsort` - Introsort (Hybrid)
+
+**Specialized Algorithms:**
+- `counting-sort` - Counting Sort
+- `radix-sort` - Radix Sort
+- `bucket-sort` - Bucket Sort
+
+**Variants & Improvements:**
+- `cocktail-sort` - Cocktail Shaker Sort
+- `odd-even-sort` - Odd-Even Sort
+- `comb-sort` - Comb Sort
+
+**Exotic Algorithms:**
+- `bogo-sort` - Bogo Sort (Probabilistic)
+- `bitonic-sort` - Bitonic Sort (Network)
+- `stooge-sort` - Stooge Sort (Recursive)
+- `pancake-sort` - Pancake Sort (Restricted)
+- `cycle-sort` - Cycle Sort (Minimal Writes)
+
 ### Implementation Registry (`registry.ts`)
 Maps algorithm keys to executable implementations:
 

@@ -49,10 +49,11 @@ The project follows a **Clean Architecture** pattern with strict separation of c
 
 #### `/src/components/`
 **Purpose**: React UI components for visualization and interaction
-- **Visualizers**: `ArrayVisualizer.tsx`, `CountingSortVisualizer.tsx`, etc.
-- **Controls**: `AnimationControls.tsx`, `ArrayControls.tsx`
-- **Layout**: `ModernHeader.tsx`, `Footer.tsx`
-- **Educational**: `AlgorithmDetailsPage.tsx`, `ComparisonPage.tsx`
+- **Visualizers**: `ArrayVisualizer.tsx`, `CountingSortVisualizer.tsx`, `RadixSortVisualizer.tsx`, `BucketSortVisualizer.tsx`
+- **Controls**: `AnimationControls.tsx`, `ArrayControls.tsx`, `CombinedControls.tsx`
+- **Layout**: `ModernHeader.tsx`, `Footer.tsx`, `LandingPage.tsx`
+- **Educational**: `AlgorithmDetailsPage.tsx`, `ComparisonPage.tsx`, `GlossaryPage.tsx`
+- **Common**: `ColorLegend.tsx`, `StatisticsPanel.tsx`, `VisualizerTemplate.tsx`, `AlgorithmComparison.tsx`
 
 #### `/src/data/`
 **Purpose**: Static data and configuration
@@ -66,8 +67,11 @@ The project follows a **Clean Architecture** pattern with strict separation of c
 
 #### `/src/hooks/`
 **Purpose**: Custom React hooks for state management and animations
-- **Animation logic**: Managing step-by-step visualization
-- **State management**: Controlling visualization flow
+- **`useSortingAnimation.tsx`**: Comprehensive hook managing all visualization state
+  - Array generation (random, nearly-sorted, reverse)
+  - Animation controls (play, pause, step, reset)
+  - Speed control and step progression
+  - Statistics tracking (comparisons, swaps, execution time)
 
 #### `/src/utils/`
 **Purpose**: Helper functions and utilities
@@ -165,25 +169,44 @@ export const bubbleSort = createSortingAlgorithm(
 - Enforced structure compliance
 
 ### 3. Hook Pattern for Animation
-**Purpose**: Reusable animation logic across different visualizers
+**Purpose**: Comprehensive animation and state management for visualizers
 
 ```typescript
-// Custom hook for sorting animations
-const useSortingAnimation = (algorithm: string, array: number[]) => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [steps, setSteps] = useState<SortStep[]>([]);
+// useSortingAnimation hook interface
+interface UseSortingAnimationReturn {
+  // State
+  array: number[];
+  steps: SortStep[];
+  currentStep: number;
+  isAnimating: boolean;
+  isPlaying: boolean;
+  animationSpeed: number;
+  currentStepData: SortStep;
+  displayArray: number[];
+  arraySize: number;
   
-  // Animation logic
-  return { currentStep, isPlaying, steps, controls };
-};
+  // Actions
+  generateNewArray: (type?: 'random' | 'nearly-sorted' | 'reverse') => void;
+  playAnimation: () => void;
+  pauseAnimation: () => void;
+  nextStep: () => void;
+  prevStep: () => void;
+  reset: () => void;
+  setAnimationSpeed: (speed: number) => void;
+  changeArraySize: (size: number) => void;
+  
+  // Computed values
+  canPlayNext: boolean;
+  canPlayPrev: boolean;
+  progress: number;
+  comparisons: number;
+  swaps: number;
+  executionTime: number;
+}
 
 // Usage in components
 const ArrayVisualizer = ({ algorithm }) => {
-  const { currentStep, isPlaying, steps, controls } = useSortingAnimation(
-    algorithm, 
-    array
-  );
+  const animationState = useSortingAnimation(algorithm, initialArray);
   
   return <div>{/* Visualization JSX */}</div>;
 };
@@ -220,13 +243,27 @@ const ArrayVisualizer = ({ algorithm }) => {
 
 ```typescript
 interface SortStep {
-  type: 'compare' | 'swap' | 'set-sorted' | 'highlight';
+  type: 'compare' | 'swap' | 'set-sorted' | 'highlight' | 'temp-sorted' | 
+        'move' | 'clear-for-merge' | 'counting-phase' | 'count-increment' | 
+        'count-prefix' | 'count-placement' | 'bucket-operation';
   indices: number[];           // Indices being operated on
   array: number[];            // Current array state
   metadata?: {
     comparisons: number;      // Total comparisons so far
     swaps: number;           // Total swaps so far
     currentPhase?: string;   // Educational phase description
+    executionTime?: number;  // Execution time in milliseconds
+    fromValue?: number;      // For move operations
+    toPosition?: number;     // For move operations
+    mergeSlots?: number[];   // For merge operations
+    countArray?: number[];   // For counting sort
+    outputArray?: number[];  // For counting sort
+    currentValue?: number;   // For counting sort
+    countIndex?: number;     // For counting sort
+    buckets?: number[][];    // For bucket sort
+    bucketIndex?: number;    // For bucket sort
+    elementValue?: number;   // For bucket sort
+    operationType?: 'distribute' | 'sort-internal' | 'bucket-sorted' | 'concatenate';
   };
 }
 

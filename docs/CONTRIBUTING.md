@@ -29,6 +29,37 @@ Thank you for your interest in contributing! This guide will help you add new so
 
 ## 📝 Adding New Sorting Algorithms
 
+### Current SortStep Interface
+
+The project supports a comprehensive set of step types for different algorithm visualization needs:
+
+```typescript
+interface SortStep {
+  type: 'compare' | 'swap' | 'set-sorted' | 'highlight' | 'temp-sorted' | 
+        'move' | 'clear-for-merge' | 'counting-phase' | 'count-increment' | 
+        'count-prefix' | 'count-placement' | 'bucket-operation';
+  indices: number[];
+  array: number[];
+  metadata?: {
+    comparisons: number;
+    swaps: number;
+    currentPhase?: string;
+    executionTime?: number;
+    fromValue?: number;           // For move operations
+    toPosition?: number;          // For move operations  
+    mergeSlots?: number[];        // For merge operations
+    countArray?: number[];        // For counting sort
+    outputArray?: number[];       // For counting sort
+    currentValue?: number;        // For counting sort
+    countIndex?: number;          // For counting sort
+    buckets?: number[][];         // For bucket sort
+    bucketIndex?: number;         // For bucket sort
+    elementValue?: number;        // For bucket sort
+    operationType?: 'distribute' | 'sort-internal' | 'bucket-sorted' | 'concatenate';
+  };
+}
+```
+
 ### Step-by-Step Process
 
 #### 1. **Algorithm Compatibility Assessment**
@@ -71,7 +102,6 @@ function yourAlgorithmSteps(array: number[]): SortStep[] {
     metadata: { comparisons, swaps, currentPhase: 'Initialization' }
   });
 
-  // Your algorithm implementation here
   // Generate steps for each operation:
   
   // For comparisons:
@@ -92,6 +122,27 @@ function yourAlgorithmSteps(array: number[]): SortStep[] {
       metadata: { comparisons, swaps: ++swaps, currentPhase: 'Swapping elements' }
     });
   }
+
+  // For highlighting elements:
+  steps.push({
+    type: 'highlight',
+    indices: [highlightIndex],
+    array: [...workingArray],
+    metadata: { comparisons, swaps, currentPhase: 'Highlighting current element' }
+  });
+
+  // For moving elements (useful for insertion-based algorithms):
+  steps.push({
+    type: 'move',
+    indices: [fromIndex, toIndex],
+    array: [...workingArray],
+    metadata: { 
+      comparisons, swaps, 
+      currentPhase: 'Moving element',
+      fromValue: workingArray[fromIndex],
+      toPosition: toIndex
+    }
+  });
 
   // For marking as sorted:
   steps.push({
