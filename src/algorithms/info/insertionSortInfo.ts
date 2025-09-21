@@ -71,12 +71,6 @@ export const insertionSortInfo: AlgorithmInfo = {
   ],
 
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',    // Blue - elements being compared
-      swapping: '#EF4444',     // Red - elements being shifted/moved
-      sorted: '#10B981',       // Green - elements in final sorted position
-      unsorted: '#6B7280'      // Gray - elements not yet processed
-    },
     phases: [
       'Foundation Building: Begin by considering the first element as an already sorted section, since any single element is naturally in order',
       'Element Selection: Choose the next unsorted element to be placed into its correct position within the sorted section',

@@ -27,12 +27,6 @@ export const cycleSortInfo: AlgorithmInfo = {
   useCases: ['When memory writes are significantly more expensive than reads'],
   keyCharacteristics: ['In-place', 'Minimizes writes', 'Unstable', 'Quadratic time'],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Counting phase: determine final position for the current element by counting smaller elements to the right.',
       'Placement phase: put the item in its correct position (this is one memory write).',

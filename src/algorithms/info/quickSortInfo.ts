@@ -60,12 +60,6 @@ export const quickSortInfo: AlgorithmInfo = {
   'Partition algorithms include Naive (uses extra O(n) space), Lomuto (simple, used here), and Hoare (more efficient in swaps). All run in O(n) time'
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Select Pivot: Highlight the pivot element used for partitioning.',
       'Compare: Compare elements against pivot and highlight comparisons.',

@@ -42,12 +42,6 @@ export const cocktailSortInfo: AlgorithmInfo = {
     'In-place and stable'
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Initial Setup: Start with the unsorted array and initialize left and right boundaries',
       'Forward Pass: Move from left to right, comparing adjacent elements and swapping when needed to push larger elements to the right boundary',

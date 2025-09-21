@@ -50,12 +50,6 @@ export const oddEvenSortInfo: AlgorithmInfo = {
     'In-place and stable'
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Initialization: Prepare for alternating even-odd comparison pattern that enables parallel processing',
       

@@ -68,13 +68,6 @@ export const bubbleSortInfo: AlgorithmInfo = {
   ],
 
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
-    
     phases: [
       "Initial Setup: Start with the unsorted array and begin the first pass from the leftmost position",
       "Pass Initialization: Begin a new pass through the array, starting from the first element",

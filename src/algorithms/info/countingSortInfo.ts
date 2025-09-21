@@ -59,12 +59,6 @@ export const countingSortInfo: AlgorithmInfo = {
     "Works by counting occurrences and calculating positions"
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444', 
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       "Phase 1 - Discover Range: Find the smallest (min) and largest (max) values in the array. This tells us how many 'buckets' we need for counting.",
       "Phase 2 - Create Count Array: Create a counting array with (max - min + 1) positions, all starting at 0. Each position represents a possible value.",

@@ -64,12 +64,6 @@ export const timSortInfo: AlgorithmInfo = {
     "Optimized for real-world data distributions"
   ],
   visualizationNotes: {
-    colors: { 
-      comparing: '#3B82F6',    // Blue for comparisons
-      swapping: '#EF4444',     // Red for swaps/moves
-      sorted: '#10B981',       // Green for finally sorted
-      unsorted: '#6B7280'      // Gray for unsorted elements
-    },
     phases: [
       "Run Detection: Identify existing ordered sequences in the input",
       "Minimum Run Length: Calculate optimal run size (typically 32-64 elements)",

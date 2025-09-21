@@ -64,13 +64,6 @@ export const pancakeSortInfo: AlgorithmInfo = {
   ],
 
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
-    
     phases: [
       "Initial Setup: Display the unsorted array and identify the largest unsorted element that needs to be moved to its correct position",
       "Find Maximum: Scan through the unsorted portion to locate the largest element that hasn't been placed in its final position yet",

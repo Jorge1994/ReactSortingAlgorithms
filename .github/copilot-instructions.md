@@ -43,7 +43,6 @@ interface AlgorithmInfo {
   useCases: string[];
   keyCharacteristics: string[];
   visualizationNotes: {
-    colors: { comparing: string; swapping: string; sorted: string; unsorted: string };
     phases: string[]; // Detailed educational phases - as many as needed for full comprehension
   };
 }
@@ -207,12 +206,6 @@ export const algorithmNameInfo: AlgorithmInfo = {
   useCases: ["When to use this algorithm"],
   keyCharacteristics: ["Important properties"],
   visualizationNotes: {
-    colors: { 
-      comparing: '#3B82F6', 
-      swapping: '#EF4444', 
-      sorted: '#10B981', 
-      unsorted: '#6B7280' 
-    },
     phases: [
       "Phase 1: Detailed explanation",
       "Phase 2: Detailed explanation",

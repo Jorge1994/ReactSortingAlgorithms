@@ -51,12 +51,6 @@ export const bucketSortInfo: AlgorithmInfo = {
     'Performance highly dependent on input data distribution'
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Initialization: Create empty buckets based on array size using adaptive formula (√n for optimal distribution)',
       'Range Calculation: Determine min/max values to establish bucket ranges for uniform distribution',

@@ -51,12 +51,6 @@ export const gnomeSortInfo: AlgorithmInfo = {
     "Similar behaviour to insertion sort but implemented with swaps and index movement",
   ],
   visualizationNotes: {
-    colors: {
-      comparing: "#3B82F6",
-      swapping: "#EF4444",
-      sorted: "#10B981",
-      unsorted: "#6B7280",
-    },
     phases: [
       "Start: Begin at index 0 (the algorithm advances to index 1 immediately) and compare with the previous element as needed",
       "Advance: If the pair is in order, move one step to the right",

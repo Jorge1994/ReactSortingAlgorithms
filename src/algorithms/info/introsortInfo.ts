@@ -64,12 +64,6 @@ export const introsortInfo: AlgorithmInfo = {
     "Industry-standard algorithm used in major programming language libraries"
   ],
   visualizationNotes: {
-    colors: { 
-      comparing: '#3B82F6',    // Blue for comparisons
-      swapping: '#EF4444',     // Red for swaps  
-      sorted: '#10B981',       // Green for sorted elements
-      unsorted: '#6B7280'      // Gray for unsorted elements
-    },
     phases: [
       "Initialization: Calculate depth limit (2 × log₂(n)) to prevent worst-case quicksort behavior",
       "Algorithm Selection: Choose sorting method based on subarray size and recursion depth",

@@ -63,12 +63,6 @@ export const heapSortInfo: AlgorithmInfo = {
     "Heapify operation has O(log n) complexity due to tree height"
   ],
   visualizationNotes: {
-    colors: { 
-      comparing: '#3B82F6',  // Blue - elements being compared
-      swapping: '#EF4444',   // Red - elements being swapped  
-      sorted: '#10B981',     // Green - elements in final sorted position
-      unsorted: '#6B7280'    // Gray - unprocessed elements
-    },
     phases: [
       "Initial Array: The unsorted input array is displayed with all elements in gray, ready to be transformed into a heap structure",
       

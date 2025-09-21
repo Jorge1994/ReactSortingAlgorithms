@@ -27,12 +27,6 @@ export const bitonicSortInfo: AlgorithmInfo = {
   useCases: ['GPU/parallel sorting networks', 'Educational demonstrations of data-oblivious algorithms'],
   keyCharacteristics: ['Data-oblivious', 'Compare-exchange network', 'Requires power-of-two length'],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       "Initial setup: Ensure array length is a power of two (this visualizer allows 16, 32, 64).",
       "Form pairs: First passes form bitonic pairs (size 2) by comparing adjacent elements.",

@@ -55,12 +55,6 @@ export const radixSortInfo: AlgorithmInfo = {
     'Space complexity: Requires O(n+k) additional space'
   ],
   visualizationNotes: {
-    colors: { 
-      comparing: '#3B82F6',    // Blue - for elements being analyzed
-      swapping: '#EF4444',     // Red - for elements being moved/placed
-      sorted: '#10B981',       // Green - for elements in auxiliary/final positions
-      unsorted: '#6B7280'      // Gray - for unprocessed elements
-    },
     phases: [
       "Phase 1 - Digit Analysis: Each element is examined to extract the current digit (units, tens, hundreds, etc.). The digit determines which 'bucket' the element belongs to.",
       

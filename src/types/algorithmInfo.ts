@@ -18,12 +18,6 @@ export interface AlgorithmInfo {
   useCases: string[];
   keyCharacteristics: string[];
   visualizationNotes: {
-    colors: {
-      comparing: string;
-      swapping: string;
-      sorted: string;
-      unsorted: string;
-    };
     phases: string[];
   };
 }

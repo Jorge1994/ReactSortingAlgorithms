@@ -27,7 +27,6 @@ export const stoogeSortInfo: AlgorithmInfo = {
   useCases: ['Educational demonstration of recursion and algorithm analysis'],
   keyCharacteristics: ['Recursive', 'Divide into overlapping sections (2/3)', 'Poor time complexity ~ O(n²·⁷)'],
   visualizationNotes: {
-    colors: { comparing: '#3B82F6', swapping: '#EF4444', sorted: '#10B981', unsorted: '#6B7280' },
     phases: [
       'Compare and swap the first and last elements of the current segment',
       'Recursively sort the first 2/3 of the segment',

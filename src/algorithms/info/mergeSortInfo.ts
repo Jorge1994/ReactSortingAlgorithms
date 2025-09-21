@@ -63,12 +63,6 @@ export const mergeSortInfo: AlgorithmInfo = {
     'Bottom-up merge approach available'
   ],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444', 
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Initial State: Display the unsorted array that needs to be sorted using divide-and-conquer approach',
       

@@ -29,12 +29,6 @@ export const combSortInfo: AlgorithmInfo = {
   useCases: ['Educational comparisons with bubble and shell sorts', 'Small to medium arrays where simplicity is desired'],
   keyCharacteristics: ['Gap-based comparisons', 'Shrinking gap factor (commonly 1.3)'],
   visualizationNotes: {
-    colors: {
-      comparing: '#3B82F6',
-      swapping: '#EF4444',
-      sorted: '#10B981',
-      unsorted: '#6B7280'
-    },
     phases: [
       'Initial Setup: Display the unsorted array and set the initial gap to the length of the array. Explain the purpose of the gap — to compare non-adjacent elements and move distant "turtles" quickly.',
       'Choose Shrink Factor: Introduce the shrink factor (commonly 1.3). Demonstrate how the gap will be divided by the shrink factor each pass to gradually focus comparisons.',
